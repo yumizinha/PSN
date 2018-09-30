@@ -2,14 +2,13 @@
 title: "Filtros de sinais"
 author: "Amanda Yumi"
 date: "29 de setembro de 2018"
-output: html_document
-
+output:
+  html_document: default
+weight: 20
 ---
 
 
 
-<div id="introducao" class="section level1">
-<h1>Introdução:</h1>
 <p>O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.</p>
 <p>Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada.</p>
 <p>Nos casos do sinais de Eletroencefalografia (EEG), temos o ruído da rede elétrica que no Brasil é 60 Hz. Além desses existem outros artefatos como ondas de baixas frequências devido ao calor na cabeça do indivíduo. Deste modo, é extremamente importante aplicação de filtros nestes sinais para remoção de tais artefatos antes de qualquer outra análise.</p>
@@ -97,5 +96,24 @@ plot((1:nrow(sinais))/HZ,y,type=&quot;l&quot;,
 lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
 <p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Dessa forma é possível aplicar outros filtros, alterando o tipo na função <em>butter</em> e aplicando aos sinais de todos os canais na função <em>filter</em>. Dica de exercício: Tente executar para outros canais ou então ajustando o filtro para outras frequências ou determinados intervalos de frequência.</p>
-</div>
+<p>Um exemplo comum é a aplicação de um filtro que processe dados de um determinado intervalo (por exemplo, como a rede elétrica é 60hz mas há oscilações, processa-se sinal entre 59-61hz). Neste caso, queremos um passa-banda para deixar apenas entre as frequências de 1-40 hz:</p>
+<pre class="r"><code># butter (n = ordem do filtro, w = cutoff, tipo = tipo de filtro)
+#   - n = Ordem do filtro = controla o decaimento da curva de ajuste do filtro, #   geralmente se usa 3 ou 5.
+#   -type = tipo de filtro (low/passa-baixa, high/passa-alta ou band-pass/passa banda)
+
+FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = &quot;pass&quot;)
+freqz(FILTRO)</code></pre>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Quero aplicar este filtro em todas as colunas da matriz de sinais, realizando a retirada da média para tirar os outliers antes do filtro. O sinal bruto permanece sem o ajuste das médias, então para executar em todos os canais, é importante que y esteja nas interações:</p>
+<pre class="r"><code>fsinais = matrix(0, nrow(sinais), ncol(sinais))
+
+for (canal in 1:32) {
+  y = sinais[,canal] - mean(sinais[,canal])
+  fsinais[,canal]=filter(FILTRO,y)
+}</code></pre>
+<p>Para verificar o sinal bruto e filtrado de cada canal, tirando a média (o exemplo contempla o canal 1):</p>
+<pre class="r"><code>#Checar o sinal bruto e filtrado
+plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
+lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>

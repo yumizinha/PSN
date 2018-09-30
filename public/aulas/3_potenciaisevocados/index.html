@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Filtros de sinais :: Documentation for Hugo Learn Theme</title>
+    <title>Potenciais Evocados :: Documentation for Hugo Learn Theme</title>
     
     
     <link href="../../css/nucleus.css?1538326654" rel="stylesheet">
@@ -33,7 +33,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/aulas/2_filtro_sinais/">
+  <body class="" data-url="/aulas/3_potenciaisevocados/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -176,7 +176,7 @@
  
   
     
-      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item active">
+      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item ">
         <a href="../../aulas/2_filtro_sinais/">
         Filtros de sinais
         <i class="fa fa-check read-icon"></i>
@@ -195,7 +195,7 @@
  
   
     
-      <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item ">
+      <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item active">
         <a href="../../aulas/3_potenciaisevocados/">
         Potenciais Evocados
         <i class="fa fa-check read-icon"></i>
@@ -268,7 +268,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/2_Filtro_Sinais.html" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/3_PotenciaisEvocados.html" target="blank">
                       <i class="fa fa-code-fork"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -297,7 +297,7 @@
             
           
           
-            <a href='../../'>Learn Theme for Hugo</a> > <a href='../../aulas/'>Conteúdo</a> > Filtros de sinais
+            <a href='../../'>Learn Theme for Hugo</a> > <a href='../../aulas/'>Conteúdo</a> > Potenciais Evocados
           
          
           
@@ -321,120 +321,38 @@
         
         <div id="body-inner">
           
-            <h1>Filtros de sinais</h1>
+            <h1>Potenciais Evocados</h1>
           
 
         
 
 
-<p>O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.</p>
-<p>Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada.</p>
-<p>Nos casos do sinais de Eletroencefalografia (EEG), temos o ruído da rede elétrica que no Brasil é 60 Hz. Além desses existem outros artefatos como ondas de baixas frequências devido ao calor na cabeça do indivíduo. Deste modo, é extremamente importante aplicação de filtros nestes sinais para remoção de tais artefatos antes de qualquer outra análise.</p>
-<p>Como tirar as baixas e altas frequências pensando em janela de médias? Podemos definir um filtro passa baixa a partir da subtração do sinal original pela média aritmética dos pontos ao redor de um ponto. Como resultado resta no sinal apenas as baixas frequências. Já para um filtro passa alta, fazemos a subtração do sinal original pelo sinal resultante do filtro passa baixa. Como resultado resta no sinal apenas os sinais com alta frequência. Alguns conceitos importantes para a construção dos filtros:</p>
-<ul>
-<li><strong>Frequência de amostragem:</strong> Corresponde ao número de observação em um intervalo de tempo. Quando se trabalha com segundo, temos essa média em Hz.
-<ul>
-<li>Ex: Na câmera fotográfica temo 30 frames por segundo (fps). Na ressonância magnética funcional (fMRI), temos 1 imagem a cada 2 segundos. Logo, a frequência de amostragem é 1/2 = 0.5Hz</li>
-<li>Observação: A frequência = 1/período da observação</li>
-</ul></li>
-<li><strong>Frequência de Nyquist:</strong> Corresponde à metade da frequência da taxa amostragem.
-<ul>
-<li>Note: A frequência de Nyquist vale para qualquer modalidade de técnica de neuroiumagem (fMRI,EEG,fNIRS…).</li>
-</ul></li>
-</ul>
-<p>O filtro permite a passagem o sinal de parte dos dados e impede a retirada de outros. São os filtros:</p>
-<ul>
-<li><p>Passa-alta (<em>High pass</em>): Deixa passar as altas frequências (maior importância pra alta frequência e baixa importáncia para baixa frequência.</p></li>
-<li><p>Passa-baixa (<em>Low pass</em>): Deixa passar as baixas frequências e dá pouca importância às altas frequências.</p></li>
-<li><p>Passa-banda (<em>band pass</em>): O sinal resultante após o filtro possui apenas a banda de frequência utilizada no filtro.</p></li>
-</ul>
-<div id="implementacao-de-filtros-em-r-e-carregando-dados" class="section level2">
-<h2>Implementação de filtros em R e carregando dados:</h2>
-<p>No R faremos primeiro o desenho do filtro: ou seja definir qual o tipo de frequências vamos passar, para isso usaremos o comando “butter” no pacote signal.</p>
-<p>Caso não tenha o pacote, utilize os comandos:</p>
-<p>Instalando pacote de sinais no R: * install.packages(“signal”)</p>
-<p>e no código chamar a blbioteca</p>
-<pre class="r"><code>require(signal)</code></pre>
-<p>O exercício da aula mostra a leitura de um banco de dados de sinais de EEG.</p>
-<p>Para isso, será necessário realizar a leitura dos dados:</p>
-<pre class="r"><code>sinais=read.table(&quot;oddball250hz.txt&quot;,header=FALSE)</code></pre>
-<p>ver também a verificação dos dados:</p>
-<pre class="r"><code>dim(sinais)</code></pre>
-<pre><code>## [1] 45461    33</code></pre>
-<p>Olhan do o arquivo, ele é composto por 45461 linhas e 33 colunas (essas referentes aos 32 canais e uma última coluna de zeros).</p>
-<p>Para verificar os dados do arquivo em um plot:</p>
-<pre class="r"><code># Plot da série temporal:
-#gambiarra para o ts.plot funcionar no R Studio:
+<pre class="r"><code># Leitura dos dados
+sinais=read.table(&quot;oddball250hz.txt&quot;,header=FALSE)</code></pre>
+<p>Para continuar a leitura dos filtros, deve-se realizar a leitura dos dados de canais também disponibilizados:</p>
+<pre class="r"><code># Leitura dos canais de EEG:
+nomes=scan(&quot;nomecanais.txt&quot;, what = &quot;string&quot;)</code></pre>
+<p>Ao analisar o arquivo dos sinais, é possível verificar que a coluna 33 não se trata de sinais cerebrais, mas sim, a referência dos triggers (marcações do experimento). Dessa forma, realiza-se a leitura dos sinais e dos triggers, armazenando em matrizes separadas:</p>
+<pre class="r"><code># Separar o trigger dos sinais
+# Jogo fora o sinal 33 porque não é dado cerrebral
+trigger = sinais[,33]
+sinais= sinais[,1:32]</code></pre>
+<p>Analisando a matriz trigger com o comando table, é possível verificar os tipos de eventos existentes no experimento (eventos raros marcados por 10 e frequentes marcados por 11):</p>
+<pre class="r"><code># Lendo o conteúdo do trigger:
+# esse comendo mostra o número de observações de cada tipo
+table(trigger)</code></pre>
+<pre><code>## trigger
+##     0    10    11 
+## 45422    10    29</code></pre>
+<p>Olhando o conteúdo do trigger:</p>
+<pre class="r"><code># Gambi pra funcionar o ts.plot:
 graphics.off()
 par(&quot;mar&quot;)</code></pre>
 <pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
-<pre class="r"><code>par(mar=c(1,1,1,1))</code></pre>
-<p>e o plot:</p>
-<pre class="r"><code># Plotando gráfico de linha
-ts.plot(sinais)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>A taxa de amostragem é a frequência em que a leitura ocorre: * HZ=1/INTERVALO, onde 1hz = 1/s</p>
-<pre class="r"><code># Suponha que o sinal foi adquirido sob uma taxa de amostragem de 250Hz: 
-HZ= 250</code></pre>
-<p>Dessa forma, analisamos o sinal com base nessa amostragem, para todas as linhas, para o canal 5, com o plot do tipo l (linha):</p>
-<pre class="r"><code>#Fazer gráfico com frescura:
-# plot(1:nrow(sinais), sinais[,5],type=&quot;l&quot;)
-# mas preciso considerar a frequência convertendo pra segundos:
-plot((1:nrow(sinais))/HZ, sinais[,5], type=&quot;l&quot;, xlab=&quot;Tempo(s)&quot;, ylab= &quot;sinal uV&quot;)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-</div>
-<div id="utilizando-a-funcao-do-filtro-butter" class="section level2">
-<h2>Utilizando a função do filtro (<em>butter</em>):</h2>
-<p>Primeiramente se define qual o tipo de frequências vamos passar, para isso usaremos o comando “butter”. A função butter possui a seguinte síntaxe: * <em>butter</em> (n = ordem do filtro, w = cutoff, tipo = tipo de filtro) onde, + ordem do filtro = controla o decaimento da curva de ajuste do filtro, geralmente se usa 3 ou 5. + cutoff = frequências que se queira cortar (é um número de 0 a 1, neste caso é preciso fazer uma regra de 3; 0 = 1 e 1= frequências de Nyquist) + type = tipo de filtro (low/passa-baixa, high/passa-alta ou band-pass/passa banda)</p>
-<p>Aplicando passa-baixa em 30Hz:</p>
-<pre class="r"><code>FILTRO = butter(n=5, W =30/(HZ/2), type = &quot;low&quot;)
+<pre class="r"><code>par(mar=c(1,1,1,1))
 
-# Gráfico do desenho do filtro:
-freqz(FILTRO)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Após ter o filtro desenhado, aplica-lo sobre os dados do canal (neste caso seria o canal 5, como exemplo, mas poderia ser qlq um). Ao aplicar o filtro de forma direta teríamos ainda um problema:</p>
-<pre class="r"><code>filtrado_teste = filter(FILTRO, sinais[,5]) 
-# bug de início do sinal, com valor muito alto.</code></pre>
-<p>Neste caso “bugado” teríamos o seguinte retorno:</p>
-<pre class="r"><code>#Fazer o grafico com os 2 sinais
-plot((1:nrow(sinais))/HZ, sinais[,5],type=&quot;l&quot;,
-     xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
-
-#Acrescentar linha com o sinal filtrado
-lines((1:nrow(sinais))/HZ, filtrado_teste, col=2)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Para isso resolve-se tirando a média do sinal:</p>
-<pre class="r"><code>y = sinais[,5] - mean(sinais[,5])
-# e novamente aplicando o filtro no sinal:
-filtrado = filter(FILTRO, y)</code></pre>
-<p>obtenso então o sinal filtrado:</p>
-<pre class="r"><code>#Acrescentar linha com o sinal filtrado
-plot((1:nrow(sinais))/HZ,y,type=&quot;l&quot;,
-     xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
-lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>Dessa forma é possível aplicar outros filtros, alterando o tipo na função <em>butter</em> e aplicando aos sinais de todos os canais na função <em>filter</em>. Dica de exercício: Tente executar para outros canais ou então ajustando o filtro para outras frequências ou determinados intervalos de frequência.</p>
-<p>Um exemplo comum é a aplicação de um filtro que processe dados de um determinado intervalo (por exemplo, como a rede elétrica é 60hz mas há oscilações, processa-se sinal entre 59-61hz). Neste caso, queremos um passa-banda para deixar apenas entre as frequências de 1-40 hz:</p>
-<pre class="r"><code># butter (n = ordem do filtro, w = cutoff, tipo = tipo de filtro)
-#   - n = Ordem do filtro = controla o decaimento da curva de ajuste do filtro, #   geralmente se usa 3 ou 5.
-#   -type = tipo de filtro (low/passa-baixa, high/passa-alta ou band-pass/passa banda)
-
-FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = &quot;pass&quot;)
-freqz(FILTRO)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Quero aplicar este filtro em todas as colunas da matriz de sinais, realizando a retirada da média para tirar os outliers antes do filtro. O sinal bruto permanece sem o ajuste das médias, então para executar em todos os canais, é importante que y esteja nas interações:</p>
-<pre class="r"><code>fsinais = matrix(0, nrow(sinais), ncol(sinais))
-
-for (canal in 1:32) {
-  y = sinais[,canal] - mean(sinais[,canal])
-  fsinais[,canal]=filter(FILTRO,y)
-}</code></pre>
-<p>Para verificar o sinal bruto e filtrado de cada canal, tirando a média (o exemplo contempla o canal 1):</p>
-<pre class="r"><code>#Checar o sinal bruto e filtrado
-plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
-lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
-<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-</div>
+# Conteúdo do vetor do trigger:
+ts.plot(trigger)</code></pre>
 
 
 <footer class=" footline" >
@@ -522,7 +440,6 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
             
                 
                     
-                    
                 
                 
 
@@ -539,8 +456,6 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -563,10 +478,10 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
 
 
         
-            <a class="nav nav-prev" href="../../aulas/1_intror/" title="Introdução ao R"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="../../aulas/2_filtro_sinais/" title="Filtros de sinais"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../../aulas/3_potenciaisevocados/" title="Potenciais Evocados" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../../aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
