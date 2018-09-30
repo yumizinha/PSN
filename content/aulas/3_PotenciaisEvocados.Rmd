@@ -6,6 +6,14 @@ output: html_document
 weight: 30
 ---
 
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+require(signal)
+# taxa de amostragem:
+HZ = 250
+```
+
+
+
 ```{r}
 # Leitura dos dados
 sinais=read.table("oddball250hz.txt",header=FALSE)
@@ -39,17 +47,22 @@ table(trigger)
 
 Olhando o conteúdo do trigger:
 
-```{r}
+```{r echo=FALSE}
 # Gambi pra funcionar o ts.plot:
 graphics.off()
 par("mar")
 par(mar=c(1,1,1,1))
-
-# Conteúdo do vetor do trigger:
-ts.plot(trigger)
 ```
 
-Para identificação dos potenciais evocados, precisamos ainda definir os canais e pontos no tempo:
+```{r}
+# Conteúdo do vetor do trigger:
+ts.plot(trigger)
+
+```
+
+
+
+Para identificação dos potenciais evocados, precisamos ainda definir os canais (a matriz **sinais** já exclui a coluna de trigger do arquivo) e pontos no tempo (número de linhas do arquivo):
 
 ```{r}
 # Número de canais:
@@ -62,6 +75,7 @@ T=nrow(sinais)
 Filtrando os sinais de todos os canais:
 
 ```{r cache=TRUE} 
+
 FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = "pass")
 freqz(FILTRO)
 fsinais = matrix(0, nrow(sinais), ncol(sinais))
@@ -87,27 +101,85 @@ O comando which ajuda a separar os estímulos:
 
 ```{r}
 #Descobrir quais as caselas do vetor trigger se referem ao estimulo freq e raro
-TiRaros= which(trigger==10)
-TiFreq= which(trigger==11)
+TiRaro= which(trigger==10) #estimulo raro
+TiFreq= which(trigger==11) #estimulo frequente
 ```
 
-Armazenando os potenciais evocados:
+Armazenando os potenciais evocados do estímulo **raro**:
 
 ```{r}
 # Matriz que guarda os potenciais evocados medios do estimulo raro
-PEraro = matrix(0,276,Ncanais)
+ti=1000
+PERaro=matrix(0,length((ti-JANELApre):(ti+JANELApos)),Ncanais)
 
 # for pra cada canal
 for(canal in 1:Ncanais){
-  MediaRaro = 0
-  # pra todo ti
-  for(ti in TiRaros){
-    Baseline = mean(fsinais[(ti-JANELApre):ti, canal])
-    y = fsinais[(ti-JANELApre):(ti+JANELApos), canal] - Baseline
-    MediaRaro = MediaRaro + y/length(TiRaros)
-  } 
-  PEraro[,canal] = MediaRaro
+   for(ti in TiRaro){
+     BASELINE=mean(fsinais[(ti-JANELApre):ti,canal])
+     y=fsinais[(ti-JANELApre):(ti+JANELApos),canal]-BASELINE
+     PERaro[,canal]= PERaro[,canal]+y/length(TiRaro)
+   }
 }
+```
+
+Por exemplo, olhando a legenda no arquivo, nomedoscanais, vemos que o canal Fz se refere ao canal 5. Desa forma, o gráfico:
+
+```{r}
+#Fazer o grafico do potencial evocal no canal Fz. coluna 5
+# estimulo acontece em milisegundos (ms) por isso converto com a taxa de  
+# amostragem
+plot((1:nrow(PERaro))/HZ*1000-100, PERaro[,5],type="l",
+xlab="Tempo(ms)", ylab="Sinal(uv)")
+abline(v=0,lty=3)
+```
+
+Agora armazenando os potenciais evocados do estímulo **frequente**:
+ 
+```{r}
+#Matriz que guarda os potenciais evocados medios de todos os canais
+PEFreq=matrix(0,length((ti-JANELApre):(ti+JANELApos)), Ncanais)
+
+#Calculo para todos os canais
+for(canal in 1:Ncanais){
+   for(ti in TiFreq){
+     BASELINE=mean(fsinais[(ti-JANELApre):ti, canal])
+     y=fsinais[(ti-JANELApre):(ti+JANELApos), canal] -BASELINE
+     PEFreq[,canal] = PEFreq[,canal]+ y/length(TiFreq)
+   }#fecha o for do ti
+}#fecha o for do canal
+
+#Fazer o grafico do potencial evocal no canal Fz. coluna 5
+plot((1:nrow(PEFreq))/HZ*1000-100, PEFreq[,5], type="l",
+xlab="Tempo(ms)", ylab="Sinal(uv)")
+abline(v=0,lty=3)
+
+```
+
+Para conseguir fazer uma comparação entre os potenciais evocados, adicionamos os dois gráficos conjuntamente.
+Sendo nas cores Preta para estímulo frequente e vermelho para estímulo raro.
+
+```{r}
+#Fazer o grafico do potencial evocal no canal Fz. coluna 5
+#Do estimulo raro e frequente no mesmo grafico
+plot((1:nrow(PEFreq))/HZ*1000-100, PEFreq[,5],type="l",
+xlab="Tempo(ms)",ylab="Sinal(uv)",ylim=c(-7,7))
+
+lines((1:nrow(PERaro))/HZ*1000-100, PERaro[,5],col=2)
+abline(v=0,lty=3)
+
+# Obs: os valores arbitrários em ylim foram ajustes manuais para alinhar a
+# visualização superior e inferior das linhas, ao fazer o plot de ambas
+# poderia ter feito melhor, mas sabe como a vida é...
+```
+
+Analisando esse tipo de gráfico, é possível ver diferença entre os estímulos. Claro que para ter significância estatística precisaria de uma avaliação mais profunda para poder confirmar a real existência dessa diferença.
+
+Fazer o plot da diferenca do PE raro e frequente  no canal Pz, coluna 25:
+
+```{r}
+canal=25
+plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type="l",xlab="Tempo(ms)", ylab="sinal(uV)",ylim=c(-8,4))
+abline(v=0,lty=3)
 ```
 
 

@@ -26,11 +26,91 @@ table(trigger)</code></pre>
 ##     0    10    11 
 ## 45422    10    29</code></pre>
 <p>Olhando o conteúdo do trigger:</p>
-<pre class="r"><code># Gambi pra funcionar o ts.plot:
-graphics.off()
-par(&quot;mar&quot;)</code></pre>
 <pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
-<pre class="r"><code>par(mar=c(1,1,1,1))
-
-# Conteúdo do vetor do trigger:
+<pre class="r"><code># Conteúdo do vetor do trigger:
 ts.plot(trigger)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Para identificação dos potenciais evocados, precisamos ainda definir os canais (a matriz <strong>sinais</strong> já exclui a coluna de trigger do arquivo) e pontos no tempo (número de linhas do arquivo):</p>
+<pre class="r"><code># Número de canais:
+Ncanais =ncol(sinais)
+
+# Número de pontos no tempo:
+T=nrow(sinais)</code></pre>
+<p>Filtrando os sinais de todos os canais:</p>
+<pre class="r"><code>FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = &quot;pass&quot;)
+freqz(FILTRO)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>fsinais = matrix(0, nrow(sinais), ncol(sinais))
+
+for (canal in 1:32) {
+  y = sinais[,canal] - mean(sinais[,canal])
+  fsinais[,canal]=filter(FILTRO,y)
+}
+plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
+lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>Considerando a taxa de amostragem de 250hz, quero calcular uma determinada janela no intervalo 100ms dado um canal:</p>
+<pre class="r"><code># Se a taxa de amostragem é 250, quero definir as janelas pré e pós estímulos:
+JANELApos=HZ        #janela de 1 segundo
+JANELApre=HZ/10    #janela de 100 milisegundos</code></pre>
+<p>O comando which ajuda a separar os estímulos:</p>
+<pre class="r"><code>#Descobrir quais as caselas do vetor trigger se referem ao estimulo freq e raro
+TiRaro= which(trigger==10) #estimulo raro
+TiFreq= which(trigger==11) #estimulo frequente</code></pre>
+<p>Armazenando os potenciais evocados do estímulo <strong>raro</strong>:</p>
+<pre class="r"><code># Matriz que guarda os potenciais evocados medios do estimulo raro
+ti=1000
+PERaro=matrix(0,length((ti-JANELApre):(ti+JANELApos)),Ncanais)
+
+# for pra cada canal
+for(canal in 1:Ncanais){
+   for(ti in TiRaro){
+     BASELINE=mean(fsinais[(ti-JANELApre):ti,canal])
+     y=fsinais[(ti-JANELApre):(ti+JANELApos),canal]-BASELINE
+     PERaro[,canal]= PERaro[,canal]+y/length(TiRaro)
+   }
+}</code></pre>
+<p>Por exemplo, olhando a legenda no arquivo, nomedoscanais, vemos que o canal Fz se refere ao canal 5. Desa forma, o gráfico:</p>
+<pre class="r"><code>#Fazer o grafico do potencial evocal no canal Fz. coluna 5
+# estimulo acontece em milisegundos (ms) por isso converto com a taxa de  
+# amostragem
+plot((1:nrow(PERaro))/HZ*1000-100, PERaro[,5],type=&quot;l&quot;,
+xlab=&quot;Tempo(ms)&quot;, ylab=&quot;Sinal(uv)&quot;)
+abline(v=0,lty=3)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Agora armazenando os potenciais evocados do estímulo <strong>frequente</strong>:</p>
+<pre class="r"><code>#Matriz que guarda os potenciais evocados medios de todos os canais
+PEFreq=matrix(0,length((ti-JANELApre):(ti+JANELApos)), Ncanais)
+
+#Calculo para todos os canais
+for(canal in 1:Ncanais){
+   for(ti in TiFreq){
+     BASELINE=mean(fsinais[(ti-JANELApre):ti, canal])
+     y=fsinais[(ti-JANELApre):(ti+JANELApos), canal] -BASELINE
+     PEFreq[,canal] = PEFreq[,canal]+ y/length(TiFreq)
+   }#fecha o for do ti
+}#fecha o for do canal
+
+#Fazer o grafico do potencial evocal no canal Fz. coluna 5
+plot((1:nrow(PEFreq))/HZ*1000-100, PEFreq[,5], type=&quot;l&quot;,
+xlab=&quot;Tempo(ms)&quot;, ylab=&quot;Sinal(uv)&quot;)
+abline(v=0,lty=3)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Para conseguir fazer uma comparação entre os potenciais evocados, adicionamos os dois gráficos conjuntamente. Sendo nas cores Preta para estímulo frequente e vermelho para estímulo raro.</p>
+<pre class="r"><code>#Fazer o grafico do potencial evocal no canal Fz. coluna 5
+#Do estimulo raro e frequente no mesmo grafico
+plot((1:nrow(PEFreq))/HZ*1000-100, PEFreq[,5],type=&quot;l&quot;,
+xlab=&quot;Tempo(ms)&quot;,ylab=&quot;Sinal(uv)&quot;,ylim=c(-7,7))
+
+lines((1:nrow(PERaro))/HZ*1000-100, PERaro[,5],col=2)
+abline(v=0,lty=3)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code># Obs: os valores arbitrários em ylim foram ajustes manuais para alinhar a
+# visualização superior e inferior das linhas, ao fazer o plot de ambas
+# poderia ter feito melhor, mas sabe como a vida é...</code></pre>
+<p>Analisando esse tipo de gráfico, é possível ver diferença entre os estímulos. Claro que para ter significância estatística precisaria de uma avaliação mais profunda para poder confirmar a real existência dessa diferença.</p>
+<p>Fazer o plot da diferenca do PE raro e frequente no canal Pz, coluna 25:</p>
+<pre class="r"><code>canal=25
+plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type=&quot;l&quot;,xlab=&quot;Tempo(ms)&quot;, ylab=&quot;sinal(uV)&quot;,ylim=c(-8,4))
+abline(v=0,lty=3)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
