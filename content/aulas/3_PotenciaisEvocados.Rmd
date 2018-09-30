@@ -1,0 +1,118 @@
+---
+title: "Potenciais Evocados"
+author: "Amanda Yumi"
+date: "30 de setembro de 2018"
+output: html_document
+weight: 30
+---
+
+```{r}
+# Leitura dos dados
+sinais=read.table("oddball250hz.txt",header=FALSE)
+```
+
+
+Para continuar a leitura dos filtros, deve-se realizar a leitura dos dados de canais também disponibilizados:
+
+```{r}
+# Leitura dos canais de EEG:
+nomes=scan("nomecanais.txt", what = "string")
+```
+
+Ao analisar o arquivo dos sinais, é possível verificar que a coluna 33 não se trata de sinais cerebrais, mas sim, a referência dos triggers (marcações do experimento).
+Dessa forma, realiza-se a leitura dos sinais e dos triggers, armazenando em matrizes separadas:
+
+```{r}
+# Separar o trigger dos sinais
+# Jogo fora o sinal 33 porque não é dado cerrebral
+trigger = sinais[,33]
+sinais= sinais[,1:32]
+```
+
+Analisando a matriz trigger com o comando table, é possível verificar os tipos de eventos existentes no experimento (eventos raros marcados por 10 e frequentes marcados por 11):
+
+```{r}
+# Lendo o conteúdo do trigger:
+# esse comendo mostra o número de observações de cada tipo
+table(trigger)
+```
+
+Olhando o conteúdo do trigger:
+
+```{r}
+# Gambi pra funcionar o ts.plot:
+graphics.off()
+par("mar")
+par(mar=c(1,1,1,1))
+
+# Conteúdo do vetor do trigger:
+ts.plot(trigger)
+```
+
+Para identificação dos potenciais evocados, precisamos ainda definir os canais e pontos no tempo:
+
+```{r}
+# Número de canais:
+Ncanais =ncol(sinais)
+
+# Número de pontos no tempo:
+T=nrow(sinais)
+```
+
+Filtrando os sinais de todos os canais:
+
+```{r cache=TRUE} 
+FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = "pass")
+freqz(FILTRO)
+fsinais = matrix(0, nrow(sinais), ncol(sinais))
+
+for (canal in 1:32) {
+  y = sinais[,canal] - mean(sinais[,canal])
+  fsinais[,canal]=filter(FILTRO,y)
+}
+plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type="l",xlab="Tempo(s)", ylab="sinal(uV)")
+lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)
+```
+
+Considerando a taxa de amostragem de 250hz, quero calcular uma determinada janela no intervalo 100ms dado um canal:
+
+```{r}
+# Se a taxa de amostragem é 250, quero definir as janelas pré e pós estímulos:
+JANELApos=HZ        #janela de 1 segundo
+JANELApre=HZ/10    #janela de 100 milisegundos
+
+```
+
+O comando which ajuda a separar os estímulos:
+
+```{r}
+#Descobrir quais as caselas do vetor trigger se referem ao estimulo freq e raro
+TiRaros= which(trigger==10)
+TiFreq= which(trigger==11)
+```
+
+Armazenando os potenciais evocados:
+
+```{r}
+# Matriz que guarda os potenciais evocados medios do estimulo raro
+PEraro = matrix(0,276,Ncanais)
+
+# for pra cada canal
+for(canal in 1:Ncanais){
+  MediaRaro = 0
+  # pra todo ti
+  for(ti in TiRaros){
+    Baseline = mean(fsinais[(ti-JANELApre):ti, canal])
+    y = fsinais[(ti-JANELApre):(ti+JANELApos), canal] - Baseline
+    MediaRaro = MediaRaro + y/length(TiRaros)
+  } 
+  PEraro[,canal] = MediaRaro
+}
+```
+
+
+
+
+
+
+

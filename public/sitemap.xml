@@ -15,16 +15,20 @@
   </url>
   
   <url>
+    <loc>/aulas/2_filtro_sinais/</loc>
+  </url>
+  
+  <url>
+    <loc>/aulas/3_potenciaisevocados/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/credits/</loc>
-  </url>
-  
-  <url>
-    <loc>/aulas/2_filtro_sinais/</loc>
   </url>
   
   <url>

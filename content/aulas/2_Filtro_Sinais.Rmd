@@ -2,10 +2,10 @@
 title: "Filtros de sinais"
 author: "Amanda Yumi"
 date: "29 de setembro de 2018"
-output: html_document
-
+output:
+  html_document: default
+weight: 20
 ---
-# Introdução:
 
 O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves. 
 
@@ -159,6 +159,38 @@ lines((1:nrow(sinais))/HZ, filtrado, col=2)
 ```
 
 Dessa forma é possível aplicar outros filtros, alterando o tipo na função *butter* e aplicando aos sinais de todos os canais na função *filter*. Dica de exercício: Tente executar para outros canais ou então ajustando o filtro para outras frequências ou determinados intervalos de frequência.
+
+Um exemplo comum é a aplicação de um filtro que processe dados de um determinado intervalo (por exemplo, como a rede elétrica é 60hz mas há oscilações, processa-se sinal entre 59-61hz). Neste caso, queremos um passa-banda para deixar apenas entre as frequências de 1-40 hz:
+
+```{r}
+# butter (n = ordem do filtro, w = cutoff, tipo = tipo de filtro)
+#   - n = Ordem do filtro = controla o decaimento da curva de ajuste do filtro, #   geralmente se usa 3 ou 5.
+#   -type = tipo de filtro (low/passa-baixa, high/passa-alta ou band-pass/passa banda)
+
+FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = "pass")
+freqz(FILTRO)
+```
+
+Quero aplicar este filtro em todas as colunas da matriz de sinais, realizando a retirada da média para tirar os outliers antes do filtro.
+O sinal bruto permanece sem o ajuste das médias, então para executar em todos os canais, é importante que y esteja nas interações:
+
+```{r}
+fsinais = matrix(0, nrow(sinais), ncol(sinais))
+
+for (canal in 1:32) {
+  y = sinais[,canal] - mean(sinais[,canal])
+  fsinais[,canal]=filter(FILTRO,y)
+}
+```
+
+Para verificar o sinal bruto e filtrado de cada canal, tirando a média (o exemplo contempla o canal 1):
+
+```{r}
+#Checar o sinal bruto e filtrado
+plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type="l",xlab="Tempo(s)", ylab="sinal(uV)")
+lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)
+```
+
 
 
 
