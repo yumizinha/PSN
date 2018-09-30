@@ -13,17 +13,17 @@
     <title>Potenciais Evocados :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538326654" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538326654" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538326654" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538326654" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538326654" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538326654" rel="stylesheet">
-    <link href="../../css/theme.css?1538326654" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538326654" rel="stylesheet">
+    <link href="../../css/nucleus.css?1538339313" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538339313" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538339313" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538339313" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538339313" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538339313" rel="stylesheet">
+    <link href="../../css/theme.css?1538339313" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538339313" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538326654"></script>
+    <script src="../../js/jquery-2.x.min.js?1538339313"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -88,14 +88,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538326654"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538326654"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1538339313"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538339313"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538326654"></script>
+<script type="text/javascript" src="../../js/search.js?1538339313"></script>
 
     
   </div>
@@ -345,14 +345,52 @@ table(trigger)</code></pre>
 ##     0    10    11 
 ## 45422    10    29</code></pre>
 <p>Olhando o conteúdo do trigger:</p>
-<pre class="r"><code># Gambi pra funcionar o ts.plot:
-graphics.off()
-par(&quot;mar&quot;)</code></pre>
 <pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
-<pre class="r"><code>par(mar=c(1,1,1,1))
-
-# Conteúdo do vetor do trigger:
+<pre class="r"><code># Conteúdo do vetor do trigger:
 ts.plot(trigger)</code></pre>
+<p><img src="../../aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Para identificação dos potenciais evocados, precisamos ainda definir os canais e pontos no tempo:</p>
+<pre class="r"><code># Número de canais:
+Ncanais =ncol(sinais)
+
+# Número de pontos no tempo:
+T=nrow(sinais)</code></pre>
+<p>Filtrando os sinais de todos os canais:</p>
+<pre class="r"><code>FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = &quot;pass&quot;)
+freqz(FILTRO)</code></pre>
+<p><img src="../../aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>fsinais = matrix(0, nrow(sinais), ncol(sinais))
+
+for (canal in 1:32) {
+  y = sinais[,canal] - mean(sinais[,canal])
+  fsinais[,canal]=filter(FILTRO,y)
+}
+plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
+lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
+<p><img src="../../aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>Considerando a taxa de amostragem de 250hz, quero calcular uma determinada janela no intervalo 100ms dado um canal:</p>
+<pre class="r"><code># Se a taxa de amostragem é 250, quero definir as janelas pré e pós estímulos:
+JANELApos=HZ        #janela de 1 segundo
+JANELApre=HZ/10    #janela de 100 milisegundos</code></pre>
+<p>O comando which ajuda a separar os estímulos:</p>
+<pre class="r"><code>#Descobrir quais as caselas do vetor trigger se referem ao estimulo freq e raro
+TiRaros= which(trigger==10)
+TiFreq= which(trigger==11)</code></pre>
+<p>Armazenando os potenciais evocados:</p>
+<pre class="r"><code># Matriz que guarda os potenciais evocados medios do estimulo raro
+PEraro = matrix(0,276,Ncanais)
+
+# for pra cada canal
+for(canal in 1:Ncanais){
+  MediaRaro = 0
+  # pra todo ti
+  for(ti in TiRaros){
+    Baseline = mean(fsinais[(ti-JANELApre):ti, canal])
+    y = fsinais[(ti-JANELApre):(ti+JANELApos), canal] - Baseline
+    MediaRaro = MediaRaro + y/length(TiRaros)
+  } 
+  PEraro[,canal] = MediaRaro
+}</code></pre>
 
 
 <footer class=" footline" >
@@ -490,20 +528,20 @@ ts.plot(trigger)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538326654"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538326654"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538326654"></script>
-    <script src="../../js/jquery.sticky.js?1538326654"></script>
-    <script src="../../js/featherlight.min.js?1538326654"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538326654"></script>
-    <script src="../../js/highlight.pack.js?1538326654"></script>
+    <script src="../../js/clipboard.min.js?1538339313"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538339313"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538339313"></script>
+    <script src="../../js/jquery.sticky.js?1538339313"></script>
+    <script src="../../js/featherlight.min.js?1538339313"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538339313"></script>
+    <script src="../../js/highlight.pack.js?1538339313"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538326654"></script>
-    <script src="../../js/learn.js?1538326654"></script>
-    <script src="../../js/hugo-learn.js?1538326654"></script>
+    <script src="../../js/modernizr.custom.71422.js?1538339313"></script>
+    <script src="../../js/learn.js?1538339313"></script>
+    <script src="../../js/hugo-learn.js?1538339313"></script>
 
-    <link href="../../mermaid/mermaid.css?1538326654" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538326654"></script>
+    <link href="../../mermaid/mermaid.css?1538339313" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538339313"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

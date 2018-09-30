@@ -26,11 +26,49 @@ table(trigger)</code></pre>
 ##     0    10    11 
 ## 45422    10    29</code></pre>
 <p>Olhando o conteúdo do trigger:</p>
-<pre class="r"><code># Gambi pra funcionar o ts.plot:
-graphics.off()
-par(&quot;mar&quot;)</code></pre>
 <pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
-<pre class="r"><code>par(mar=c(1,1,1,1))
-
-# Conteúdo do vetor do trigger:
+<pre class="r"><code># Conteúdo do vetor do trigger:
 ts.plot(trigger)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Para identificação dos potenciais evocados, precisamos ainda definir os canais e pontos no tempo:</p>
+<pre class="r"><code># Número de canais:
+Ncanais =ncol(sinais)
+
+# Número de pontos no tempo:
+T=nrow(sinais)</code></pre>
+<p>Filtrando os sinais de todos os canais:</p>
+<pre class="r"><code>FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = &quot;pass&quot;)
+freqz(FILTRO)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>fsinais = matrix(0, nrow(sinais), ncol(sinais))
+
+for (canal in 1:32) {
+  y = sinais[,canal] - mean(sinais[,canal])
+  fsinais[,canal]=filter(FILTRO,y)
+}
+plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
+lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>Considerando a taxa de amostragem de 250hz, quero calcular uma determinada janela no intervalo 100ms dado um canal:</p>
+<pre class="r"><code># Se a taxa de amostragem é 250, quero definir as janelas pré e pós estímulos:
+JANELApos=HZ        #janela de 1 segundo
+JANELApre=HZ/10    #janela de 100 milisegundos</code></pre>
+<p>O comando which ajuda a separar os estímulos:</p>
+<pre class="r"><code>#Descobrir quais as caselas do vetor trigger se referem ao estimulo freq e raro
+TiRaros= which(trigger==10)
+TiFreq= which(trigger==11)</code></pre>
+<p>Armazenando os potenciais evocados:</p>
+<pre class="r"><code># Matriz que guarda os potenciais evocados medios do estimulo raro
+PEraro = matrix(0,276,Ncanais)
+
+# for pra cada canal
+for(canal in 1:Ncanais){
+  MediaRaro = 0
+  # pra todo ti
+  for(ti in TiRaros){
+    Baseline = mean(fsinais[(ti-JANELApre):ti, canal])
+    y = fsinais[(ti-JANELApre):(ti+JANELApos), canal] - Baseline
+    MediaRaro = MediaRaro + y/length(TiRaros)
+  } 
+  PEraro[,canal] = MediaRaro
+}</code></pre>

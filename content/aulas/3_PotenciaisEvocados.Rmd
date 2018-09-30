@@ -6,6 +6,14 @@ output: html_document
 weight: 30
 ---
 
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
+require(signal)
+# taxa de amostragem:
+HZ = 250
+```
+
+
+
 ```{r}
 # Leitura dos dados
 sinais=read.table("oddball250hz.txt",header=FALSE)
@@ -39,15 +47,20 @@ table(trigger)
 
 Olhando o conteúdo do trigger:
 
-```{r}
+```{r echo=FALSE}
 # Gambi pra funcionar o ts.plot:
 graphics.off()
 par("mar")
 par(mar=c(1,1,1,1))
+```
 
+```{r}
 # Conteúdo do vetor do trigger:
 ts.plot(trigger)
+
 ```
+
+
 
 Para identificação dos potenciais evocados, precisamos ainda definir os canais e pontos no tempo:
 
@@ -61,7 +74,9 @@ T=nrow(sinais)
 
 Filtrando os sinais de todos os canais:
 
+
 ```{r cache=TRUE} 
+
 FILTRO = butter(n=5, W =c(1,40)/(HZ/2), type = "pass")
 freqz(FILTRO)
 fsinais = matrix(0, nrow(sinais), ncol(sinais))
@@ -109,10 +124,4 @@ for(canal in 1:Ncanais){
   PEraro[,canal] = MediaRaro
 }
 ```
-
-
-
-
-
-
 
