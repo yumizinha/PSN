@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/en/aulas/</loc>
+  </url>
+  
+  <url>
+    <loc>/en/aulas/aula_1_intror/</loc>
+  </url>
+  
+  <url>
+    <loc>/en/aulas/aula_2_filtro_sinais/</loc>
+  </url>
+  
+  <url>
+    <loc>/en/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/credits/</loc>
+  </url>
+  
+  <url>
+    <loc>/en/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/showcase/</loc>
+  </url>
+  
+  <url>
+    <loc>/en/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="/fr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/"
+                />
+  </url>
+  
+</urlset>
