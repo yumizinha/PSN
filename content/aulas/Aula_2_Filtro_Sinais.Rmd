@@ -62,10 +62,11 @@ sinais=read.table("oddball250hz.txt",header=FALSE)
 
 ```
 ver também a verificação dos dados:
+
 ```{r}
 dim(sinais)
-
 ```
+
 Olhan do o arquivo, ele é composto por 45461 linhas e 33 colunas (essas referentes aos 32 canais e uma última coluna de zeros).
 
 Para verificar os dados do arquivo em um plot:
@@ -131,7 +132,7 @@ Neste caso "bugado" teríamos o seguinte retorno:
 
 ```{r}
 #Fazer o grafico com os 2 sinais
-plot((1:nrow(sinais))/HZ,y,type="l",
+plot((1:nrow(sinais))/HZ, sinais[,5],type="l",
      xlab="Tempo(s)", ylab="sinal(uV)")
 
 #Acrescentar linha com o sinal filtrado
@@ -156,6 +157,12 @@ plot((1:nrow(sinais))/HZ,y,type="l",
      xlab="Tempo(s)", ylab="sinal(uV)")
 lines((1:nrow(sinais))/HZ, filtrado, col=2)
 ```
+
+Dessa forma é possível aplicar outros filtros, alterando o tipo na função *butter* e aplicando aos sinais de todos os canais na função *filter*. Dica de exercício: Tente executar para outros canais ou então ajustando o filtro para outras frequências ou determinados intervalos de frequência.
+
+
+
+
 
 
 
