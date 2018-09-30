@@ -5,7 +5,7 @@ date: "29 de setembro de 2018"
 output: html_document
 weight: 20
 ---
-# Breve introdução sobre filtros:
+# Introdução:
 
 O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves. 
 
@@ -119,36 +119,36 @@ FILTRO = butter(n=5, W =30/(HZ/2), type = "low")
 freqz(FILTRO)
 ```
 
-Após ter o filtro desenhado, aplica-lo sobre os dados do canal.
+Após ter o filtro desenhado, aplica-lo sobre os dados do canal (neste caso seria o canal 5, como exemplo, mas poderia ser qlq um).
 Ao aplicar o filtro de forma direta teríamos ainda um problema:
 
 ```{r}
 filtrado_teste = filter(FILTRO, sinais[,5]) 
-# bug de início do sinal, com valor muito alto 
+# bug de início do sinal, com valor muito alto.
 ```
 
-Para isso teria que tirar a média do sinal para ficar média 0:
+Neste caso "bugado" teríamos o seguinte retorno:
 
 ```{r}
-y = sinais[,5] - mean(sinais[,5])
-#e novamente:
-#Aplicar o filtro no sinal:
-filtrado = filter(FILTRO, y)
-
-```
-
-```{r}
-
 #Fazer o grafico com os 2 sinais
 plot((1:nrow(sinais))/HZ,y,type="l",
      xlab="Tempo(s)", ylab="sinal(uV)")
 
 #Acrescentar linha com o sinal filtrado
 lines((1:nrow(sinais))/HZ, filtrado_teste, col=2)
+```
+
+
+Para isso resolve-se tirando a média do sinal:
+
+```{r}
+y = sinais[,5] - mean(sinais[,5])
+# e novamente aplicando o filtro no sinal:
+filtrado = filter(FILTRO, y)
 
 ```
 
-e sem ser no teste:
+obtenso então o sinal filtrado:
 
 ```{r}
 #Acrescentar linha com o sinal filtrado
