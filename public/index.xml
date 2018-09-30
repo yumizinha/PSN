@@ -11,24 +11,23 @@
     
     
     <item>
-      <title>Introdução ao R</title>
-      <link>/aulas/aula_1_intror/</link>
+      <title>Intro_eletrofisiologia</title>
+      <link>/aulas/0_eletrofisiologia/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/aulas/aula_1_intror/</guid>
-      <description>Introdução ao R - comandos O R é um software importante para análise de dados estatísticos. Apesar de não ter uma interface gráfica , a usabilidade é melhor para personificação das análises e permite mais opções para visualização e análise de dados.
-Vetor e matrizes no R: Para armazenar um valor a uma variável, simplesmente usamos:
-x = 3.7 O vetor é uma estrutura de dados básica do R, que permite armazenar um conjunto de valores numéricos ou de caractere sob um mesmo tipo.</description>
+      <guid>/aulas/0_eletrofisiologia/</guid>
+      <description>Eletrofiosiologia  1929 - Hans Berger queria medir telepatia em humanos pela primeira vez: Como um soldado no exército alemão na primeira década de 1900, Hans Berger caiu de seu cavalo em frente de um carro de artilharia e quase foi atropelado. Quando ele voltou para o quartel, havia um telegrama de seu pai dizendo que sua irmã teve a “sensação” de que ele tinha sido ferido. Com essa motivação, Berger quis explorar manifestações físicas dessas transmissões psíquicas  1935 - Hallowell e Pauline Davis obtêm os primeiros registros de ERPs (potencial evocado).</description>
     </item>
     
     <item>
-      <title>Filtros de sinais</title>
-      <link>/aulas/aula_2_filtro_sinais/</link>
+      <title>Introdução ao R</title>
+      <link>/aulas/1_intror/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/aulas/aula_2_filtro_sinais/</guid>
-      <description>Introdução: O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.
-Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada.</description>
+      <guid>/aulas/1_intror/</guid>
+      <description>Introdução ao R - comandos O R é um software importante para análise de dados estatísticos. Apesar de não ter uma interface gráfica , a usabilidade é melhor para personificação das análises e permite mais opções para visualização e análise de dados.
+Vetor e matrizes no R: Para armazenar um valor a uma variável, simplesmente usamos:
+x = 3.7 O vetor é uma estrutura de dados básica do R, que permite armazenar um conjunto de valores numéricos ou de caractere sob um mesmo tipo.</description>
     </item>
     
     <item>
@@ -39,6 +38,16 @@ Outro exemplo é a luz branca, que é a composição de diversas ondas com difer
       <guid>/credits/</guid>
       <description>Contributors Thanks to them  for make Open Source Software a better place !
 .ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @matcornic 143 commits   @lierdakil 16 commits   @gwleclerc 13 commits   @mdavids 10 commits   @Xipas 5 commits   @mreithub 3 commits   @matalo33 3 commits   @denisvm 2 commits   @gpospelov 2 commits   @wikijm 2 commits   @lfalin 2 commits   @alexvargasbenamburg 1 commits   @afs2015 1 commits   @arifpedia 1 commits   @MrMoio 1 commits   @giuliov 1 commits   @haitch 1 commits   @RealOrangeOne 1 commits   @tanzaho 1 commits   @JohnBlood 1 commits   @kamilchm 1 commits   @sykesm 1 commits   @ripienaar 1 commits   @EnigmaCurry 1 commits   @tedyoung 1 commits   @Thiht 1 commits   @fossabot 1 commits   @kamar535 1 commits   @nonumeros 1 commits   @pgorod 1 commits   @proelbtn 1 commits   And a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn.</description>
+    </item>
+    
+    <item>
+      <title>Filtros de sinais</title>
+      <link>/aulas/2_filtro_sinais/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/2_filtro_sinais/</guid>
+      <description>Introdução: O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.
+Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada.</description>
     </item>
     
     <item>

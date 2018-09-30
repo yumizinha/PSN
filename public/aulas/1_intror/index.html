@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.49" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
+
+    <title>Introdução ao R :: Documentation for Hugo Learn Theme</title>
+    
+    
+    <link href="../../css/nucleus.css?1538322794" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538322794" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538322794" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538322794" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538322794" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538322794" rel="stylesheet">
+    <link href="../../css/theme.css?1538322794" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538322794" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-2.x.min.js?1538322794"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/aulas/1_intror/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="../../">
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<g>
+	<path d="M35,0c9.6,0,17.9,3.4,24.7,10.3c6.8,6.8,10.3,15,10.3,24.7c0,9.7-3.4,17.9-10.3,24.7c-6.8,6.8-15,10.3-24.7,10.3
+		c-9.7,0-17.9-3.4-24.7-10.3C3.4,52.8,0,44.6,0,34.9c0-9.6,3.4-17.9,10.3-24.7C17.1,3.4,25.3,0,35,0z M22.3,63.7
+		c0.3-7.4,0.3-14.7,0-22.1c-2.1-0.4-4-0.4-5.9,0c-0.2,0.8-0.2,2.5-0.1,4.9c0.1,2.3,0,3.9-0.3,4.8c-1.7-0.6-2.7-2.1-3.1-4.6
+		c-0.1-0.7-0.1-3.3-0.1-8c0-14.5-0.1-23-0.3-25.6c-3.6,4.1-5.6,7-5.9,8.5v10.9c0,4.5,0.1,8.1,0.2,10.9c0,0.4,0,1.3-0.1,2.8
+		c-0.1,1.2,0,2.1,0.1,2.6c0.1,0.6,1.1,2.1,2.8,4.7C13.2,58.7,17.5,62.2,22.3,63.7z M44.6,65.4c0.3-5,0.2-12.9-0.1-23.6
+		c-2.1-0.3-4.1-0.3-5.9,0c-0.2,2-0.2,5.1-0.1,9.5c0.1,4.3,0,7.5-0.1,9.5c-2.9,0.4-5,0.3-6.2-0.1c-0.2-5.6-0.2-15.2-0.1-28.7
+		c0.1-12.4,0-21.8-0.3-28.3c-2.4,0.1-4.3,0.6-5.7,1.3c-0.1,7.7-0.2,17.7-0.1,30.1c0,16.5,0,26.6,0,30.3c2.3,1.1,5.4,1.7,9.4,1.7
+		C38.9,66.9,42.1,66.4,44.6,65.4z M48.1,64.1c9.7-4.6,15.7-12,18-22.2c-1.8-0.2-3.8-0.3-6.1-0.3c-1.6,3.9-2.6,6.3-3.2,7.2
+		c-1.1,1.7-2,2.5-2.7,2.5C54,46,54,39.1,54,30.5c0-11.5,0-18.4,0-20.9c-1.4-1.4-3.3-2.5-5.7-3.4C48.1,6.3,48,6.4,48,6.7
+		c0,3.5,0,13.1,0,28.8C47.9,47.2,48,56.8,48.1,64.1z"/>
+</g>
+<g>
+	<path d="M116.6,51.3h-29c-0.5,0-0.9-0.1-1.3-0.2c-0.4-0.2-0.7-0.4-1-0.7c-0.3-0.3-0.5-0.6-0.7-1c-0.2-0.4-0.2-0.8-0.2-1.3V16.3h6.3
+		V45h25.8V51.3z"/>
+	<path d="M154.8,51.3h-22.9c-0.9,0-1.8-0.2-2.9-0.5c-1-0.3-2-0.8-2.9-1.5c-0.9-0.7-1.6-1.6-2.2-2.8c-0.6-1.1-0.9-2.5-0.9-4.2V19.5
+		c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2h28.6v6.3h-25.4v19.8
+		c0,0.8,0.2,1.5,0.7,1.9s1.1,0.7,1.9,0.7h22.9V51.3z M151.9,37h-20v-6.4h20V37z"/>
+	<path d="M197.3,51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6,0.4-4.9,1.3-7.1s2.1-4,3.7-5.5c1.6-1.5,3.4-2.8,5.5-3.6
+		c2.1-0.9,4.5-1.3,7-1.3h14.3c0.4,0,0.9,0.1,1.2,0.2c0.4,0.2,0.7,0.4,1,0.7s0.5,0.6,0.7,1c0.2,0.4,0.2,0.8,0.2,1.2V51.3z
+		 M168.7,36.4H191V22.6h-11.2c-0.2,0-0.6,0-1.2,0.1c-0.6,0.1-1.4,0.2-2.2,0.4c-0.8,0.2-1.7,0.6-2.6,1c-0.9,0.5-1.8,1.1-2.5,2
+		c-0.8,0.8-1.4,1.9-1.9,3.1c-0.5,1.2-0.7,2.8-0.7,4.5V36.4z"/>
+	<path d="M241.7,28.1c0,1.4-0.2,2.7-0.5,3.9c-0.4,1.1-0.8,2.1-1.5,3c-0.6,0.9-1.3,1.6-2.1,2.2c-0.8,0.6-1.6,1.1-2.5,1.5
+		c-0.9,0.4-1.8,0.7-2.6,0.9c-0.9,0.2-1.7,0.3-2.5,0.3l13.3,11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c0.8-0.1,1.5-0.2,2.2-0.5
+		c0.7-0.3,1.2-0.6,1.7-1.1c0.5-0.5,0.9-1,1.1-1.6c0.3-0.6,0.4-1.4,0.4-2.2v-4c0-0.4,0-0.6-0.1-0.8c-0.1-0.2-0.2-0.3-0.3-0.4
+		c-0.1-0.1-0.3-0.1-0.4-0.2c-0.2,0-0.3,0-0.4,0h-20.9v28.7h-6.3V19.5c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1
+		c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2H234c1.4,0,2.6,0.3,3.6,0.8s1.8,1.2,2.4,1.9c0.6,0.8,1,1.6,1.3,2.5
+		c0.3,0.9,0.4,1.7,0.4,2.5V28.1z"/>
+	<path d="M285.1,48.6c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.4,0.7-0.7,1c-0.3,0.3-0.6,0.5-1,0.7c-0.4,0.2-0.8,0.2-1.2,0.2
+		c-0.4,0-0.8-0.1-1.2-0.2c-0.4-0.1-0.8-0.4-1.1-0.7l-23.2-24.2v24.7h-6.3V19c0-0.7,0.2-1.2,0.5-1.8c0.4-0.5,0.8-0.9,1.4-1.2
+		c0.6-0.2,1.2-0.3,1.9-0.2s1.2,0.4,1.6,0.9l23.2,24.2V16.3h6.3V48.6z"/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1538322794"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538322794"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1538322794"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/aulas/" title="Conteúdo" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../aulas/">
+          <b>1. </b>Conteúdo
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/0_eletrofisiologia/" title="Intro_eletrofisiologia" class="dd-item ">
+        <a href="../../aulas/0_eletrofisiologia/">
+        Intro_eletrofisiologia
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/1_intror/" title="Introdução ao R" class="dd-item active">
+        <a href="../../aulas/1_intror/">
+        Introdução ao R
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item ">
+        <a href="../../aulas/2_filtro_sinais/">
+        Filtros de sinais
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+       
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fa fa-fw fa-history"></i> Clear History</a></li>         
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/1_IntroR.html" target="blank">
+                      <i class="fa fa-code-fork"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Learn Theme for Hugo</a> > <a href='../../aulas/'>Conteúdo</a> > Introdução ao R
+          
+         
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>Introdução ao R</h1>
+          
+
+        
+
+
+<div id="introducao-ao-r---comandos" class="section level2">
+<h2>Introdução ao R - comandos</h2>
+<p>O R é um software importante para análise de dados estatísticos. Apesar de não ter uma interface gráfica , a usabilidade é melhor para personificação das análises e permite mais opções para visualização e análise de dados.</p>
+<div id="vetor-e-matrizes-no-r" class="section level3">
+<h3>Vetor e matrizes no R:</h3>
+<p>Para armazenar um valor a uma variável, simplesmente usamos:</p>
+<pre class="r"><code>x = 3.7</code></pre>
+<p>O vetor é uma estrutura de dados básica do R, que permite armazenar um conjunto de valores numéricos ou de caractere sob um mesmo tipo.</p>
+<pre class="r"><code>x = c(1, 2, 3, 4)
+x</code></pre>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<p>Para criar um vetor com repetidos valores, por exemplo uma repetição de zeros, utiliza-se:</p>
+<pre class="r"><code>x = array(0, 100)
+x</code></pre>
+<pre><code>##   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+##  [36] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+##  [71] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+<p>Para criar uma matriz, utiliza-se uma estrutura similar.</p>
+<pre class="r"><code>x = matrix(1, 2, 2)
+x</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    1
+## [2,]    1    1</code></pre>
+<p>Atribuindo algum valor (1000) ao intervalo, no caso primeira linha:</p>
+<pre class="r"><code>x[1,]=1000
+# Saída da matriz inteira com 1000 na primeira linha e 1 no resto:
+x</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,] 1000 1000
+## [2,]    1    1</code></pre>
+<p>Caso queira exibir uma única linha ou coluna, basta digitar o comando com a linha ou coluna desejada:</p>
+<pre class="r"><code># Coluna
+x[,2]</code></pre>
+<pre><code>## [1] 1000    1</code></pre>
+<pre class="r"><code>#Linha:
+x[2,]</code></pre>
+<pre><code>## [1] 1 1</code></pre>
+</div>
+<div id="listas-no-r" class="section level3">
+<h3>Listas no R:</h3>
+<p>Listas são objetos que podem armazenar objetos de dados de tipos diferentes. É possível incluir data.frames, arrays, matrizes, vetores, fatores e mesmo listas em uma lista.</p>
+<pre class="r"><code>list=list()
+list$nome = &quot;joao&quot;
+list$idade = 40
+list$vetor=c(1,2,3)
+list$nome</code></pre>
+<pre><code>## [1] &quot;joao&quot;</code></pre>
+<pre class="r"><code># Saída:
+list</code></pre>
+<pre><code>## $nome
+## [1] &quot;joao&quot;
+## 
+## $idade
+## [1] 40
+## 
+## $vetor
+## [1] 1 2 3</code></pre>
+</div>
+<div id="loops-r" class="section level3">
+<h3>Loops R:</h3>
+<p>Para realizar uma repetição com variável de controle, o comando for() incrementa um índice dentro de uma sequência de valores.</p>
+<pre class="r"><code>for(i in 1:10){
+  print (i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>Para reaizar uma repetição pré-testada, o teste para sair do laço de repetição é realizado antes de entrar no laço, e para isso utilizamos a função while():</p>
+<pre class="r"><code>i=1
+while(i&lt;=10){
+  print (i)
+  i=i+1
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>Ou outro exemplo:</p>
+<pre class="r"><code>i=1
+while(i&lt;=10){
+  print (i)
+  if (i&lt;=5) {
+    print(&quot;menor ou igual a 5&quot;)
+  }
+  else{
+    print(&quot;maior que 5&quot;)
+  }
+  i=i+1
+}</code></pre>
+<pre><code>## [1] 1
+## [1] &quot;menor ou igual a 5&quot;
+## [1] 2
+## [1] &quot;menor ou igual a 5&quot;
+## [1] 3
+## [1] &quot;menor ou igual a 5&quot;
+## [1] 4
+## [1] &quot;menor ou igual a 5&quot;
+## [1] 5
+## [1] &quot;menor ou igual a 5&quot;
+## [1] 6
+## [1] &quot;maior que 5&quot;
+## [1] 7
+## [1] &quot;maior que 5&quot;
+## [1] 8
+## [1] &quot;maior que 5&quot;
+## [1] 9
+## [1] &quot;maior que 5&quot;
+## [1] 10
+## [1] &quot;maior que 5&quot;</code></pre>
+<p>No R, o índice i for imutável, recomenda-se utilizar o “for” como opção de repetição.</p>
+</div>
+<div id="outras-funcoes-uteis-no-r" class="section level3">
+<h3>Outras funções úteis no R:</h3>
+<p>A Estatística Descritiva está diretamente ligada à organização e descrição dos dados. É utilizada para sumarizar como as observações se distribuem e onde estão posicionadas (ex.: medidas de tendência central e dispersão) e como se apresentam em termos de associação. Os conceitos e métodos descritivos são ponto de partida da análise exploratória de dados, passo fundamental para análises estatísticas mais avançadas.</p>
+<p>Considerando a matriz criada x,</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,] 1000 1000
+## [2,]    1    1</code></pre>
+<p>temos as seguintes funções para estatística descritiva:</p>
+<pre class="r"><code># Média:
+mean(x)</code></pre>
+<pre><code>## [1] 500.5</code></pre>
+<pre class="r"><code># Desvio padrão 
+sd(x)</code></pre>
+<pre><code>## [1] 576.7729</code></pre>
+<pre class="r"><code># Distribuição normal: 
+rnorm(x)</code></pre>
+<pre><code>## [1] -0.2941549 -0.5695707 -1.1018875  1.4181125</code></pre>
+<pre class="r"><code># Boxplot:
+boxplot(x)</code></pre>
+<p><img src="../../aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
+<div id="leitura-de-dados-de-ecg" class="section level2">
+<h2>Leitura de dados de ECG</h2>
+<p>A primeira vista, pode parecer contraintuitivo que num curso de Processamento de Sinais Neurais contenha análise de dados de Eletrocardiograma (ECG). Dentre os parâmetros que podem ser aferidos a partir do ECG é a frequência cardíaca (número de batimentos do coração que acontecem a cada minuto - bpm). A freqüência cardíaca é capaz de indicar uma ativação geral do sistema nervoso autônomo, responsável por controlar nossas reações corporais involuntárias. Ao expor uma pessoa em situações de maior demanda energética, o coração bate mais forte e mais rápido.</p>
+<p>O uso do ECG fornece dados informativos acerca dos processos psicofisiológicos em diversas situações, sendo altamente aplicável em estudos que investigam as respostas comportamentais como por exemplo de consumidores ou outros entrevistados.</p>
+<div id="leitura-de-dados-de-ecg-1" class="section level3">
+<h3>Leitura de dados de ECG:</h3>
+<p>Na aula o professor disponibilizou dados de um arquivo em que ele coletou dados de ECG de si mesmo (a partir de um arduino). O arquivo contém uma única coluna que é o valor em mV coletado com o instrumento:</p>
+<pre class="r"><code>dados = read.table(&quot;ecg.txt&quot;, header = FALSE)</code></pre>
+<p>Para visualizar os dados da forma de série temporal, utiliza-se a função ts.plot(). Algumas versões do R Studio contém um problema para visualização dos dados, então utiliza-se a seguinte gambiarra recomendada pelo Stackoverflow:</p>
+<pre class="r"><code># Pra não dar erro &quot;figure margins too large&quot; no ts.plot:
+graphics.off()
+par(&quot;mar&quot;)</code></pre>
+<pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
+<pre class="r"><code>par(mar=c(1,1,1,1))</code></pre>
+<p>Após implementar essas linhas, na sequência, visualizamos os dados com a função:</p>
+<pre class="r"><code># Plotando gráfico de linha - ECG
+ts.plot(dados)</code></pre>
+<p><img src="../../aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Um histograma pode ajudar a melhorar a visualização da amplitude do sinal:</p>
+<pre class="r"><code>hist(dados$V1)</code></pre>
+<p><img src="../../aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Para fins de referência, consideremos como picos de batimentos os valores com resultados acima de 685mV, então destacaríamos os maiores:</p>
+<pre class="r"><code># Para percorrer todas as casas dos dados, detectando os picos:
+picos=array(0, nrow(dados))
+for(i in 1:960){
+  if(dados$V1[i]&gt;685){
+    picos[i]=1
+  }
+}
+
+# Unindo no plot as colunas de dados e picos
+ts.plot(cbind(dados$V1, picos))</code></pre>
+<p><img src="../../aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code># Como pode ver, ficou zoado, então ajustamos a escala e adicionamos cores para que se possa visualizar os dados:
+# cores: col 2 = preto e 1 vermelho
+ts.plot(cbind(dados$V1, picos+684), col=c(2,1))</code></pre>
+<p><img src="../../aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<p>O ajuste ainda não ficou muito claro. Toda vez que encontrar um pico, os valores conseguintes referem-se ao mesmo pico, ou seja, devemos limpar os dados (retirada de picos contínuos adjacentes). Neste caso, escolhemos ignorar os picos dos 10 dados seguintes ao primeiro pico.</p>
+<p>Nota: Para percorrer o vetor completo, basta percorrer o código até os 10 últimos (critério de parada) dados. Os demais picos seriam ignorados de qualquer forma e poderia reproduzir erro no vetor.</p>
+<p>Dessa forma, teríamos:</p>
+<pre class="r"><code>for(i in 1:(nrow(dados)-10) ){
+  if(picos[i]==1){
+    picos[(i+1):(i+10)]=0 
+  }
+}
+ts.plot(cbind(dados$V1,picos+684),col=c(2,1))</code></pre>
+<p><img src="../../aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+</div>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+            <a class="nav nav-prev" href="../../aulas/0_eletrofisiologia/" title="Intro_eletrofisiologia"> <i class="fa fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="../../aulas/2_filtro_sinais/" title="Filtros de sinais" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1538322794"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538322794"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538322794"></script>
+    <script src="../../js/jquery.sticky.js?1538322794"></script>
+    <script src="../../js/featherlight.min.js?1538322794"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538322794"></script>
+    <script src="../../js/highlight.pack.js?1538322794"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom.71422.js?1538322794"></script>
+    <script src="../../js/learn.js?1538322794"></script>
+    <script src="../../js/hugo-learn.js?1538322794"></script>
+
+    <link href="../../mermaid/mermaid.css?1538322794" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538322794"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
+

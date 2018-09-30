@@ -7,11 +7,11 @@
   </url>
   
   <url>
-    <loc>/aulas/aula_1_intror/</loc>
+    <loc>/aulas/0_eletrofisiologia/</loc>
   </url>
   
   <url>
-    <loc>/aulas/aula_2_filtro_sinais/</loc>
+    <loc>/aulas/1_intror/</loc>
   </url>
   
   <url>
@@ -21,6 +21,10 @@
   
   <url>
     <loc>/credits/</loc>
+  </url>
+  
+  <url>
+    <loc>/aulas/2_filtro_sinais/</loc>
   </url>
   
   <url>

@@ -3,7 +3,7 @@ title: "Filtros de sinais"
 author: "Amanda Yumi"
 date: "29 de setembro de 2018"
 output: html_document
-weight: 20
+
 ---
 
 
@@ -55,7 +55,7 @@ par(&quot;mar&quot;)</code></pre>
 <p>e o plot:</p>
 <pre class="r"><code># Plotando gráfico de linha
 ts.plot(sinais)</code></pre>
-<p><img src="/aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>A taxa de amostragem é a frequência em que a leitura ocorre: * HZ=1/INTERVALO, onde 1hz = 1/s</p>
 <pre class="r"><code># Suponha que o sinal foi adquirido sob uma taxa de amostragem de 250Hz: 
 HZ= 250</code></pre>
@@ -64,7 +64,7 @@ HZ= 250</code></pre>
 # plot(1:nrow(sinais), sinais[,5],type=&quot;l&quot;)
 # mas preciso considerar a frequência convertendo pra segundos:
 plot((1:nrow(sinais))/HZ, sinais[,5], type=&quot;l&quot;, xlab=&quot;Tempo(s)&quot;, ylab= &quot;sinal uV&quot;)</code></pre>
-<p><img src="/aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="utilizando-a-funcao-do-filtro-butter" class="section level2">
 <h2>Utilizando a função do filtro (<em>butter</em>):</h2>
@@ -74,7 +74,7 @@ plot((1:nrow(sinais))/HZ, sinais[,5], type=&quot;l&quot;, xlab=&quot;Tempo(s)&qu
 
 # Gráfico do desenho do filtro:
 freqz(FILTRO)</code></pre>
-<p><img src="/aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Após ter o filtro desenhado, aplica-lo sobre os dados do canal (neste caso seria o canal 5, como exemplo, mas poderia ser qlq um). Ao aplicar o filtro de forma direta teríamos ainda um problema:</p>
 <pre class="r"><code>filtrado_teste = filter(FILTRO, sinais[,5]) 
 # bug de início do sinal, com valor muito alto.</code></pre>
@@ -85,7 +85,7 @@ plot((1:nrow(sinais))/HZ, sinais[,5],type=&quot;l&quot;,
 
 #Acrescentar linha com o sinal filtrado
 lines((1:nrow(sinais))/HZ, filtrado_teste, col=2)</code></pre>
-<p><img src="/aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Para isso resolve-se tirando a média do sinal:</p>
 <pre class="r"><code>y = sinais[,5] - mean(sinais[,5])
 # e novamente aplicando o filtro no sinal:
@@ -95,7 +95,7 @@ filtrado = filter(FILTRO, y)</code></pre>
 plot((1:nrow(sinais))/HZ,y,type=&quot;l&quot;,
      xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
 lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
-<p><img src="/aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Dessa forma é possível aplicar outros filtros, alterando o tipo na função <em>butter</em> e aplicando aos sinais de todos os canais na função <em>filter</em>. Dica de exercício: Tente executar para outros canais ou então ajustando o filtro para outras frequências ou determinados intervalos de frequência.</p>
 </div>
 </div>

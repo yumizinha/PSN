@@ -13,17 +13,17 @@
     <title>Filtros de sinais :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538322587" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538322587" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538322587" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538322587" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538322587" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538322587" rel="stylesheet">
-    <link href="../../css/theme.css?1538322587" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538322587" rel="stylesheet">
+    <link href="../../css/nucleus.css?1538322794" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538322794" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538322794" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538322794" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538322794" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538322794" rel="stylesheet">
+    <link href="../../css/theme.css?1538322794" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538322794" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538322587"></script>
+    <script src="../../js/jquery-2.x.min.js?1538322794"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -33,7 +33,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/aulas/aula_2_filtro_sinais/">
+  <body class="" data-url="/aulas/2_filtro_sinais/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -88,14 +88,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538322587"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538322587"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1538322794"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538322794"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538322587"></script>
+<script type="text/javascript" src="../../js/search.js?1538322794"></script>
 
     
   </div>
@@ -138,6 +138,25 @@
  
   
     
+      <li data-nav-id="/aulas/0_eletrofisiologia/" title="Intro_eletrofisiologia" class="dd-item ">
+        <a href="../../aulas/0_eletrofisiologia/">
+        Intro_eletrofisiologia
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
       <li data-nav-id="/aulas/1_intror/" title="Introdução ao R" class="dd-item ">
         <a href="../../aulas/1_intror/">
         Introdução ao R
@@ -157,8 +176,8 @@
  
   
     
-      <li data-nav-id="/aulas/aula_2_filtro_sinais/" title="Filtros de sinais" class="dd-item active">
-        <a href="../../aulas/aula_2_filtro_sinais/">
+      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item active">
+        <a href="../../aulas/2_filtro_sinais/">
         Filtros de sinais
         <i class="fa fa-check read-icon"></i>
         </a>
@@ -230,7 +249,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/Aula_2_Filtro_Sinais.html" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/2_Filtro_Sinais.html" target="blank">
                       <i class="fa fa-code-fork"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -336,7 +355,7 @@ par(&quot;mar&quot;)</code></pre>
 <p>e o plot:</p>
 <pre class="r"><code># Plotando gráfico de linha
 ts.plot(sinais)</code></pre>
-<p><img src="../../aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>A taxa de amostragem é a frequência em que a leitura ocorre: * HZ=1/INTERVALO, onde 1hz = 1/s</p>
 <pre class="r"><code># Suponha que o sinal foi adquirido sob uma taxa de amostragem de 250Hz: 
 HZ= 250</code></pre>
@@ -345,7 +364,7 @@ HZ= 250</code></pre>
 # plot(1:nrow(sinais), sinais[,5],type=&quot;l&quot;)
 # mas preciso considerar a frequência convertendo pra segundos:
 plot((1:nrow(sinais))/HZ, sinais[,5], type=&quot;l&quot;, xlab=&quot;Tempo(s)&quot;, ylab= &quot;sinal uV&quot;)</code></pre>
-<p><img src="../../aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="utilizando-a-funcao-do-filtro-butter" class="section level2">
 <h2>Utilizando a função do filtro (<em>butter</em>):</h2>
@@ -355,7 +374,7 @@ plot((1:nrow(sinais))/HZ, sinais[,5], type=&quot;l&quot;, xlab=&quot;Tempo(s)&qu
 
 # Gráfico do desenho do filtro:
 freqz(FILTRO)</code></pre>
-<p><img src="../../aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Após ter o filtro desenhado, aplica-lo sobre os dados do canal (neste caso seria o canal 5, como exemplo, mas poderia ser qlq um). Ao aplicar o filtro de forma direta teríamos ainda um problema:</p>
 <pre class="r"><code>filtrado_teste = filter(FILTRO, sinais[,5]) 
 # bug de início do sinal, com valor muito alto.</code></pre>
@@ -366,7 +385,7 @@ plot((1:nrow(sinais))/HZ, sinais[,5],type=&quot;l&quot;,
 
 #Acrescentar linha com o sinal filtrado
 lines((1:nrow(sinais))/HZ, filtrado_teste, col=2)</code></pre>
-<p><img src="../../aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Para isso resolve-se tirando a média do sinal:</p>
 <pre class="r"><code>y = sinais[,5] - mean(sinais[,5])
 # e novamente aplicando o filtro no sinal:
@@ -376,7 +395,7 @@ filtrado = filter(FILTRO, y)</code></pre>
 plot((1:nrow(sinais))/HZ,y,type=&quot;l&quot;,
      xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
 lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
-<p><img src="../../aulas/Aula_2_Filtro_Sinais_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Dessa forma é possível aplicar outros filtros, alterando o tipo na função <em>butter</em> e aplicando aos sinais de todos os canais na função <em>filter</em>. Dica de exercício: Tente executar para outros canais ou então ajustando o filtro para outras frequências ou determinados intervalos de frequência.</p>
 </div>
 </div>
@@ -451,6 +470,22 @@ lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -476,7 +511,7 @@ lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
             <a class="nav nav-prev" href="../../aulas/1_intror/" title="Introdução ao R"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../../aulas/1_intror/" title="Introdução ao R" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../../aulas/0_eletrofisiologia/" title="Intro_eletrofisiologia" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -485,20 +520,20 @@ lines((1:nrow(sinais))/HZ, filtrado, col=2)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538322587"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538322587"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538322587"></script>
-    <script src="../../js/jquery.sticky.js?1538322587"></script>
-    <script src="../../js/featherlight.min.js?1538322587"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538322587"></script>
-    <script src="../../js/highlight.pack.js?1538322587"></script>
+    <script src="../../js/clipboard.min.js?1538322794"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538322794"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538322794"></script>
+    <script src="../../js/jquery.sticky.js?1538322794"></script>
+    <script src="../../js/featherlight.min.js?1538322794"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538322794"></script>
+    <script src="../../js/highlight.pack.js?1538322794"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538322587"></script>
-    <script src="../../js/learn.js?1538322587"></script>
-    <script src="../../js/hugo-learn.js?1538322587"></script>
+    <script src="../../js/modernizr.custom.71422.js?1538322794"></script>
+    <script src="../../js/learn.js?1538322794"></script>
+    <script src="../../js/hugo-learn.js?1538322794"></script>
 
-    <link href="../../mermaid/mermaid.css?1538322587" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538322587"></script>
+    <link href="../../mermaid/mermaid.css?1538322794" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538322794"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

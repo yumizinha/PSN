@@ -3,7 +3,7 @@ title: "Filtros de sinais"
 author: "Amanda Yumi"
 date: "29 de setembro de 2018"
 output: html_document
-weight: 20
+
 ---
 # Introdução:
 
