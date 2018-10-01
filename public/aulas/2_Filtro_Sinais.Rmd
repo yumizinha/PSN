@@ -67,7 +67,7 @@ ver também a verificação dos dados:
 dim(sinais)
 ```
 
-Olhan do o arquivo, ele é composto por 45461 linhas e 33 colunas (essas referentes aos 32 canais e uma última coluna de zeros).
+Olhando o arquivo, ele é composto por 45461 linhas e 33 colunas (essas referentes aos 32 canais e uma última coluna de zeros).
 
 Para verificar os dados do arquivo em um plot:
 
@@ -191,7 +191,17 @@ plot((1:nrow(sinais))/HZ,sinais[,1]-mean(sinais[,1]),type="l",xlab="Tempo(s)", y
 lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)
 ```
 
+Observações sobre a implementação de filtros:
+1. Adicionar a taxa de amostragem atribuindo um valor para HZ.
 
+  * Passa-baixa em 30hz: 
+  **FILTRO = butter(n=5, W = 30/(HZ/2), type = "low")
+  
+  * Passa-banda para deixar apenas entre as frequências de 1-40 hz:
+  **FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = "pass")
+
+  * Passa-alta para frequências acima de 0.2hz:
+  **FILTRO = butter(n=5, W = 0.2/(HZ/2), type = "high")
 
 
 

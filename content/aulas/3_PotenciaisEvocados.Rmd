@@ -90,7 +90,7 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)
 Considerando a taxa de amostragem de 250hz, quero calcular uma determinada janela no intervalo 100ms dado um canal:
 
 ```{r}
-# Se a taxa de amostragem é 250, quero definir as janelas pré e pós estímulos:
+# Se a taxa de amostragem é HZ= 250, quero definir as janelas pré e pós estímulos, ou seja 1s = 250hz, 100ms = 250hz/10:
 JANELApos=HZ        #janela de 1 segundo
 JANELApre=HZ/10    #janela de 100 milisegundos
 
