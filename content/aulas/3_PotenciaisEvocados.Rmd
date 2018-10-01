@@ -6,6 +6,28 @@ output: html_document
 weight: 30
 ---
 
+Potencial relacionado a evento (ERP, do inglês Event-Related Potential), é uma resposta direta do cérebro a um específico estímulo cognitivo, sensorial, ou
+motor. ERPs são obtidos por promediação (no tempo).
+
+Os componentes são designados por uma letra (N - **negative** / P - **positive**), seguido de um número que pode indicar tanto a latência em ms como a posição da componente na forma de onda.
+
+Alguns exemplos de ERPs e suas devidas funções:
+
+  * P1 (ou P100) concentraram-se em observar as variações deste potencial durante estimulação visual. Pesquisas posteriores sobre o P1 começaram a olhar para alterações do P1 em relação à atenção seletiva. Sua amplitude máxima é observada sobre o lobo occipital, contralateral ao campo visual no qual o
+estímulo é apresentado.
+  * O N1 (também chamado de N100) é o primeiro componente negativo contínuo e o seu pico é normalmente observado entre 80 e 160 ms após o aparecimento do estímulo. Forte sobre a região fronto-central do couro cabeludo. Embora a maioria das pesquisas se concentra em estímulos auditivos, o N100 também ocorre para estimulação visual, olfativa e táctil. O N100 é pré-atencional e diretamente envolvido na percepção porque sua amplitude é fortemente dependente de coisas como o tempo de subida de um som, sua intensidade, o intervalo
+entre estímulos e a frequência comparativa, ou seja, sua amplitude aumenta em proporção a quanto um som difere em frequência de um som precedente.
+  * O P2 (P200) potencial positivo que ocorre cerca de 200 milissegundos frequentemente distribuído em torno das áreas centro-frontal e parieto-occipital do couro cabeludo. Sua associação ainda está em desenvolvimento pois há um grande e diversificado número de tarefas cognitivas associadas a essa componente.
+  * N2, ou N200, encontrada principalmente na parte anterior do couro cabeludo em resposta a estímulos auditivos inesperados ou raros,com ou sem atenção, é referido como a negatividade de incompatibilidade (mismatch negativity – MMN). Mais genericamente, foi descrito em tarefas que refletem a identificação
+de estímulos, deslocamentos atencionais, inibição de respostas motoras, superação de respostas estereotípicas ou monitoramento de conflitos, manutenção de informações de contexto, seleção de respostas, timing, e detecção de novidade (novelty) ou incompatibilidade (mismatch).
+  * P3 (P300) tipicamente medido mais fortemente pelos
+eletrodos que cobrem o lobo parietal, está suscitado no processo de tomada de decisão. Mais especificamente, considera-se que o P300 reflete processos envolvidos na avaliação ou categorização do estímulo. Geralmente é provocado usando o paradigma oddball, em que eventos alvo (ou “raro”) de baixa probabilidade são misturados com itens não-alvo (ou "padrão") de alta probabilidade
+
+Outros componentes de ERP mais tardios, como por exemplo o N400 e o P600 são muito usados na área de neurociência da linguagem. Os componentes mais
+pesquisados na literatura ainda são o N1 e o P3.
+
+
+
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 require(signal)
 # taxa de amostragem:
@@ -178,13 +200,14 @@ plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type="l",xlab="
 abline(v=0,lty=3)
 ```
 
-Considere um sinal amostrado a uma taxa de 300hz.
-x = rnorm(10000)
 
-1) Desenhe e aplique um filtro passa-banda de 5-15hz neste sinal
-2) Identifique as caselas de x com valores menores que 1.96 e coloque 0 nestas caselas.
 
 ```{r echo=FALSE}
+#Considere um sinal amostrado a uma taxa de 300hz.
+#x = rnorm(10000)
+
+#1) Desenhe e aplique um filtro passa-banda de 5-15hz neste sinal
+#2) Identifique as caselas de x com valores menores que 1.96 e coloque 0 nestas caselas.
 require(signal)
 x = rnorm(10000)
 HZ = 300

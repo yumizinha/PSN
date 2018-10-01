@@ -6,7 +6,9 @@ output: html_document
 weight: 40
 ---
 
-Identificação de épocas num experimento.
+O número de tentativas necessárias para obter um ERP depende de vários fatores, sendo o mais importante a "relação sinal-ruído" (Signal to Noise Ratio), ou seja, o tamanho relativo do sinal (o ERP) em relação ao tamanho do ruído. Em experimentos cognitivos, 30 a 50 apresentações de estímulo são normalmente necessárias para se obter um ERP médio bom e limpo.
+
+Identificação de épocas (períodos dos estímulos) num experimento. O número de épocas (trials) aumenta a SNR.
 
 ```{r}
 #Leitura de dados
@@ -42,7 +44,7 @@ ts.plot(sinais)
 
 Para definição das épocas dos eventos (intervalos dos trials), precisamos identificar as amplitudes dos intervalos e assinalar na matriz os intervalos de tempo entre os eventos:
 
-Comando importantes:
+Comandos importantes:
 
   * round(): arredondamento matemático
 
