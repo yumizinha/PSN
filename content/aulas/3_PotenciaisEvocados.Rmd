@@ -46,7 +46,7 @@ table(trigger)
 
 Olhando o conteúdo do trigger:
 
-```{r echo=FALSE}
+```{r include=FALSE}
 # Gambi pra funcionar o ts.plot:
 graphics.off()
 par("mar")
@@ -177,4 +177,34 @@ canal=25
 plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type="l",xlab="Tempo(ms)", ylab="sinal(uV)",ylim=c(-8,4))
 abline(v=0,lty=3)
 ```
+
+Considere um sinal amostrado a uma taxa de 300hz.
+x = rnorm(10000)
+
+1) Desenhe e aplique um filtro passa-banda de 5-15hz neste sinal
+2) Identifique as caselas de x com valores menores que 1.96 e coloque 0 nestas caselas.
+
+```{r echo=FALSE}
+require(signal)
+x = rnorm(10000)
+HZ = 300
+FILTRO = butter(n=5, W =c(5,15)/(HZ/2), type = "pass")
+freqz(FILTRO)
+
+y = x[1] - mean(x[1])
+# e novamente aplicando o filtro no sinal:
+filtrado = filter(FILTRO, y)
+
+MENOR= which(filtrado<1.96)
+x[MENOR]=0
+```
+
+## Resumo: 
+Na questão de potenciais evocados, trabalhamos com as médias dos sinais.
+Basicamente visam dois objetivos: 
+
+* Sinal de EEG é extremamente ruidoso (artefatos musculares e do ambiente). Aumentar o SNR - signal-to-noise ratio (ou relação sinal-ruído em português)
+
+* Extrair "componente"" comum entre os **trials**
+
 

@@ -89,7 +89,7 @@ lines((1:nrow(sinais))/HZ, filtrado_teste, col=2)</code></pre>
 <pre class="r"><code>y = sinais[,5] - mean(sinais[,5])
 # e novamente aplicando o filtro no sinal:
 filtrado = filter(FILTRO, y)</code></pre>
-<p>obtenso então o sinal filtrado:</p>
+<p>obtendo então o sinal filtrado:</p>
 <pre class="r"><code>#Acrescentar linha com o sinal filtrado
 plot((1:nrow(sinais))/HZ,y,type=&quot;l&quot;,
      xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
@@ -118,8 +118,8 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
 <p><img src="/aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Observações sobre a implementação de filtros: 1. Adicionar a taxa de amostragem atribuindo um valor para HZ.</p>
 <ul>
-<li><p>Passa-baixa em 30hz: **FILTRO = butter(n=5, W = 30/(HZ/2), type = “low”)</p></li>
-<li><p>Passa-banda para deixar apenas entre as frequências de 1-40 hz: **FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = “pass”)</p></li>
-<li><p>Passa-alta para frequências acima de 0.2hz: **FILTRO = butter(n=5, W = 0.2/(HZ/2), type = “high”)</p></li>
+<li><p>Passa-baixa em 30hz: ** FILTRO = butter(n=5, W = 30/(HZ/2), type = “low”)</p></li>
+<li><p>Passa-banda para deixar apenas entre as frequências de 1-40 hz: ** FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = “pass”)</p></li>
+<li><p>Passa-alta para frequências acima de 0.2hz: ** FILTRO = butter(n=5, W = 0.2/(HZ/2), type = “high”)</p></li>
 </ul>
 </div>

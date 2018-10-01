@@ -71,7 +71,7 @@ Olhando o arquivo, ele é composto por 45461 linhas e 33 colunas (essas referent
 
 Para verificar os dados do arquivo em um plot:
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 # Plot da série temporal:
 #gambiarra para o ts.plot funcionar no R Studio:
 graphics.off()
@@ -149,7 +149,7 @@ filtrado = filter(FILTRO, y)
 
 ```
 
-obtenso então o sinal filtrado:
+obtendo então o sinal filtrado:
 
 ```{r}
 #Acrescentar linha com o sinal filtrado
@@ -195,13 +195,13 @@ Observações sobre a implementação de filtros:
 1. Adicionar a taxa de amostragem atribuindo um valor para HZ.
 
   * Passa-baixa em 30hz: 
-  **FILTRO = butter(n=5, W = 30/(HZ/2), type = "low")
+  ** FILTRO = butter(n=5, W = 30/(HZ/2), type = "low")
   
   * Passa-banda para deixar apenas entre as frequências de 1-40 hz:
-  **FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = "pass")
+  ** FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = "pass")
 
   * Passa-alta para frequências acima de 0.2hz:
-  **FILTRO = butter(n=5, W = 0.2/(HZ/2), type = "high")
+  ** FILTRO = butter(n=5, W = 0.2/(HZ/2), type = "high")
 
 
 

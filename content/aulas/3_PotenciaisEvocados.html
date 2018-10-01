@@ -26,7 +26,6 @@ table(trigger)</code></pre>
 ##     0    10    11 
 ## 45422    10    29</code></pre>
 <p>Olhando o conteúdo do trigger:</p>
-<pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
 <pre class="r"><code># Conteúdo do vetor do trigger:
 ts.plot(trigger)</code></pre>
 <p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
@@ -111,3 +110,17 @@ abline(v=0,lty=3)</code></pre>
 plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type=&quot;l&quot;,xlab=&quot;Tempo(ms)&quot;, ylab=&quot;sinal(uV)&quot;,ylim=c(-8,4))
 abline(v=0,lty=3)</code></pre>
 <p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Considere um sinal amostrado a uma taxa de 300hz. x = rnorm(10000)</p>
+<ol style="list-style-type: decimal">
+<li>Desenhe e aplique um filtro passa-banda de 5-15hz neste sinal</li>
+<li>Identifique as caselas de x com valores menores que 1.96 e coloque 0 nestas caselas.</li>
+</ol>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div id="resumo" class="section level2">
+<h2>Resumo:</h2>
+<p>Na questão de potenciais evocados, trabalhamos com as médias dos sinais. Basicamente visam dois objetivos:</p>
+<ul>
+<li><p>Sinal de EEG é extremamente ruidoso (artefatos musculares e do ambiente). Aumentar o SNR - signal-to-noise ratio (ou relação sinal-ruído em português)</p></li>
+<li><p>Extrair “componente”&quot; comum entre os <strong>trials</strong></p></li>
+</ul>
+</div>

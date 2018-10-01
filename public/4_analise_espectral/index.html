@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.49" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="../images/favicon.png" type="image/x-icon" />
+
+    <title>Análise Espectral :: Documentation for Hugo Learn Theme</title>
+    
+    
+    <link href="../css/nucleus.css?1538398267" rel="stylesheet">
+    <link href="../css/font-awesome.min.css?1538398267" rel="stylesheet">
+    <link href="../css/hybrid.css?1538398267" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1538398267" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1538398267" rel="stylesheet">
+    <link href="../css/auto-complete.css?1538398267" rel="stylesheet">
+    <link href="../css/theme.css?1538398267" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1538398267" rel="stylesheet">
+    
+
+    <script src="../js/jquery-2.x.min.js?1538398267"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/4_analise_espectral/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="../">
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<defs>
+<image id="image1101" width="540" height="201" xlink:href="data:image/png;base64,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"/>
+<pattern id="pattern0" patternUnits="userSpaceOnUse" width="540" height="201"  patternTransform="matrix(0.999875,0,0,0.999875,27.671541,309.297443)">
+  <use xlink:href="#image1101"/>
+</pattern>
+</defs>
+<g id="surface1064">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern0);" d="M 27.671875 309.296875 L 567.605469 309.296875 L 567.605469 510.273438 L 27.671875 510.273438 Z M 27.671875 309.296875 "/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="../js/lunr.min.js?1538398267"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1538398267"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="../js/search.js?1538398267"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/aulas/" title="Conteúdo" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../aulas/">
+          <b>1. </b>Conteúdo
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" class="dd-item ">
+        <a href="../aulas/0_eletrofisiologia/">
+        Introdução a eletrofisiologia
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/1_intror/" title="Introdução ao R" class="dd-item ">
+        <a href="../aulas/1_intror/">
+        Introdução ao R
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item ">
+        <a href="../aulas/2_filtro_sinais/">
+        Filtros de sinais
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item ">
+        <a href="../aulas/3_potenciaisevocados/">
+        Potenciais Evocados
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+       
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fa fa-fw fa-history"></i> Clear History</a></li>         
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/4_Analise_espectral.html" target="blank">
+                      <i class="fa fa-code-fork"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            <a href='../'>Processamento de sinais neurais</a> > Análise Espectral
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>Análise Espectral</h1>
+          
+
+        
+
+
+<p>Análise espectral constitui em uma forma alternativa de identificar, descrever e analisar sinais de forma complementar a análise no tempo.</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+        
+            <a class="nav nav-next" href="../aulas/" title="Conteúdo" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../js/clipboard.min.js?1538398267"></script>
+    <script src="../js/perfect-scrollbar.min.js?1538398267"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1538398267"></script>
+    <script src="../js/jquery.sticky.js?1538398267"></script>
+    <script src="../js/featherlight.min.js?1538398267"></script>
+    <script src="../js/html5shiv-printshiv.min.js?1538398267"></script>
+    <script src="../js/highlight.pack.js?1538398267"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/modernizr.custom.71422.js?1538398267"></script>
+    <script src="../js/learn.js?1538398267"></script>
+    <script src="../js/hugo-learn.js?1538398267"></script>
+
+    <link href="../mermaid/mermaid.css?1538398267" type="text/css" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1538398267"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
+

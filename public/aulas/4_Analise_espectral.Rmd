@@ -1,0 +1,158 @@
+---
+title: "Identificação de épocas"
+author: "Amanda Yumi"
+date: "01 de outubro de 2018"
+output: html_document
+weight: 40
+---
+
+Análise espectral constitui em uma forma alternativa de identificar, descrever e
+analisar sinais de forma complementar a análise no tempo.
+
+```{r}
+#Leitura de dados
+sinais=read.table("OlhosFechados.txt",header=FALSE)
+
+#Nome dos canais
+nomescanais=scan("NOMEScanais.txt",what="string")
+
+dim(sinais)
+nomescanais
+
+```
+
+Para saber o período de aquisição dos dados, basta dividir o número de linhas por 32:
+
+```{r}
+# Considerando taxa de amostragem e convertendo pra minutos:
+45315/(200*60)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# Gambi pra funcionar o ts.plot:
+graphics.off()
+par("mar")
+par(mar=c(1,1,1,1))
+```
+
+```{r}
+# Conteúdo do vetor do trigger:
+ts.plot(sinais)
+
+```
+
+Para definição das épocas dos eventos (intervalos dos trials), precisamos identificar as amplitudes dos intervalos e assinalar na matriz os intervalos de tempo entre os eventos:
+
+Comando importantes:
+  * round(): arredondamento matemático
+  * floor(): arredondamento para baixo
+  * ceiling(): arredondamento para cima
+
+```{r}
+# Análisando uma época de 5s numa taxa de amostragem de 200hz:
+# Considerando o tamanho de 5s, seria:
+# TAM = seg * HZ = 5 * 200
+
+HZ = 200 # taxa de amostragem considerada:
+TamSegundos=5 # Numero de segundos do trial:
+TAM = TamSegundos*HZ
+Nepocas = floor(nrow(sinais)/TAM)
+Ncanais = ncol(sinais)
+
+# Inicializar a matriz com as amplitudes de cada epoca para cada canal:
+#Inicializar a matriz com as amplitudes de cada epoca para cada canal
+AMPLITUDE= matrix(0, Nepocas, Ncanais)
+
+for(canal in 1:Ncanais){
+  for(epoca in 1:Nepocas){
+    #Casela de inicio da epoca
+    INICIO=(epoca-1)*TAM+1
+    #Casela de fim da epoca
+    FIM=epoca*TAM
+
+    #Calculo de amplitude
+    AMPLITUDE[epoca,canal]=max(sinais[INICIO:FIM,canal])- min(sinais[INICIO:FIM,canal])
+  }#for da epoca
+}#for dos canais
+```
+
+Para analisar os dados da amplitude, podemos ver a distribuição no histograma abaixo:
+
+```{r}
+#Analisar a distribuicao das amplitudes
+hist(c(AMPLITUDE))
+```
+
+Limitando um pouco a visualização, no caso em 150:
+
+```{r}
+LIMIAR=150 #escolhido analisando o histograma
+```
+
+Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:
+
+```{r}
+CQ=matrix(0,Nepocas,Ncanais)
+CQ[which(AMPLITUDE>LIMIAR)]=1
+```
+
+Para identificar os CANAIS mais problemáticos e realizar a contagem das épocas descartadas em cada canal:
+
+```{r}
+colSums(CQ)
+```
+
+Unindo as colunas dos canais com as épocas descartadas:
+```{r}
+cbind(nomescanais,colSums(CQ))
+```
+
+Agora identificando as ÉPOCAS mais problemáticas e verificar as épocas com problemas em mais de um canal:
+
+```{r}
+rowSums(CQ)
+```
+
+```{r}
+#Olhar um canal especifico (ex: Fp1) na epoca 11
+epoca=11
+
+INICIO=(epoca-1)*TAM+1
+FIM=epoca*TAM
+
+ts.plot(sinais[INICIO:FIM,1])
+```
+
+
+
+
+
+
+
+
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# Código teste da Yumi:
+TABELA <- matrix(0, 10, 3)
+for (i in 1:10) {
+  TABELA[i,1]=i
+  if (i==1) {
+    TABELA[i,2]=TAM+1   
+    TABELA[i,3]= TAM
+  }
+  else{
+    TABELA[i,2]=TAM+TABELA[i-1,2]
+    TABELA[i,3]=TAM+TABELA[i-1,3]
+  }
+}
+TABELA
+```
+
+
+
+
+
+
+
+

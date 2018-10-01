@@ -51,5 +51,15 @@ Outro exemplo é a luz branca, que é a composição de diversas ondas com difer
 # Leitura dos canais de EEG: nomes=scan(&amp;quot;nomecanais.txt&amp;quot;, what = &amp;quot;string&amp;quot;) Ao analisar o arquivo dos sinais, é possível verificar que a coluna 33 não se trata de sinais cerebrais, mas sim, a referência dos triggers (marcações do experimento). Dessa forma, realiza-se a leitura dos sinais e dos triggers, armazenando em matrizes separadas:</description>
     </item>
     
+    <item>
+      <title>Identificação de épocas</title>
+      <link>/aulas/4_analise_espectral/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/4_analise_espectral/</guid>
+      <description>Análise espectral constitui em uma forma alternativa de identificar, descrever e analisar sinais de forma complementar a análise no tempo.
+#Leitura de dados sinais=read.table(&amp;quot;OlhosFechados.txt&amp;quot;,header=FALSE) #Nome dos canais nomescanais=scan(&amp;quot;NOMEScanais.txt&amp;quot;,what=&amp;quot;string&amp;quot;) dim(sinais) ## [1] 45315 32 nomescanais ## [1] &amp;quot;Fp1&amp;quot; &amp;quot;Fp2&amp;quot; &amp;quot;F7&amp;quot; &amp;quot;F3&amp;quot; &amp;quot;Fz&amp;quot; &amp;quot;F4&amp;quot; &amp;quot;F8&amp;quot; &amp;quot;FC5&amp;quot; &amp;quot;FC1&amp;quot; &amp;quot;FC2&amp;quot; ## [11] &amp;quot;FC6&amp;quot; &amp;quot;T7&amp;quot; &amp;quot;C3&amp;quot; &amp;quot;Cz&amp;quot; &amp;quot;C4&amp;quot; &amp;quot;T8&amp;quot; &amp;quot;TP9&amp;quot; &amp;quot;CP5&amp;quot; &amp;quot;CP1&amp;quot; &amp;quot;CP2&amp;quot; ## [21] &amp;quot;CP6&amp;quot; &amp;quot;TP10&amp;quot; &amp;quot;P7&amp;quot; &amp;quot;P3&amp;quot; &amp;quot;Pz&amp;quot; &amp;quot;P4&amp;quot; &amp;quot;P8&amp;quot; &amp;quot;PO9&amp;quot; &amp;quot;O1&amp;quot; &amp;quot;Oz&amp;quot; ## [31] &amp;quot;O2&amp;quot; &amp;quot;PO10&amp;quot; Para saber o período de aquisição dos dados, basta dividir o número de linhas por 32:</description>
+    </item>
+    
   </channel>
 </rss>

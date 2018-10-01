@@ -1,0 +1,10 @@
+---
+title: "Análise Espectral"
+author: "Amanda Yumi"
+date: "01 de outubro de 2018"
+output: html_document
+weight: 40
+---
+
+Análise espectral constitui em uma forma alternativa de identificar, descrever e
+analisar sinais de forma complementar a análise no tempo.

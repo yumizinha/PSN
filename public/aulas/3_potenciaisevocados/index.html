@@ -13,17 +13,17 @@
     <title>Potenciais Evocados :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538361039" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538361039" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538361039" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538361039" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538361039" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538361039" rel="stylesheet">
-    <link href="../../css/theme.css?1538361039" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538361039" rel="stylesheet">
+    <link href="../../css/nucleus.css?1538404816" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538404816" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538404816" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538404816" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538404816" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538404816" rel="stylesheet">
+    <link href="../../css/theme.css?1538404816" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538404816" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538361039"></script>
+    <script src="../../js/jquery-2.x.min.js?1538404816"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538361039"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538361039"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1538404816"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538404816"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538361039"></script>
+<script type="text/javascript" src="../../js/search.js?1538404816"></script>
 
     
   </div>
@@ -175,6 +175,25 @@
       <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item active">
         <a href="../../aulas/3_potenciaisevocados/">
         Potenciais Evocados
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/4_analise_espectral/" title="Identificação de épocas" class="dd-item ">
+        <a href="../../aulas/4_analise_espectral/">
+        Identificação de épocas
         <i class="fa fa-check read-icon"></i>
         </a>
     </li>
@@ -322,7 +341,6 @@ table(trigger)</code></pre>
 ##     0    10    11 
 ## 45422    10    29</code></pre>
 <p>Olhando o conteúdo do trigger:</p>
-<pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
 <pre class="r"><code># Conteúdo do vetor do trigger:
 ts.plot(trigger)</code></pre>
 <p><img src="../../aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
@@ -407,6 +425,20 @@ abline(v=0,lty=3)</code></pre>
 plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type=&quot;l&quot;,xlab=&quot;Tempo(ms)&quot;, ylab=&quot;sinal(uV)&quot;,ylim=c(-8,4))
 abline(v=0,lty=3)</code></pre>
 <p><img src="../../aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Considere um sinal amostrado a uma taxa de 300hz. x = rnorm(10000)</p>
+<ol style="list-style-type: decimal">
+<li>Desenhe e aplique um filtro passa-banda de 5-15hz neste sinal</li>
+<li>Identifique as caselas de x com valores menores que 1.96 e coloque 0 nestas caselas.</li>
+</ol>
+<p><img src="../../aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div id="resumo" class="section level2">
+<h2>Resumo:</h2>
+<p>Na questão de potenciais evocados, trabalhamos com as médias dos sinais. Basicamente visam dois objetivos:</p>
+<ul>
+<li><p>Sinal de EEG é extremamente ruidoso (artefatos musculares e do ambiente). Aumentar o SNR - signal-to-noise ratio (ou relação sinal-ruído em português)</p></li>
+<li><p>Extrair “componente”&quot; comum entre os <strong>trials</strong></p></li>
+</ul>
+</div>
 
 
 <footer class=" footline" >
@@ -522,6 +554,25 @@ abline(v=0,lty=3)</code></pre>
             
         
                     
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -535,7 +586,7 @@ abline(v=0,lty=3)</code></pre>
             <a class="nav nav-prev" href="../../aulas/2_filtro_sinais/" title="Filtros de sinais"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../../aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../../aulas/4_analise_espectral/" title="Identificação de épocas" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -544,20 +595,20 @@ abline(v=0,lty=3)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538361039"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538361039"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538361039"></script>
-    <script src="../../js/jquery.sticky.js?1538361039"></script>
-    <script src="../../js/featherlight.min.js?1538361039"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538361039"></script>
-    <script src="../../js/highlight.pack.js?1538361039"></script>
+    <script src="../../js/clipboard.min.js?1538404816"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538404816"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538404816"></script>
+    <script src="../../js/jquery.sticky.js?1538404816"></script>
+    <script src="../../js/featherlight.min.js?1538404816"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538404816"></script>
+    <script src="../../js/highlight.pack.js?1538404816"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538361039"></script>
-    <script src="../../js/learn.js?1538361039"></script>
-    <script src="../../js/hugo-learn.js?1538361039"></script>
+    <script src="../../js/modernizr.custom.71422.js?1538404816"></script>
+    <script src="../../js/learn.js?1538404816"></script>
+    <script src="../../js/hugo-learn.js?1538404816"></script>
 
-    <link href="../../mermaid/mermaid.css?1538361039" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538361039"></script>
+    <link href="../../mermaid/mermaid.css?1538404816" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538404816"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

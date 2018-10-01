@@ -1,0 +1,118 @@
+---
+title: "Identificação de épocas"
+author: "Amanda Yumi"
+date: "01 de outubro de 2018"
+output: html_document
+weight: 40
+---
+
+
+
+<p>Análise espectral constitui em uma forma alternativa de identificar, descrever e analisar sinais de forma complementar a análise no tempo.</p>
+<pre class="r"><code>#Leitura de dados
+sinais=read.table(&quot;OlhosFechados.txt&quot;,header=FALSE)
+
+#Nome dos canais
+nomescanais=scan(&quot;NOMEScanais.txt&quot;,what=&quot;string&quot;)
+
+dim(sinais)</code></pre>
+<pre><code>## [1] 45315    32</code></pre>
+<pre class="r"><code>nomescanais</code></pre>
+<pre><code>##  [1] &quot;Fp1&quot;  &quot;Fp2&quot;  &quot;F7&quot;   &quot;F3&quot;   &quot;Fz&quot;   &quot;F4&quot;   &quot;F8&quot;   &quot;FC5&quot;  &quot;FC1&quot;  &quot;FC2&quot; 
+## [11] &quot;FC6&quot;  &quot;T7&quot;   &quot;C3&quot;   &quot;Cz&quot;   &quot;C4&quot;   &quot;T8&quot;   &quot;TP9&quot;  &quot;CP5&quot;  &quot;CP1&quot;  &quot;CP2&quot; 
+## [21] &quot;CP6&quot;  &quot;TP10&quot; &quot;P7&quot;   &quot;P3&quot;   &quot;Pz&quot;   &quot;P4&quot;   &quot;P8&quot;   &quot;PO9&quot;  &quot;O1&quot;   &quot;Oz&quot;  
+## [31] &quot;O2&quot;   &quot;PO10&quot;</code></pre>
+<p>Para saber o período de aquisição dos dados, basta dividir o número de linhas por 32:</p>
+<pre class="r"><code># Considerando taxa de amostragem e convertendo pra minutos:
+45315/(200*60)</code></pre>
+<pre><code>## [1] 3.77625</code></pre>
+<pre class="r"><code># Conteúdo do vetor do trigger:
+ts.plot(sinais)</code></pre>
+<p><img src="/aulas/4_Analise_espectral_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Para definição das épocas dos eventos (intervalos dos trials), precisamos identificar as amplitudes dos intervalos e assinalar na matriz os intervalos de tempo entre os eventos:</p>
+<p>Comando importantes: * round(): arredondamento matemático * floor(): arredondamento para baixo * ceiling(): arredondamento para cima</p>
+<pre class="r"><code># Análisando uma época de 5s numa taxa de amostragem de 200hz:
+# Considerando o tamanho de 5s, seria:
+# TAM = seg * HZ = 5 * 200
+
+HZ = 200 # taxa de amostragem considerada:
+TamSegundos=5 # Numero de segundos do trial:
+TAM = TamSegundos*HZ
+Nepocas = floor(nrow(sinais)/TAM)
+Ncanais = ncol(sinais)
+
+# Inicializar a matriz com as amplitudes de cada epoca para cada canal:
+#Inicializar a matriz com as amplitudes de cada epoca para cada canal
+AMPLITUDE= matrix(0, Nepocas, Ncanais)
+
+for(canal in 1:Ncanais){
+  for(epoca in 1:Nepocas){
+    #Casela de inicio da epoca
+    INICIO=(epoca-1)*TAM+1
+    #Casela de fim da epoca
+    FIM=epoca*TAM
+
+    #Calculo de amplitude
+    AMPLITUDE[epoca,canal]=max(sinais[INICIO:FIM,canal])- min(sinais[INICIO:FIM,canal])
+  }#for da epoca
+}#for dos canais</code></pre>
+<p>Para analisar os dados da amplitude, podemos ver a distribuição no histograma abaixo:</p>
+<pre class="r"><code>#Analisar a distribuicao das amplitudes
+hist(c(AMPLITUDE))</code></pre>
+<p><img src="/aulas/4_Analise_espectral_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Limitando um pouco a visualização, no caso em 150:</p>
+<pre class="r"><code>LIMIAR=150 #escolhido analisando o histograma</code></pre>
+<p>Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:</p>
+<pre class="r"><code>CQ=matrix(0,Nepocas,Ncanais)
+CQ[which(AMPLITUDE&gt;LIMIAR)]=1</code></pre>
+<p>Para identificar os CANAIS mais problemáticos e realizar a contagem das épocas descartadas em cada canal:</p>
+<pre class="r"><code>colSums(CQ)</code></pre>
+<pre><code>##  [1]  8  2  4  1  1  0  0  2  0  0  0 11  6  0  1  8 10  0  0  1  1  9  4
+## [24]  0  1  3  9 10  1  3  7  3</code></pre>
+<p>Unindo as colunas dos canais com as épocas descartadas:</p>
+<pre class="r"><code>cbind(nomescanais,colSums(CQ))</code></pre>
+<pre><code>##       nomescanais     
+##  [1,] &quot;Fp1&quot;       &quot;8&quot; 
+##  [2,] &quot;Fp2&quot;       &quot;2&quot; 
+##  [3,] &quot;F7&quot;        &quot;4&quot; 
+##  [4,] &quot;F3&quot;        &quot;1&quot; 
+##  [5,] &quot;Fz&quot;        &quot;1&quot; 
+##  [6,] &quot;F4&quot;        &quot;0&quot; 
+##  [7,] &quot;F8&quot;        &quot;0&quot; 
+##  [8,] &quot;FC5&quot;       &quot;2&quot; 
+##  [9,] &quot;FC1&quot;       &quot;0&quot; 
+## [10,] &quot;FC2&quot;       &quot;0&quot; 
+## [11,] &quot;FC6&quot;       &quot;0&quot; 
+## [12,] &quot;T7&quot;        &quot;11&quot;
+## [13,] &quot;C3&quot;        &quot;6&quot; 
+## [14,] &quot;Cz&quot;        &quot;0&quot; 
+## [15,] &quot;C4&quot;        &quot;1&quot; 
+## [16,] &quot;T8&quot;        &quot;8&quot; 
+## [17,] &quot;TP9&quot;       &quot;10&quot;
+## [18,] &quot;CP5&quot;       &quot;0&quot; 
+## [19,] &quot;CP1&quot;       &quot;0&quot; 
+## [20,] &quot;CP2&quot;       &quot;1&quot; 
+## [21,] &quot;CP6&quot;       &quot;1&quot; 
+## [22,] &quot;TP10&quot;      &quot;9&quot; 
+## [23,] &quot;P7&quot;        &quot;4&quot; 
+## [24,] &quot;P3&quot;        &quot;0&quot; 
+## [25,] &quot;Pz&quot;        &quot;1&quot; 
+## [26,] &quot;P4&quot;        &quot;3&quot; 
+## [27,] &quot;P8&quot;        &quot;9&quot; 
+## [28,] &quot;PO9&quot;       &quot;10&quot;
+## [29,] &quot;O1&quot;        &quot;1&quot; 
+## [30,] &quot;Oz&quot;        &quot;3&quot; 
+## [31,] &quot;O2&quot;        &quot;7&quot; 
+## [32,] &quot;PO10&quot;      &quot;3&quot;</code></pre>
+<p>Agora identificando as ÉPOCAS mais problemáticas e verificar as épocas com problemas em mais de um canal:</p>
+<pre class="r"><code>rowSums(CQ)</code></pre>
+<pre><code>##  [1] 11  7  9  5  2  4  2  2  2  4 15 15  4  3  2  1  0  0  0  0  0  0  0
+## [24]  0  0  1  3  0  3  1  1  0  2  1  2  0  1  2  0  0  1  0  0  0  0</code></pre>
+<pre class="r"><code>#Olhar um canal especifico (ex: Fp1) na epoca 11
+epoca=11
+
+INICIO=(epoca-1)*TAM+1
+FIM=epoca*TAM
+
+ts.plot(sinais[INICIO:FIM,1])</code></pre>
+<p><img src="/aulas/4_Analise_espectral_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>

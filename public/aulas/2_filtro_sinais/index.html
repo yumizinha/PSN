@@ -13,17 +13,17 @@
     <title>Filtros de sinais :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538361039" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538361039" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538361039" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538361039" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538361039" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538361039" rel="stylesheet">
-    <link href="../../css/theme.css?1538361039" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538361039" rel="stylesheet">
+    <link href="../../css/nucleus.css?1538404816" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538404816" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538404816" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538404816" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538404816" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538404816" rel="stylesheet">
+    <link href="../../css/theme.css?1538404816" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538404816" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538361039"></script>
+    <script src="../../js/jquery-2.x.min.js?1538404816"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538361039"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538361039"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1538404816"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538404816"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538361039"></script>
+<script type="text/javascript" src="../../js/search.js?1538404816"></script>
 
     
   </div>
@@ -175,6 +175,25 @@
       <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item ">
         <a href="../../aulas/3_potenciaisevocados/">
         Potenciais Evocados
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/4_analise_espectral/" title="Identificação de épocas" class="dd-item ">
+        <a href="../../aulas/4_analise_espectral/">
+        Identificação de épocas
         <i class="fa fa-check read-icon"></i>
         </a>
     </li>
@@ -384,7 +403,7 @@ lines((1:nrow(sinais))/HZ, filtrado_teste, col=2)</code></pre>
 <pre class="r"><code>y = sinais[,5] - mean(sinais[,5])
 # e novamente aplicando o filtro no sinal:
 filtrado = filter(FILTRO, y)</code></pre>
-<p>obtenso então o sinal filtrado:</p>
+<p>obtendo então o sinal filtrado:</p>
 <pre class="r"><code>#Acrescentar linha com o sinal filtrado
 plot((1:nrow(sinais))/HZ,y,type=&quot;l&quot;,
      xlab=&quot;Tempo(s)&quot;, ylab=&quot;sinal(uV)&quot;)
@@ -413,9 +432,9 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
 <p><img src="../../aulas/2_Filtro_Sinais_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Observações sobre a implementação de filtros: 1. Adicionar a taxa de amostragem atribuindo um valor para HZ.</p>
 <ul>
-<li><p>Passa-baixa em 30hz: **FILTRO = butter(n=5, W = 30/(HZ/2), type = “low”)</p></li>
-<li><p>Passa-banda para deixar apenas entre as frequências de 1-40 hz: **FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = “pass”)</p></li>
-<li><p>Passa-alta para frequências acima de 0.2hz: **FILTRO = butter(n=5, W = 0.2/(HZ/2), type = “high”)</p></li>
+<li><p>Passa-baixa em 30hz: ** FILTRO = butter(n=5, W = 30/(HZ/2), type = “low”)</p></li>
+<li><p>Passa-banda para deixar apenas entre as frequências de 1-40 hz: ** FILTRO = butter(n=5, W = c(1,40)/(HZ/2), type = “pass”)</p></li>
+<li><p>Passa-alta para frequências acima de 0.2hz: ** FILTRO = butter(n=5, W = 0.2/(HZ/2), type = “high”)</p></li>
 </ul>
 </div>
 
@@ -536,6 +555,22 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -558,20 +593,20 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538361039"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538361039"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538361039"></script>
-    <script src="../../js/jquery.sticky.js?1538361039"></script>
-    <script src="../../js/featherlight.min.js?1538361039"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538361039"></script>
-    <script src="../../js/highlight.pack.js?1538361039"></script>
+    <script src="../../js/clipboard.min.js?1538404816"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538404816"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538404816"></script>
+    <script src="../../js/jquery.sticky.js?1538404816"></script>
+    <script src="../../js/featherlight.min.js?1538404816"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538404816"></script>
+    <script src="../../js/highlight.pack.js?1538404816"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538361039"></script>
-    <script src="../../js/learn.js?1538361039"></script>
-    <script src="../../js/hugo-learn.js?1538361039"></script>
+    <script src="../../js/modernizr.custom.71422.js?1538404816"></script>
+    <script src="../../js/learn.js?1538404816"></script>
+    <script src="../../js/hugo-learn.js?1538404816"></script>
 
-    <link href="../../mermaid/mermaid.css?1538361039" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538361039"></script>
+    <link href="../../mermaid/mermaid.css?1538404816" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538404816"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
