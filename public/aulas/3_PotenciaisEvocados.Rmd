@@ -19,7 +19,6 @@ HZ = 250
 sinais=read.table("oddball250hz.txt",header=FALSE)
 ```
 
-
 Para continuar a leitura dos filtros, deve-se realizar a leitura dos dados de canais também disponibilizados:
 
 ```{r}
@@ -60,9 +59,9 @@ ts.plot(trigger)
 
 ```
 
-
-
 Para identificação dos potenciais evocados, precisamos ainda definir os canais (a matriz **sinais** já exclui a coluna de trigger do arquivo) e pontos no tempo (número de linhas do arquivo):
+
+
 
 ```{r}
 # Número de canais:
@@ -110,7 +109,7 @@ Armazenando os potenciais evocados do estímulo **raro**:
 ```{r}
 # Matriz que guarda os potenciais evocados medios do estimulo raro
 ti=1000
-PERaro=matrix(0,length((ti-JANELApre):(ti+JANELApos)),Ncanais)
+PERaro=matrix(0,length((ti-JANELApre):(ti+JANELApos)), Ncanais)
 
 # for pra cada canal
 for(canal in 1:Ncanais){
@@ -145,8 +144,8 @@ for(canal in 1:Ncanais){
      BASELINE=mean(fsinais[(ti-JANELApre):ti, canal])
      y=fsinais[(ti-JANELApre):(ti+JANELApos), canal] -BASELINE
      PEFreq[,canal] = PEFreq[,canal]+ y/length(TiFreq)
-   }#fecha o for do ti
-}#fecha o for do canal
+   } #fecha o for do ti
+} #fecha o for do canal
 
 #Fazer o grafico do potencial evocal no canal Fz. coluna 5
 plot((1:nrow(PEFreq))/HZ*1000-100, PEFreq[,5], type="l",
@@ -181,10 +180,4 @@ canal=25
 plot((1:nrow(PEFreq))/HZ*1000-100, PERaro[,canal]-PEFreq[,canal],type="l",xlab="Tempo(ms)", ylab="sinal(uV)",ylim=c(-8,4))
 abline(v=0,lty=3)
 ```
-
-
-
-
-
-
 
