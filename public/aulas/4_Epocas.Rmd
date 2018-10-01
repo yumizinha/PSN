@@ -43,9 +43,13 @@ ts.plot(sinais)
 Para definição das épocas dos eventos (intervalos dos trials), precisamos identificar as amplitudes dos intervalos e assinalar na matriz os intervalos de tempo entre os eventos:
 
 Comando importantes:
+
   * round(): arredondamento matemático
+
   * floor(): arredondamento para baixo
+
   * ceiling(): arredondamento para cima
+  
 
 ```{r}
 # Análisando uma época de 5s numa taxa de amostragem de 200hz:

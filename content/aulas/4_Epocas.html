@@ -8,7 +8,7 @@ weight: 40
 
 
 
-<p>Análise espectral constitui em uma forma alternativa de identificar, descrever e analisar sinais de forma complementar a análise no tempo.</p>
+<p>Identificação de épocas num experimento.</p>
 <pre class="r"><code>#Leitura de dados
 sinais=read.table(&quot;OlhosFechados.txt&quot;,header=FALSE)
 
@@ -28,9 +28,14 @@ dim(sinais)</code></pre>
 <pre><code>## [1] 3.77625</code></pre>
 <pre class="r"><code># Conteúdo do vetor do trigger:
 ts.plot(sinais)</code></pre>
-<p><img src="/aulas/4_Analise_espectral_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/aulas/4_Epocas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Para definição das épocas dos eventos (intervalos dos trials), precisamos identificar as amplitudes dos intervalos e assinalar na matriz os intervalos de tempo entre os eventos:</p>
-<p>Comando importantes: * round(): arredondamento matemático * floor(): arredondamento para baixo * ceiling(): arredondamento para cima</p>
+<p>Comando importantes:</p>
+<ul>
+<li><p>round(): arredondamento matemático</p></li>
+<li><p>floor(): arredondamento para baixo</p></li>
+<li><p>ceiling(): arredondamento para cima</p></li>
+</ul>
 <pre class="r"><code># Análisando uma época de 5s numa taxa de amostragem de 200hz:
 # Considerando o tamanho de 5s, seria:
 # TAM = seg * HZ = 5 * 200
@@ -59,7 +64,7 @@ for(canal in 1:Ncanais){
 <p>Para analisar os dados da amplitude, podemos ver a distribuição no histograma abaixo:</p>
 <pre class="r"><code>#Analisar a distribuicao das amplitudes
 hist(c(AMPLITUDE))</code></pre>
-<p><img src="/aulas/4_Analise_espectral_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/aulas/4_Epocas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Limitando um pouco a visualização, no caso em 150:</p>
 <pre class="r"><code>LIMIAR=150 #escolhido analisando o histograma</code></pre>
 <p>Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:</p>
@@ -108,11 +113,11 @@ CQ[which(AMPLITUDE&gt;LIMIAR)]=1</code></pre>
 <pre class="r"><code>rowSums(CQ)</code></pre>
 <pre><code>##  [1] 11  7  9  5  2  4  2  2  2  4 15 15  4  3  2  1  0  0  0  0  0  0  0
 ## [24]  0  0  1  3  0  3  1  1  0  2  1  2  0  1  2  0  0  1  0  0  0  0</code></pre>
-<pre class="r"><code>#Olhar um canal especifico (ex: Fp1) na epoca 11
-epoca=11
+<p>Olhando um canal específico (ex: Fp1) na época 11:</p>
+<pre class="r"><code>epoca=11
 
 INICIO=(epoca-1)*TAM+1
 FIM=epoca*TAM
 
 ts.plot(sinais[INICIO:FIM,1])</code></pre>
-<p><img src="/aulas/4_Analise_espectral_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/aulas/4_Epocas_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
