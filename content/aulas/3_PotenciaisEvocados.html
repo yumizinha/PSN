@@ -104,10 +104,7 @@ xlab=&quot;Tempo(ms)&quot;,ylab=&quot;Sinal(uv)&quot;,ylim=c(-7,7))
 
 lines((1:nrow(PERaro))/HZ*1000-100, PERaro[,5],col=2)
 abline(v=0,lty=3)</code></pre>
-<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<pre class="r"><code># Obs: os valores arbitrários em ylim foram ajustes manuais para alinhar a
-# visualização superior e inferior das linhas, ao fazer o plot de ambas
-# poderia ter feito melhor, mas sabe como a vida é...</code></pre>
+<p><img src="/aulas/3_PotenciaisEvocados_files/figure-html/unnamed-chunk-15-1.png" width="672" /> Obs: os valores arbitrários em ylim foram ajustes manuais para alinhar a visualização superior e inferior das linhas, ao fazer o plot de ambas poderia ter feito melhor, mas sabe como a vida é…</p>
 <p>Analisando esse tipo de gráfico, é possível ver diferença entre os estímulos. Claro que para ter significância estatística precisaria de uma avaliação mais profunda para poder confirmar a real existência dessa diferença.</p>
 <p>Fazer o plot da diferenca do PE raro e frequente no canal Pz, coluna 25:</p>
 <pre class="r"><code>canal=25

@@ -165,11 +165,8 @@ xlab="Tempo(ms)",ylab="Sinal(uv)",ylim=c(-7,7))
 
 lines((1:nrow(PERaro))/HZ*1000-100, PERaro[,5],col=2)
 abline(v=0,lty=3)
-
-# Obs: os valores arbitrários em ylim foram ajustes manuais para alinhar a
-# visualização superior e inferior das linhas, ao fazer o plot de ambas
-# poderia ter feito melhor, mas sabe como a vida é...
 ```
+Obs: os valores arbitrários em ylim foram ajustes manuais para alinhar a visualização superior e inferior das linhas, ao fazer o plot de ambas poderia ter feito melhor, mas sabe como a vida é...
 
 Analisando esse tipo de gráfico, é possível ver diferença entre os estímulos. Claro que para ter significância estatística precisaria de uma avaliação mais profunda para poder confirmar a real existência dessa diferença.
 
