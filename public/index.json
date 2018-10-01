@@ -42,25 +42,11 @@
 	"content": ""
 },
 {
-	"uri": "/credits/",
-	"title": "Credits",
-	"tags": [],
-	"description": "",
-	"content": " Contributors Thanks to them  for make Open Source Software a better place !\n.ghContributors{ display:flex; flex-flow: wrap; align-content: flex-start } .ghContributors  div{ width: 50% ; display: inline-flex; margin-bottom: 5px; } .ghContributors  div label{ padding-left: 4px ; } .ghContributors  div span{ font-size: x-small; padding-left: 4px ; }   @matcornic 143 commits   @lierdakil 16 commits   @gwleclerc 13 commits   @mdavids 10 commits   @Xipas 5 commits   @mreithub 3 commits   @matalo33 3 commits   @denisvm 2 commits   @gpospelov 2 commits   @wikijm 2 commits   @lfalin 2 commits   @alexvargasbenamburg 1 commits   @afs2015 1 commits   @arifpedia 1 commits   @MrMoio 1 commits   @giuliov 1 commits   @haitch 1 commits   @RealOrangeOne 1 commits   @tanzaho 1 commits   @JohnBlood 1 commits   @kamilchm 1 commits   @sykesm 1 commits   @ripienaar 1 commits   @EnigmaCurry 1 commits   @tedyoung 1 commits   @Thiht 1 commits   @fossabot 1 commits   @kamar535 1 commits   @nonumeros 1 commits   @pgorod 1 commits   @proelbtn 1 commits   And a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.\nPackages and libraries  mermaid - generation of diagram and flowchart from text in a similar manner as markdown font awesome - the iconic font and CSS framework jQuery - The Write Less, Do More, JavaScript Library lunr - Lunr enables you to provide a great search experience without the need for external, server-side, search services\u0026hellip; horsey - Progressive and customizable autocomplete component clipboard.js - copy text to clipboard highlight.js - Javascript syntax highlighter modernizr - A JavaScript toolkit that allows web developers to use new CSS3 and HTML5 features while maintaining a fine level of control over browsers that don\u0026rsquo;t support  Tooling  Netlify - Continuous deployement and hosting of this documentation Hugo  "
-},
-{
 	"uri": "/",
-	"title": "Learn Theme for Hugo",
+	"title": "Processamento de sinais neurais",
 	"tags": [],
 	"description": "",
-	"content": ""
-},
-{
-	"uri": "/showcase/",
-	"title": "Showcase",
-	"tags": [],
-	"description": "",
-	"content": " TAT by OVH "
+	"content": "Utilize o menu ao lado para encontrar o conteúdo do curso.\n"
 },
 {
 	"uri": "/tags/",
