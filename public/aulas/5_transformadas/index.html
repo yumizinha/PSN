@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.49" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
+
+    <title>Transformadas de Fourier :: Documentation for Hugo Learn Theme</title>
+    
+    
+    <link href="../../css/nucleus.css?1538598009" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538598009" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538598009" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538598009" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538598009" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538598009" rel="stylesheet">
+    <link href="../../css/theme.css?1538598009" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538598009" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-2.x.min.js?1538598009"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/aulas/5_transformadas/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="../../">
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<defs>
+<image id="image1101" width="540" height="201" xlink:href="data:image/png;base64,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"/>
+<pattern id="pattern0" patternUnits="userSpaceOnUse" width="540" height="201"  patternTransform="matrix(0.999875,0,0,0.999875,27.671541,309.297443)">
+  <use xlink:href="#image1101"/>
+</pattern>
+</defs>
+<g id="surface1064">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern0);" d="M 27.671875 309.296875 L 567.605469 309.296875 L 567.605469 510.273438 L 27.671875 510.273438 Z M 27.671875 309.296875 "/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1538598009"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538598009"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1538598009"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/aulas/" title="Conteúdo" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../aulas/">
+          <b>1. </b>Conteúdo
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" class="dd-item ">
+        <a href="../../aulas/0_eletrofisiologia/">
+        Introdução a eletrofisiologia
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/1_intror/" title="Introdução ao R" class="dd-item ">
+        <a href="../../aulas/1_intror/">
+        Introdução ao R
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item ">
+        <a href="../../aulas/2_filtro_sinais/">
+        Filtros de sinais
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item ">
+        <a href="../../aulas/3_potenciaisevocados/">
+        Potenciais Evocados
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/4_epocas/" title="Identificação de épocas" class="dd-item ">
+        <a href="../../aulas/4_epocas/">
+        Identificação de épocas
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/5_transformadas/" title="Transformadas de Fourier" class="dd-item active">
+        <a href="../../aulas/5_transformadas/">
+        Transformadas de Fourier
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/aula_2_filtro_sinais/" title="Aula 2 - Filtros de sinais" class="dd-item ">
+        <a href="../../aulas/aula_2_filtro_sinais/">
+        Aula 2 - Filtros de sinais
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+       
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fa fa-fw fa-history"></i> Clear History</a></li>         
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/5_Transformadas.html" target="blank">
+                      <i class="fa fa-code-fork"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Transformadas de Fourier
+          
+         
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>Transformadas de Fourier</h1>
+          
+
+        
+
+
+<p>O conteúdo dessa aula auxilia no entendimento da amostragem no domínio da frequência e reconstrução de sinais de tempo discreto. No quesito de análise de dados com EEG, os processos de transformação de amostras do domínio do tempo para o domínio da frequência. Estas incluem tanto a análise direta do espectro de frquência, bem como convoluções. Existem variações relacionadas com a transformada, dependendo do tipo de cada função.</p>
+<p>A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (harmônicos) que geram frequências conhecidas que podem ser distinguidas entre si.</p>
+<pre class="r"><code>T = 1000
+lambda1 = 30
+lambda2 = 50
+lambda3 = 110
+
+x= sin(2*pi*lambda1*(1:T)/T) +0.5*sin(2*pi*lambda2*(1:T)/T)
++0.25*sin(2*pi*lambda3*(1:T)/T)</code></pre>
+<pre><code>##    [1]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##    [5] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##    [9] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##   [13]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##   [17] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##   [21]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##   [25] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##   [29]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##   [33] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##   [37]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##   [41] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##   [45] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##   [49]  1.593560e-01 -5.514005e-16 -1.593560e-01 -2.455718e-01
+##   [53] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##   [57]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##   [61] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##   [65]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##   [69] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##   [73]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##   [77]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##   [81] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##   [85]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##   [89] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##   [93]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##   [97] -2.190767e-01 -2.455718e-01 -1.593560e-01  1.102801e-15
+##  [101]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [105] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [109] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [113]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [117] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [121]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [125] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [129]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [133] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [137]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [141] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [145] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [149]  1.593560e-01  1.221552e-16 -1.593560e-01 -2.455718e-01
+##  [153] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [157]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [161] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [165]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [169] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [173]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [177]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [181] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [185]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [189] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [193]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [197] -2.190767e-01 -2.455718e-01 -1.593560e-01  2.205602e-15
+##  [201]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [205] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [209] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [213]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [217] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [221]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [225] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [229]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [233] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [237]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [241] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [245] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [249]  1.593560e-01 -9.806459e-16 -1.593560e-01 -2.455718e-01
+##  [253] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [257]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [261] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [265]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [269] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [273]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [277]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [281] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [285]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [289] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [293]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [297] -2.190767e-01 -2.455718e-01 -1.593560e-01 -2.443104e-16
+##  [301]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [305] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [309] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [313]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [317] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [321]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [325] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [329]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [333] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [337]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [341] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [345] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [349]  1.593560e-01 -5.636161e-15 -1.593560e-01 -2.455718e-01
+##  [353] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [357]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [361] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [365]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [369] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [373]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [377]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [381] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [385]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [389] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [393]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [397] -2.190767e-01 -2.455718e-01 -1.593560e-01  4.411204e-15
+##  [401]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [405] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [409] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [413]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [417] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [421]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [425] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [429]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [433] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [437]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [441] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [445] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [449]  1.593560e-01 -3.186248e-15 -1.593560e-01 -2.455718e-01
+##  [453] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [457]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [461] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [465]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [469] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [473]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [477]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [481] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [485]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [489] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [493]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [497] -2.190767e-01 -2.455718e-01 -1.593560e-01  1.961292e-15
+##  [501]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [505] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [509] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [513]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [517] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [521]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [525] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [529]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [533] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [537]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [541] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [545] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [549]  1.593560e-01 -7.363355e-16 -1.593560e-01 -2.455718e-01
+##  [553] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [557]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [561] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [565]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [569] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [573]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [577]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [581] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [585]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [589] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [593]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [597] -2.190767e-01 -2.455718e-01 -1.593560e-01 -4.886208e-16
+##  [601]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [605] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [609] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [613]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [617] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [621]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [625] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [629]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [633] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [637]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [641] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [645] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [649]  1.593560e-01  1.713577e-15 -1.593560e-01 -2.455718e-01
+##  [653] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [657]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [661] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [665]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [669] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [673]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [677]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [681] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [685]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [689] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [693]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [697] -2.190767e-01 -2.455718e-01 -1.593560e-01  1.127232e-14
+##  [701]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [705] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [709] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [713]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [717] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [721]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [725] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [729]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [733] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [737]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [741] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [745] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [749]  1.593560e-01 -1.004737e-14 -1.593560e-01 -2.455718e-01
+##  [753] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [757]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [761] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [765]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [769] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [773]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [777]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [781] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [785]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [789] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [793]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [797] -2.190767e-01 -2.455718e-01 -1.593560e-01  8.822409e-15
+##  [801]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [805] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [809] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [813]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [817] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [821]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [825] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [829]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [833] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [837]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [841] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [845] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [849]  1.593560e-01 -7.597453e-15 -1.593560e-01 -2.455718e-01
+##  [853] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [857]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [861] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [865]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [869] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [873]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [877]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [881] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [885]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [889] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [893]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [897] -2.190767e-01 -2.455718e-01 -1.593560e-01  6.372496e-15
+##  [901]  1.593560e-01  2.455718e-01  2.190767e-01  9.203114e-02
+##  [905] -7.725425e-02 -2.110820e-01 -2.480287e-01 -1.711368e-01
+##  [909] -1.569763e-02  1.469463e-01  2.421458e-01  2.262068e-01
+##  [913]  1.064448e-01 -6.217247e-02 -2.022542e-01 -2.495067e-01
+##  [917] -1.822422e-01 -3.133331e-02  1.339567e-01  2.377641e-01
+##  [921]  2.324441e-01  1.204384e-01 -4.684533e-02 -1.926283e-01
+##  [925] -2.500000e-01 -1.926283e-01 -4.684533e-02  1.204384e-01
+##  [929]  2.324441e-01  2.377641e-01  1.339567e-01 -3.133331e-02
+##  [933] -1.822422e-01 -2.495067e-01 -2.022542e-01 -6.217247e-02
+##  [937]  1.064448e-01  2.262068e-01  2.421458e-01  1.469463e-01
+##  [941] -1.569763e-02 -1.711368e-01 -2.480287e-01 -2.110820e-01
+##  [945] -7.725425e-02  9.203114e-02  2.190767e-01  2.455718e-01
+##  [949]  1.593560e-01 -5.147540e-15 -1.593560e-01 -2.455718e-01
+##  [953] -2.190767e-01 -9.203114e-02  7.725425e-02  2.110820e-01
+##  [957]  2.480287e-01  1.711368e-01  1.569763e-02 -1.469463e-01
+##  [961] -2.421458e-01 -2.262068e-01 -1.064448e-01  6.217247e-02
+##  [965]  2.022542e-01  2.495067e-01  1.822422e-01  3.133331e-02
+##  [969] -1.339567e-01 -2.377641e-01 -2.324441e-01 -1.204384e-01
+##  [973]  4.684533e-02  1.926283e-01  2.500000e-01  1.926283e-01
+##  [977]  4.684533e-02 -1.204384e-01 -2.324441e-01 -2.377641e-01
+##  [981] -1.339567e-01  3.133331e-02  1.822422e-01  2.495067e-01
+##  [985]  2.022542e-01  6.217247e-02 -1.064448e-01 -2.262068e-01
+##  [989] -2.421458e-01 -1.469463e-01  1.569763e-02  1.711368e-01
+##  [993]  2.480287e-01  2.110820e-01  7.725425e-02 -9.203114e-02
+##  [997] -2.190767e-01 -2.455718e-01 -1.593560e-01  3.922584e-15</code></pre>
+<pre class="r"><code>ts.plot(x)</code></pre>
+<p><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Ruído-branco Gaussiano. FFT: Fast Fourier Transform Idêntico à definição se T for potência de 2 (ou aproximação de).</p>
+<pre class="r"><code>hist(rnorm(T))</code></pre>
+<p><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>x = x+rnorm(T)
+ts.plot(x)</code></pre>
+<p><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>O R já calcula o estimador do espectro (periodograma). O conceito é definido como “estimado” pois ele faz uma estimativa e não uma média de todos os dados gerados. (MELHORAR EXPLICAÇÃO)</p>
+<p>(COLOCAR AS FAIXAS DE FREQUÊNCIA DAS BANDAS delta &lt;4hz, theta 4-7hz, alfa 8-12hz, beta 13-30hz, gama &gt; 30hz… )</p>
+<pre class="r"><code>ESPECTRO = spectrum(x)</code></pre>
+<p><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code># O eixo x ficaria em 
+
+plot(ESPECTRO$freq, ESPECTRO$spec, type = &quot;l&quot;)</code></pre>
+<p><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<div id="implementando-com-o-banco-de-dados" class="section level2">
+<h2>Implementando com o banco de dados</h2>
+<p>Realizando a leitura dos dados:</p>
+<pre class="r"><code>#leitura dos sinais
+sinais=read.table(&quot;OlhosFechados.txt&quot;,header=FALSE)
+
+#leitura do nome dos canais
+nomescanais=scan(&quot;NOMEScanais.txt&quot;,what=&quot;string&quot;)
+
+dim(sinais)</code></pre>
+<pre><code>## [1] 45315    32</code></pre>
+<pre class="r"><code>nomescanais </code></pre>
+<pre><code>##  [1] &quot;Fp1&quot;  &quot;Fp2&quot;  &quot;F7&quot;   &quot;F3&quot;   &quot;Fz&quot;   &quot;F4&quot;   &quot;F8&quot;   &quot;FC5&quot;  &quot;FC1&quot;  &quot;FC2&quot; 
+## [11] &quot;FC6&quot;  &quot;T7&quot;   &quot;C3&quot;   &quot;Cz&quot;   &quot;C4&quot;   &quot;T8&quot;   &quot;TP9&quot;  &quot;CP5&quot;  &quot;CP1&quot;  &quot;CP2&quot; 
+## [21] &quot;CP6&quot;  &quot;TP10&quot; &quot;P7&quot;   &quot;P3&quot;   &quot;Pz&quot;   &quot;P4&quot;   &quot;P8&quot;   &quot;PO9&quot;  &quot;O1&quot;   &quot;Oz&quot;  
+## [31] &quot;O2&quot;   &quot;PO10&quot;</code></pre>
+<p>Parametrizando as variáveis iniciais:</p>
+<pre class="r"><code>#Taxa de amostragem
+HZ=250
+
+#Tamanho da epoca (janela) em segundos
+TAMsegundos=5
+
+#Tamanho da epoca (janela) em caselas do vetor de sinais
+TAM=TAMsegundos*HZ
+
+#Numero de epocas
+Nepocas=floor(nrow(sinais)/TAM)
+
+#Numero de canais
+Ncanais=ncol(sinais)</code></pre>
+<p>Criando matriz Espectro para para armazenar a média dos periodogramas entre todas as épocas para cada canal. As linhas representam diferentes frequencias As colunas representam os canais</p>
+<pre class="r"><code>ESPECTRO=matrix(0,TAM/2,Ncanais)
+
+#Calcular para cada canal
+for(canal in 1:Ncanais){  
+  y=0
+  #Calcula a media entre épocas
+  for(epoca in 1:Nepocas){
+    #Descobrir caselas de inicio e fim de cada epoca
+    INICIO=TAM*(epoca-1)+1
+    FIM=epoca*TAM
+    y=y+spectrum(sinais[INICIO:FIM,canal])$spec
+  }#for da epoca
+   ESPECTRO[,canal]=y/Nepocas
+}#for do canal</code></pre>
+<p><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-2.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-3.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-4.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-5.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-6.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-7.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-8.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-9.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-10.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-11.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-12.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-13.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-14.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-15.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-16.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-17.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-18.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-19.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-20.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-21.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-22.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-23.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-24.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-25.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-26.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-27.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-28.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-29.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-30.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-31.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-32.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-33.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-34.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-35.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-36.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-37.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-38.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-39.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-40.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-41.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-42.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-43.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-44.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-45.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-46.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-47.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-48.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-49.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-50.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-51.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-52.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-53.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-54.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-55.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-56.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-57.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-58.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-59.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-60.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-61.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-62.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-63.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-64.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-65.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-66.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-67.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-68.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-69.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-70.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-71.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-72.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-73.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-74.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-75.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-76.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-77.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-78.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-79.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-80.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-81.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-82.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-83.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-84.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-85.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-86.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-87.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-88.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-89.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-90.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-91.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-92.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-93.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-94.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-95.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-96.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-97.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-98.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-99.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-100.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-101.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-102.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-103.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-104.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-105.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-106.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-107.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-108.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-109.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-110.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-111.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-112.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-113.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-114.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-115.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-116.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-117.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-118.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-119.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-120.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-121.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-122.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-123.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-124.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-125.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-126.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-127.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-128.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-129.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-130.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-131.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-132.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-133.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-134.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-135.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-136.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-137.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-138.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-139.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-140.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-141.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-142.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-143.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-144.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-145.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-146.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-147.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-148.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-149.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-150.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-151.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-152.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-153.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-154.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-155.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-156.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-157.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-158.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-159.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-160.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-161.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-162.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-163.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-164.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-165.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-166.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-167.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-168.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-169.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-170.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-171.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-172.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-173.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-174.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-175.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-176.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-177.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-178.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-179.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-180.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-181.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-182.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-183.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-184.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-185.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-186.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-187.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-188.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-189.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-190.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-191.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-192.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-193.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-194.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-195.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-196.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-197.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-198.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-199.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-200.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-201.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-202.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-203.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-204.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-205.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-206.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-207.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-208.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-209.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-210.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-211.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-212.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-213.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-214.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-215.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-216.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-217.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-218.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-219.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-220.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-221.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-222.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-223.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-224.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-225.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-226.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-227.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-228.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-229.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-230.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-231.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-232.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-233.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-234.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-235.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-236.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-237.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-238.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-239.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-240.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-241.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-242.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-243.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-244.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-245.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-246.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-247.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-248.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-249.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-250.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-251.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-252.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-253.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-254.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-255.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-256.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-257.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-258.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-259.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-260.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-261.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-262.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-263.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-264.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-265.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-266.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-267.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-268.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-269.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-270.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-271.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-272.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-273.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-274.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-275.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-276.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-277.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-278.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-279.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-280.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-281.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-282.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-283.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-284.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-285.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-286.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-287.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-288.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-289.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-290.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-291.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-292.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-293.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-294.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-295.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-296.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-297.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-298.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-299.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-300.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-301.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-302.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-303.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-304.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-305.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-306.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-307.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-308.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-309.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-310.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-311.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-312.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-313.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-314.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-315.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-316.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-317.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-318.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-319.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-320.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-321.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-322.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-323.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-324.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-325.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-326.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-327.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-328.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-329.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-330.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-331.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-332.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-333.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-334.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-335.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-336.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-337.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-338.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-339.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-340.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-341.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-342.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-343.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-344.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-345.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-346.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-347.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-348.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-349.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-350.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-351.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-352.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-353.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-354.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-355.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-356.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-357.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-358.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-359.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-360.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-361.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-362.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-363.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-364.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-365.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-366.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-367.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-368.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-369.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-370.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-371.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-372.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-373.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-374.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-375.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-376.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-377.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-378.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-379.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-380.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-381.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-382.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-383.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-384.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-385.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-386.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-387.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-388.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-389.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-390.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-391.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-392.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-393.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-394.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-395.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-396.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-397.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-398.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-399.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-400.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-401.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-402.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-403.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-404.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-405.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-406.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-407.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-408.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-409.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-410.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-411.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-412.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-413.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-414.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-415.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-416.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-417.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-418.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-419.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-420.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-421.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-422.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-423.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-424.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-425.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-426.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-427.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-428.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-429.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-430.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-431.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-432.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-433.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-434.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-435.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-436.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-437.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-438.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-439.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-440.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-441.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-442.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-443.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-444.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-445.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-446.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-447.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-448.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-449.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-450.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-451.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-452.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-453.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-454.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-455.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-456.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-457.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-458.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-459.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-460.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-461.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-462.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-463.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-464.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-465.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-466.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-467.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-468.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-469.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-470.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-471.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-472.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-473.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-474.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-475.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-476.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-477.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-478.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-479.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-480.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-481.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-482.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-483.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-484.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-485.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-486.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-487.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-488.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-489.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-490.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-491.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-492.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-493.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-494.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-495.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-496.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-497.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-498.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-499.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-500.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-501.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-502.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-503.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-504.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-505.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-506.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-507.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-508.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-509.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-510.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-511.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-512.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-513.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-514.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-515.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-516.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-517.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-518.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-519.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-520.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-521.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-522.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-523.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-524.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-525.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-526.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-527.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-528.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-529.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-530.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-531.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-532.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-533.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-534.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-535.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-536.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-537.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-538.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-539.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-540.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-541.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-542.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-543.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-544.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-545.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-546.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-547.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-548.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-549.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-550.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-551.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-552.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-553.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-554.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-555.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-556.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-557.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-558.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-559.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-560.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-561.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-562.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-563.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-564.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-565.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-566.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-567.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-568.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-569.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-570.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-571.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-572.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-573.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-574.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-575.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-576.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-577.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-578.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-579.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-580.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-581.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-582.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-583.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-584.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-585.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-586.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-587.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-588.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-589.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-590.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-591.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-592.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-593.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-594.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-595.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-596.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-597.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-598.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-599.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-600.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-601.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-602.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-603.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-604.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-605.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-606.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-607.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-608.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-609.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-610.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-611.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-612.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-613.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-614.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-615.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-616.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-617.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-618.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-619.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-620.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-621.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-622.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-623.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-624.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-625.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-626.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-627.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-628.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-629.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-630.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-631.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-632.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-633.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-634.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-635.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-636.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-637.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-638.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-639.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-640.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-641.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-642.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-643.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-644.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-645.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-646.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-647.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-648.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-649.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-650.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-651.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-652.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-653.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-654.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-655.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-656.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-657.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-658.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-659.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-660.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-661.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-662.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-663.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-664.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-665.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-666.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-667.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-668.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-669.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-670.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-671.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-672.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-673.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-674.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-675.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-676.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-677.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-678.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-679.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-680.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-681.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-682.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-683.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-684.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-685.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-686.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-687.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-688.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-689.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-690.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-691.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-692.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-693.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-694.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-695.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-696.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-697.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-698.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-699.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-700.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-701.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-702.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-703.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-704.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-705.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-706.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-707.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-708.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-709.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-710.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-711.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-712.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-713.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-714.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-715.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-716.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-717.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-718.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-719.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-720.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-721.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-722.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-723.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-724.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-725.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-726.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-727.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-728.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-729.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-730.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-731.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-732.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-733.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-734.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-735.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-736.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-737.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-738.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-739.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-740.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-741.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-742.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-743.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-744.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-745.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-746.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-747.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-748.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-749.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-750.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-751.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-752.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-753.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-754.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-755.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-756.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-757.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-758.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-759.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-760.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-761.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-762.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-763.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-764.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-765.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-766.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-767.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-768.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-769.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-770.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-771.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-772.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-773.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-774.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-775.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-776.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-777.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-778.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-779.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-780.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-781.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-782.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-783.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-784.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-785.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-786.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-787.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-788.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-789.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-790.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-791.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-792.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-793.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-794.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-795.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-796.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-797.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-798.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-799.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-800.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-801.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-802.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-803.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-804.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-805.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-806.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-807.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-808.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-809.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-810.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-811.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-812.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-813.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-814.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-815.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-816.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-817.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-818.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-819.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-820.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-821.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-822.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-823.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-824.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-825.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-826.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-827.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-828.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-829.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-830.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-831.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-832.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-833.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-834.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-835.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-836.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-837.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-838.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-839.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-840.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-841.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-842.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-843.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-844.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-845.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-846.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-847.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-848.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-849.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-850.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-851.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-852.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-853.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-854.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-855.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-856.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-857.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-858.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-859.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-860.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-861.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-862.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-863.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-864.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-865.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-866.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-867.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-868.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-869.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-870.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-871.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-872.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-873.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-874.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-875.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-876.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-877.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-878.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-879.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-880.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-881.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-882.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-883.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-884.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-885.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-886.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-887.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-888.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-889.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-890.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-891.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-892.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-893.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-894.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-895.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-896.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-897.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-898.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-899.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-900.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-901.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-902.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-903.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-904.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-905.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-906.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-907.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-908.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-909.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-910.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-911.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-912.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-913.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-914.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-915.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-916.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-917.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-918.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-919.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-920.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-921.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-922.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-923.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-924.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-925.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-926.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-927.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-928.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-929.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-930.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-931.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-932.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-933.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-934.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-935.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-936.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-937.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-938.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-939.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-940.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-941.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-942.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-943.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-944.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-945.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-946.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-947.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-948.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-949.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-950.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-951.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-952.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-953.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-954.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-955.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-956.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-957.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-958.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-959.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-960.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-961.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-962.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-963.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-964.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-965.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-966.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-967.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-968.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-969.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-970.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-971.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-972.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-973.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-974.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-975.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-976.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-977.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-978.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-979.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-980.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-981.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-982.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-983.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-984.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-985.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-986.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-987.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-988.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-989.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-990.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-991.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-992.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-993.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-994.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-995.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-996.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-997.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-998.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-999.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1000.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1001.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1002.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1003.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1004.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1005.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1006.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1007.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1008.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1009.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1010.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1011.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1012.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1013.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1014.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1015.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1016.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1017.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1018.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1019.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1020.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1021.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1022.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1023.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1024.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1025.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1026.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1027.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1028.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1029.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1030.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1031.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1032.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1033.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1034.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1035.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1036.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1037.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1038.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1039.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1040.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1041.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1042.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1043.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1044.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1045.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1046.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1047.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1048.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1049.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1050.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1051.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1052.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1053.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1054.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1055.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1056.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1057.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1058.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1059.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1060.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1061.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1062.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1063.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1064.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1065.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1066.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1067.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1068.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1069.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1070.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1071.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1072.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1073.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1074.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1075.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1076.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1077.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1078.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1079.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1080.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1081.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1082.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1083.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1084.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1085.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1086.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1087.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1088.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1089.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1090.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1091.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1092.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1093.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1094.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1095.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1096.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1097.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1098.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1099.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1100.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1101.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1102.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1103.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1104.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1105.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1106.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1107.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1108.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1109.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1110.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1111.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1112.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1113.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1114.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1115.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1116.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1117.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1118.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1119.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1120.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1121.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1122.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1123.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1124.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1125.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1126.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1127.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1128.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1129.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1130.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1131.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1132.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1133.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1134.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1135.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1136.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1137.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1138.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1139.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1140.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1141.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1142.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1143.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1144.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1145.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1146.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1147.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1148.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1149.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1150.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1151.png" width="672" /><img src="../../aulas/5_Transformadas_files/figure-html/unnamed-chunk-7-1152.png" width="672" /></p>
+</div>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+            <a class="nav nav-prev" href="../../aulas/4_epocas/" title="Identificação de épocas"> <i class="fa fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="../../aulas/aula_2_filtro_sinais/" title="Aula 2 - Filtros de sinais" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1538598009"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538598009"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538598009"></script>
+    <script src="../../js/jquery.sticky.js?1538598009"></script>
+    <script src="../../js/featherlight.min.js?1538598009"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538598009"></script>
+    <script src="../../js/highlight.pack.js?1538598009"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom.71422.js?1538598009"></script>
+    <script src="../../js/learn.js?1538598009"></script>
+    <script src="../../js/hugo-learn.js?1538598009"></script>
+
+    <link href="../../mermaid/mermaid.css?1538598009" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538598009"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
+

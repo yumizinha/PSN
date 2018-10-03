@@ -27,6 +27,14 @@
   </url>
   
   <url>
+    <loc>/aulas/5_transformadas/</loc>
+  </url>
+  
+  <url>
+    <loc>/aulas/aula_2_filtro_sinais/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
   </url>

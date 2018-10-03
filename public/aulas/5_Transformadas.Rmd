@@ -1,0 +1,123 @@
+---
+title: "Transformadas de Fourier"
+author: "Amanda Yumi"
+date: "01 de outubro de 2018"
+output: html_document
+weight: 50
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# Gambi pra funcionar o ts.plot:
+graphics.off()
+par("mar")
+par(mar=c(1,1,1,1))
+```
+
+O conteúdo dessa aula auxilia no entendimento da amostragem no domínio da frequência e reconstrução de sinais de tempo discreto.
+No quesito de análise de dados com EEG, os processos de transformação de amostras do domínio do tempo para o domínio da frequência. Estas incluem tanto a análise direta do espectro de frquência, bem como convoluções. Existem variações relacionadas com a transformada, dependendo do tipo de cada função. 
+
+A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (harmônicos) que geram frequências conhecidas que podem ser distinguidas entre si.
+
+```{r}
+T = 1000
+lambda1 = 30
+lambda2 = 50
+lambda3 = 110
+
+x= sin(2*pi*lambda1*(1:T)/T) +0.5*sin(2*pi*lambda2*(1:T)/T)
++0.25*sin(2*pi*lambda3*(1:T)/T)
+ts.plot(x)
+```
+
+
+Ruído-branco Gaussiano.
+FFT: Fast Fourier Transform
+Idêntico à definição se T for potência de 2 (ou aproximação de).
+
+
+
+
+```{r}
+hist(rnorm(T))
+x = x+rnorm(T)
+ts.plot(x)
+```
+
+O R já calcula o estimador do espectro (periodograma). O conceito é definido como "estimado" pois ele faz uma estimativa e não uma média de todos os dados gerados.
+(MELHORAR EXPLICAÇÃO)
+
+(COLOCAR AS FAIXAS DE FREQUÊNCIA DAS BANDAS delta <4hz, theta 4-7hz, alfa 8-12hz, beta 13-30hz, gama > 30hz... )
+
+
+```{r}
+ESPECTRO = spectrum(x)
+
+# O eixo x ficaria em 
+
+plot(ESPECTRO$freq, ESPECTRO$spec, type = "l")
+
+```
+
+## Implementando com o banco de dados
+
+Realizando a leitura dos dados:
+
+```{r}
+#leitura dos sinais
+sinais=read.table("OlhosFechados.txt",header=FALSE)
+
+#leitura do nome dos canais
+nomescanais=scan("NOMEScanais.txt",what="string")
+
+dim(sinais)
+nomescanais 
+```
+
+Parametrizando as variáveis iniciais:
+
+```{r}
+#Taxa de amostragem
+HZ=250
+
+#Tamanho da epoca (janela) em segundos
+TAMsegundos=5
+
+#Tamanho da epoca (janela) em caselas do vetor de sinais
+TAM=TAMsegundos*HZ
+
+#Numero de epocas
+Nepocas=floor(nrow(sinais)/TAM)
+
+#Numero de canais
+Ncanais=ncol(sinais)
+```
+
+Criando matriz Espectro para para armazenar a média dos periodogramas entre todas as épocas para cada canal.
+As linhas representam diferentes frequencias
+As colunas representam os canais
+
+
+```{r}
+ESPECTRO=matrix(0,TAM/2,Ncanais)
+
+#Calcular para cada canal
+for(canal in 1:Ncanais){  
+  y=0
+  #Calcula a media entre épocas
+  for(epoca in 1:Nepocas){
+    #Descobrir caselas de inicio e fim de cada epoca
+    INICIO=TAM*(epoca-1)+1
+    FIM=epoca*TAM
+    y=y+spectrum(sinais[INICIO:FIM,canal])$spec
+  }#for da epoca
+   ESPECTRO[,canal]=y/Nepocas
+}#for do canal
+
+
+
+
+
+
+```
+
+
