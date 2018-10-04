@@ -72,15 +72,5 @@ Identificação de épocas (períodos dos estímulos) num experimento. O número
 A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (harmônicos) que geram frequências conhecidas que podem ser distinguidas entre si.</description>
     </item>
     
-    <item>
-      <title>Aula 2 - Filtros de sinais</title>
-      <link>/aulas/aula_2_filtro_sinais/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/aulas/aula_2_filtro_sinais/</guid>
-      <description>Breve introdução sobre filtros: O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.
-Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências.</description>
-    </item>
-    
   </channel>
 </rss>

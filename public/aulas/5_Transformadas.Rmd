@@ -113,11 +113,44 @@ for(canal in 1:Ncanais){
    ESPECTRO[,canal]=y/Nepocas
 }#for do canal
 
+```
 
+#Grafico do espectro no canal O1, coluna 29.
 
-
-
+```{r}
+plot((HZ/2)*(1:nrow(ESPECTRO))/nrow(ESPECTRO), ESPECTRO[, 29],
+ type="l", xlab="Frequencia (Hz)", ylab="Potencia (uV^2)")
 
 ```
+
+Ajustando o zoom para conseguir visualizar a informação melhor:
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# O professor colocou 10:200 mas voce nao quer ver 190 gráficos aqui
+IX=10:12
+plot((HZ/2)*IX/nrow(ESPECTRO),ESPECTRO[IX,29],
+ type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
+
+#Armazenar o espectro estimado médio de olhos fechados
+ESPECTROof=ESPECTRO
+```
+
+Para armazenar o espectro estimado médio de olhos abertos:
+
+```{r}
+ESPECTROoa=ESPECTRO
+
+##### COLOCAR OS 2 espectros médios no mesmo grafico
+
+#ZOOM no grafico
+IX=10:12
+plot((HZ/2)*IX/nrow(ESPECTROof),ESPECTROof[IX,29],
+ type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
+legend("topright",c("Olhos Fechados","Olhos Abertos"),lty=c(1,1),
+    col=c(1,2))
+
+```
+
+No gráfico podemos o espectro para cada frequência (analisar o espectro para cada faixa) e não a evolução em si (pois não está no tempo):
+
 
 
