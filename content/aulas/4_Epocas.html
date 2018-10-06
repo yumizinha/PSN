@@ -10,6 +10,7 @@ weight: 40
 
 <p>O número de tentativas necessárias para obter um ERP depende de vários fatores, sendo o mais importante a “relação sinal-ruído” (Signal to Noise Ratio), ou seja, o tamanho relativo do sinal (o ERP) em relação ao tamanho do ruído. Em experimentos cognitivos, 30 a 50 apresentações de estímulo são normalmente necessárias para se obter um ERP médio bom e limpo.</p>
 <p>Identificação de épocas (períodos dos estímulos) num experimento. O número de épocas (trials) aumenta a SNR.</p>
+<p>O código implementado abaixo foram calculados os ERPs associados aos dois tipos de estímulos (raros e frequentes) de um experimento. O sinal foi corrigido pela média do baseline, com a média de várias repetições para remoção de ruídos existentes.</p>
 <pre class="r"><code>#Leitura de dados
 sinais=read.table(&quot;OlhosFechados.txt&quot;,header=FALSE)
 

@@ -6,8 +6,7 @@ output: html_document
 weight: 30
 ---
 
-Potencial relacionado a evento (ERP, do inglês Event-Related Potential), é uma resposta direta do cérebro a um específico estímulo cognitivo, sensorial, ou
-motor. ERPs são obtidos por promediação (no tempo).
+Potencial relacionado a evento (ERP, do inglês Event-Related Potential), é uma resposta direta do cérebro a um específico estímulo cognitivo, sensorial, ou motor. ERPs são obtidos por promediação (no tempo).
 
 Os componentes são designados por uma letra (N - **negative** / P - **positive**), seguido de um número que pode indicar tanto a latência em ms como a posição da componente na forma de onda.
 
@@ -26,7 +25,7 @@ eletrodos que cobrem o lobo parietal, está suscitado no processo de tomada de d
 Outros componentes de ERP mais tardios, como por exemplo o N400 e o P600 são muito usados na área de neurociência da linguagem. Os componentes mais
 pesquisados na literatura ainda são o N1 e o P3.
 
-
+Os dados deste material são de estímulos sonoros, um agudo e um grave em que o indivíduo deveria clicar no mouse ao ouvir o estímulo agudo.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo=FALSE}
 require(signal)

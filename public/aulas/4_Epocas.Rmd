@@ -10,6 +10,9 @@ O número de tentativas necessárias para obter um ERP depende de vários fatore
 
 Identificação de épocas (períodos dos estímulos) num experimento. O número de épocas (trials) aumenta a SNR.
 
+O código implementado abaixo foram calculados os ERPs associados aos dois tipos de estímulos (raros e frequentes) de um experimento. O sinal foi corrigido pela média do baseline, com a média de várias repetições para remoção de ruídos existentes.
+
+
 ```{r}
 #Leitura de dados
 sinais=read.table("OlhosFechados.txt",header=FALSE)

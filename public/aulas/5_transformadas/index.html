@@ -10,20 +10,20 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Transformadas de Fourier :: Documentation for Hugo Learn Theme</title>
+    <title>Análise Espectral :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538839044" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538839044" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538839044" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538839044" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538839044" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538839044" rel="stylesheet">
-    <link href="../../css/theme.css?1538839044" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538839044" rel="stylesheet">
+    <link href="../../css/nucleus.css?1538863263" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538863263" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538863263" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538863263" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538863263" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538863263" rel="stylesheet">
+    <link href="../../css/theme.css?1538863263" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538863263" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538839044"></script>
+    <script src="../../js/jquery-2.x.min.js?1538863263"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538839044"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538839044"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1538863263"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538863263"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538839044"></script>
+<script type="text/javascript" src="../../js/search.js?1538863263"></script>
 
     
   </div>
@@ -210,9 +210,9 @@
  
   
     
-      <li data-nav-id="/aulas/5_transformadas/" title="Transformadas de Fourier" class="dd-item active">
+      <li data-nav-id="/aulas/5_transformadas/" title="Análise Espectral" class="dd-item active">
         <a href="../../aulas/5_transformadas/">
-        Transformadas de Fourier
+        Análise Espectral
         <i class="fa fa-check read-icon"></i>
         </a>
     </li>
@@ -312,7 +312,7 @@
             
           
           
-            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Transformadas de Fourier
+            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Análise Espectral
           
          
           
@@ -336,7 +336,7 @@
         
         <div id="body-inner">
           
-            <h1>Transformadas de Fourier</h1>
+            <h1>Análise Espectral</h1>
           
 
         
@@ -344,6 +344,25 @@
 
 <p>O conteúdo dessa aula auxilia no entendimento da amostragem no domínio da frequência e reconstrução de sinais de tempo discreto. No quesito de análise de dados com EEG, os processos de transformação de amostras do domínio do tempo para o domínio da frequência. Estas incluem tanto a análise direta do espectro de frquência, bem como convoluções. Existem variações relacionadas com a transformada, dependendo do tipo de cada função.</p>
 <p>A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (harmônicos) que geram frequências conhecidas que podem ser distinguidas entre si.</p>
+<p>O sinal de EEG é composto de várias outras ondas, de modo que a análise espectral consiste em realizar uma decomposição da onda de EEG em diversas ondas senoidais (ou cossenoides). Essa decomposição consiste na aplicação da <em>transformada de Fourier</em>.</p>
+<p>A transformada de Fourier converte uma seqüência finita de amostras igualmente espaçadas de uma função em uma seqüência de comprimento igual de amostras igualmente espaçadas da transformada de Fourier em tempo discreto (DTFT), que é uma função de frequência de valor complexo (na literatura poderá conferir que muitas vezes o número imaginário <span class="math inline">\(i\)</span> pode ser representado como <span class="math inline">\(j\)</span> para evitar possíveis confusões com intensidade de corrente, também representadas pelo mesmo símbolo).</p>
+<p>O intervalo no qual o DTFT é amostrado é recíproco a duração da sequência de entrada. Uma DFT inversa é uma série de Fourier, possuindo os mesmos valores de amostra da seqüência de entrada original. A DFT é, portanto, considerada uma representação do domínio da frequência da sequência de entrada original. Se a sequência original abranger todos os valores diferentes de zero de uma função, seu DTFT é contínuo (e periódico), e o DFT fornece amostras discretas de um ciclo. Se a sequência original é um ciclo de uma função periódica, a DFT fornece todos os valores diferentes de zero de um ciclo de DTFT.</p>
+<p>O sinal de EEG de: <span class="math inline">\(X_T = \{X_0, X_1, ..., X_{t-1}\}\)</span> é denotado pela decomposição:</p>
+<p><span class="math display">\[
+\begin{align}
+C_{k} = \sum_{T=0}^{t-1} X_{T} \hspace{1mm} \sin(\lambda_j T+\phi) &amp;&amp; \text{(sendo} \lambda_j= \frac{2\pi i}{N} \text{a frequência de Fourier)}
+\end{align}
+\]</span></p>
+<p>Pelas relações trigonométricas:</p>
+<p><span class="math display">\[
+\begin{align}
+\sin(\lambda t+ \phi) =  \sin(\lambda t) \cos(\phi) + \sin(\phi)\cos(\lambda t)
+&amp;&amp; \text{(soma de arcos)}\\
+e^{jx} = \cos(x)+j\sin(x) &amp;&amp; \text{(forma de Euler)}
+\end{align}
+\]</span></p>
+<p>pode-se representar a decomposição do sinal de EEG como:</p>
+<p><span class="math display">\[C_{k} = \sum_{T=0}^{t-1} X_{T} \hspace{1mm} e^\frac{-2\pi k i}{T}\]</span></p>
 <pre class="r"><code>T = 100
 lambda1 = 30
 lambda2 = 50
@@ -632,20 +651,20 @@ legend(&quot;topright&quot;,c(&quot;Olhos Fechados&quot;,&quot;Olhos Abertos&quo
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538839044"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538839044"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538839044"></script>
-    <script src="../../js/jquery.sticky.js?1538839044"></script>
-    <script src="../../js/featherlight.min.js?1538839044"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538839044"></script>
-    <script src="../../js/highlight.pack.js?1538839044"></script>
+    <script src="../../js/clipboard.min.js?1538863263"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538863263"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538863263"></script>
+    <script src="../../js/jquery.sticky.js?1538863263"></script>
+    <script src="../../js/featherlight.min.js?1538863263"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538863263"></script>
+    <script src="../../js/highlight.pack.js?1538863263"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538839044"></script>
-    <script src="../../js/learn.js?1538839044"></script>
-    <script src="../../js/hugo-learn.js?1538839044"></script>
+    <script src="../../js/modernizr.custom.71422.js?1538863263"></script>
+    <script src="../../js/learn.js?1538863263"></script>
+    <script src="../../js/hugo-learn.js?1538863263"></script>
 
-    <link href="../../mermaid/mermaid.css?1538839044" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538839044"></script>
+    <link href="../../mermaid/mermaid.css?1538863263" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538863263"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
