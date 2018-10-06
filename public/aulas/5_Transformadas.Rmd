@@ -96,7 +96,7 @@ As linhas representam diferentes frequências
 As colunas representam os canais
 
 
-```{r results = 'hide'}
+```{r, results = 'hide', message = FALSE}
 ESPECTRO=matrix(0,TAM/2,Ncanais)
 
 #Calcular para cada canal
@@ -142,7 +142,7 @@ ESPECTROoa=ESPECTRO
 ##### COLOCAR OS 2 espectros médios no mesmo grafico
 
 #ZOOM no grafico
-IX=10:12
+IX=10:200
 plot((HZ/2)*IX/nrow(ESPECTROof), ESPECTROof[IX,29],
  type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
 
