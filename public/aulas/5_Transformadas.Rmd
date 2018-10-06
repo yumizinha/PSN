@@ -108,7 +108,7 @@ for(canal in 1:Ncanais){
     #Descobrir caselas de inicio e fim de cada epoca
     INICIO=TAM*(epoca-1)+1
     FIM=epoca*TAM
-    y=y+spectrum(sinais[INICIO:FIM,canal])$spec
+    y=y+spectrum(sinais[INICIO:FIM,canal], plot = FALSE)$spec
   }#for da epoca
    ESPECTRO[,canal]=y/Nepocas
 }#for do canal
