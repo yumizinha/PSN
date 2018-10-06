@@ -37,8 +37,8 @@ x = 3.7 O vetor é uma estrutura de dados básica do R, que permite armazenar um
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/aulas/2_filtro_sinais/</guid>
-      <description>O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.
-Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada.</description>
+      <description>O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, aplicado ao som as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.
+Os artefatos em EEG caracterizam de ondas não cerebrais, denominadas por ruídos, como por exemplo a frequência da rede elétrica de 60hz, ondas de baixas frequências devido ao calor no couro cabeludo do indivíduo.</description>
     </item>
     
     <item>

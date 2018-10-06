@@ -19,7 +19,7 @@ No quesito de análise de dados com EEG, os processos de transformação de amos
 A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (harmônicos) que geram frequências conhecidas que podem ser distinguidas entre si.
 
 ```{r}
-T = 1000
+T = 100
 lambda1 = 30
 lambda2 = 50
 lambda3 = 110
@@ -28,7 +28,6 @@ x= sin(2*pi*lambda1*(1:T)/T) +0.5*sin(2*pi*lambda2*(1:T)/T)
 +0.25*sin(2*pi*lambda3*(1:T)/T)
 ts.plot(x)
 ```
-
 
 Ruído-branco Gaussiano.
 FFT: Fast Fourier Transform
@@ -92,15 +91,16 @@ Nepocas=floor(nrow(sinais)/TAM)
 Ncanais=ncol(sinais)
 ```
 
-Criando matriz Espectro para para armazenar a média dos periodogramas entre todas as épocas para cada canal.
-As linhas representam diferentes frequencias
+Criando matriz Espectro para armazenar a média dos periodogramas entre todas as épocas para cada canal.
+As linhas representam diferentes frequências
 As colunas representam os canais
 
 
-```{r}
+```{r results = 'hide'}
 ESPECTRO=matrix(0,TAM/2,Ncanais)
 
 #Calcular para cada canal
+# Escondi a saída de todos os espectros porque tem muitos canais e épocas na saída
 for(canal in 1:Ncanais){  
   y=0
   #Calcula a media entre épocas
@@ -126,15 +126,15 @@ plot((HZ/2)*(1:nrow(ESPECTRO))/nrow(ESPECTRO), ESPECTRO[, 29],
 Ajustando o zoom para conseguir visualizar a informação melhor:
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 # O professor colocou 10:200 mas voce nao quer ver 190 gráficos aqui
-IX=10:12
-plot((HZ/2)*IX/nrow(ESPECTRO),ESPECTRO[IX,29],
+IX=10:200
+plot((HZ/2)*IX/nrow(ESPECTRO), ESPECTRO[IX,29],
  type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
 
 #Armazenar o espectro estimado médio de olhos fechados
 ESPECTROof=ESPECTRO
 ```
 
-Para armazenar o espectro estimado médio de olhos abertos:
+Para armazenar o espectro estimado médio de olhos abertos e colocar os dois no mesmo gráfico:
 
 ```{r}
 ESPECTROoa=ESPECTRO
@@ -143,14 +143,11 @@ ESPECTROoa=ESPECTRO
 
 #ZOOM no grafico
 IX=10:12
-plot((HZ/2)*IX/nrow(ESPECTROof),ESPECTROof[IX,29],
+plot((HZ/2)*IX/nrow(ESPECTROof), ESPECTROof[IX,29],
  type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
+
 legend("topright",c("Olhos Fechados","Olhos Abertos"),lty=c(1,1),
     col=c(1,2))
-
 ```
 
-No gráfico podemos o espectro para cada frequência (analisar o espectro para cada faixa) e não a evolução em si (pois não está no tempo):
-
-
-
+No gráfico podemos o espectro para cada frequência (analisar o espectro para cada faixa) e não a evolução em si (pois não está no tempo).

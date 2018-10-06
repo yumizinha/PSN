@@ -7,25 +7,18 @@ output:
 weight: 20
 ---
 
-O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves. 
+O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, aplicado ao som as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.
 
+Os artefatos em EEG caracterizam de ondas não cerebrais, denominadas por ruídos, como por exemplo a frequência da rede elétrica de 60hz, ondas de baixas frequências devido ao calor no couro cabeludo do indivíduo. Deste modo, é extremamente importante aplicação de filtros nestes sinais para remoção de tais artefatos antes de qualquer outra análise. 
 
-Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada. 
-
-
-Nos casos do sinais de Eletroencefalografia (EEG), temos o ruído da rede elétrica que no Brasil é 60 Hz. Além desses existem outros artefatos como ondas de baixas frequências devido ao calor na cabeça do indivíduo. Deste modo, é extremamente importante aplicação de filtros nestes sinais para remoção de tais artefatos antes de qualquer outra análise. 
-
-
-Como tirar as baixas e altas frequências pensando em janela de médias?
-Podemos definir um filtro passa baixa a partir da subtração do sinal original pela média aritmética dos pontos ao redor de um ponto. Como resultado resta no sinal apenas as baixas frequências. Já para um filtro passa alta, fazemos a subtração do sinal original pelo sinal resultante do filtro passa baixa. Como resultado resta no sinal apenas os sinais com alta frequência. 
+Para tratar esses sinais, seja, frequências altas, baixas ou algum determinado intervalo, definimos um filtro passa baixa a partir da subtração do sinal original pela média aritmética dos pontos ao redor. 
 Alguns conceitos importantes para a construção dos filtros:
 
-  * **Frequência de amostragem:** Corresponde ao número de observação em um intervalo de tempo. Quando se trabalha com segundo, temos essa média em Hz.
-    + Ex: Na câmera fotográfica temo 30 frames por segundo (fps). Na ressonância magnética funcional (fMRI), temos 1 imagem a cada 2 segundos. Logo, a frequência de amostragem é 1/2 = 0.5Hz
+  * **Frequência de amostragem:** Trata-se da frequência de sinais observados em um intervalo de tempo (medidos em hertz = 1/s).
+    + Ex: No EEG utiliza-se uma frequência de 250 por segundo. Com FNIRS, utiliza-se em torno de 7 frames por segundo. Na ressonância magnética funcional (fMRI), temos 1 imagem a cada 2 segundos. Logo, a frequência de amostragem é 1/2 = 0.5Hz
     + Observação: A frequência = 1/período da observação
     
-
-  * **Frequência de Nyquist:** Corresponde à metade da frequência da taxa amostragem.
+  * **Frequência de Nyquist:** Corresponde à metade da frequência da taxa amostragem. Pelo teorema de Nyquist, para prevenir o aliasing (sobreposição de sinais) deve-se:aumentar da taxa de amostragem até duas vezes da maior frequência do sinal. Se o sinal é limitado no tempo a frequência de amostragem deve ser tão alta quanto se conseguir, pois em frequência o sinal se espalha por todo o espectro sendo não limitado; com isso deve-se remover ou filtrar as frequências acima da frequência mais alta desejada evitando a formação do aliasing
     + Note: A frequência de Nyquist vale para qualquer modalidade de técnica de neuroiumagem (fMRI,EEG,fNIRS...).
 
 

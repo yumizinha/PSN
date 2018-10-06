@@ -13,17 +13,17 @@
     <title>Filtros de sinais :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538672628" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538672628" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538672628" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538672628" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538672628" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538672628" rel="stylesheet">
-    <link href="../../css/theme.css?1538672628" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538672628" rel="stylesheet">
+    <link href="../../css/nucleus.css?1538800101" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1538800101" rel="stylesheet">
+    <link href="../../css/hybrid.css?1538800101" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1538800101" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1538800101" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1538800101" rel="stylesheet">
+    <link href="../../css/theme.css?1538800101" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1538800101" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538672628"></script>
+    <script src="../../js/jquery-2.x.min.js?1538800101"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538672628"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538672628"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1538800101"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1538800101"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538672628"></script>
+<script type="text/javascript" src="../../js/search.js?1538800101"></script>
 
     
   </div>
@@ -342,17 +342,16 @@
         
 
 
-<p>O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, ao aplicar um filtro no processo de equalização de ondas sonora, podemos verificar que as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.</p>
-<p>Outro exemplo é a luz branca, que é a composição de diversas ondas com diferentes frequências. Assim, ao aplicarmos um filtro podemos separar as cores individualmente, a partir da aplicação de um filtro de frequência na cor associada.</p>
-<p>Nos casos do sinais de Eletroencefalografia (EEG), temos o ruído da rede elétrica que no Brasil é 60 Hz. Além desses existem outros artefatos como ondas de baixas frequências devido ao calor na cabeça do indivíduo. Deste modo, é extremamente importante aplicação de filtros nestes sinais para remoção de tais artefatos antes de qualquer outra análise.</p>
-<p>Como tirar as baixas e altas frequências pensando em janela de médias? Podemos definir um filtro passa baixa a partir da subtração do sinal original pela média aritmética dos pontos ao redor de um ponto. Como resultado resta no sinal apenas as baixas frequências. Já para um filtro passa alta, fazemos a subtração do sinal original pelo sinal resultante do filtro passa baixa. Como resultado resta no sinal apenas os sinais com alta frequência. Alguns conceitos importantes para a construção dos filtros:</p>
+<p>O processo de filtragem de sinais permite a caracterização dos sinais a partir de suas características. Por exemplo, aplicado ao som as frequências mais altas representam os sons mais agudos, enquanto que as frequências mais baixas representam os sons mais graves.</p>
+<p>Os artefatos em EEG caracterizam de ondas não cerebrais, denominadas por ruídos, como por exemplo a frequência da rede elétrica de 60hz, ondas de baixas frequências devido ao calor no couro cabeludo do indivíduo. Deste modo, é extremamente importante aplicação de filtros nestes sinais para remoção de tais artefatos antes de qualquer outra análise.</p>
+<p>Para tratar esses sinais, seja, frequências altas, baixas ou algum determinado intervalo, definimos um filtro passa baixa a partir da subtração do sinal original pela média aritmética dos pontos ao redor. Alguns conceitos importantes para a construção dos filtros:</p>
 <ul>
-<li><strong>Frequência de amostragem:</strong> Corresponde ao número de observação em um intervalo de tempo. Quando se trabalha com segundo, temos essa média em Hz.
+<li><strong>Frequência de amostragem:</strong> Trata-se da frequência de sinais observados em um intervalo de tempo (medidos em hertz = 1/s).
 <ul>
-<li>Ex: Na câmera fotográfica temo 30 frames por segundo (fps). Na ressonância magnética funcional (fMRI), temos 1 imagem a cada 2 segundos. Logo, a frequência de amostragem é 1/2 = 0.5Hz</li>
+<li>Ex: No EEG utiliza-se uma frequência de 250 por segundo. Com FNIRS, utiliza-se em torno de 7 frames por segundo. Na ressonância magnética funcional (fMRI), temos 1 imagem a cada 2 segundos. Logo, a frequência de amostragem é 1/2 = 0.5Hz</li>
 <li>Observação: A frequência = 1/período da observação</li>
 </ul></li>
-<li><strong>Frequência de Nyquist:</strong> Corresponde à metade da frequência da taxa amostragem.
+<li><strong>Frequência de Nyquist:</strong> Corresponde à metade da frequência da taxa amostragem. Pelo teorema de Nyquist, para prevenir o aliasing (sobreposição de sinais) deve-se:aumentar da taxa de amostragem até duas vezes da maior frequência do sinal. Se o sinal é limitado no tempo a frequência de amostragem deve ser tão alta quanto se conseguir, pois em frequência o sinal se espalha por todo o espectro sendo não limitado; com isso deve-se remover ou filtrar as frequências acima da frequência mais alta desejada evitando a formação do aliasing
 <ul>
 <li>Note: A frequência de Nyquist vale para qualquer modalidade de técnica de neuroiumagem (fMRI,EEG,fNIRS…).</li>
 </ul></li>
@@ -628,20 +627,20 @@ lines((1:nrow(sinais))/HZ,fsinais[,1],col=2)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538672628"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538672628"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538672628"></script>
-    <script src="../../js/jquery.sticky.js?1538672628"></script>
-    <script src="../../js/featherlight.min.js?1538672628"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538672628"></script>
-    <script src="../../js/highlight.pack.js?1538672628"></script>
+    <script src="../../js/clipboard.min.js?1538800101"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1538800101"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1538800101"></script>
+    <script src="../../js/jquery.sticky.js?1538800101"></script>
+    <script src="../../js/featherlight.min.js?1538800101"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1538800101"></script>
+    <script src="../../js/highlight.pack.js?1538800101"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538672628"></script>
-    <script src="../../js/learn.js?1538672628"></script>
-    <script src="../../js/hugo-learn.js?1538672628"></script>
+    <script src="../../js/modernizr.custom.71422.js?1538800101"></script>
+    <script src="../../js/learn.js?1538800101"></script>
+    <script src="../../js/hugo-learn.js?1538800101"></script>
 
-    <link href="../../mermaid/mermaid.css?1538672628" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538672628"></script>
+    <link href="../../mermaid/mermaid.css?1538800101" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1538800101"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

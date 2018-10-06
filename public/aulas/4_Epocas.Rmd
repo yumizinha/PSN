@@ -130,13 +130,6 @@ ts.plot(sinais[INICIO:FIM,1])
 
 
 
-
-
-
-
-
-
-
 ```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 # Código teste da Yumi:
 TABELA <- matrix(0, 10, 3)
