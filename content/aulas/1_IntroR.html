@@ -149,10 +149,10 @@ sd(x)</code></pre>
 <pre><code>## [1] 576.7729</code></pre>
 <pre class="r"><code># Distribuição normal: 
 rnorm(x)</code></pre>
-<pre><code>## [1] -0.2941549 -0.5695707 -1.1018875  1.4181125</code></pre>
+<pre><code>## [1] -0.82708705  0.40291164 -0.06741388  0.05212912</code></pre>
 <pre class="r"><code># Boxplot:
 boxplot(x)</code></pre>
-<p><img src="/aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/aulas/1_IntroR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
 <div id="leitura-de-dados-de-ecg" class="section level2">
@@ -172,10 +172,10 @@ par(&quot;mar&quot;)</code></pre>
 <p>Após implementar essas linhas, na sequência, visualizamos os dados com a função:</p>
 <pre class="r"><code># Plotando gráfico de linha - ECG
 ts.plot(dados)</code></pre>
-<p><img src="/aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/aulas/1_IntroR_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Um histograma pode ajudar a melhorar a visualização da amplitude do sinal:</p>
 <pre class="r"><code>hist(dados$V1)</code></pre>
-<p><img src="/aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/aulas/1_IntroR_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Para fins de referência, consideremos como picos de batimentos os valores com resultados acima de 685mV, então destacaríamos os maiores:</p>
 <pre class="r"><code># Para percorrer todas as casas dos dados, detectando os picos:
 picos=array(0, nrow(dados))
@@ -187,11 +187,11 @@ for(i in 1:960){
 
 # Unindo no plot as colunas de dados e picos
 ts.plot(cbind(dados$V1, picos))</code></pre>
-<p><img src="/aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/aulas/1_IntroR_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <pre class="r"><code># Como pode ver, ficou zoado, então ajustamos a escala e adicionamos cores para que se possa visualizar os dados:
 # cores: col 2 = preto e 1 vermelho
 ts.plot(cbind(dados$V1, picos+684), col=c(2,1))</code></pre>
-<p><img src="/aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<p><img src="/aulas/1_IntroR_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
 <p>O ajuste ainda não ficou muito claro. Toda vez que encontrar um pico, os valores conseguintes referem-se ao mesmo pico, ou seja, devemos limpar os dados (retirada de picos contínuos adjacentes). Neste caso, escolhemos ignorar os picos dos 10 dados seguintes ao primeiro pico.</p>
 <p>Nota: Para percorrer o vetor completo, basta percorrer o código até os 10 últimos (critério de parada) dados. Os demais picos seriam ignorados de qualquer forma e poderia reproduzir erro no vetor.</p>
 <p>Dessa forma, teríamos:</p>
@@ -201,6 +201,6 @@ ts.plot(cbind(dados$V1, picos+684), col=c(2,1))</code></pre>
   }
 }
 ts.plot(cbind(dados$V1,picos+684),col=c(2,1))</code></pre>
-<p><img src="/aulas/Aula_1_IntroR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/aulas/1_IntroR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 </div>
