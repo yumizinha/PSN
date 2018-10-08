@@ -10,20 +10,20 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Identificação de épocas :: Documentation for Hugo Learn Theme</title>
+    <title>Controle de qualidade :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1538876082" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1538876082" rel="stylesheet">
-    <link href="../../css/hybrid.css?1538876082" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1538876082" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1538876082" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1538876082" rel="stylesheet">
-    <link href="../../css/theme.css?1538876082" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1538876082" rel="stylesheet">
+    <link href="../../css/nucleus.css?1539035458" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1539035458" rel="stylesheet">
+    <link href="../../css/hybrid.css?1539035458" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1539035458" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1539035458" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1539035458" rel="stylesheet">
+    <link href="../../css/theme.css?1539035458" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1539035458" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1538876082"></script>
+    <script src="../../js/jquery-2.x.min.js?1539035458"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1538876082"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1538876082"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1539035458"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1539035458"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1538876082"></script>
+<script type="text/javascript" src="../../js/search.js?1539035458"></script>
 
     
   </div>
@@ -191,9 +191,9 @@
  
   
     
-      <li data-nav-id="/aulas/4_epocas/" title="Identificação de épocas" class="dd-item active">
+      <li data-nav-id="/aulas/4_epocas/" title="Controle de qualidade" class="dd-item active">
         <a href="../../aulas/4_epocas/">
-        Identificação de épocas
+        Controle de qualidade
         <i class="fa fa-check read-icon"></i>
         </a>
     </li>
@@ -213,6 +213,25 @@
       <li data-nav-id="/aulas/5_transformadas/" title="Análise Espectral" class="dd-item ">
         <a href="../../aulas/5_transformadas/">
         Análise Espectral
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/6_eyetracker/" title="Eye Tracking" class="dd-item ">
+        <a href="../../aulas/6_eyetracker/">
+        Eye Tracking
         <i class="fa fa-check read-icon"></i>
         </a>
     </li>
@@ -312,7 +331,7 @@
             
           
           
-            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Identificação de épocas
+            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Controle de qualidade
           
          
           
@@ -336,7 +355,7 @@
         
         <div id="body-inner">
           
-            <h1>Identificação de épocas</h1>
+            <h1>Controle de qualidade</h1>
           
 
         
@@ -404,7 +423,7 @@ hist(c(AMPLITUDE))</code></pre>
 <p>Limitando um pouco a visualização, no caso em 150:</p>
 <pre class="r"><code>LIMIAR=150 #escolhido analisando o histograma</code></pre>
 <p>Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:</p>
-<pre class="r"><code>CQ=matrix(0,Nepocas,Ncanais)
+<pre class="r"><code>CQ = matrix(0, Nepocas, Ncanais)
 CQ[which(AMPLITUDE&gt;LIMIAR)]=1</code></pre>
 <p>Para identificar os CANAIS mais problemáticos e realizar a contagem das épocas descartadas em cada canal:</p>
 <pre class="r"><code>colSums(CQ)</code></pre>
@@ -607,6 +626,22 @@ ts.plot(sinais[INICIO:FIM,1])</code></pre>
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -629,20 +664,20 @@ ts.plot(sinais[INICIO:FIM,1])</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1538876082"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1538876082"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1538876082"></script>
-    <script src="../../js/jquery.sticky.js?1538876082"></script>
-    <script src="../../js/featherlight.min.js?1538876082"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1538876082"></script>
-    <script src="../../js/highlight.pack.js?1538876082"></script>
+    <script src="../../js/clipboard.min.js?1539035458"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1539035458"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1539035458"></script>
+    <script src="../../js/jquery.sticky.js?1539035458"></script>
+    <script src="../../js/featherlight.min.js?1539035458"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1539035458"></script>
+    <script src="../../js/highlight.pack.js?1539035458"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1538876082"></script>
-    <script src="../../js/learn.js?1538876082"></script>
-    <script src="../../js/hugo-learn.js?1538876082"></script>
+    <script src="../../js/modernizr.custom.71422.js?1539035458"></script>
+    <script src="../../js/learn.js?1539035458"></script>
+    <script src="../../js/hugo-learn.js?1539035458"></script>
 
-    <link href="../../mermaid/mermaid.css?1538876082" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1538876082"></script>
+    <link href="../../mermaid/mermaid.css?1539035458" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1539035458"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

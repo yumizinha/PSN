@@ -1,0 +1,184 @@
+---
+title: "Eye Tracking"
+author: "Amanda Yumi"
+date: "8 de outubro de 2018"
+output: html_document
+weight: 60
+---
+
+(INSERIR INTRODUÇÃO SOBRE) EYE TRACKER.
+TECNOLOGIAS, FUNCIONAMENTO BIOLÓGICO.
+
+```{r}
+#leitura de dados
+dados=read.table("dadosEYE.txt",header=TRUE,sep=";")
+
+dim(dados)
+```
+
+Para ler as primeiras linhas (só pra saber a cara da tabela sem olhar tudo):
+
+```{r}
+head(dados)
+
+```
+
+(assim é possível verificar se está tudo ok e se não tem problema algum com os arquivos)
+
+A função colnames ajuda a identificar o nome das colunas.
+
+```{r}
+#Leia os nomes das colunas 
+colnames(dados)
+```
+
+A primeira coluna se traz os "RecordingTime..ms."
+Para saber a taxa de amostragem, precisamos avaliar a diferença entre elementos.
+Entre um MILISEGUNDO e outro, temos um intervalo de sinais coletados.
+
+
+```{r}
+#Tomando os 10 primeiros números
+dados[1:10,1]
+```
+
+
+```{r, echo= FALSE}
+#Identificamos a diferença entre um elemento menos o #anterior, para isso usamos o comando "diff" para ter 
+diff(dados[,1])
+```
+
+```{r, echo = FALSE}
+DIFF = mean(diff(dados$RecordingTime..ms.))
+
+#A taxa de amostragem em Hertz é dada por:
+HZ=1000*1/DIFF
+
+```
+
+
+No caso do cálculo da frequência, HZ, está multiplicado por 1000 pois a coleta está em milisegundos e a frequência tem que considerar segundos.
+
+Visualizando a informação:
+
+```{r}
+#Fazer o grafico
+plot(dados$RecordingTime..ms.*1000,
+  dados$Pupil.Diameter.Right..mm.,type="l",xlab="Tempo(s)",
+  ylab="Diametro Pupilar Direito(mm)")
+```
+
+
+Neste gráfico pode-se identificar piscadas (que não necessariamente é um artefato, pois piscada está associada a estados cognitivos). 
+
+Para essa análise, pretendemos identificar os picos de cima e os de baixo (muito sensíveis posso considerar como missing data).
+
+Identificando o diâmetro da pupila direita e os dados que quero ignorar:
+
+```{r}
+#Sinal do diametro da pupila direita
+pupilD=dados$Pupil.Diameter.Right..mm.
+
+#Detectar outliers, piscadas e missing data
+IX=which(pupilD<4 | pupilD>6)
+pupilD[IX]=NA
+```
+
+Delineamento do experimento:
+* 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo)
+* Cada época de 30s se refere a HZ*30 caselas no vetor pupilD.
+* Devemos criar um vetor indicando a condição para cada casela do vetor pupilD:
+
+```{r}
+CONDICAO = array(1, length(pupilD))
+```
+
+Durante os períodos de contagem de subtração mental (a cada 30s) há um repouso:
+
+```{r}
+inicio = ceiling(HZ*30)
+final = ceiling((HZ*30)+(HZ*30))
+```
+
+Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado é reproduzir as linhas acima num laço e identificar as condições e intervalos.
+A grosso modo o intervalo seria desta forma:
+
+```{r}
+#Colocar 2 nas caselas durante os periodos de subtracao mental
+CONDICAO[902:1803]=2
+CONDICAO[2706:3607]=2
+CONDICAO[4510:5411]=2
+CONDICAO[6314:7215]=2
+CONDICAO[8118:9019]=2
+
+```
+
+Analisando as duas condições (repouso e atividade), podemos visualizar com boxplot:
+
+```{r}
+#Boxplot do diametro de pupila nas duas condicoes
+#os proximos 2 comandos sao equivalentes
+boxplot(pupilD[which(CONDICAO==1)],pupilD[which(CONDICAO==2)])
+boxplot(pupilD~CONDICAO)
+```
+
+Além disso, queremos avaliar a transição repouso da tarefa para cada bloco em cada região.
+
+```{r}
+plot(1:1803,pupilD[1:1803],type="l")
+lines(1:1804,pupilD[1804:3607],col=2)
+lines(1:1804,pupilD[3608:5411],col=3)
+lines(1:1804,pupilD[5412:7215],col=4)
+lines(1:1804,pupilD[7216:9019],col=6)
+```
+
+Para visualização dos dados, analisamos a curva média da pupila nesses períodos.
+
+```{r}
+#calcular a curva media
+MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupilD[7216:9019])/5
+
+plot(60*(1:1804)/1804,MEDIA,type="l",xlab="Tempo(s)",ylab="Diametro(mm)")
+abline(v=30,lty=3)
+```
+
+A dificuldade nestes exercícios é a identificação das caselas a serem trabalhadas.
+
+
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+#Corrija os “missing datas” dos dados devido a piscada de olhos
+for(i in 2:length(pupil)){
+if(pupil[i]==0){
+pupil[i]==pupil[i-1]
+ }
+}
+#Passe um filtro para retirar as altas frequências 
+require(signal) #Passa-baixa em 0.5Hz
+FILTRO=butter(5, 0.5/(HZ/2),"low")
+#Informações sobre o filtro
+freqz(FILTRO) 
+#Filtre os sinais
+Fpupil=filter(FILTRO,pupil)
+ts.plot(Fpupil)
+#Crie uma janela de cada condição (30SEG) 
+JANELA = 30*HZ 
+#Primeiro ciclo
+CICLO1 = 1:(2*JANELA+1)
+#Segundo ciclo 
+CICLO2 = (61*HZ):(2*JANELA+61*HZ)
+#terceiro ciclo 
+CICLO3 = (121*HZ):(2*JANELA+181*HZ)
+#quarto ciclo 
+CICLO4 = (181*HZ):(2*JANELA+241*HZ)
+#quinto ciclo 
+CICLO5 = (241*HZ):(2*JANELA+301*HZ)
+# Media do sinal.
+MEDIA = (Fpupil[CICLO1]+Fpupil[CICLO2]+Fpupil[CICLO3]+Fpupil[CICLO4]+Fpupil[CICLO5])/5
+#Plote e compare as medias. 
+ts.plot(MEDIA)
+boxplot(MEDIA[1:902],MEDIA[903:1804])
+
+```
+
+

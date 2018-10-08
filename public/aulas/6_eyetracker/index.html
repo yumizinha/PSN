@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.49" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
+
+    <title>Eye Tracking :: Documentation for Hugo Learn Theme</title>
+    
+    
+    <link href="../../css/nucleus.css?1539035458" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1539035458" rel="stylesheet">
+    <link href="../../css/hybrid.css?1539035458" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1539035458" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1539035458" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1539035458" rel="stylesheet">
+    <link href="../../css/theme.css?1539035458" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1539035458" rel="stylesheet">
+    
+
+    <script src="../../js/jquery-2.x.min.js?1539035458"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/aulas/6_eyetracker/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="../../">
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<defs>
+<image id="image1101" width="540" height="201" xlink:href="data:image/png;base64,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"/>
+<pattern id="pattern0" patternUnits="userSpaceOnUse" width="540" height="201"  patternTransform="matrix(0.999875,0,0,0.999875,27.671541,309.297443)">
+  <use xlink:href="#image1101"/>
+</pattern>
+</defs>
+<g id="surface1064">
+<path style=" stroke:none;fill-rule:nonzero;fill:url(#pattern0);" d="M 27.671875 309.296875 L 567.605469 309.296875 L 567.605469 510.273438 L 27.671875 510.273438 Z M 27.671875 309.296875 "/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1539035458"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1539035458"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1539035458"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/aulas/" title="Conteúdo" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../aulas/">
+          <b>1. </b>Conteúdo
+          
+            <i class="fa fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" class="dd-item ">
+        <a href="../../aulas/0_eletrofisiologia/">
+        Introdução a eletrofisiologia
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/1_intror/" title="Introdução ao R" class="dd-item ">
+        <a href="../../aulas/1_intror/">
+        Introdução ao R
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/2_filtro_sinais/" title="Filtros de sinais" class="dd-item ">
+        <a href="../../aulas/2_filtro_sinais/">
+        Filtros de sinais
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/3_potenciaisevocados/" title="Potenciais Evocados" class="dd-item ">
+        <a href="../../aulas/3_potenciaisevocados/">
+        Potenciais Evocados
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/4_epocas/" title="Controle de qualidade" class="dd-item ">
+        <a href="../../aulas/4_epocas/">
+        Controle de qualidade
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/5_transformadas/" title="Análise Espectral" class="dd-item ">
+        <a href="../../aulas/5_transformadas/">
+        Análise Espectral
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/aulas/6_eyetracker/" title="Eye Tracking" class="dd-item active">
+        <a href="../../aulas/6_eyetracker/">
+        Eye Tracking
+        <i class="fa fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+       
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fa fa-fw fa-history"></i> Clear History</a></li>         
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/6_EyeTracker.html" target="blank">
+                      <i class="fa fa-code-fork"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Eye Tracking
+          
+         
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>Eye Tracking</h1>
+          
+
+        
+
+
+<p>(INSERIR INTRODUÇÃO SOBRE) EYE TRACKER. TECNOLOGIAS, FUNCIONAMENTO BIOLÓGICO.</p>
+<pre class="r"><code>#leitura de dados
+dados=read.table(&quot;dadosEYE.txt&quot;,header=TRUE,sep=&quot;;&quot;)
+
+dim(dados)</code></pre>
+<pre><code>## [1] 9099   30</code></pre>
+<p>Para ler as primeiras linhas (só pra saber a cara da tabela sem olhar tudo):</p>
+<pre class="r"><code>head(dados)</code></pre>
+<pre><code>##   RecordingTime..ms. Time.of.Day..h.m.s.ms.    Trial              Stimulus
+## 1           221104.5           21:41:01:349 Trial001 brian-1-recording.avi
+## 2           221137.8           21:41:01:382 Trial001 brian-1-recording.avi
+## 3           221170.9           21:41:01:415 Trial001 brian-1-recording.avi
+## 4           221204.4           21:41:01:449 Trial001 brian-1-recording.avi
+## 5           221237.5           21:41:01:482 Trial001 brian-1-recording.avi
+## 6           221270.8           21:41:01:515 Trial001 brian-1-recording.avi
+##   Export.Start.Trial.Time..ms. Export.End.Trial.Time..ms. Participant
+## 1                            0                     302726       brian
+## 2                            0                     302726       brian
+## 3                            0                     302726       brian
+## 4                            0                     302726       brian
+## 5                            0                     302726       brian
+## 6                            0                     302726       brian
+##   Color Tracking.Ratio.... Category.Group Category.Binocular
+## 1 Coral                100            Eye                  -
+## 2 Coral                100            Eye      Visual Intake
+## 3 Coral                100            Eye      Visual Intake
+## 4 Coral                100            Eye      Visual Intake
+## 5 Coral                100            Eye      Visual Intake
+## 6 Coral                100            Eye      Visual Intake
+##   Index.Binocular Pupil.Diameter.Right..mm.
+## 1               -                       4.6
+## 2               1                       4.6
+## 3               1                       4.6
+## 4               1                       4.6
+## 5               1                       4.6
+## 6               1                       4.6
+##   Point.of.Regard.Binocular.X..px. Point.of.Regard.Binocular.Y..px.
+## 1                            693.0                            258.7
+## 2                            690.1                            257.0
+## 3                            692.4                            257.2
+## 4                            692.2                            257.5
+## 5                            694.2                            256.3
+## 6                            691.5                            257.2
+##   Point.of.Regard.Right.X..px. Point.of.Regard.Right.Y..px.
+## 1                        739.9                        271.6
+## 2                        739.4                        269.7
+## 3                        742.4                        270.5
+## 4                        743.3                        269.9
+## 5                        743.8                        268.9
+## 6                        741.0                        270.5
+##   AOI.Name.Binocular Gaze.Vector.Right.X Gaze.Vector.Right.Y
+## 1                  -                   0                   0
+## 2                  -                   0                   0
+## 3                  -                   0                   0
+## 4                  -                   0                   0
+## 5                  -                   0                   0
+## 6                  -                   0                   0
+##   Gaze.Vector.Right.Z Video.Time..h.m.s.ms. Annotation.Name
+## 1                   1          00:00:00:083               -
+## 2                   1          00:00:00:083               -
+## 3                   1          00:00:00:125               -
+## 4                   1          00:00:00:167               -
+## 5                   1          00:00:00:208               -
+## 6                   1          00:00:00:250               -
+##   Annotation.Description Annotation.Tags Mouse.Position.X..px.
+## 1                      -               -                     -
+## 2                      -               -                     -
+## 3                      -               -                     -
+## 4                      -               -                     -
+## 5                      -               -                     -
+## 6                      -               -                     -
+##   Mouse.Position.Y..px. Scroll.Direction.X Scroll.Direction.Y Content
+## 1                     -                  -                  -       -
+## 2                     -                  -                  -       -
+## 3                     -                  -                  -       -
+## 4                     -                  -                  -       -
+## 5                     -                  -                  -       -
+## 6                     -                  -                  -       -</code></pre>
+<p>(assim é possível verificar se está tudo ok e se não tem problema algum com os arquivos)</p>
+<p>A função colnames ajuda a identificar o nome das colunas.</p>
+<pre class="r"><code>#Leia os nomes das colunas 
+colnames(dados)</code></pre>
+<pre><code>##  [1] &quot;RecordingTime..ms.&quot;               &quot;Time.of.Day..h.m.s.ms.&quot;          
+##  [3] &quot;Trial&quot;                            &quot;Stimulus&quot;                        
+##  [5] &quot;Export.Start.Trial.Time..ms.&quot;     &quot;Export.End.Trial.Time..ms.&quot;      
+##  [7] &quot;Participant&quot;                      &quot;Color&quot;                           
+##  [9] &quot;Tracking.Ratio....&quot;               &quot;Category.Group&quot;                  
+## [11] &quot;Category.Binocular&quot;               &quot;Index.Binocular&quot;                 
+## [13] &quot;Pupil.Diameter.Right..mm.&quot;        &quot;Point.of.Regard.Binocular.X..px.&quot;
+## [15] &quot;Point.of.Regard.Binocular.Y..px.&quot; &quot;Point.of.Regard.Right.X..px.&quot;    
+## [17] &quot;Point.of.Regard.Right.Y..px.&quot;     &quot;AOI.Name.Binocular&quot;              
+## [19] &quot;Gaze.Vector.Right.X&quot;              &quot;Gaze.Vector.Right.Y&quot;             
+## [21] &quot;Gaze.Vector.Right.Z&quot;              &quot;Video.Time..h.m.s.ms.&quot;           
+## [23] &quot;Annotation.Name&quot;                  &quot;Annotation.Description&quot;          
+## [25] &quot;Annotation.Tags&quot;                  &quot;Mouse.Position.X..px.&quot;           
+## [27] &quot;Mouse.Position.Y..px.&quot;            &quot;Scroll.Direction.X&quot;              
+## [29] &quot;Scroll.Direction.Y&quot;               &quot;Content&quot;</code></pre>
+<p>A primeira coluna se traz os “RecordingTime..ms.” Para saber a taxa de amostragem, precisamos avaliar a diferença entre elementos. Entre um MILISEGUNDO e outro, temos um intervalo de sinais coletados.</p>
+<pre class="r"><code>#Tomando os 10 primeiros números
+dados[1:10,1]</code></pre>
+<pre><code>##  [1] 221104.5 221137.8 221170.9 221204.4 221237.5 221270.8 221304.0
+##  [8] 221337.5 221370.7 221403.9</code></pre>
+<pre><code>##    [1] 33.3 33.1 33.5 33.1 33.3 33.2 33.5 33.2 33.2 33.3 33.2 33.3 33.4
+##   [14] 33.2 33.3 33.2 33.4 33.3 33.1 33.3 33.3 33.3 33.5 33.0 33.4 33.2
+##   [27] 33.4 33.2 33.1 33.3 33.4 33.4 33.1 33.2 33.5 33.1 33.4 33.2 33.2
+##   [40] 33.4 33.2 33.3 33.3 33.1 33.4 33.2 33.3 33.3 33.4 33.1 33.3 33.4
+##   [53] 33.2 33.3 33.1 33.4 33.4 33.1 33.3 33.2 33.3 33.5 33.1 33.4 33.0
+##   [66] 33.5 33.5 32.9 33.3 33.3 33.4 33.2 33.2 33.3 33.5 33.2 33.2 33.3
+##   [79] 33.2 33.3 33.4 33.2 33.2 33.3 33.2 33.3 33.3 33.4 33.1 33.3 33.3
+##   [92] 33.3 33.2 33.2 33.3 33.4 33.2 33.3 33.2 33.3 33.4 33.3 33.1 33.3
+##  [105] 33.3 33.4 33.3 33.1 33.2 33.4 33.3 33.3 33.2 33.4 33.2 33.2 33.4
+##  [118] 33.1 33.5 33.2 33.2 33.2 33.4 33.1 33.5 33.3 33.2 33.2 33.4 33.3
+##  [131] 33.2 33.3 33.1 33.3 33.4 33.3 33.1 33.3 33.4 33.3 33.1 33.3 33.3
+##  [144] 33.2 33.5 33.1 33.3 33.2 33.3 33.3 33.3 33.2 33.4 33.2 33.4 33.3
+##  [157] 33.2 33.3 33.2 33.3 33.2 33.2 33.4 33.2 33.5 33.3 33.1 33.2 33.3
+##  [170] 33.4 33.2 33.2 33.2 33.3 33.5 33.1 33.2 33.3 33.4 33.3 33.2 33.4
+##  [183] 33.1 33.4 33.2 33.2 33.3 33.3 33.4 33.3 33.2 33.3 33.1 33.4 33.4
+##  [196] 33.1 33.2 33.4 33.4 33.2 33.3 33.2 33.2 33.4 33.2 33.3 33.2 33.2
+##  [209] 33.4 33.4 33.2 33.1 33.3 33.5 33.2 33.3 33.1 33.2 33.6 33.1 33.2
+##  [222] 33.3 33.4 33.3 33.3 33.1 33.5 33.2 33.2 33.3 33.3 33.2 33.4 33.1
+##  [235] 33.4 33.1 33.4 33.3 33.3 33.3 33.4 33.0 33.4 33.3 33.3 33.2 33.1
+##  [248] 33.4 33.3 33.2 33.3 33.3 33.3 34.2 32.3 33.2 33.3 33.4 33.3 33.3
+##  [261] 33.1 33.4 33.3 33.3 33.2 33.2 33.5 33.1 33.2 33.4 33.1 33.2 33.5
+##  [274] 33.3 33.1 33.5 33.0 33.4 33.3 33.3 33.1 33.3 33.3 33.4 33.2 33.3
+##  [287] 33.1 33.4 33.4 33.2 33.3 33.3 33.3 33.3 33.2 33.1 33.5 33.3 33.2
+##  [300] 33.3 33.1 33.5 33.2 33.3 33.1 33.4 33.2 33.3 33.2 33.4 33.2 33.4
+##  [313] 33.1 33.3 33.3 33.3 33.3 33.3 33.3 33.2 33.2 33.4 33.3 33.2 33.3
+##  [326] 33.1 33.5 33.3 33.1 33.3 33.2 33.6 33.2 33.2 33.1 33.4 33.5 33.1
+##  [339] 33.2 33.3 33.2 33.4 33.2 33.4 33.1 33.3 33.3 33.4 33.1 33.3 33.3
+##  [352] 33.3 33.2 33.3 33.3 33.3 33.2 33.4 33.3 33.3 33.2 33.2 33.4 33.1
+##  [365] 33.3 33.3 33.3 33.2 33.4 33.3 33.3 33.2 33.3 33.1 33.3 33.4 33.2
+##  [378] 33.2 33.4 33.2 33.3 33.3 33.3 33.2 33.2 33.5 33.2 33.3 33.2 33.2
+##  [391] 33.5 33.1 33.3 33.3 33.2 33.3 33.4 33.3 33.1 33.4 33.3 33.2 33.3
+##  [404] 33.1 33.6 33.0 33.4 33.3 33.2 33.3 33.4 33.1 33.4 33.2 33.3 33.3
+##  [417] 33.1 33.4 33.2 33.4 33.3 33.1 33.3 33.2 33.4 33.3 33.3 33.2 33.3
+##  [430] 33.3 33.2 33.3 33.3 33.2 33.3 33.3 33.3 33.2 33.2 33.5 33.1 33.9
+##  [443] 32.6 33.3 33.3 33.4 33.1 33.4 33.1 33.5 33.1 33.6 33.0 33.3 33.3
+##  [456] 33.2 33.2 33.5 33.3 33.2 33.4 33.0 33.4 33.2 33.4 33.3 33.2 33.2
+##  [469] 33.5 33.1 33.2 33.4 33.2 33.4 33.1 33.4 33.2 33.3 33.3 33.3 33.2
+##  [482] 33.3 33.3 33.3 33.2 33.3 33.2 33.3 33.4 33.2 33.3 33.2 33.3 33.4
+##  [495] 33.1 33.4 33.1 33.3 33.3 33.3 33.4 33.2 33.2 33.4 33.2 33.2 33.2
+##  [508] 33.4 33.4 33.1 33.2 33.3 33.3 33.3 33.5 33.0 33.4 33.3 33.2 33.2
+##  [521] 33.4 33.2 33.5 33.0 33.4 33.1 33.4 33.4 33.2 33.3 33.1 33.3 33.5
+##  [534] 33.1 33.3 33.3 33.4 33.1 33.2 33.3 33.3 33.2 33.5 33.2 33.2 33.3
+##  [547] 33.3 33.4 33.2 33.1 33.4 33.2 33.4 33.3 33.1 33.4 33.2 33.4 33.1
+##  [560] 33.3 33.3 33.3 33.4 33.2 33.3 33.2 33.3 33.3 33.3 33.1 33.4 33.2
+##  [573] 33.3 33.3 33.2 33.3 33.3 33.3 33.2 33.3 33.3 33.4 33.2 33.2 33.2
+##  [586] 33.3 33.3 33.4 33.3 33.3 33.1 33.3 33.3 33.2 33.3 33.3 33.4 33.1
+##  [599] 33.3 33.3 33.2 33.4 33.3 33.1 33.3 33.2 33.5 33.2 33.3 33.3 33.2
+##  [612] 33.3 33.2 33.4 33.2 33.3 33.4 33.2 33.1 33.3 33.3 33.5 33.2 33.1
+##  [625] 33.4 33.4 33.1 33.3 33.2 33.3 33.3 33.3 33.2 33.3 33.3 33.4 33.1
+##  [638] 33.2 33.3 33.3 33.4 33.3 33.1 33.4 33.1 33.4 33.4 33.1 33.3 33.4
+##  [651] 33.2 33.2 33.3 33.3 33.3 33.4 33.2 33.3 33.1 33.2 33.4 33.4 33.2
+##  [664] 33.2 33.2 33.5 33.2 33.2 33.2 33.3 33.3 33.3 33.2 33.3 33.3 33.4
+##  [677] 33.3 33.1 33.3 33.4 33.3 33.2 33.3 33.1 33.4 33.4 33.1 33.4 33.2
+##  [690] 33.4 33.2 33.2 33.2 33.2 33.5 33.3 33.2 33.2 33.2 33.4 33.3 33.2
+##  [703] 33.3 33.2 33.5 33.2 33.3 33.1 33.3 33.4 33.3 33.1 33.3 33.3 33.4
+##  [716] 33.2 33.2 33.4 33.1 33.4 33.3 33.3 33.1 33.2 33.6 33.1 33.2 33.4
+##  [729] 33.2 33.4 33.2 33.3 33.1 33.6 33.1 33.2 33.4 33.1 33.5 33.2 33.2
+##  [742] 33.4 33.2 33.4 33.2 33.3 33.1 33.2 33.5 33.2 33.3 33.2 33.2 33.5
+##  [755] 33.3 33.1 33.3 33.2 33.5 33.1 33.2 33.3 33.3 33.5 33.0 33.4 33.2
+##  [768] 33.3 33.2 33.4 33.2 33.2 33.4 33.3 33.3 33.3 33.1 33.4 33.3 33.3
+##  [781] 33.2 33.1 33.3 33.5 33.3 33.2 33.1 33.3 33.4 33.3 33.3 33.2 33.3
+##  [794] 33.3 33.3 33.3 33.1 33.5 33.1 33.2 33.3 33.3 33.5 33.1 33.3 33.2
+##  [807] 33.2 33.4 33.3 33.3 33.2 33.2 33.4 33.3 33.2 33.3 33.1 33.5 33.3
+##  [820] 33.2 33.3 33.1 33.5 33.2 33.3 33.1 33.3 33.3 33.4 33.3 33.2 33.1
+##  [833] 33.4 33.3 33.2 33.3 33.3 33.4 33.2 33.2 33.4 33.2 33.4 33.2 33.3
+##  [846] 33.2 33.1 33.4 33.4 33.2 33.3 33.4 33.1 33.3 33.4 33.1 33.3 33.4
+##  [859] 33.2 33.1 33.3 33.4 33.2 33.2 33.3 33.2 33.5 33.3 33.2 33.2 33.4
+##  [872] 33.3 33.1 33.4 33.1 33.3 33.5 33.2 33.3 33.2 33.2 33.3 33.4 33.2
+##  [885] 33.2 33.3 33.3 33.3 33.3 33.1 33.5 33.2 33.4 33.2 33.2 33.2 33.3
+##  [898] 33.3 33.3 33.2 33.2 33.4 33.5 33.2 33.1 33.4 33.0 33.5 33.3 33.2
+##  [911] 33.3 33.4 33.2 33.1 33.4 33.3 33.2 33.4 33.2 33.3 33.2 33.3 33.4
+##  [924] 33.2 33.2 33.4 33.3 33.1 33.2 33.3 33.4 33.3 33.2 33.4 33.0 33.4
+##  [937] 33.4 33.2 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.2 33.3 33.3
+##  [950] 33.2 33.5 33.2 33.2 33.2 33.4 33.4 33.2 33.2 33.3 33.5 33.0 33.2
+##  [963] 33.3 33.3 33.3 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.4 33.1 33.3
+##  [976] 33.3 33.3 33.3 33.2 33.4 33.3 33.2 33.1 33.4 33.3 33.2 33.7 32.9
+##  [989] 33.1 33.6 33.2 33.2 33.1 33.3 33.4 33.2 33.3 33.3 33.3 33.3 33.2
+## [1002] 33.4 33.3 33.1 33.4 33.3 33.1 33.3 33.3 33.3 33.3 33.3 33.1 33.5
+## [1015] 33.3 33.1 33.4 33.1 33.5 33.2 33.4 33.1 33.2 33.3 33.4 33.3 33.1
+## [1028] 33.3 33.4 33.4 33.1 33.3 33.2 33.3 33.2 33.4 33.2 33.2 33.5 33.1
+## [1041] 33.4 33.1 33.2 33.5 33.1 33.3 33.4 33.2 33.4 33.1 33.3 33.3 33.2
+## [1054] 33.3 33.4 33.3 33.1 33.2 33.4 33.3 33.2 33.3 33.2 33.4 33.3 33.2
+## [1067] 33.3 33.3 33.4 33.2 33.1 33.4 33.3 33.4 33.1 33.2 33.3 33.3 33.4
+## [1080] 33.1 33.4 33.1 33.5 33.3 33.1 33.3 33.2 33.4 33.2 33.3 33.2 33.3
+## [1093] 33.5 33.2 33.3 33.2 33.2 33.3 33.3 33.4 33.2 33.2 33.4 33.1 33.3
+## [1106] 33.4 33.1 33.4 33.3 33.1 33.3 33.3 33.3 33.4 33.2 33.3 33.2 33.3
+## [1119] 33.3 33.2 33.3 33.2 33.3 33.3 33.2 33.4 33.2 33.4 33.2 33.4 33.2
+## [1132] 33.2 33.4 33.3 33.1 33.2 33.5 33.1 33.3 33.4 33.2 33.3 33.3 33.6
+## [1145] 32.8 33.2 33.6 33.4 33.0 33.2 33.2 33.5 33.1 33.4 33.1 33.3 33.7
+## [1158] 33.0 33.2 33.3 33.3 33.3 33.2 33.3 33.2 33.2 33.5 33.1 33.4 33.1
+## [1171] 33.3 33.5 33.2 33.2 33.3 33.3 33.3 33.3 33.2 33.3 33.3 33.3 33.2
+## [1184] 33.2 33.2 33.6 33.2 33.2 33.2 33.3 33.3 33.3 33.3 33.3 33.1 33.5
+## [1197] 33.2 33.1 33.3 33.4 33.5 33.0 33.3 33.2 33.3 33.4 33.2 33.3 33.2
+## [1210] 33.3 33.3 33.2 33.3 33.2 33.3 33.4 33.2 33.2 33.3 33.2 33.4 33.2
+## [1223] 33.4 33.1 33.4 33.4 33.2 33.1 33.4 33.2 33.3 33.4 33.1 33.3 33.4
+## [1236] 33.3 33.6 32.8 33.3 33.4 33.3 33.2 33.2 33.3 33.4 33.3 33.2 33.2
+## [1249] 33.2 33.5 33.2 33.1 33.3 33.2 33.5 33.3 33.1 33.5 33.0 33.5 33.2
+## [1262] 33.3 33.2 33.1 33.6 33.2 33.3 33.1 33.5 33.1 33.3 33.3 33.1 33.5
+## [1275] 33.3 33.3 33.2 33.1 33.4 33.4 33.1 33.6 32.9 33.2 33.4 33.2 33.3
+## [1288] 33.3 33.3 33.4 33.1 33.5 33.2 33.2 33.3 33.3 33.2 33.2 33.3 33.4
+## [1301] 33.5 33.0 33.2 33.4 33.3 33.1 33.4 33.2 33.4 33.1 33.4 33.2 33.2
+## [1314] 33.4 33.4 33.2 33.2 33.1 33.5 33.2 33.3 33.3 33.1 33.4 33.4 33.1
+## [1327] 33.2 33.3 33.5 33.2 33.3 33.3 33.1 33.3 33.4 33.3 33.3 33.0 33.5
+## [1340] 33.1 33.3 33.3 33.2 33.5 33.2 33.4 33.1 33.3 33.3 33.3 33.1 33.3
+## [1353] 33.4 33.3 33.3 33.1 33.5 33.1 33.3 33.3 33.1 33.3 33.8 33.0 33.2
+## [1366] 33.1 33.3 33.5 33.1 33.4 33.2 33.2 33.3 33.4 33.3 33.1 33.2 33.6
+## [1379] 33.0 33.4 33.2 33.2 33.4 33.2 33.4 33.2 33.4 33.1 33.4 33.3 33.3
+## [1392] 33.0 33.5 33.2 33.3 33.2 33.2 33.5 33.1 33.3 33.2 33.5 33.2 33.2
+## [1405] 33.3 33.2 33.2 33.4 33.3 33.3 33.2 33.3 33.3 33.2 33.3 33.2 33.5
+## [1418] 33.2 33.3 33.2 33.3 33.2 33.4 33.3 33.2 33.1 33.4 33.3 33.3 33.2
+## [1431] 33.2 33.5 33.3 33.1 33.3 33.2 33.5 33.2 33.3 33.2 33.2 33.3 33.4
+## [1444] 33.2 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.4 33.2 33.2 33.2
+## [1457] 33.4 33.3 33.2 33.3 33.2 33.6 33.0 33.3 33.2 33.3 33.3 33.3 33.3
+## [1470] 33.2 33.3 33.3 33.3 33.1 33.4 33.3 33.3 33.2 33.3 33.1 33.4 33.4
+## [1483] 33.2 33.3 33.1 33.4 33.2 33.3 33.3 33.2 33.3 33.4 33.2 33.2 33.3
+## [1496] 33.4 33.2 33.3 33.2 33.2 33.4 33.2 33.4 33.3 33.1 33.5 33.2 33.2
+## [1509] 33.3 33.2 33.3 33.2 33.5 33.1 33.2 33.4 33.4 33.2 33.2 33.5 33.0
+## [1522] 33.4 33.3 33.1 33.5 33.2 33.3 33.2 33.2 33.3 33.3 33.3 33.3 33.2
+## [1535] 33.5 33.1 33.2 33.4 33.2 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.2
+## [1548] 33.4 33.1 33.4 33.4 33.2 33.3 33.5 33.0 33.2 33.3 33.3 33.3 33.4
+## [1561] 33.2 33.2 33.3 33.3 33.3 33.2 33.2 33.3 33.2 33.5 33.4 33.0 33.4
+## [1574] 33.1 33.5 33.2 33.2 33.2 33.4 33.2 33.3 33.2 33.3 33.4 33.3 33.2
+## [1587] 33.3 33.4 33.1 33.2 33.4 33.3 33.2 33.3 33.2 33.4 33.1 33.3 33.4
+## [1600] 33.2 33.3 33.2 33.4 33.2 33.4 33.1 33.2 33.4 33.3 33.3 33.1 33.4
+## [1613] 33.3 33.2 33.3 33.2 33.4 33.3 33.3 33.2 33.2 33.4 33.2 33.4 33.2
+## [1626] 33.3 33.1 33.4 33.2 33.3 33.3 33.3 33.4 33.1 33.2 33.4 33.2 33.5
+## [1639] 33.2 33.2 33.3 33.1 33.4 33.4 33.3 33.1 33.3 33.4 33.1 33.3 33.3
+## [1652] 33.1 33.5 33.3 33.1 33.4 33.2 33.4 33.2 33.2 33.3 33.2 33.5 33.1
+## [1665] 33.3 33.3 33.2 33.3 33.4 33.2 33.3 33.2 33.4 33.1 33.3 33.3 33.2
+## [1678] 33.4 33.2 33.4 33.1 33.4 33.3 33.2 33.3 33.3 33.4 33.2 33.1 33.3
+## [1691] 33.3 33.4 33.3 33.1 33.4 33.2 33.3 33.4 33.2 33.2 33.3 33.4 33.1
+## [1704] 33.3 33.3 33.3 33.2 33.2 33.4 33.2 33.2 33.5 33.1 33.3 33.4 33.1
+## [1717] 33.5 33.2 33.3 33.1 33.4 33.3 33.3 33.1 33.3 33.3 33.4 33.2 33.2
+## [1730] 33.2 33.3 33.4 33.2 33.3 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.2
+## [1743] 33.3 33.3 33.2 33.3 33.4 33.2 33.4 33.0 33.3 33.4 33.2 33.2 33.3
+## [1756] 33.4 33.2 33.4 33.2 33.1 33.4 33.4 33.1 33.3 33.4 33.3 33.3 33.1
+## [1769] 33.3 33.2 33.5 33.1 33.3 33.2 33.3 33.6 32.9 33.3 33.4 33.2 33.4
+## [1782] 33.2 33.2 33.4 33.2 33.4 33.2 33.2 33.2 33.2 33.5 33.2 33.3 33.1
+## [1795] 33.4 33.4 33.1 33.3 33.2 33.5 33.2 33.3 33.1 33.3 33.5 33.2 33.1
+## [1808] 33.3 33.4 33.4 33.1 33.2 33.4 33.2 33.4 33.2 33.2 33.4 33.2 33.4
+## [1821] 33.1 33.3 33.3 33.1 33.5 33.3 33.2 33.3 33.2 33.4 33.3 33.1 33.3
+## [1834] 33.2 33.5 33.2 33.2 33.3 33.1 33.4 33.4 33.1 33.3 33.3 33.5 33.2
+## [1847] 33.2 33.2 33.2 33.3 33.4 33.2 33.2 33.4 33.4 33.1 33.4 33.3 33.3
+## [1860] 33.2 33.3 33.1 33.4 33.2 33.3 33.4 33.1 33.3 33.3 33.2 33.3 33.5
+## [1873] 33.1 33.4 33.2 33.2 33.2 33.3 33.3 33.3 33.4 33.1 33.3 33.3 33.3
+## [1886] 33.2 33.3 33.3 33.6 32.9 33.3 33.2 33.4 33.3 33.2 33.2 33.3 33.7
+## [1899] 32.9 33.4 33.2 33.2 33.2 33.4 33.2 33.3 33.3 33.2 33.4 33.3 33.3
+## [1912] 33.1 33.3 33.3 33.4 33.6 32.8 33.3 33.5 33.1 33.3 33.2 33.4 33.2
+## [1925] 33.2 33.2 33.2 33.6 33.2 33.2 33.2 33.5 33.3 33.1 33.2 33.3 33.4
+## [1938] 33.3 33.1 33.3 33.4 33.1 33.5 33.1 33.4 33.4 32.9 33.4 33.3 33.3
+## [1951] 33.3 33.1 33.4 33.3 33.3 33.2 33.2 33.5 33.4 33.0 33.3 33.1 33.5
+## [1964] 33.5 32.9 33.3 33.3 33.3 33.3 33.3 33.3 33.3 33.1 33.3 33.3 33.3
+## [1977] 33.4 33.1 33.3 33.3 33.2 33.3 33.4 33.1 33.4 33.2 33.3 33.3 33.4
+## [1990] 33.1 33.2 33.4 33.2 33.5 33.0 33.2 33.7 33.0 33.2 33.3 33.2 33.8
+## [2003] 33.0 33.2 33.3 33.1 33.8 32.9 33.2 33.5 33.1 33.2 33.3 33.2 33.4
+## [2016] 33.5 33.0 33.4 33.2 33.1 33.6 33.2 33.1 33.4 33.1 33.4 33.3 33.3
+## [2029] 33.3 33.2 33.2 33.3 33.2 33.3 33.3 33.2 33.5 33.1 33.4 33.1 33.6
+## [2042] 33.0 33.4 33.2 33.3 33.6 33.3 32.9 33.3 33.3 33.3 33.2 33.2 33.3
+## [2055] 33.2 33.5 33.1 33.3 33.3 33.3 33.4 33.3 33.1 33.3 33.1 33.4 33.4
+## [2068] 33.1 33.4 33.1 33.4 33.4 33.1 33.3 33.4 33.3 33.4 33.0 33.2 33.4
+## [2081] 33.5 33.0 33.4 33.2 33.3 33.2 33.3 33.2 33.3 33.6 33.0 33.3 33.3
+## [2094] 33.2 33.3 33.2 33.3 33.3 33.3 33.3 33.2 33.4 33.1 33.3 33.3 33.4
+## [2107] 33.2 33.2 33.3 33.4 33.2 33.3 33.1 33.4 33.2 33.5 33.1 33.3 33.2
+## [2120] 33.4 33.2 33.3 33.3 33.2 33.3 33.4 33.1 33.2 33.3 33.4 33.3 33.2
+## [2133] 33.4 33.3 33.2 33.1 33.5 33.2 33.4 33.1 33.3 33.2 33.4 33.3 33.1
+## [2146] 33.4 33.3 33.2 33.3 33.3 33.3 33.3 33.1 33.5 33.2 33.3 33.2 33.2
+## [2159] 33.3 33.3 33.2 33.2 33.3 33.4 33.3 33.2 33.4 33.2 33.4 33.2 33.3
+## [2172] 33.2 33.2 33.3 33.2 33.4 33.3 33.2 33.4 33.1 33.3 33.3 33.3 33.4
+## [2185] 33.2 33.7 32.8 33.3 33.2 33.5 33.1 33.2 33.3 33.3 33.2 33.4 33.2
+## [2198] 33.4 33.5 33.0 33.1 33.4 33.4 33.2 33.2 33.3 33.2 33.3 33.4 33.2
+## [2211] 33.3 33.2 33.4 33.1 33.4 33.2 33.3 33.3 33.3 33.3 33.2 33.3 33.3
+## [2224] 33.3 33.3 33.1 33.2 33.4 33.2 33.3 33.3 33.3 33.4 33.2 33.3 33.2
+## [2237] 33.3 33.3 33.3 33.1 33.3 33.3 33.3 33.4 33.1 33.3 33.3 33.3 33.3
+## [2250] 33.2 33.4 33.3 33.4 33.0 33.4 33.1 33.5 33.1 33.3 33.3 33.3 33.3
+## [2263] 33.2 33.2 33.4 33.2 33.4 33.1 33.4 33.2 33.3 33.3 33.3 33.3 33.1
+## [2276] 33.3 33.5 33.3 33.1 33.3 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.1
+## [2289] 33.3 33.2 33.3 33.3 33.4 33.2 33.3 33.4 33.2 33.5 33.1 33.1 33.3
+## [2302] 33.2 33.4 33.2 33.3 33.4 33.3 33.3 33.0 33.4 33.4 33.1 33.3 33.2
+## [2315] 33.3 33.4 33.3 33.1 33.3 33.2 33.6 33.2 33.2 33.1 33.2 33.6 33.2
+## [2328] 33.1 33.3 33.3 33.4 33.3 33.1 33.4 33.2 33.4 33.2 33.2 33.3 33.3
+## [2341] 33.4 33.2 33.2 33.2 33.3 33.4 33.3 33.2 33.1 33.3 33.4 33.3 33.3
+## [2354] 33.1 33.5 33.1 33.3 33.3 33.2 33.4 33.3 33.3 33.1 33.3 33.5 33.2
+## [2367] 33.2 33.3 33.1 33.5 33.2 33.3 33.3 33.5 33.1 33.1 33.3 33.2 33.4
+## [2380] 33.4 33.2 33.3 33.1 33.3 33.4 33.3 33.3 33.2 33.1 33.5 33.2 33.3
+## [2393] 33.1 33.4 33.3 33.3 33.2 33.3 33.2 33.3 33.3 33.3 33.1 33.3 33.4
+## [2406] 33.3 33.2 33.2 33.5 33.2 33.2 33.4 33.2 33.3 33.3 33.3 33.1 33.3
+## [2419] 33.5 33.2 33.1 33.3 33.3 33.5 33.1 33.3 33.3 33.3 33.1 33.4 33.2
+## [2432] 33.3 33.1 33.6 33.1 33.3 33.3 33.1 33.5 33.3 33.2 33.2 33.2 33.4
+## [2445] 33.4 33.3 33.0 33.6 33.2 33.1 33.2 33.3 33.2 33.4 33.2 33.4 33.2
+## [2458] 33.2 33.5 33.2 33.2 33.2 33.3 33.3 33.4 33.2 33.3 33.2 33.4 33.3
+## [2471] 33.2 33.2 33.3 33.3 33.3 33.2 33.2 33.4 33.4 33.1 33.3 33.3 33.3
+## [2484] 33.3 33.3 33.1 33.2 33.4 33.3 33.4 33.1 33.2 33.4 33.3 33.3 33.2
+## [2497] 33.2 33.5 33.2 33.3 33.1 33.3 33.3 33.4 33.4 33.0 33.3 33.3 33.4
+## [2510] 33.2 33.3 33.1 33.4 33.3 33.3 33.2 33.1 33.4 33.2 33.3 33.3 33.4
+## [2523] 33.3 33.3 33.3 33.1 33.4 33.3 33.2 33.1 33.3 33.4 33.3 33.3 33.2
+## [2536] 33.3 33.2 33.3 33.3 33.3 33.2 33.4 33.3 33.2 33.2 33.2 33.5 33.3
+## [2549] 33.1 33.3 33.2 33.6 33.0 33.4 33.1 33.3 33.3 33.4 33.2 33.2 33.3
+## [2562] 33.5 33.2 33.1 33.3 33.2 33.3 33.4 33.3 33.2 33.1 33.4 33.4 33.2
+## [2575] 33.2 33.4 33.2 33.2 33.3 33.2 33.4 33.3 33.2 33.2 33.4 33.4 33.2
+## [2588] 33.1 33.5 33.2 33.2 33.3 33.3 33.3 33.1 33.4 33.4 33.2 33.2 33.2
+## [2601] 33.5 33.2 33.3 33.2 33.2 33.4 33.2 33.3 33.3 33.2 33.4 33.3 33.1
+## [2614] 33.4 33.1 33.4 33.3 33.3 33.2 33.3 33.4 33.2 33.2 33.3 33.3 33.4
+## [2627] 33.1 33.2 33.3 33.4 33.2 33.2 33.3 33.4 33.2 33.2 33.4 33.3 33.1
+## [2640] 33.4 33.2 33.4 33.2 33.3 33.2 33.3 33.4 33.2 33.2 33.4 33.3 33.1
+## [2653] 33.2 33.4 33.3 33.2 33.4 33.1 33.2 33.6 33.2 33.3 33.2 33.2 33.3
+## [2666] 33.3 33.3 33.2 33.3 33.3 33.3 33.3 33.1 33.3 33.3 33.4 33.1 33.6
+## [2679] 32.9 33.6 33.1 33.4 33.1 33.4 33.2 33.3 33.3 33.2 33.4 33.3 33.1
+## [2692] 33.2 33.4 33.4 33.2 33.3 33.3 33.1 33.4 33.5 32.9 33.3 33.3 33.3
+## [2705] 33.3 33.2 33.2 33.4 33.3 33.2 33.4 33.2 33.1 33.4 33.3 33.2 33.4
+## [2718] 33.2 33.4 33.2 33.3 33.2 33.3 33.4 33.2 33.1 33.3 33.3 33.4 33.4
+## [2731] 33.2 33.2 33.2 33.3 33.3 33.3 33.2 33.3 33.3 33.2 33.4 33.2 33.3
+## [2744] 33.2 33.3 33.4 33.2 33.3 33.3 33.3 33.1 33.3 33.3 33.2 33.3 33.3
+## [2757] 33.3 33.4 33.2 33.2 33.4 33.1 33.4 33.2 33.3 33.2 33.3 33.5 33.1
+## [2770] 33.3 33.1 33.4 33.4 33.2 33.3 33.1 33.3 33.4 33.2 33.2 33.3 33.3
+## [2783] 33.4 33.1 33.3 33.3 33.3 33.3 33.2 33.3 33.5 33.1 33.3 33.2 33.4
+## [2796] 33.2 33.4 33.2 33.3 33.2 33.3 33.2 33.4 33.3 33.2 33.2 33.4 33.2
+## [2809] 33.2 33.3 33.2 33.4 33.2 33.5 33.0 33.5 33.4 33.0 33.2 33.3 33.2
+## [2822] 33.5 33.2 33.3 33.3 33.2 33.3 33.3 33.2 33.3 33.2 33.4 33.3 33.1
+## [2835] 33.4 33.2 33.4 33.4 33.2 33.0 33.3 33.4 33.4 33.1 33.3 33.2 33.4
+## [2848] 33.3 33.3 33.2 33.3 33.3 33.3 33.1 33.3 33.4 33.3 33.3 33.1 33.4
+## [2861] 33.3 33.3 33.2 33.2 33.2 33.5 33.2 33.2 33.3 33.3 33.2 33.3 33.2
+## [2874] 33.3 33.3 33.3 33.3 33.3 33.2 33.2 33.5 33.2 33.3 33.2 33.3 33.3
+## [2887] 33.2 33.5 33.1 33.2 33.5 33.1 33.3 33.3 33.1 33.5 33.1 33.3 33.2
+## [2900] 33.4 33.3 33.2 33.2 33.4 33.1 33.4 33.3 33.2 33.3 33.3 33.3 33.4
+## [2913] 33.2 33.2 33.3 33.3 33.4 33.2 33.1 33.5 33.2 33.2 33.2 33.4 33.3
+## [2926] 33.2 33.3 33.2 33.2 33.5 33.4 33.1 33.2 33.3 33.4 33.2 33.2 33.3
+## [2939] 33.1 33.4 33.3 33.2 33.3 33.2 33.5 33.3 33.1 33.3 33.3 33.4 33.2
+## [2952] 33.2 33.2 33.3 33.3 33.3 33.2 33.4 33.2 33.5 33.2 33.1 33.5 33.2
+## [2965] 33.3 33.2 33.2 33.2 33.4 33.4 33.2 33.1 33.3 33.6 33.1 33.3 33.1
+## [2978] 33.3 33.6 33.1 33.2 33.2 33.3 33.5 33.1 33.2 33.3 33.2 33.3 33.3
+## [2991] 33.4 33.2 33.2 33.4 33.3 33.2 33.3 33.2 33.3 33.4 33.2 33.2 33.2
+## [3004] 33.3 33.4 33.3 33.2 33.1 33.5 33.3 33.2 33.2 33.2 33.5 33.1 33.3
+## [3017] 33.2 33.6 33.2 33.2 33.2 33.2 33.4 33.3 33.3 33.2 33.3 33.5 33.0
+## [3030] 33.2 33.4 33.1 33.5 33.2 33.3 33.3 33.1 33.4 33.2 33.4 33.2 33.2
+## [3043] 33.3 33.4 33.1 33.4 33.1 33.6 33.2 33.2 33.2 33.3 33.3 33.3 33.3
+## [3056] 33.2 33.2 33.3 33.4 33.2 33.2 33.3 33.4 33.2 33.2 33.3 33.2 33.4
+## [3069] 33.2 33.3 33.3 33.4 33.3 33.2 33.3 33.5 33.1 33.1 33.4 33.3 33.2
+## [3082] 33.4 33.1 33.4 33.2 33.1 33.7 33.1 33.1 33.2 33.4 33.4 33.2 33.2
+## [3095] 33.3 33.3 33.2 33.3 33.3 33.2 33.2 33.4 33.4 33.1 33.3 33.3 33.3
+## [3108] 33.2 33.2 33.3 33.3 33.4 33.2 33.3 33.3 33.4 33.1 33.3 33.3 33.2
+## [3121] 33.3 33.3 33.4 33.1 33.3 33.3 33.3 33.2 33.4 33.1 33.4 33.2 33.2
+## [3134] 33.4 33.2 33.3 33.4 33.2 33.2 33.3 33.4 33.2 33.2 33.4 33.4 33.1
+## [3147] 33.2 33.4 33.2 33.3 33.3 33.2 33.3 33.3 33.1 33.5 33.1 33.4 33.2
+## [3160] 33.3 33.2 33.3 33.3 33.2 33.3 33.3 33.3 33.3 33.3 33.2 33.3 33.2
+## [3173] 33.4 33.2 33.2 33.5 33.1 33.3 33.3 33.4 33.2 33.2 33.3 33.3 33.3
+## [3186] 33.2 33.3 33.2 33.3 33.4 33.2 33.2 33.3 33.3 33.4 33.3 33.1 33.2
+## [3199] 33.3 33.4 33.3 33.2 33.2 33.3 33.3 33.3 33.2 33.2 33.4 33.5 33.0
+## [3212] 33.3 33.3 33.2 33.6 33.0 33.2 33.3 33.4 33.2 33.4 33.1 33.4 33.2
+## [3225] 33.3 33.4 33.1 33.3 33.2 33.4 33.3 33.2 33.3 33.2 33.4 33.3 33.2
+## [3238] 33.3 33.3 33.3 33.1 33.4 33.2 33.4 33.2 33.2 33.3 33.3 33.4 33.2
+## [3251] 33.3 33.2 33.2 33.5 33.2 33.1 33.4 33.2 33.4 33.2 33.2 33.3 33.2
+## [3264] 33.4 33.3 33.2 33.3 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.2
+## [3277] 33.3 33.2 33.6 33.4 33.0 33.2 33.3 33.3 33.2 33.3 33.2 33.4 33.2
+## [3290] 33.2 33.4 33.2 33.4 33.1 33.3 33.3 33.2 33.5 33.2 33.3 33.3 33.1
+## [3303] 33.2 33.5 33.2 33.5 32.9 33.5 33.3 33.1 33.4 33.2 33.4 33.3 33.1
+## [3316] 33.2 33.3 33.5 33.1 33.3 33.2 33.3 33.5 33.1 33.2 33.2 33.4 33.4
+## [3329] 33.3 33.2 33.1 33.5 33.2 33.3 33.3 33.2 33.2 33.4 33.3 33.1 33.3
+## [3342] 33.4 33.3 33.3 33.2 33.2 33.3 33.3 33.2 33.5 33.0 33.5 33.3 33.3
+## [3355] 33.2 33.1 33.5 33.1 33.3 33.2 33.3 33.5 33.2 33.1 33.6 32.9 33.5
+## [3368] 33.3 33.2 33.1 33.5 33.2 33.2 33.4 33.2 33.3 33.4 33.2 33.2 33.2
+## [3381] 33.3 33.4 33.2 33.3 33.2 33.3 33.3 33.3 33.2 33.3 33.1 33.5 33.2
+## [3394] 33.2 33.3 33.3 33.4 33.2 33.2 33.3 33.4 33.2 33.2 33.3 33.3 33.3
+## [3407] 33.3 33.3 33.2 33.2 33.4 33.3 33.3 33.3 33.0 33.5 33.2 33.3 33.2
+## [3420] 33.3 33.3 33.4 33.1 33.3 33.2 33.5 33.2 33.1 33.4 33.1 33.5 33.3
+## [3433] 33.2 33.1 33.4 33.5 33.1 33.3 33.1 33.3 33.2 33.4 33.2 33.3 33.3
+## [3446] 33.4 33.3 33.3 33.1 33.3 33.4 33.3 33.1 33.2 33.3 33.3 33.4 33.3
+## [3459] 33.1 33.3 33.4 33.2 33.3 33.2 33.4 33.2 33.4 33.1 33.2 33.5 33.3
+## [3472] 33.2 33.2 33.2 33.5 33.2 33.3 33.2 33.3 33.2 33.3 33.3 33.2 33.4
+## [3485] 33.2 33.4 33.1 33.6 33.2 33.1 33.4 33.2 33.1 33.3 33.3 33.4 33.2
+## [3498] 33.2 33.2 33.5 33.2 33.3 33.1 33.3 33.5 33.1 33.3 33.2 33.3 33.4
+## [3511] 33.3 33.2 33.3 33.4 33.2 33.2 33.3 33.3 33.3 33.2 33.2 33.3 33.3
+## [3524] 33.5 33.2 33.2 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.1 33.4 33.2
+## [3537] 33.3 33.1 33.5 33.3 33.1 33.3 33.2 33.5 33.2 33.3 33.1 33.3 33.5
+## [3550] 33.2 33.2 33.2 33.2 33.5 33.2 33.3 33.3 33.1 33.5 33.1 33.3 33.4
+## [3563] 33.2 33.2 33.3 33.2 33.5 33.0 33.4 33.3 33.3 33.4 33.2 33.3 33.2
+## [3576] 33.2 33.3 33.4 33.1 33.4 33.2 33.2 33.4 33.3 33.2 33.2 33.3 33.3
+## [3589] 33.4 33.2 33.2 33.2 33.4 33.2 33.4 33.2 33.3 33.4 33.2 33.3 33.2
+## [3602] 33.3 33.3 33.3 33.2 33.4 33.1 33.3 33.3 33.2 33.3 33.2 33.4 33.2
+## [3615] 33.5 33.1 33.1 33.4 33.3 33.3 33.2 33.2 33.5 33.3 33.1 33.2 33.5
+## [3628] 33.2 33.4 33.0 33.4 33.4 33.2 33.3 33.3 33.1 33.6 33.1 33.1 33.4
+## [3641] 33.3 33.2 33.3 33.2 33.4 33.1 33.4 33.3 33.3 33.1 33.3 33.4 33.2
+## [3654] 33.2 33.4 33.2 33.3 33.4 33.1 33.3 33.3 33.3 33.4 33.2 33.2 33.3
+## [3667] 33.3 33.2 33.3 33.3 33.2 33.4 33.2 33.2 33.4 33.4 33.1 33.4 33.2
+## [3680] 33.2 33.4 33.2 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.2 33.3 33.2
+## [3693] 33.4 33.2 33.1 33.4 33.3 33.2 33.4 33.2 33.3 33.4 33.2 33.2 33.3
+## [3706] 33.4 33.2 33.3 33.2 33.2 33.3 33.3 33.3 33.2 33.2 33.4 33.1 33.4
+## [3719] 33.3 33.4 33.2 33.2 33.4 33.1 33.2 33.4 33.4 33.2 33.1 33.3 33.4
+## [3732] 33.3 33.3 33.2 33.4 33.1 33.5 33.2 33.2 33.4 33.4 33.0 33.2 33.3
+## [3745] 33.4 33.2 33.2 33.3 33.4 33.2 33.4 33.1 33.3 33.2 33.5 33.1 33.3
+## [3758] 33.3 33.3 33.3 33.2 33.2 33.4 33.3 33.3 33.3 33.1 33.5 33.1 33.3
+## [3771] 33.2 33.4 33.3 33.2 33.3 33.3 33.4 33.1 33.1 33.4 33.3 33.3 33.2
+## [3784] 33.3 33.4 33.1 33.4 33.2 33.4 33.3 33.2 33.3 33.1 33.4 33.3 33.2
+## [3797] 33.2 33.4 33.4 33.1 33.2 33.4 33.2 33.3 33.2 33.3 33.4 33.2 33.6
+## [3810] 32.9 33.3 33.3 33.1 33.5 33.3 33.3 33.2 33.1 33.5 33.3 33.1 33.4
+## [3823] 33.1 33.4 33.4 33.1 33.2 33.3 33.5 33.1 33.2 33.3 33.4 33.3 33.3
+## [3836] 33.1 33.4 33.2 33.4 33.1 33.4 33.1 33.3 33.3 33.3 33.2 33.3 33.4
+## [3849] 33.3 33.2 33.3 33.3 33.3 33.3 33.1 33.3 33.2 33.5 33.2 33.3 33.1
+## [3862] 33.4 33.4 33.3 33.2 33.2 33.1 33.5 33.3 33.2 33.1 33.4 33.4 33.1
+## [3875] 33.3 33.2 33.4 33.3 33.3 33.3 33.4 33.0 33.3 33.3 33.2 33.4 33.2
+## [3888] 33.4 33.1 33.3 33.2 33.3 33.4 33.4 33.2 33.1 33.3 33.4 33.2 33.2
+## [3901] 33.4 33.4 33.2 33.3 33.2 33.2 33.4 33.1 33.3 33.3 33.3 33.4 33.1
+## [3914] 33.3 33.4 33.2 33.2 33.3 33.2 33.3 33.4 33.3 33.3 33.1 33.4 33.1
+## [3927] 33.5 33.2 33.3 33.2 33.2 33.4 33.2 33.5 33.1 33.1 33.6 33.1 33.4
+## [3940] 33.2 33.1 33.3 33.3 33.3 33.3 33.3 33.3 33.2 33.2 33.3 33.4 33.3
+## [3953] 33.3 33.2 33.2 33.5 33.2 33.2 33.2 33.4 33.2 33.4 33.2 33.1 33.4
+## [3966] 33.4 33.3 33.2 33.2 33.2 33.5 33.2 33.2 33.2 33.2 33.4 33.4 33.2
+## [3979] 33.2 33.2 33.4 33.3 33.3 33.2 33.2 33.5 33.2 33.1 33.3 33.2 33.5
+## [3992] 33.3 33.1 33.3 33.3 33.4 33.2 33.2 33.2 33.3 33.5 33.2 33.1 33.3
+## [4005] 33.4 33.2 33.3 33.3 33.2 33.2 33.4 33.3 33.1 33.4 33.4 33.2 33.3
+## [4018] 33.3 33.1 33.3 33.4 33.3 33.2 33.2 33.5 33.2 33.2 33.2 33.3 33.3
+## [4031] 33.3 33.3 33.2 33.2 33.4 33.3 33.2 33.2 33.2 33.5 33.2 33.3 33.2
+## [4044] 33.4 33.2 33.4 33.2 33.2 33.3 33.3 33.3 33.3 33.4 33.0 33.5 33.3
+## [4057] 33.1 33.3 33.1 33.4 33.4 33.3 33.0 33.6 33.2 33.2 33.3 33.1 33.4
+## [4070] 33.2 33.3 33.3 33.3 33.3 33.2 33.3 33.2 33.3 33.3 33.3 33.3 33.3
+## [4083] 33.2 33.3 33.4 33.1 33.2 33.3 33.4 33.3 33.3 33.2 33.2 33.3 33.3
+## [4096] 33.4 33.1 33.3 33.4 33.1 33.3 33.3 33.2 33.5 33.2 33.3 33.1 33.2
+## [4109] 33.4 33.3 33.3 33.3 33.1 33.5 33.2 33.3 33.2 33.3 33.4 33.1 33.4
+## [4122] 33.1 33.5 33.1 33.4 33.1 33.2 33.4 33.4 33.3 33.1 33.3 33.3 33.3
+## [4135] 33.3 33.2 33.2 33.5 33.3 33.2 33.2 33.3 33.3 33.2 33.4 33.2 33.2
+## [4148] 33.3 33.4 33.1 33.5 33.0 33.4 33.2 33.6 33.1 33.2 33.3 33.2 33.4
+## [4161] 33.2 33.2 33.3 33.4 33.2 33.2 33.4 33.2 33.3 33.3 33.2 33.3 33.3
+## [4174] 33.3 33.1 33.4 33.3 33.2 33.4 33.1 33.3 33.5 33.1 33.3 33.2 33.3
+## [4187] 33.3 33.3 33.3 33.2 33.3 33.4 33.2 33.2 33.4 33.1 33.3 33.4 33.1
+## [4200] 33.6 32.9 33.4 33.4 33.3 33.1 33.3 33.4 33.1 33.5 33.1 33.2 33.3
+## [4213] 33.3 33.3 33.2 33.2 33.4 33.3 33.2 33.3 33.3 33.3 33.2 33.4 33.2
+## [4226] 33.3 33.3 33.3 33.2 33.3 33.4 33.2 33.1 33.5 33.0 33.4 33.3 33.2
+## [4239] 33.3 33.2 33.4 33.4 33.2 33.1 33.4 33.4 33.3 33.0 33.4 33.3 33.3
+## [4252] 33.2 33.2 33.4 33.2 33.4 33.2 33.2 33.3 33.3 33.4 33.1 33.2 33.4
+## [4265] 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.1 33.4 33.1 33.3 33.4 33.2
+## [4278] 33.4 33.2 33.3 33.4 33.1 33.2 33.4 33.4 33.3 33.1 33.3 33.2 33.4
+## [4291] 33.3 33.2 33.1 33.5 33.2 33.2 33.3 33.2 33.3 33.5 33.1 33.2 33.3
+## [4304] 33.4 33.3 33.3 33.2 33.1 33.4 33.4 33.2 33.3 33.2 33.2 33.4 33.3
+## [4317] 33.3 33.2 33.2 33.4 33.3 33.1 33.3 33.3 33.4 33.1 33.4 33.1 33.3
+## [4330] 33.3 33.3 33.3 33.3 33.2 33.7 32.9 33.3 33.3 33.3 33.2 33.2 33.4
+## [4343] 33.2 33.4 33.2 33.3 33.2 33.4 33.2 33.2 33.3 33.3 33.3 33.4 33.2
+## [4356] 33.3 33.1 33.3 33.4 33.3 33.2 33.1 33.3 33.4 33.3 33.2 33.2 33.3
+## [4369] 33.5 33.1 33.2 33.3 33.2 33.5 33.3 33.1 33.4 33.2 33.4 33.2 33.3
+## [4382] 33.2 33.2 33.5 33.1 33.3 33.2 33.4 33.3 33.2 33.4 33.0 33.5 33.3
+## [4395] 33.2 33.2 33.2 33.5 33.3 33.1 33.2 33.3 33.5 33.4 33.1 33.1 33.3
+## [4408] 33.5 33.1 33.2 33.3 33.2 33.5 33.2 33.2 33.3 33.3 33.4 33.1 33.3
+## [4421] 33.3 33.3 33.4 33.2 33.1 33.4 33.3 33.2 33.4 33.2 33.2 33.2 33.4
+## [4434] 33.2 33.4 33.5 33.0 33.3 33.5 32.9 33.3 33.3 33.4 33.2 33.2 33.3
+## [4447] 33.3 33.3 33.2 33.3 33.2 33.6 33.2 33.1 33.4 33.4 33.1 33.3 33.1
+## [4460] 33.3 33.2 33.4 33.3 33.2 33.4 33.2 33.4 33.3 33.1 33.2 33.3 33.4
+## [4473] 33.2 33.4 33.1 33.3 33.5 33.2 33.2 33.3 33.1 33.6 33.2 33.1 33.2
+## [4486] 33.4 33.4 33.3 33.2 33.1 33.3 33.3 33.3 33.2 33.3 33.2 33.5 33.3
+## [4499] 33.2 33.2 33.4 33.3 33.2 33.3 33.2 33.4 33.1 33.3 33.2 33.4 33.3
+## [4512] 33.3 33.3 33.1 33.2 33.5 33.2 33.3 33.2 33.2 33.5 33.2 33.3 33.1
+## [4525] 33.3 33.5 33.3 33.1 33.2 33.5 33.2 33.2 33.3 33.2 33.2 33.5 33.1
+## [4538] 33.3 33.3 33.3 33.3 33.2 33.3 33.3 33.1 33.5 33.2 33.3 33.2 33.2
+## [4551] 33.5 33.3 33.3 33.1 33.2 33.3 33.3 33.8 32.7 33.5 33.2 33.3 33.1
+## [4564] 33.3 33.3 33.5 33.1 33.2 33.4 33.3 33.1 33.3 33.4 33.2 33.4 33.2
+## [4577] 33.2 33.3 33.4 33.3 33.2 33.1 33.7 33.0 33.2 33.4 33.4 33.2 33.0
+## [4590] 33.4 33.3 33.3 33.1 33.4 33.2 33.4 33.1 33.3 33.2 33.5 33.2 33.3
+## [4603] 33.2 33.3 33.4 33.2 33.2 33.2 33.6 33.1 33.3 33.2 33.2 33.4 33.3
+## [4616] 33.2 33.2 33.4 33.4 33.1 33.2 33.3 33.9 32.7 33.4 33.1 33.2 33.3
+## [4629] 33.4 33.2 33.2 33.4 33.2 33.3 33.3 33.3 33.3 33.2 33.3 33.5 33.1
+## [4642] 33.2 33.2 33.7 32.9 33.2 33.4 33.4 33.2 33.2 33.3 33.3 33.2 33.4
+## [4655] 33.2 33.3 33.2 33.4 33.3 33.1 33.4 33.2 33.1 33.4 33.3 33.3 33.2
+## [4668] 33.3 33.3 33.5 33.1 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.2
+## [4681] 33.3 33.3 33.2 33.6 33.0 33.2 33.3 33.4 33.2 33.3 33.2 33.3 33.3
+## [4694] 33.4 33.2 33.2 33.3 33.3 33.2 33.3 33.3 33.1 33.4 33.3 33.4 33.2
+## [4707] 33.2 33.2 33.4 33.3 33.2 33.2 33.4 33.2 33.4 33.2 33.1 33.4 33.3
+## [4720] 33.3 33.2 33.4 33.2 33.4 33.1 33.2 33.5 33.3 33.2 33.3 33.3 33.6
+## [4733] 32.9 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.2 33.3 33.3 33.2 33.3
+## [4746] 33.3 33.3 33.4 33.1 33.3 33.2 33.3 33.3 33.3 33.3 33.1 33.6 33.1
+## [4759] 33.3 33.1 33.3 33.4 33.4 33.2 33.2 33.2 33.4 33.3 33.3 33.2 33.2
+## [4772] 33.3 33.3 33.2 33.4 33.4 33.1 33.2 33.3 33.3 33.3 33.3 33.3 33.2
+## [4785] 33.3 33.3 33.2 33.4 33.1 33.3 33.3 33.4 33.2 33.2 33.4 33.2 33.3
+## [4798] 33.2 33.3 33.2 33.4 33.2 33.4 33.2 33.3 33.3 33.3 33.2 33.2 33.3
+## [4811] 33.4 33.3 33.1 33.4 33.1 33.4 33.2 33.4 33.1 33.4 33.3 33.2 33.2
+## [4824] 33.4 33.3 33.3 33.1 33.4 33.2 33.5 33.2 33.3 33.1 33.2 33.5 33.2
+## [4837] 33.3 33.1 33.4 33.6 33.0 33.2 33.3 33.3 33.4 33.2 33.1 33.3 33.4
+## [4850] 33.3 33.1 33.3 33.4 33.1 33.4 33.3 33.3 33.2 33.3 33.4 33.1 33.2
+## [4863] 33.3 33.3 33.3 33.2 33.3 33.3 33.3 33.4 33.2 33.2 33.3 33.3 33.4
+## [4876] 33.1 33.2 33.4 33.2 33.3 33.2 33.3 33.2 33.4 33.4 33.2 33.2 33.4
+## [4889] 33.2 33.4 33.1 33.2 33.5 33.2 33.3 33.2 33.4 33.1 33.4 33.3 33.1
+## [4902] 33.3 33.3 33.3 33.2 33.4 33.2 33.2 33.4 33.3 33.2 33.2 33.2 33.4
+## [4915] 33.6 32.9 33.4 33.2 33.4 33.2 33.3 33.1 33.3 33.5 33.2 33.2 33.2
+## [4928] 33.3 33.4 33.2 33.3 33.1 33.8 32.9 33.3 33.3 33.2 33.3 33.4 33.2
+## [4941] 33.3 33.2 33.4 33.2 33.2 33.3 33.2 33.5 33.2 33.2 33.3 33.2 33.4
+## [4954] 33.2 33.4 33.1 33.3 33.4 33.2 33.2 33.2 33.4 33.4 33.2 33.1 33.4
+## [4967] 33.3 33.3 33.2 33.2 33.3 33.3 33.4 33.3 33.1 33.3 33.2 33.3 33.3
+## [4980] 33.2 33.3 33.2 33.6 33.1 33.3 33.2 33.3 33.3 33.2 33.3 33.3 33.3
+## [4993] 33.3 33.3 33.3 33.1 33.4 33.2 33.4 33.2 33.2 33.5 33.1 33.3 33.2
+## [5006] 33.3 33.4 33.3 33.2 33.1 33.3 33.4 33.2 33.4 33.2 33.2 33.5 33.2
+## [5019] 33.2 33.2 33.2 33.4 33.3 33.3 33.2 33.3 33.4 33.3 33.2 33.2 33.2
+## [5032] 33.5 33.2 33.2 33.3 33.2 33.3 33.3 33.3 33.2 33.2 33.4 33.3 33.3
+## [5045] 33.2 33.3 33.4 33.2 33.1 33.6 32.9 33.5 33.2 33.5 33.0 33.3 33.4
+## [5058] 33.2 33.3 33.2 33.3 33.4 33.1 33.2 33.3 33.5 33.2 33.2 33.3 33.2
+## [5071] 33.3 33.3 33.4 33.1 33.4 33.2 33.4 33.2 33.2 33.3 33.3 33.2 33.4
+## [5084] 33.3 33.1 33.5 33.2 33.2 33.2 33.2 33.6 33.1 33.3 33.1 33.3 33.6
+## [5097] 33.0 33.4 33.1 33.3 33.3 33.4 33.1 33.3 33.2 33.5 33.2 33.2 33.3
+## [5110] 33.3 33.3 33.3 33.3 33.1 33.5 33.3 33.2 33.2 33.3 33.4 33.2 33.2
+## [5123] 33.2 33.4 33.2 33.3 33.4 33.2 33.1 33.4 33.3 33.3 33.2 33.3 33.4
+## [5136] 33.2 33.2 33.3 33.2 33.3 33.5 33.0 33.3 33.3 33.4 33.3 33.1 33.3
+## [5149] 33.2 33.3 33.4 33.3 33.2 33.2 33.3 33.4 33.3 33.1 33.6 33.1 33.3
+## [5162] 33.2 33.2 33.3 33.3 33.3 33.3 33.1 33.4 33.4 33.1 33.2 33.3 33.4
+## [5175] 33.3 33.1 33.4 33.1 33.4 33.4 33.2 33.2 33.3 33.3 33.4 33.1 33.2
+## [5188] 33.4 33.3 33.3 33.2 33.3 33.2 33.3 33.2 33.3 33.4 33.2 33.3 33.2
+## [5201] 33.4 33.2 33.3 33.2 33.3 33.2 33.5 33.1 33.2 33.4 33.3 33.2 33.4
+## [5214] 33.3 33.1 33.6 33.0 33.3 33.3 33.3 33.1 33.3 33.5 33.4 33.0 33.3
+## [5227] 33.4 33.1 33.3 33.2 33.4 33.2 33.4 33.3 33.2 33.3 33.2 33.3 33.2
+## [5240] 33.3 33.3 33.3 33.2 33.4 33.3 33.2 33.2 33.4 33.2 33.4 33.1 33.2
+## [5253] 33.4 33.4 33.1 33.3 33.2 33.7 32.9 33.3 33.3 33.2 33.7 33.0 33.2
+## [5266] 33.3 33.3 33.2 33.2 33.3 33.4 33.4 33.0 33.3 33.3 33.3 33.6 32.9
+## [5279] 33.4 33.2 33.3 33.3 33.3 33.3 33.2 33.2 33.5 33.1 33.2 33.4 33.2
+## [5292] 33.3 33.5 33.1 33.2 33.3 33.3 33.3 33.2 33.2 33.2 33.4 33.2 33.3
+## [5305] 33.3 33.3 33.4 33.2 33.3 33.2 33.3 33.2 33.3 33.3 33.3 33.4 33.1
+## [5318] 33.3 33.3 33.2 33.3 33.4 33.3 33.2 33.2 33.3 33.2 33.4 33.2 33.3
+## [5331] 33.3 33.3 33.2 33.2 33.3 33.4 33.4 33.0 33.4 33.2 33.3 33.2 33.3
+## [5344] 33.4 33.1 33.7 33.2 33.0 33.3 33.3 33.4 33.2 33.1 33.3 33.3 33.3
+## [5357] 33.3 33.3 33.3 33.1 33.5 33.1 33.4 33.1 33.4 33.2 33.3 33.4 33.1
+## [5370] 33.4 33.3 33.3 33.1 33.3 33.3 33.4 33.1 33.4 33.2 33.2 33.4 33.3
+## [5383] 33.2 33.3 33.3 33.3 33.1 33.3 33.3 33.4 33.3 33.1 33.4 33.2 33.4
+## [5396] 33.2 33.3 33.1 33.3 33.5 33.2 33.2 33.5 33.0 33.4 33.3 33.2 33.2
+## [5409] 33.3 33.4 33.3 33.1 33.3 33.1 33.6 33.2 33.1 33.3 33.3 33.4 33.2
+## [5422] 33.3 33.2 33.3 33.4 33.1 33.3 33.2 33.5 33.3 33.1 33.2 33.4 33.3
+## [5435] 33.3 33.2 33.2 33.5 33.1 33.3 33.4 33.3 33.0 33.5 33.2 33.5 33.3
+## [5448] 32.9 33.4 33.3 33.4 33.0 33.2 33.5 33.3 33.3 33.2 33.1 33.5 33.2
+## [5461] 33.2 33.2 33.3 33.4 33.2 33.3 33.2 33.5 33.1 33.4 33.2 33.3 33.2
+## [5474] 33.4 33.3 33.2 33.2 33.2 33.5 33.1 33.3 33.4 33.2 33.4 33.1 33.5
+## [5487] 33.1 33.1 33.6 33.3 33.0 33.3 33.3 33.4 33.2 33.2 33.2 33.5 33.3
+## [5500] 33.2 33.2 33.2 33.4 33.3 33.1 33.3 33.3 33.4 33.3 33.3 33.2 33.1
+## [5513] 33.5 33.2 33.3 33.1 33.4 33.3 33.3 33.2 33.8 32.8 33.2 33.3 33.2
+## [5526] 33.3 33.2 33.4 33.2 33.3 33.2 33.4 33.2 33.4 33.3 33.1 33.3 33.4
+## [5539] 33.3 33.1 33.3 33.6 33.1 33.3 33.1 33.4 33.4 33.1 33.4 33.2 33.2
+## [5552] 33.3 33.4 33.2 33.1 33.5 33.3 33.2 33.3 33.4 33.0 33.3 33.3 33.4
+## [5565] 33.1 33.2 33.4 33.2 33.4 33.2 33.2 33.5 33.2 33.2 33.2 33.2 33.5
+## [5578] 33.3 33.2 33.2 33.4 33.4 33.1 33.3 33.2 33.2 33.4 33.3 33.3 33.2
+## [5591] 33.2 33.4 33.2 33.3 33.3 33.2 33.3 33.5 33.2 33.2 33.3 33.3 33.2
+## [5604] 33.1 33.3 33.4 33.3 33.2 33.4 33.2 33.3 33.3 33.3 33.2 33.2 33.3
+## [5617] 33.4 33.2 33.3 33.1 33.7 33.1 33.1 33.3 33.2 33.3 33.3 33.2 33.3
+## [5630] 33.3 33.4 33.3 33.1 33.6 32.9 33.5 33.1 33.3 33.3 33.2 33.3 33.5
+## [5643] 33.2 33.2 33.2 33.3 33.4 33.3 33.1 33.2 33.5 33.2 33.3 33.1 33.5
+## [5656] 33.4 33.0 33.2 33.4 33.3 33.3 33.2 33.3 33.3 33.3 33.3 33.2 33.3
+## [5669] 33.1 33.5 33.2 33.3 33.3 33.1 33.5 33.1 33.3 33.3 33.2 33.3 33.3
+## [5682] 33.4 33.2 33.1 33.4 33.4 33.1 33.6 32.9 33.5 33.2 33.2 33.2 33.3
+## [5695] 33.5 33.2 33.3 33.2 33.2 33.3 33.4 33.1 33.3 33.2 33.4 33.3 33.3
+## [5708] 33.2 33.4 33.3 33.1 33.4 33.2 33.3 33.2 33.3 33.4 33.1 33.5 33.2
+## [5721] 33.1 33.3 33.3 33.3 33.3 33.2 33.4 33.2 33.3 33.3 33.3 33.2 33.2
+## [5734] 33.5 33.3 33.0 33.3 33.3 33.3 33.3 33.3 33.2 33.3 33.3 33.3 33.3
+## [5747] 33.2 33.3 33.4 33.1 33.2 33.4 33.1 33.4 33.2 33.4 33.2 33.4 33.3
+## [5760] 33.4 33.0 33.3 33.4 33.1 33.3 33.4 33.2 33.3 33.4 33.1 33.4 33.2
+## [5773] 33.4 33.1 33.3 33.3 33.2 33.3 33.2 33.4 33.2 33.4 33.2 33.4 33.2
+## [5786] 33.2 33.1 33.5 33.2 33.4 33.2 33.2 33.3 33.2 33.4 33.1 33.4 33.3
+## [5799] 33.4 33.2 33.2 33.2 33.3 33.4 33.3 33.3 33.1 33.3 33.2 33.4 33.2
+## [5812] 33.3 33.4 33.3 33.0 33.5 33.4 33.0 33.3 33.2 33.3 33.4 33.3 33.1
+## [5825] 33.4 33.2 33.4 33.2 33.3 33.3 33.2 33.4 33.2 33.2 33.4 33.2 33.2
+## [5838] 33.3 33.3 33.3 33.2 33.3 33.3 33.2 33.4 33.1 33.5 33.2 33.2 33.3
+## [5851] 33.2 33.3 33.3 33.4 33.2 33.2 33.3 33.3 33.3 33.3 33.2 33.3 33.4
+## [5864] 33.1 33.4 33.2 33.4 33.1 33.4 33.2 33.1 33.5 33.3 33.1 33.3 33.4
+## [5877] 33.3 33.1 33.3 33.3 33.4 33.2 33.2 33.2 33.3 33.4 33.4 33.1 33.3
+## [5890] 33.2 33.6 33.0 33.2 33.4 33.2 33.3 33.3 33.3 33.2 33.2 33.5 33.3
+## [5903] 33.1 33.4 33.2 33.4 33.2 33.2 33.2 33.6 33.0 33.4 33.1 33.4 33.2
+## [5916] 33.4 33.1 33.3 33.3 33.2 33.4 33.3 33.3 33.2 33.4 33.2 33.3 33.2
+## [5929] 33.2 33.4 33.2 33.3 33.3 33.4 33.2 33.2 33.2 33.2 33.3 33.5 33.2
+## [5942] 33.2 33.3 33.3 33.4 33.1 33.3 33.3 33.1 33.4 33.3 33.2 33.2 33.4
+## [5955] 33.4 33.2 33.2 33.4 33.1 33.5 33.3 33.2 33.1 33.3 33.3 33.3 33.2
+## [5968] 33.3 33.3 33.4 33.3 33.2 33.2 33.3 33.2 33.3 33.4 33.1 33.5 33.2
+## [5981] 33.2 33.4 33.1 33.3 33.3 33.4 33.2 33.1 33.5 33.2 33.2 33.3 33.3
+## [5994] 33.4 33.2 33.2 33.2 33.3 33.4 33.4 33.2 33.2 33.3 33.5 33.1 33.1
+## [6007] 33.3 33.3 33.4 33.1 33.4 33.3 33.1 33.3 33.3 33.4 33.1 33.4 33.3
+## [6020] 33.3 33.2 33.4 33.1 33.4 33.2 33.1 33.3 33.3 33.4 33.3 33.1 33.3
+## [6033] 33.3 33.4 33.2 33.3 33.4 33.1 33.4 33.2 33.2 33.2 33.5 33.2 33.1
+## [6046] 33.3 33.4 33.4 33.2 33.3 33.1 33.2 33.5 33.2 33.4 33.2 33.1 33.4
+## [6059] 33.2 33.4 33.2 33.3 33.4 33.2 33.2 33.2 33.2 33.5 33.3 33.3 33.1
+## [6072] 33.3 33.3 33.3 33.3 33.1 33.2 33.4 33.3 33.3 33.2 33.4 33.3 33.2
+## [6085] 33.2 33.3 33.4 33.2 33.4 33.2 33.1 33.4 33.4 33.2 33.1 33.4 33.3
+## [6098] 33.3 33.3 33.3 33.1 33.3 33.3 33.4 33.2 33.1 33.5 33.3 33.2 33.1
+## [6111] 33.3 33.5 33.1 33.3 33.4 33.2 33.4 33.3 33.2 33.1 33.3 33.5 33.1
+## [6124] 33.2 33.3 33.2 33.5 33.1 33.3 33.4 33.1 33.3 33.4 33.3 33.2 33.2
+## [6137] 33.4 33.2 33.4 33.1 33.3 33.3 33.2 33.3 33.2 33.4 33.3 33.3 33.2
+## [6150] 33.2 33.4 33.2 33.3 33.2 33.2 33.6 33.2 33.2 33.2 33.2 33.5 33.2
+## [6163] 33.4 33.1 33.3 33.5 33.2 33.2 33.2 33.4 33.2 33.2 33.3 33.3 33.2
+## [6176] 33.3 33.3 33.3 33.3 33.1 33.4 33.3 33.3 33.2 33.2 33.4 33.4 33.1
+## [6189] 33.3 33.2 33.4 33.4 33.1 33.2 33.3 33.4 33.2 33.2 33.3 33.3 33.2
+## [6202] 33.3 33.4 33.1 33.4 33.2 33.2 33.3 33.3 33.4 33.2 33.3 33.3 33.2
+## [6215] 33.3 33.3 33.4 33.2 33.1 33.4 33.3 33.2 33.2 33.3 33.4 33.2 33.3
+## [6228] 33.1 33.3 33.4 33.3 33.4 33.1 33.2 33.4 33.6 33.0 33.2 33.2 33.3
+## [6241] 33.2 33.3 33.3 33.3 33.3 33.4 33.1 33.5 33.3 33.2 33.2 33.2 33.3
+## [6254] 33.3 33.2 33.4 33.3 33.2 33.2 33.3 33.6 33.0 33.2 33.5 33.2 33.1
+## [6267] 33.4 33.1 33.4 33.4 33.3 33.0 33.3 33.6 33.2 33.2 33.1 33.2 33.4
+## [6280] 33.3 33.3 33.3 33.2 33.4 33.3 33.2 33.2 33.4 33.1 33.3 33.4 33.2
+## [6293] 33.3 33.2 33.3 33.3 33.3 33.2 33.4 33.3 33.1 33.4 33.2 33.4 33.2
+## [6306] 33.1 33.4 33.1 33.5 33.3 33.2 33.2 33.3 33.3 33.4 33.1 33.4 33.3
+## [6319] 33.3 33.1 33.3 33.3 33.3 33.3 33.3 33.2 33.3 33.2 33.3 33.2 33.4
+## [6332] 33.3 33.3 33.2 33.2 33.3 33.2 33.3 33.3 33.4 33.1 33.4 33.2 33.5
+## [6345] 33.2 33.2 33.2 33.4 33.3 33.2 33.2 33.2 33.4 33.2 33.3 33.3 33.3
+## [6358] 33.3 33.3 33.1 33.4 33.4 33.3 33.0 33.4 33.3 33.3 33.2 33.2 33.4
+## [6371] 33.2 33.3 33.4 33.1 33.3 33.3 33.4 33.2 33.3 33.2 33.2 33.4 33.2
+## [6384] 33.3 33.3 33.2 33.4 33.3 33.1 33.2 33.3 33.5 33.2 33.1 33.3 33.4
+## [6397] 33.4 33.2 33.2 33.3 33.1 33.5 33.1 33.3 33.3 33.2 33.4 33.2 33.3
+## [6410] 33.3 33.2 33.3 33.3 33.3 33.2 33.2 33.4 33.4 33.2 33.3 33.3 33.3
+## [6423] 33.3 33.2 33.2 33.3 33.3 33.2 33.2 33.4 33.4 33.2 33.2 33.2 33.3
+## [6436] 33.5 33.2 33.2 33.2 33.3 33.3 33.2 33.3 33.3 33.3 33.2 33.4 33.2
+## [6449] 33.4 33.1 33.4 33.3 33.2 33.3 33.2 33.4 33.3 33.1 33.3 33.3 33.4
+## [6462] 33.3 33.1 33.3 33.2 33.3 33.3 33.2 33.3 33.5 33.2 33.3 33.2 33.3
+## [6475] 33.3 33.1 33.3 33.2 33.4 33.4 33.2 33.2 33.2 33.4 33.3 33.2 33.2
+## [6488] 33.5 33.1 33.4 33.3 33.2 33.3 33.2 33.4 33.2 33.2 33.5 33.0 33.4
+## [6501] 33.6 32.9 33.3 33.2 33.4 33.3 33.1 33.2 33.3 33.4 33.3 33.3 33.2
+## [6514] 33.3 33.4 33.2 33.1 33.3 33.4 33.3 33.3 33.1 33.4 33.3 33.3 33.2
+## [6527] 33.2 33.3 33.3 33.2 33.4 33.1 33.3 33.5 33.1 33.4 33.1 33.4 33.3
+## [6540] 33.2 33.2 33.3 33.2 33.5 33.3 33.2 33.2 33.2 33.6 33.2 33.2 33.2
+## [6553] 33.2 33.4 33.3 33.2 33.2 33.3 33.3 33.3 33.2 33.3 33.2 33.4 33.3
+## [6566] 33.3 33.1 33.4 33.4 33.2 33.2 33.3 33.1 33.5 33.2 33.4 33.1 33.2
+## [6579] 33.5 33.2 33.3 33.1 33.4 33.4 33.2 33.1 33.4 33.4 33.2 33.2 33.3
+## [6592] 33.1 33.6 33.2 33.2 33.2 33.2 33.4 33.4 33.3 33.1 33.4 33.3 33.1
+## [6605] 33.3 33.2 33.2 33.5 33.3 33.1 33.4 33.3 33.4 33.2 33.1 33.4 33.1
+## [6618] 33.5 33.2 33.2 33.3 33.2 33.3 33.4 33.2 33.3 33.1 33.5 33.1 33.3
+## [6631] 33.4 33.2 33.4 33.3 33.2 33.3 33.2 33.3 33.3 33.2 33.3 33.4 33.2
+## [6644] 33.3 33.2 33.2 33.4 33.3 33.2 33.3 33.1 33.4 33.2 33.4 33.2 33.2
+## [6657] 33.4 33.2 33.3 33.2 33.2 33.5 33.2 33.4 33.1 33.2 33.4 33.2 33.4
+## [6670] 33.1 33.3 33.4 33.3 33.3 33.3 33.1 33.4 33.3 33.1 33.4 33.1 33.5
+## [6683] 33.2 33.2 33.2 33.5 33.3 33.2 33.3 33.3 33.2 33.2 33.4 33.3 33.2
+## [6696] 33.3 33.3 33.1 33.3 33.4 33.2 33.2 33.4 33.3 33.1 33.5 33.2 33.3
+## [6709] 33.2 33.3 33.3 33.3 33.3 33.2 33.2 33.3 33.2 33.3 33.2 33.3 33.4
+## [6722] 33.3 33.1 33.3 33.3 33.4 33.2 33.3 33.3 33.2 33.3 33.5 33.1 33.3
+## [6735] 33.2 33.4 33.2 33.2 33.3 33.3 33.2 33.4 33.2 33.4 33.2 33.4 33.2
+## [6748] 33.1 33.3 33.4 33.2 33.3 33.3 33.1 33.5 33.2 33.2 33.3 33.3 33.3
+## [6761] 33.3 33.3 33.3 33.1 33.5 33.1 33.4 33.2 33.2 33.5 33.1 33.3 33.2
+## [6774] 33.4 33.2 33.4 33.2 33.2 33.3 33.4 33.1 33.3 33.3 33.2 33.3 33.3
+## [6787] 33.3 33.1 33.3 33.4 33.4 33.1 33.4 33.2 33.2 33.3 33.4 33.1 33.4
+## [6800] 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.2 33.5 33.2 33.1 33.3
+## [6813] 33.2 33.5 33.1 33.3 33.3 33.3 33.3 33.2 33.2 33.3 33.2 33.5 33.2
+## [6826] 33.2 33.3 33.3 33.4 33.2 33.3 33.2 33.2 33.3 33.4 33.2 33.2 33.3
+## [6839] 33.4 33.2 33.2 33.4 33.2 33.3 33.2 33.3 33.3 33.2 33.3 33.4 33.3
+## [6852] 33.2 33.2 33.4 33.5 32.9 33.3 33.4 33.2 33.5 33.0 33.2 33.5 33.2
+## [6865] 33.2 33.4 33.1 33.4 33.2 33.2 33.4 33.3 33.3 33.2 33.3 33.3 33.2
+## [6878] 33.4 33.2 33.2 33.3 33.3 33.4 33.3 33.1 33.2 33.4 33.3 33.3 33.1
+## [6891] 33.4 33.2 33.4 33.2 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.2 33.4
+## [6904] 33.3 33.2 33.3 33.3 33.2 33.3 33.3 33.2 33.3 33.4 33.1 33.6 32.9
+## [6917] 33.4 33.2 33.3 33.3 33.2 33.4 33.3 33.2 33.3 33.2 33.3 33.3 33.2
+## [6930] 33.2 33.4 33.4 33.1 33.4 33.2 33.3 33.4 33.2 33.2 33.3 33.2 33.4
+## [6943] 33.3 33.1 33.4 33.2 33.3 33.2 33.3 33.2 33.4 33.4 33.2 33.2 33.3
+## [6956] 33.2 33.4 33.2 33.2 33.4 33.2 33.3 33.6 33.1 33.2 33.2 33.4 33.2
+## [6969] 33.2 33.3 33.4 33.2 33.1 33.3 33.3 33.4 33.2 33.2 33.4 33.1 33.5
+## [6982] 33.3 33.1 33.3 33.4 33.3 33.1 33.3 33.3 33.3 33.2 33.4 33.1 33.4
+## [6995] 33.2 33.4 33.3 33.2 33.3 33.2 33.4 33.2 33.2 33.2 33.4 33.4 33.2
+## [7008] 33.1 33.3 33.2 33.5 33.3 33.2 33.1 33.3 33.5 33.2 33.3 33.2 33.3
+## [7021] 33.4 33.1 33.4 33.1 33.5 33.2 33.3 33.2 33.1 33.6 33.2 33.3 33.1
+## [7034] 33.2 33.4 33.4 33.1 33.3 33.2 33.5 33.2 33.3 33.1 33.3 33.5 33.1
+## [7047] 33.2 33.3 33.2 33.5 33.4 33.0 33.3 33.2 33.4 33.2 33.3 33.2 33.3
+## [7060] 33.3 33.3 33.4 33.2 33.3 33.3 33.3 33.1 33.3 33.2 33.5 33.3 33.2
+## [7073] 33.1 33.4 33.3 33.3 33.4 33.1 33.3 33.3 33.5 33.2 32.9 33.6 33.2
+## [7086] 33.1 33.2 33.3 33.5 33.3 33.2 33.2 33.2 33.6 33.1 33.3 33.1 33.3
+## [7099] 33.5 33.2 33.1 33.5 33.2 33.1 33.5 33.2 33.1 33.3 33.4 33.3 33.1
+## [7112] 33.4 33.2 33.3 33.4 33.2 33.2 33.2 33.4 33.4 33.2 33.1 33.4 33.3
+## [7125] 33.4 33.1 33.3 33.4 33.2 33.2 33.2 33.3 33.4 33.3 33.2 33.2 33.4
+## [7138] 33.3 33.3 33.2 33.2 33.2 33.4 33.3 33.2 33.5 33.0 33.4 33.2 33.3
+## [7151] 33.3 33.2 33.4 33.3 33.2 33.1 33.3 33.5 33.3 33.2 33.1 33.3 33.4
+## [7164] 33.4 33.2 33.1 33.2 33.6 33.2 33.3 33.1 33.3 33.5 33.2 33.2 33.2
+## [7177] 33.4 33.1 33.3 33.4 33.1 33.4 33.2 33.3 33.3 33.2 33.3 33.3 33.2
+## [7190] 33.4 33.2 33.3 33.2 33.4 33.1 33.3 33.4 33.2 33.4 33.2 33.2 33.3
+## [7203] 33.4 33.1 33.4 33.1 33.5 33.2 33.2 33.2 33.3 33.5 33.3 33.1 33.2
+## [7216] 33.3 33.4 33.3 33.3 33.2 33.1 33.4 33.3 33.3 33.3 33.2 33.4 33.3
+## [7229] 33.2 33.2 33.4 33.1 33.4 33.3 33.1 33.4 33.2 33.3 33.2 33.4 33.3
+## [7242] 33.3 33.1 33.4 33.1 33.5 33.2 33.3 33.1 33.4 33.3 33.3 33.3 33.2
+## [7255] 33.3 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.2 33.3 33.1 33.4 33.2
+## [7268] 33.3 33.4 33.2 33.2 33.4 33.3 33.1 33.2 33.4 33.5 33.1 33.2 33.3
+## [7281] 33.4 33.1 33.4 33.2 33.4 33.3 33.2 33.3 33.2 33.4 33.2 33.1 33.4
+## [7294] 33.3 33.3 33.2 33.2 33.4 33.2 33.3 33.3 33.3 33.2 33.2 33.4 33.2
+## [7307] 33.3 33.3 33.2 33.3 33.3 33.3 33.3 33.2 33.4 33.2 33.3 33.1 33.3
+## [7320] 33.4 33.4 33.1 33.3 33.1 33.6 33.3 33.2 33.1 33.3 33.3 33.2 33.4
+## [7333] 33.2 33.2 33.4 33.3 33.1 33.4 33.1 33.5 33.2 33.2 33.4 33.4 33.2
+## [7346] 33.2 33.3 33.2 33.3 33.4 33.1 33.4 33.2 33.5 33.1 33.2 33.4 33.2
+## [7359] 33.2 33.5 33.3 33.0 33.3 33.4 33.4 33.1 33.2 33.2 33.5 33.1 33.3
+## [7372] 33.3 33.3 33.4 33.1 33.4 33.2 33.2 33.5 32.9 33.4 33.4 33.1 33.4
+## [7385] 33.2 33.3 33.2 33.3 33.3 33.6 33.2 33.1 33.3 33.2 33.4 33.1 33.4
+## [7398] 33.4 33.1 33.4 33.2 33.3 33.2 33.3 33.2 33.2 33.4 33.3 33.2 33.3
+## [7411] 33.3 33.2 33.3 33.4 33.2 33.2 33.3 33.4 33.2 33.2 33.3 33.3 33.4
+## [7424] 33.1 33.5 33.1 33.3 33.4 33.2 33.3 33.1 33.3 33.4 33.3 33.3 33.1
+## [7437] 33.2 33.5 33.3 33.2 33.2 33.2 33.5 33.1 33.2 33.3 33.4 33.3 33.3
+## [7450] 33.2 33.1 33.6 33.1 33.4 33.2 33.2 33.4 33.3 33.1 33.3 33.4 33.3
+## [7463] 33.2 33.2 33.7 32.9 33.2 33.2 33.3 33.3 33.3 33.4 33.2 33.3 33.2
+## [7476] 33.2 33.4 33.4 33.1 33.2 33.3 33.5 33.2 33.1 33.3 33.3 33.3 33.2
+## [7489] 33.3 33.3 33.3 33.4 33.2 33.3 33.1 33.3 33.5 33.2 33.2 33.2 33.2
+## [7502] 33.5 33.2 33.2 33.3 33.3 33.4 33.1 33.3 33.3 33.4 33.1 33.5 33.2
+## [7515] 33.2 33.4 33.3 33.1 33.2 33.2 33.5 33.3 33.1 33.4 33.1 33.4 33.3
+## [7528] 33.3 33.3 33.1 33.5 33.1 33.3 33.2 33.3 33.4 33.2 33.3 33.2 33.2
+## [7541] 33.5 33.2 33.3 33.1 33.3 33.4 33.2 33.3 33.3 33.3 33.3 33.3 33.1
+## [7554] 33.4 33.1 33.5 33.3 33.1 33.2 33.5 33.3 33.2 33.2 33.3 33.3 33.2
+## [7567] 33.3 33.3 33.2 33.4 33.3 33.3 33.1 33.3 33.4 33.3 33.2 33.2 33.3
+## [7580] 33.3 33.2 33.3 33.2 33.3 33.5 33.2 33.2 33.5 32.9 33.5 33.3 33.1
+## [7593] 33.3 33.2 33.5 33.3 33.1 33.2 33.3 33.3 33.4 33.2 33.2 33.4 33.2
+## [7606] 33.3 33.3 33.2 33.3 33.4 33.2 33.3 33.1 33.4 33.4 33.2 33.3 33.1
+## [7619] 33.4 33.2 33.3 33.2 33.5 33.1 33.4 33.1 33.3 33.2 33.5 33.5 32.9
+## [7632] 33.2 33.3 33.4 33.4 33.2 33.2 33.3 33.5 33.1 33.3 33.1 33.3 33.3
+## [7645] 33.3 33.3 33.2 33.4 33.2 33.3 33.3 33.2 33.2 33.5 33.1 33.2 33.3
+## [7658] 33.2 33.5 33.3 33.2 33.1 33.3 33.5 33.2 33.3 33.1 33.4 33.2 33.4
+## [7671] 33.2 33.5 33.0 33.7 32.8 33.3 33.3 33.4 33.3 33.2 33.2 33.2 33.4
+## [7684] 33.4 33.2 33.3 33.1 33.3 33.4 33.3 33.2 33.2 33.3 33.3 33.2 33.5
+## [7697] 33.1 33.3 33.3 33.3 33.2 33.2 33.5 33.1 33.4 33.2 33.2 33.3 33.3
+## [7710] 33.3 33.3 33.1 33.4 33.4 33.2 33.1 33.4 33.9 32.6 33.3 33.3 33.3
+## [7723] 33.2 33.5 33.2 33.0 33.4 33.3 33.4 33.1 33.4 33.2 33.4 33.2 33.3
+## [7736] 33.1 33.4 33.3 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.1 33.4 33.3
+## [7749] 33.3 33.2 33.2 33.5 33.2 33.3 33.2 33.2 33.5 33.1 33.2 33.3 33.2
+## [7762] 33.5 33.1 33.3 33.3 33.3 33.4 33.3 33.1 33.4 33.1 33.4 33.3 33.3
+## [7775] 33.2 33.3 33.2 33.3 33.4 33.2 33.3 33.2 33.4 33.4 33.0 33.4 33.3
+## [7788] 33.1 33.3 33.2 33.4 33.2 33.4 33.2 33.3 33.5 33.1 33.1 33.5 33.1
+## [7801] 33.3 33.2 33.4 33.2 33.3 33.3 33.3 33.3 33.2 33.3 33.3 33.3 33.3
+## [7814] 33.1 33.2 33.4 33.2 33.4 33.1 33.4 33.3 33.5 33.0 33.2 33.3 33.4
+## [7827] 33.4 33.1 33.3 33.4 33.3 33.1 33.3 33.3 33.2 33.3 33.2 33.3 33.3
+## [7840] 33.6 33.0 33.3 33.3 33.1 33.4 33.2 33.4 33.2 33.4 33.1 33.3 33.2
+## [7853] 33.5 33.0 33.5 33.1 33.4 33.2 33.3 33.4 33.2 33.3 33.1 33.3 33.4
+## [7866] 33.3 33.2 33.3 33.3 33.4 33.1 33.3 33.2 33.3 33.3 33.2 33.3 33.3
+## [7879] 33.2 33.5 33.1 33.2 33.5 33.4 33.0 33.3 33.3 33.1 33.4 33.3 33.3
+## [7892] 33.3 33.2 33.4 33.1 33.5 33.0 33.3 33.4 33.3 33.3 33.2 33.3 33.3
+## [7905] 33.2 33.4 33.1 33.3 33.4 33.1 33.3 33.4 33.2 33.3 33.3 33.2 33.3
+## [7918] 33.2 33.4 33.2 33.2 33.3 33.3 33.3 33.2 33.4 33.1 33.3 33.4 33.2
+## [7931] 33.4 33.2 33.3 33.4 33.1 33.3 33.3 33.1 33.4 33.4 33.2 33.2 33.5
+## [7944] 33.2 33.1 33.3 33.3 33.4 33.2 33.2 33.2 33.3 33.4 33.2 33.4 33.2
+## [7957] 33.2 33.4 33.3 33.1 33.4 33.2 33.4 33.1 33.3 33.3 33.3 33.4 33.2
+## [7970] 33.1 33.3 33.3 33.4 33.3 33.2 33.1 33.4 33.3 33.4 33.2 33.2 33.2
+## [7983] 33.5 33.2 33.1 33.3 33.2 33.4 33.3 33.2 33.4 33.4 33.2 33.2 33.2
+## [7996] 33.4 33.3 33.3 33.1 33.4 33.2 33.4 33.1 33.3 33.4 33.2 33.4 33.2
+## [8009] 33.3 33.1 33.2 33.5 33.3 33.1 33.3 33.3 33.4 33.3 33.4 32.9 33.3
+## [8022] 33.4 33.3 33.1 33.3 33.3 33.4 33.3 33.1 33.3 33.3 33.4 33.1 33.3
+## [8035] 33.3 33.3 33.3 33.2 33.3 33.3 33.3 33.3 33.3 33.4 33.1 33.3 33.2
+## [8048] 33.3 33.2 33.2 33.4 33.3 33.2 33.3 33.3 33.4 33.1 33.4 33.1 33.3
+## [8061] 33.5 33.2 33.3 33.1 33.2 33.5 33.2 33.2 33.3 33.2 33.4 33.3 33.1
+## [8074] 33.3 33.4 33.3 33.3 33.1 33.4 33.2 33.4 33.2 33.2 33.2 33.3 33.4
+## [8087] 33.3 33.3 33.2 33.3 33.4 33.2 33.2 33.3 33.1 33.4 33.3 33.2 33.2
+## [8100] 33.5 33.2 33.3 33.3 33.1 33.5 33.3 33.1 33.2 33.3 33.4 33.3 33.3
+## [8113] 33.1 33.3 33.3 33.3 33.4 33.1 33.3 33.5 33.1 33.2 33.4 33.1 33.4
+## [8126] 33.2 33.4 33.2 33.2 33.4 33.2 33.2 33.3 33.2 33.5 33.3 33.3 33.1
+## [8139] 33.2 33.4 33.3 33.3 33.2 33.3 33.4 33.1 33.3 33.2 33.2 33.5 33.1
+## [8152] 33.3 33.3 33.4 33.3 33.2 33.2 33.2 33.4 33.3 33.3 33.2 33.2 33.4
+## [8165] 33.3 33.2 33.3 33.2 33.4 33.2 33.3 33.3 33.1 33.4 33.3 33.4 33.1
+## [8178] 33.2 33.4 33.3 33.2 33.3 33.1 33.6 33.2 33.2 33.3 33.1 33.5 33.3
+## [8191] 33.2 33.1 33.7 33.0 33.3 33.3 33.2 33.5 33.0 33.4 33.3 33.1 33.3
+## [8204] 33.4 33.3 33.1 33.3 33.2 33.4 33.2 33.4 33.1 33.4 33.3 33.3 33.3
+## [8217] 33.2 33.2 33.4 33.1 33.3 33.2 33.5 33.2 33.3 33.2 33.3 33.4 33.2
+## [8230] 33.3 33.2 33.3 33.1 33.4 33.2 33.4 33.1 33.5 33.2 33.3 33.3 33.1
+## [8243] 33.5 33.1 33.3 33.3 33.3 33.3 33.2 33.3 33.3 33.2 33.3 33.4 33.2
+## [8256] 33.2 33.3 33.3 33.3 33.3 33.2 33.4 33.3 33.2 33.3 33.2 33.2 33.4
+## [8269] 33.3 33.2 33.3 33.2 33.3 33.2 33.3 33.2 33.4 33.3 33.2 33.4 33.2
+## [8282] 33.4 33.2 33.2 33.3 33.2 33.3 33.5 33.1 33.3 33.2 33.3 33.3 33.3
+## [8295] 33.2 33.2 33.4 33.3 33.3 33.2 33.2 33.4 33.2 33.3 33.3 33.3 33.4
+## [8308] 33.0 33.3 33.3 33.2 33.4 33.2 33.3 33.4 33.2 33.3 33.3 33.2 33.4
+## [8321] 33.3 33.2 33.2 33.2 33.4 33.3 33.2 33.2 33.4 33.2 33.4 33.3 33.1
+## [8334] 33.3 33.3 33.4 33.1 33.3 33.3 33.2 33.5 33.1 33.2 33.4 33.2 33.4
+## [8347] 33.2 33.3 33.1 33.4 33.4 33.1 33.4 33.2 33.1 33.5 33.3 33.2 33.3
+## [8360] 33.2 33.3 33.3 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.2 33.2 33.6
+## [8373] 33.1 33.2 33.4 33.2 33.4 33.2 33.2 33.4 33.3 33.1 33.4 33.2 33.4
+## [8386] 33.1 33.4 33.2 33.2 33.4 33.3 33.2 33.3 33.1 33.5 33.3 33.1 33.3
+## [8399] 33.3 33.4 33.1 33.3 33.2 33.4 33.4 33.1 33.2 33.3 33.3 33.4 33.1
+## [8412] 33.4 33.2 33.3 33.3 33.2 33.4 33.1 33.4 33.3 33.3 33.1 33.4 33.4
+## [8425] 33.2 33.3 33.1 33.4 33.2 33.4 33.2 33.3 33.1 33.5 33.2 33.2 33.4
+## [8438] 33.1 33.4 33.3 33.2 33.4 33.2 33.2 33.4 33.1 33.3 33.3 33.4 33.2
+## [8451] 33.2 33.3 33.4 33.3 33.2 33.3 33.2 33.4 33.3 33.2 33.2 33.3 33.3
+## [8464] 33.3 33.2 33.4 33.1 33.3 33.4 33.3 33.0 33.4 33.2 33.4 33.3 33.1
+## [8477] 33.3 33.3 33.4 33.2 33.3 33.2 33.5 33.1 33.2 33.3 33.3 33.3 33.3
+## [8490] 33.4 33.1 33.3 33.4 33.2 33.3 33.2 33.2 33.4 33.3 33.3 33.2 33.1
+## [8503] 33.5 33.1 33.3 33.3 33.3 33.4 33.0 33.5 33.3 33.2 33.3 33.2 33.3
+## [8516] 33.2 33.3 33.5 33.1 33.3 33.2 33.3 33.3 33.2 33.3 33.3 33.2 33.4
+## [8529] 33.2 33.5 33.0 33.3 33.4 33.3 33.1 33.2 33.4 33.3 33.3 33.2 33.3
+## [8542] 33.4 33.1 33.3 33.4 33.2 33.4 33.2 33.1 33.3 33.3 33.5 33.2 33.2
+## [8555] 33.2 33.3 33.4 33.2 33.6 32.8 33.4 33.4 33.1 33.3 33.2 33.3 33.4
+## [8568] 33.1 33.3 33.4 33.1 33.5 33.2 33.3 33.1 33.4 33.2 33.3 33.3 33.3
+## [8581] 33.3 33.3 33.3 33.3 33.1 33.4 33.3 33.3 33.2 33.1 33.4 33.2 33.4
+## [8594] 33.3 33.2 33.3 33.3 33.3 33.1 33.3 33.4 33.3 33.2 33.4 33.1 33.4
+## [8607] 33.3 33.2 33.2 33.2 33.4 33.3 33.2 33.3 33.3 33.5 33.1 33.3 33.2
+## [8620] 33.3 33.4 33.2 33.2 33.1 33.4 33.4 33.2 33.3 33.2 33.3 33.3 33.2
+## [8633] 33.3 33.2 33.3 33.4 33.3 33.2 33.2 33.3 33.4 33.2 33.2 33.2 33.4
+## [8646] 33.3 33.2 33.3 33.2 33.4 33.3 33.2 33.2 33.4 33.4 33.2 33.2 33.3
+## [8659] 33.1 33.4 33.4 33.2 33.2 33.2 33.4 33.4 33.1 33.2 33.3 33.4 33.3
+## [8672] 33.4 33.1 33.1 33.4 33.4 33.1 33.4 33.1 33.5 33.2 33.3 33.2 33.2
+## [8685] 33.4 33.3 33.3 33.2 33.1 33.4 33.3 33.2 33.4 33.4 33.2 33.1 33.3
+## [8698] 33.3 33.3 33.4 33.3 33.2 33.1 33.4 33.3 33.2 33.3 33.2 33.3 33.4
+## [8711] 33.2 33.3 33.1 33.5 33.1 33.4 33.2 33.2 33.4 33.2 33.3 33.3 33.2
+## [8724] 33.3 33.4 33.3 33.2 33.2 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.3
+## [8737] 33.2 33.3 33.3 33.3 33.4 33.2 33.1 33.5 33.3 33.2 33.2 33.4 33.2
+## [8750] 33.4 33.2 33.1 33.4 33.2 33.4 33.2 33.3 33.4 33.3 33.2 33.1 33.3
+## [8763] 33.4 33.3 33.1 33.4 33.1 33.4 33.3 33.3 33.3 33.2 33.4 33.2 33.3
+## [8776] 33.2 33.2 33.3 33.3 33.3 33.3 33.1 33.4 33.2 33.4 33.2 33.2 33.4
+## [8789] 33.3 33.3 33.2 33.1 33.4 33.3 33.3 33.2 33.3 33.3 33.4 33.1 33.4
+## [8802] 33.1 33.5 33.2 33.3 33.1 33.7 33.2 33.1 33.2 33.3 33.5 33.0 33.2
+## [8815] 33.4 33.2 33.5 33.1 33.3 33.2 33.3 33.3 33.2 33.3 33.2 33.3 33.4
+## [8828] 33.2 33.4 33.1 33.2 33.4 33.7 33.0 33.1 33.2 33.5 33.5 33.0 33.1
+## [8841] 33.3 33.4 33.3 33.3 33.2 33.2 33.3 33.3 33.4 33.1 33.3 33.3 33.2
+## [8854] 33.3 33.3 33.3 33.2 33.3 33.3 33.2 33.5 33.1 33.3 33.4 33.0 33.7
+## [8867] 33.0 33.4 33.1 33.3 33.4 33.1 33.4 33.3 33.2 33.4 33.2 33.3 33.1
+## [8880] 33.2 33.4 33.6 33.2 33.1 33.2 33.4 33.2 33.2 33.2 33.3 33.4 33.2
+## [8893] 33.3 33.4 33.1 33.5 33.2 33.2 33.3 33.3 33.4 33.2 33.2 33.3 33.1
+## [8906] 33.4 33.4 33.2 33.2 33.3 33.4 33.2 33.1 33.4 33.4 33.1 33.4 33.2
+## [8919] 33.3 33.3 33.3 33.1 33.3 33.3 33.4 33.1 33.3 33.2 33.3 33.5 33.2
+## [8932] 33.3 33.1 33.3 33.4 33.2 33.2 33.3 33.3 33.3 33.3 33.3 33.3 33.2
+## [8945] 33.3 33.3 33.3 33.2 33.2 33.5 33.1 33.3 33.2 33.2 33.4 33.3 33.3
+## [8958] 33.2 33.2 33.4 33.4 33.1 33.3 33.3 33.3 33.3 33.1 33.3 33.4 33.2
+## [8971] 33.4 33.1 33.5 33.4 33.1 33.1 33.4 33.2 33.3 33.2 33.3 33.4 33.2
+## [8984] 33.4 33.1 33.2 33.3 33.3 33.4 33.3 33.1 33.4 33.2 33.4 33.4 33.1
+## [8997] 33.1 33.4 33.3 33.3 33.2 33.2 33.4 33.4 33.2 33.1 33.3 33.2 33.5
+## [9010] 33.2 33.2 33.5 33.2 33.3 33.1 33.2 33.5 33.2 33.3 33.2 33.2 33.3
+## [9023] 33.5 33.2 33.2 33.3 33.2 33.3 33.3 33.2 33.4 33.2 33.4 33.2 33.4
+## [9036] 33.0 33.4 33.4 33.2 33.2 33.2 33.2 33.5 33.3 33.1 33.4 33.2 33.4
+## [9049] 33.2 33.2 33.2 33.2 33.6 33.1 33.3 33.3 33.3 33.3 33.3 33.2 33.2
+## [9062] 33.2 33.5 33.2 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.4 33.2 33.2
+## [9075] 33.2 33.5 33.2 33.3 33.3 33.1 33.2 33.5 33.1 33.3 33.4 33.2 33.4
+## [9088] 33.1 33.4 33.1 33.4 33.4 33.2 33.2 33.3 33.2 33.4 33.2</code></pre>
+<p>No caso do cálculo da frequência, HZ, está multiplicado por 1000 pois a coleta está em milisegundos e a frequência tem que considerar segundos.</p>
+<p>Visualizando a informação:</p>
+<pre class="r"><code>#Fazer o grafico
+plot(dados$RecordingTime..ms.*1000,
+  dados$Pupil.Diameter.Right..mm.,type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;,
+  ylab=&quot;Diametro Pupilar Direito(mm)&quot;)</code></pre>
+<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Neste gráfico pode-se identificar piscadas (que não necessariamente é um artefato, pois piscada está associada a estados cognitivos).</p>
+<p>Para essa análise, pretendemos identificar os picos de cima e os de baixo (muito sensíveis posso considerar como missing data).</p>
+<p>Identificando o diâmetro da pupila direita e os dados que quero ignorar:</p>
+<pre class="r"><code>#Sinal do diametro da pupila direita
+pupilD=dados$Pupil.Diameter.Right..mm.
+
+#Detectar outliers, piscadas e missing data
+IX=which(pupilD&lt;4 | pupilD&gt;6)
+pupilD[IX]=NA</code></pre>
+<p>Delineamento do experimento: * 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo) * Cada época de 30s se refere a HZ<em>30 caselas no vetor pupilD. </em> Devemos criar um vetor indicando a condição para cada casela do vetor pupilD:</p>
+<pre class="r"><code>CONDICAO = array(1, length(pupilD))</code></pre>
+<p>Durante os períodos de contagem de subtração mental (a cada 30s) há um repouso:</p>
+<pre class="r"><code>inicio = ceiling(HZ*30)
+final = ceiling((HZ*30)+(HZ*30))</code></pre>
+<p>Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado é reproduzir as linhas acima num laço e identificar as condições e intervalos. A grosso modo o intervalo seria desta forma:</p>
+<pre class="r"><code>#Colocar 2 nas caselas durante os periodos de subtracao mental
+CONDICAO[902:1803]=2
+CONDICAO[2706:3607]=2
+CONDICAO[4510:5411]=2
+CONDICAO[6314:7215]=2
+CONDICAO[8118:9019]=2</code></pre>
+<p>Analisando as duas condições (repouso e atividade), podemos visualizar com boxplot:</p>
+<pre class="r"><code>#Boxplot do diametro de pupila nas duas condicoes
+#os proximos 2 comandos sao equivalentes
+boxplot(pupilD[which(CONDICAO==1)],pupilD[which(CONDICAO==2)])
+boxplot(pupilD~CONDICAO)</code></pre>
+<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Além disso, queremos avaliar a transição repouso da tarefa para cada bloco em cada região.</p>
+<pre class="r"><code>plot(1:1803,pupilD[1:1803],type=&quot;l&quot;)
+lines(1:1804,pupilD[1804:3607],col=2)
+lines(1:1804,pupilD[3608:5411],col=3)
+lines(1:1804,pupilD[5412:7215],col=4)
+lines(1:1804,pupilD[7216:9019],col=6)</code></pre>
+<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Para visualização dos dados, analisamos a curva média da pupila nesses períodos.</p>
+<pre class="r"><code>#calcular a curva media
+MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupilD[7216:9019])/5
+
+plot(60*(1:1804)/1804,MEDIA,type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;,ylab=&quot;Diametro(mm)&quot;)
+abline(v=30,lty=3)</code></pre>
+<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>A dificuldade nestes exercícios é a identificação das caselas a serem trabalhadas.</p>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+            <a class="nav nav-prev" href="../../aulas/5_transformadas/" title="Análise Espectral"> <i class="fa fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="../../aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1539035458"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1539035458"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1539035458"></script>
+    <script src="../../js/jquery.sticky.js?1539035458"></script>
+    <script src="../../js/featherlight.min.js?1539035458"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1539035458"></script>
+    <script src="../../js/highlight.pack.js?1539035458"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom.71422.js?1539035458"></script>
+    <script src="../../js/learn.js?1539035458"></script>
+    <script src="../../js/hugo-learn.js?1539035458"></script>
+
+    <link href="../../mermaid/mermaid.css?1539035458" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1539035458"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+
+</script>
+
+
+
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    
+
+  </body>
+</html>
+
