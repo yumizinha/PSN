@@ -16,7 +16,7 @@ weight: 50
 <p>O sinal de EEG de: <span class="math inline">\(X_T = \{X_0, X_1, ..., X_{t-1}\}\)</span> é denotado pela decomposição:</p>
 <p><span class="math display">\[
 \begin{align}
-C_{k} = \sum_{T=0}^{t-1} X_{T} \hspace{1mm} \sin(\lambda_j T+\phi) &amp;&amp; \text{(sendo} \lambda_j= \frac{2\pi i}{N} \text{a frequência de Fourier)}
+C_{k} = \sum_{T=0}^{t-1} X_{T} \hspace{1mm} \sin(\lambda_k T+\phi) &amp;&amp; \text{(sendo} \lambda_k= \frac{2\pi i}{N} \text{a frequência de Fourier)}
 \end{align}
 \]</span></p>
 <p>Pelas relações trigonométricas:</p>
@@ -58,14 +58,23 @@ x= sin(2*pi*lambda1*(1:T)/T) +0.5*sin(2*pi*lambda2*(1:T)/T)
 ##  [96] -1.469463e-01 -2.377641e-01 -2.377641e-01 -1.469463e-01  3.922584e-15</code></pre>
 <pre class="r"><code>ts.plot(x)</code></pre>
 <p><img src="/aulas/5_Transformadas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>Ruído-branco Gaussiano. FFT: Fast Fourier Transform Idêntico à definição se T for potência de 2 (ou aproximação de).</p>
+<p>Ruído-branco Gaussiano é um sinal aleatório com igual intensidade em diferentes frequências, o que lhe dá uma densidade espectral de potência constante. Em termos discretos, é um sinal discreto cujas amostras são vistas como uma seqüência de variáveis aleatórias não autocorrelacionadas com média zero e variância finita. Para calcular o espectro, utiliza-se a transformada de Fourier: A Transformada rápida de Fourier (em inglês fast Fourier transform, ou FFT) é um algoritmo eficiente para se calcular a Transformada discreta de Fourier (DFT) e a sua inversa. A análise de Fourier converte um sinal do seu domínio original para uma representação no domínio da frequência e vice-versa. Idêntico à definição se T for potência de 2 (ou aproximação de).</p>
+<p>A função spectrum realiza a estimativa da densidade espectral de uma série temporal.</p>
 <pre class="r"><code>hist(rnorm(T))</code></pre>
 <p><img src="/aulas/5_Transformadas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>x = x+rnorm(T)
 ts.plot(x)</code></pre>
 <p><img src="/aulas/5_Transformadas_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
-<p>O R já calcula o estimador do espectro (periodograma). O conceito é definido como “estimado” pois ele faz uma estimativa e não uma média de todos os dados gerados. (MELHORAR EXPLICAÇÃO)</p>
-<p>(COLOCAR AS FAIXAS DE FREQUÊNCIA DAS BANDAS delta &lt;4hz, theta 4-7hz, alfa 8-12hz, beta 13-30hz, gama &gt; 30hz… )</p>
+<p>A função spectrum realiza a estimativa da densidade espectral de uma série temporal. O estimador do espectro (periodograma) é definido como “estimado” pois ele faz uma estimativa e não uma média de todos os dados gerados.</p>
+<p>Essa análise espectral verifica o valor da amplitude da onda para cada frequência de Fourier. Em EEG, existe um grupo de faixas de frequências que aparecem em situações especificas e a análise espectral permite visualizar o comportamento da amplitude das ondas de EEG para cada um desses grupos, de acordo com o objetivo do estudo, identificando as bandas de frequências:</p>
+<ul>
+<li>Delta &lt;4z</li>
+<li>Teta 4-7hz</li>
+<li>Alfa 8-12hz</li>
+<li>Beta 13-30hz</li>
+<li>Gama &gt; 30hz</li>
+</ul>
+<p>O periodograma no R, gráfico com as frequências é determinado por:</p>
 <pre class="r"><code>ESPECTRO = spectrum(x)</code></pre>
 <p><img src="/aulas/5_Transformadas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code># O eixo x ficaria em 
@@ -120,14 +129,13 @@ for(canal in 1:Ncanais){
    ESPECTRO[,canal]=y/Nepocas
 }#for do canal</code></pre>
 </div>
-<div id="grafico-do-espectro-no-canal-o1-coluna-29." class="section level1">
-<h1>Grafico do espectro no canal O1, coluna 29.</h1>
+<div id="grafico-do-espectro-no-canal-o1-coluna-29." class="section level2">
+<h2>Gráfico do espectro no canal O1, coluna 29.</h2>
 <pre class="r"><code>plot((HZ/2)*(1:nrow(ESPECTRO))/nrow(ESPECTRO), ESPECTRO[, 29],
  type=&quot;l&quot;, xlab=&quot;Frequencia (Hz)&quot;, ylab=&quot;Potencia (uV^2)&quot;)</code></pre>
 <p><img src="/aulas/5_Transformadas_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Ajustando o zoom para conseguir visualizar a informação melhor:</p>
-<pre class="r"><code># O professor colocou 10:200 mas voce nao quer ver 190 gráficos aqui
-IX=10:200
+<pre class="r"><code>IX=10:200
 plot((HZ/2)*IX/nrow(ESPECTRO), ESPECTRO[IX,29],
  type=&quot;l&quot;,xlab=&quot;Frequencia (Hz)&quot;,ylab=&quot;Potencia (uV^2)&quot;)</code></pre>
 <p><img src="/aulas/5_Transformadas_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>

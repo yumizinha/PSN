@@ -1,5 +1,5 @@
 ---
-title: "Identificação de épocas"
+title: "Controle de qualidade"
 author: "Amanda Yumi"
 date: "01 de outubro de 2018"
 output: html_document
@@ -70,7 +70,7 @@ hist(c(AMPLITUDE))</code></pre>
 <p>Limitando um pouco a visualização, no caso em 150:</p>
 <pre class="r"><code>LIMIAR=150 #escolhido analisando o histograma</code></pre>
 <p>Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:</p>
-<pre class="r"><code>CQ=matrix(0,Nepocas,Ncanais)
+<pre class="r"><code>CQ = matrix(0, Nepocas, Ncanais)
 CQ[which(AMPLITUDE&gt;LIMIAR)]=1</code></pre>
 <p>Para identificar os CANAIS mais problemáticos e realizar a contagem das épocas descartadas em cada canal:</p>
 <pre class="r"><code>colSums(CQ)</code></pre>

@@ -1,0 +1,101 @@
+---
+title: "Resumo"
+author: "Amanda Yumi"
+date: "7 de outubro de 2018"
+output: html_document
+---
+
+Separando em épocas:
+
+```{r}
+sinais=read.table("OlhosFechados.txt",header=FALSE)
+nomescanais=scan("NOMEScanais.txt",what="string")
+
+HZ = 200 # taxa de amostragem considerada:
+TamSegundos=5 # Numero de segundos do trial:
+TAM = TamSegundos*HZ
+Nepocas = floor(nrow(sinais)/TAM)
+Ncanais = ncol(sinais)
+
+# PRIMEIRO SE ANALISA A AMPLITUDE DE CADA ÉPOCA E CADA CANAL:
+# SUPONDO UM CANAL SÓ:
+
+AMPLITUDE= matrix(0, Nepocas, 1)
+  for(epoca in 1:Nepocas){
+    #Casela de inicio da epoca
+    INICIO=(epoca-1)*TAM+1
+    #Casela de fim da epoca
+    FIM=epoca*TAM
+
+    #Calculo de amplitude
+    AMPLITUDE[epoca,1]=max(sinais[INICIO:FIM,1])- min(sinais[INICIO:FIM,1])
+  }
+
+```
+
+Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:
+
+```{r}
+# Supondo Ncanais = 1:
+LIMIAR=150 #escolhido analisando o histograma
+Ncanais=1
+CQ=matrix(0,Nepocas,Ncanais)
+CQ[which(AMPLITUDE>LIMIAR)]=1
+```
+
+Para identificar os CANAIS mais problemáticos e realizar a contagem das épocas descartadas em cada canal:
+
+```{r}
+colSums(CQ)
+```
+
+Unindo as colunas dos canais com as épocas descartadas:
+```{r}
+cbind(nomescanais,colSums(CQ))
+```
+
+
+```{r}
+#Plot o PERIODOGRAMA = gráfico com as frequências 
+ESPECTRO=spectrum(sinais[,29],plot=FALSE)
+plot(ESPECTRO$freq*HZ,log(ESPECTRO$spec),type="l",
+xlab="Frequencia(Hz)",ylab="log(Espectro)")
+#Passe um filtro passa-banda de 1-30Hz.
+require(signal)
+FILTRO=butter(5,c(1,30)/(HZ/2),"pass")
+fsinal=filter(FILTRO,sinais[,29])
+ts.plot(fsinal)
+#Defina o tamanho da época em segundos
+TamEpoca=10 
+NEpocas=floor(length(fsinal)/(TamEpoca*HZ))
+#Defina o vetor que guardará as amplitudes de cada época
+AMPLITUDE=array(0,NEpocas) 
+#Ponto de corte da amplitude para controle de qualidade
+CUTOFF=60 
+SOMA=0
+#Tomando apenas as épocas com sinais bons, ie sem artefatos.
+NEpocasBOAS=0 
+for(EPOCA in 1:NEpocas){
+  INICIO=(EPOCA-1)*TamEpoca*HZ+1
+  FIM=TamEpoca*HZ*EPOCA 
+ #Janela de pontos no tempo da EPOCA
+  JANELA=INICIO:FIM
+  #Cálculo da amplitude em cada EPOCA
+  AMPLITUDE[EPOCA]=max(fsinal[JANELA])-min(fsinal[JANELA])
+  #cálculo do espectro da EPOCA
+  ESPECTRO=spectrum(fsinal[JANELA],plot=FALSE)
+  #Controle de qualidade da EPOCA para incluir na media do espectro
+  if(AMPLITUDE[EPOCA]<CUTOFF){
+    SOMA=SOMA+ESPECTRO$spec
+    NEpocasBOAS=NEpocasBOAS+1##############
+  }
+  FREQ=ESPECTRO$freq
+}#Fecha o for da EPOCA
+#Calcule a média do sinal das Epocas boas
+  MEDIA=SOMA/NEpocasBOAS 
+hist(AMPLITUDE[which(AMPLITUDE<1000)])
+#Plote o gráfico do Espectro Médio
+plot(FREQ*HZ,MEDIA,type="l",xlab="Frequencia(Hz)",ylab="Espectro")
+```
+
+

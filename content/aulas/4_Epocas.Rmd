@@ -1,5 +1,5 @@
 ---
-title: "Identificação de épocas"
+title: "Controle de qualidade"
 author: "Amanda Yumi"
 date: "01 de outubro de 2018"
 output: html_document
@@ -100,7 +100,7 @@ LIMIAR=150 #escolhido analisando o histograma
 Criando uma matriz de controle de qualidade de dimensão idêntica ao da matriz AMPLITUDE. O ZERO corresponde a épocas sem problemas e UM são as épocas onde a amplitude foi maior que um limiar:
 
 ```{r}
-CQ=matrix(0,Nepocas,Ncanais)
+CQ = matrix(0, Nepocas, Ncanais)
 CQ[which(AMPLITUDE>LIMIAR)]=1
 ```
 

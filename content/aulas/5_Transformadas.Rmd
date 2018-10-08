@@ -29,7 +29,7 @@ O sinal de EEG de: $X_T = \{X_0, X_1, ..., X_{t-1}\}$ é denotado pela decomposi
 
 $$
 \begin{align}
-C_{k} = \sum_{T=0}^{t-1} X_{T} \hspace{1mm} \sin(\lambda_j T+\phi) && \text{(sendo} \lambda_j= \frac{2\pi i}{N} \text{a frequência de Fourier)}
+C_{k} = \sum_{T=0}^{t-1} X_{T} \hspace{1mm} \sin(\lambda_k T+\phi) && \text{(sendo} \lambda_k= \frac{2\pi i}{N} \text{a frequência de Fourier)}
 \end{align}
 $$
 
@@ -59,12 +59,12 @@ x= sin(2*pi*lambda1*(1:T)/T) +0.5*sin(2*pi*lambda2*(1:T)/T)
 ts.plot(x)
 ```
 
-Ruído-branco Gaussiano.
-FFT: Fast Fourier Transform
+Ruído-branco Gaussiano é um sinal aleatório com igual intensidade em diferentes frequências, o que lhe dá uma densidade espectral de potência constante. Em termos discretos, é um sinal discreto cujas amostras são vistas como uma seqüência de variáveis aleatórias não autocorrelacionadas com média zero e variância finita.
+Para calcular o espectro, utiliza-se a transformada de Fourier:
+A Transformada rápida de Fourier (em inglês fast Fourier transform, ou FFT) é um algoritmo eficiente para se calcular a Transformada discreta de Fourier (DFT) e a sua inversa. A análise de Fourier converte um sinal do seu domínio original para uma representação no domínio da frequência e vice-versa. 
 Idêntico à definição se T for potência de 2 (ou aproximação de).
 
-
-
+A função spectrum realiza a estimativa da densidade espectral de uma série temporal.
 
 ```{r}
 hist(rnorm(T))
@@ -72,13 +72,19 @@ x = x+rnorm(T)
 ts.plot(x)
 ```
 
-O R já calcula o estimador do espectro (periodograma). O conceito é definido como "estimado" pois ele faz uma estimativa e não uma média de todos os dados gerados.
-(MELHORAR EXPLICAÇÃO)
+A função spectrum realiza a estimativa da densidade espectral de uma série temporal. O estimador do espectro (periodograma) é definido como "estimado" pois ele faz uma estimativa e não uma média de todos os dados gerados.
 
-(COLOCAR AS FAIXAS DE FREQUÊNCIA DAS BANDAS delta <4hz, theta 4-7hz, alfa 8-12hz, beta 13-30hz, gama > 30hz... )
+Essa análise espectral verifica o valor da amplitude da onda para cada frequência de Fourier. Em EEG, existe um grupo de faixas de frequências que aparecem em situações especificas e a análise espectral permite visualizar o comportamento da amplitude das ondas de EEG para cada um desses grupos, de acordo com o objetivo do estudo, identificando as bandas de frequências:
 
+* Delta <4z
+* Teta 4-7hz
+* Alfa 8-12hz
+* Beta 13-30hz
+* Gama > 30hz
 
-```{r}
+O periodograma no R, gráfico com as frequências é determinado por:
+
+```{r, cache=FALSE}
 ESPECTRO = spectrum(x)
 
 # O eixo x ficaria em 
@@ -126,7 +132,7 @@ As linhas representam diferentes frequências
 As colunas representam os canais
 
 
-```{r, results = 'hide', message = FALSE}
+```{r, results = 'hide', message = FALSE, cache=FALSE}
 ESPECTRO=matrix(0,TAM/2,Ncanais)
 
 #Calcular para cada canal
@@ -145,17 +151,16 @@ for(canal in 1:Ncanais){
 
 ```
 
-#Grafico do espectro no canal O1, coluna 29.
+## Gráfico do espectro no canal O1, coluna 29.
 
-```{r}
+```{r, cache=FALSE}
 plot((HZ/2)*(1:nrow(ESPECTRO))/nrow(ESPECTRO), ESPECTRO[, 29],
  type="l", xlab="Frequencia (Hz)", ylab="Potencia (uV^2)")
 
 ```
 
 Ajustando o zoom para conseguir visualizar a informação melhor:
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-# O professor colocou 10:200 mas voce nao quer ver 190 gráficos aqui
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, cache=FALSE}
 IX=10:200
 plot((HZ/2)*IX/nrow(ESPECTRO), ESPECTRO[IX,29],
  type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
@@ -181,3 +186,62 @@ legend("topright",c("Olhos Fechados","Olhos Abertos"),lty=c(1,1),
 ```
 
 No gráfico podemos o espectro para cada frequência (analisar o espectro para cada faixa) e não a evolução em si (pois não está no tempo).
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+
+#Ex1) No codigo de controle de qualidade:
+
+for(canal in 1:Ncanais){
+  for(epoca in 1:Nepocas){
+    #Casela de inicio da epoca
+    INICIO=(epoca-1)*TAM+1
+
+    #Casela de fim da epoca
+    FIM=epoca*TAM
+
+    #Calculo de amplitude
+    DIFERENCA[epoca,canal]=mean(sinais[INICIO:FIM,canal])- median(sinais[INICIO:FIM,canal])
+  }#for da epoca
+}#for dos canais
+
+LIMIAR=20 #Escolhido analisando o histograma. Com todos os canais
+
+#Criar matriz de controle de qualidade de dimensao identica
+#ao da matriz AMPLITUDE. Zero corresponde a epocas sem problema
+#Um sao as epocas onde a amplitude foi maior que um limiar
+CQ=matrix(0,Nepocas,Ncanais)
+CQ[which(DIFERENCA>LIMIAR)]=1
+
+#Altere o codigo para ao invés de calculo de amplitude, o algoritmo para que calcule a diferenca e entre a media e a mediana do sinal nesta epoca:
+for(canal in 1:Ncanais){
+  for(epoca in 1:Nepocas){
+    #Casela de inicio da epoca
+    INICIO=(epoca-1)*TAM+1
+
+    #Casela de fim da epoca
+    FIM=epoca*TAM
+
+    #Calculo de amplitude
+    DIFERENCA[epoca,canal]=mean(sinais[INICIO:FIM,canal])- median(sinais[INICIO:FIM,canal])
+  }#for da epoca
+}#for dos canais
+
+LIMIAR=20 # e descarte as epocas onde esta diferença for maior que 20.
+
+# Armazenando na matriz de Controle de qualidade os dados a serem descartados:
+
+CQ=matrix(0,Nepocas,Ncanais)
+CQ[which(DIFERENCA>LIMIAR)]=1
+
+
+# Ex2) interprete este grafico:
+
+# O periodograma do sinal calculado (média-mediana) a partir de um determinado intervalo aceitável trata-se de uma curva normal (média=mediana).
+# O sinal passado é o que foi considerado como atendendo as condições de uma distribuição normal.
+# O que foi retirado é o Ruído-branco Gaussiano que se refere a um sinal aleatório com igual 
+# intensidade e em diferentes frequências (vide o periodograma), o que resultando numa densidade
+# espectral de potência constante. Em termos discretos, é um sinal discreto cujas amostras são 
+# vistas como uma seqüência de variáveis aleatórias não autocorrelacionadas com média zero e variância finita.
+```
+
+
