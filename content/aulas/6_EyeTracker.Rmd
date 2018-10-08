@@ -40,17 +40,23 @@ Entre um MILISEGUNDO e outro, temos um intervalo de sinais coletados.
 ```{r}
 #Tomando os 10 primeiros números
 dados[1:10,1]
+```
 
 
+```{r, echo= FALSE}
 #Identificamos a diferença entre um elemento menos o #anterior, para isso usamos o comando "diff" para ter 
 diff(dados[,1])
+```
 
+```{r, echo = FALSE}
 DIFF = mean(diff(dados$RecordingTime..ms.))
 
 #A taxa de amostragem em Hertz é dada por:
 HZ=1000*1/DIFF
 
 ```
+
+
 No caso do cálculo da frequência, HZ, está multiplicado por 1000 pois a coleta está em milisegundos e a frequência tem que considerar segundos.
 
 Visualizando a informação:
@@ -140,7 +146,7 @@ A dificuldade nestes exercícios é a identificação das caselas a serem trabal
 
 
 
-```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 #Corrija os “missing datas” dos dados devido a piscada de olhos
 for(i in 2:length(pupil)){
 if(pupil[i]==0){
@@ -174,13 +180,5 @@ ts.plot(MEDIA)
 boxplot(MEDIA[1:902],MEDIA[903:1804])
 
 ```
-
-
-
-
-
-
-
-
 
 

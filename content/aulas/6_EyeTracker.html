@@ -110,8 +110,6 @@ colnames(dados)</code></pre>
 dados[1:10,1]</code></pre>
 <pre><code>##  [1] 221104.5 221137.8 221170.9 221204.4 221237.5 221270.8 221304.0
 ##  [8] 221337.5 221370.7 221403.9</code></pre>
-<pre class="r"><code>#Identificamos a diferença entre um elemento menos o #anterior, para isso usamos o comando &quot;diff&quot; para ter 
-diff(dados[,1])</code></pre>
 <pre><code>##    [1] 33.3 33.1 33.5 33.1 33.3 33.2 33.5 33.2 33.2 33.3 33.2 33.3 33.4
 ##   [14] 33.2 33.3 33.2 33.4 33.3 33.1 33.3 33.3 33.3 33.5 33.0 33.4 33.2
 ##   [27] 33.4 33.2 33.1 33.3 33.4 33.4 33.1 33.2 33.5 33.1 33.4 33.2 33.2
@@ -812,16 +810,52 @@ diff(dados[,1])</code></pre>
 ## [9062] 33.2 33.5 33.2 33.3 33.2 33.3 33.4 33.1 33.3 33.3 33.4 33.2 33.2
 ## [9075] 33.2 33.5 33.2 33.3 33.3 33.1 33.2 33.5 33.1 33.3 33.4 33.2 33.4
 ## [9088] 33.1 33.4 33.1 33.4 33.4 33.2 33.2 33.3 33.2 33.4 33.2</code></pre>
-<pre class="r"><code>DIFF = mean(diff(dados$RecordingTime..ms.))
-
-#A taxa de amostragem em Hertz é dada por:
-HZ=1000*1/DIFF</code></pre>
 <p>No caso do cálculo da frequência, HZ, está multiplicado por 1000 pois a coleta está em milisegundos e a frequência tem que considerar segundos.</p>
 <p>Visualizando a informação:</p>
 <pre class="r"><code>#Fazer o grafico
 plot(dados$RecordingTime..ms.*1000,
   dados$Pupil.Diameter.Right..mm.,type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;,
   ylab=&quot;Diametro Pupilar Direito(mm)&quot;)</code></pre>
-<p><img src="/aulas/6_EyeTracker_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/aulas/6_EyeTracker_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Neste gráfico pode-se identificar piscadas (que não necessariamente é um artefato, pois piscada está associada a estados cognitivos).</p>
 <p>Para essa análise, pretendemos identificar os picos de cima e os de baixo (muito sensíveis posso considerar como missing data).</p>
+<p>Identificando o diâmetro da pupila direita e os dados que quero ignorar:</p>
+<pre class="r"><code>#Sinal do diametro da pupila direita
+pupilD=dados$Pupil.Diameter.Right..mm.
+
+#Detectar outliers, piscadas e missing data
+IX=which(pupilD&lt;4 | pupilD&gt;6)
+pupilD[IX]=NA</code></pre>
+<p>Delineamento do experimento: * 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo) * Cada época de 30s se refere a HZ<em>30 caselas no vetor pupilD. </em> Devemos criar um vetor indicando a condição para cada casela do vetor pupilD:</p>
+<pre class="r"><code>CONDICAO = array(1, length(pupilD))</code></pre>
+<p>Durante os períodos de contagem de subtração mental (a cada 30s) há um repouso:</p>
+<pre class="r"><code>inicio = ceiling(HZ*30)
+final = ceiling((HZ*30)+(HZ*30))</code></pre>
+<p>Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado é reproduzir as linhas acima num laço e identificar as condições e intervalos. A grosso modo o intervalo seria desta forma:</p>
+<pre class="r"><code>#Colocar 2 nas caselas durante os periodos de subtracao mental
+CONDICAO[902:1803]=2
+CONDICAO[2706:3607]=2
+CONDICAO[4510:5411]=2
+CONDICAO[6314:7215]=2
+CONDICAO[8118:9019]=2</code></pre>
+<p>Analisando as duas condições (repouso e atividade), podemos visualizar com boxplot:</p>
+<pre class="r"><code>#Boxplot do diametro de pupila nas duas condicoes
+#os proximos 2 comandos sao equivalentes
+boxplot(pupilD[which(CONDICAO==1)],pupilD[which(CONDICAO==2)])
+boxplot(pupilD~CONDICAO)</code></pre>
+<p><img src="/aulas/6_EyeTracker_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Além disso, queremos avaliar a transição repouso da tarefa para cada bloco em cada região.</p>
+<pre class="r"><code>plot(1:1803,pupilD[1:1803],type=&quot;l&quot;)
+lines(1:1804,pupilD[1804:3607],col=2)
+lines(1:1804,pupilD[3608:5411],col=3)
+lines(1:1804,pupilD[5412:7215],col=4)
+lines(1:1804,pupilD[7216:9019],col=6)</code></pre>
+<p><img src="/aulas/6_EyeTracker_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Para visualização dos dados, analisamos a curva média da pupila nesses períodos.</p>
+<pre class="r"><code>#calcular a curva media
+MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupilD[7216:9019])/5
+
+plot(60*(1:1804)/1804,MEDIA,type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;,ylab=&quot;Diametro(mm)&quot;)
+abline(v=30,lty=3)</code></pre>
+<p><img src="/aulas/6_EyeTracker_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>A dificuldade nestes exercícios é a identificação das caselas a serem trabalhadas.</p>

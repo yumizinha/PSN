@@ -187,7 +187,7 @@ legend("topright",c("Olhos Fechados","Olhos Abertos"),lty=c(1,1),
 
 No gráfico podemos o espectro para cada frequência (analisar o espectro para cada faixa) e não a evolução em si (pois não está no tempo).
 
-```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 
 #Ex1) No codigo de controle de qualidade:
 
