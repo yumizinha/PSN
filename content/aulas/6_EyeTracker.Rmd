@@ -6,8 +6,15 @@ output: html_document
 weight: 60
 ---
 
-(INSERIR INTRODUÇÃO SOBRE) EYE TRACKER.
-TECNOLOGIAS, FUNCIONAMENTO BIOLÓGICO.
+A tecnologia de eye tracking (ET) permite o rastreamento ocular, o que possibilita sua aplicação em diversas áreas das ciências, como saúde, psicologia e até mesmo marketing. O aparelho realiza a gravação do comportamento ocular, ou seja, identificando a localização do olhar, a duração
+de tempo, a dilatação da pupila e o trajeto do olhar. 
+A importância desta técnica se deve ao fato de que o olhar de um indivíduo está diretamente relacionado com a sua atenção, o que faz com que seja possível compreender, em parte, o processo
+cognitivo de um usuário. 
+
+A distância entre o reflexo que sai da pupila e o reflexo da luz observado na córnea é o que permite identificar a localização do olhar de uma pessoa, esse ponto onde
+a pessoa fixa o olhar é chamado de “fixação”. A fixação geralmente dura entre 100 e 500 ms (milissegundos). O trajeto que se produz entre duas fixações é chamado de sacada (saccade).
+
+
 
 ```{r}
 #leitura de dados
@@ -42,13 +49,14 @@ Entre um MILISEGUNDO e outro, temos um intervalo de sinais coletados.
 dados[1:10,1]
 ```
 
+Identificando a diferença dos elementos com o elemento anterior:
 
-```{r, echo= FALSE}
+```{r, results='hide'}
 #Identificamos a diferença entre um elemento menos o #anterior, para isso usamos o comando "diff" para ter 
 diff(dados[,1])
 ```
 
-```{r, echo = FALSE}
+```{r, results='hide'}
 DIFF = mean(diff(dados$RecordingTime..ms.))
 
 #A taxa de amostragem em Hertz é dada por:

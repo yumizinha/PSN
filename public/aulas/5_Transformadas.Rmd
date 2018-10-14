@@ -84,7 +84,7 @@ Essa análise espectral verifica o valor da amplitude da onda para cada frequên
 
 O periodograma no R, gráfico com as frequências é determinado por:
 
-```{r, cache=FALSE}
+```{r, cache = TRUE}
 ESPECTRO = spectrum(x)
 
 # O eixo x ficaria em 
@@ -132,7 +132,7 @@ As linhas representam diferentes frequências
 As colunas representam os canais
 
 
-```{r, results = 'hide', message = FALSE, cache=FALSE}
+```{r, results = 'hide', message = FALSE, cache = TRUE}
 ESPECTRO=matrix(0,TAM/2,Ncanais)
 
 #Calcular para cada canal
@@ -153,14 +153,14 @@ for(canal in 1:Ncanais){
 
 ## Gráfico do espectro no canal O1, coluna 29.
 
-```{r, cache=FALSE}
+```{r, cache = TRUE}
 plot((HZ/2)*(1:nrow(ESPECTRO))/nrow(ESPECTRO), ESPECTRO[, 29],
  type="l", xlab="Frequencia (Hz)", ylab="Potencia (uV^2)")
 
 ```
 
 Ajustando o zoom para conseguir visualizar a informação melhor:
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, cache=FALSE}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, cache = TRUE}
 IX=10:200
 plot((HZ/2)*IX/nrow(ESPECTRO), ESPECTRO[IX,29],
  type="l",xlab="Frequencia (Hz)",ylab="Potencia (uV^2)")
@@ -171,7 +171,7 @@ ESPECTROof=ESPECTRO
 
 Para armazenar o espectro estimado médio de olhos abertos e colocar os dois no mesmo gráfico:
 
-```{r}
+```{r, cache = TRUE}
 ESPECTROoa=ESPECTRO
 
 ##### COLOCAR OS 2 espectros médios no mesmo grafico

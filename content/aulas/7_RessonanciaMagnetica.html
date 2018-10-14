@@ -1,0 +1,53 @@
+---
+title: "Ressonância magnética"
+author: "Amanda Yumi"
+date: "10 de outubro de 2018"
+output: html_document
+weight: 70
+---
+
+
+
+<div id="imagens-estruturais-t1-e-voxel-based-morphometry-vbm" class="section level1">
+<h1>Imagens estruturais T1 e Voxel-based-morphometry (VBM)</h1>
+<p>A Ressonância Magnética (RM) é um método de diagnóstico por imagem, estabelecido na prática clínica, utilizada em pesquisas científicas e diagnósticos clínicos. Dada a alta capacidade de diferenciar tecidos e coletar informações bioquímicas, o espectro de aplicações se estende a todas as partes do corpo humano e explora aspectos anatômicos e funcionais. A física da Ressonância Magnética Nuclear (RMN) aplicada à formação de imagens é complexa e abrangente, uma vez que tópicos como eletromagnetismo, supercondutividade e processamento de sinais têm de ser abordados em conjunto para o entendimento deste método. Esta revisão tem por objetivo explorar de forma introdutória e simplificada a física da imagem por ressonância magnética e demonstrar equipamentos, mecanismos e aplicações da RM, servindo como texto de apoio para o aprofundamento do assunto.</p>
+<div id="frequencia-de-larmor" class="section level2">
+<h2>Frequência de Larmor:</h2>
+<p>No caso do hidrogênio:</p>
+<p>$ = 42.58 mh z /tesla $</p>
+<p>Na RM clínica: <span class="math inline">\(0.5 - 1.5 Tesla\)</span> (EXPLICAR MELHOR SOBRE OS MÉTODOS DE NEUROESTIMULAÇÃO, EQUIPAMENTOS 3T, 7T E 9T)</p>
+<p>(CARREGAR GIF ANIMADO DOS SPINS)</p>
+<p>(GRADIENTE DE CAMPO)</p>
+<p>Para ler os arquivos nift e analyze, precisamos utilizar a biblioteca “AnalyzeFMRI”.</p>
+<pre class="r"><code>#Instalar biblioteca para ler arquivos nifti e analyze
+#install.packages(&quot;AnalyzeFMRI&quot;)
+#Carrega biblioteca
+require(AnalyzeFMRI)</code></pre>
+<pre class="r"><code>#leitura da imagem no arquivo nifti
+volume = f.read.volume(&quot;ch2.nii&quot;)</code></pre>
+<pre class="r"><code># Verificar a dimensão dos dados
+dim(volume)</code></pre>
+<pre><code>## [1] 181 217 181   1</code></pre>
+<p>Fazer figuras desta imagem de ressonância, identificamos pelo eixo X, Y e Z e fixamos conforme a referência que queremos ( sagital, coronal, axial)</p>
+<pre class="r"><code># Imagem AXIAL na secção z= 90, deixando x e y livres:
+# as.data.frame exibe menos poluido.
+volume[,,90,1]</code></pre>
+<pre class="r"><code>image(volume[,,90,1])</code></pre>
+<p><img src="/aulas/7_RessonanciaMagnetica_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Alterando para uma escala de cinza:</p>
+<pre class="r"><code>image(volume[,,90,1], col = gray((1:50)/50))</code></pre>
+<p><img src="/aulas/7_RessonanciaMagnetica_files/figure-html/unnamed-chunk-7-1.png" width="672" /> (é possível verificar o caldado, ventrículo, giro fusiforme)</p>
+<p>Para visualizar no ângulo sagital:</p>
+<pre class="r"><code>#Imagem SAGITAL na fatia x=100, deixo o y e z livres
+image(volume[100,,,1],col=gray((1:50)/50))</code></pre>
+<p><img src="/aulas/7_RessonanciaMagnetica_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Para visualizar no coronal:</p>
+<pre class="r"><code>#Imagem Coronal na fatia y=100
+image(volume[,100,,1], col = gray((1:50)/50))</code></pre>
+<p><img src="/aulas/7_RessonanciaMagnetica_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Nota: Não é possível identificar facilmente se o lado é esquerdo ou direito. Depende se a notação da imagem coletada é radiológica ou neurológica.</p>
+<p>Olhando as coordenadas em voxel (o parâmetro pode ter o primeiro argumento como um intervalo, depende da análise).</p>
+<pre class="r"><code>#Colocar zero nas coordenadas x=100,y=100,z=150 (voxels)
+volume[100,100,150,1]=0</code></pre>
+</div>
+</div>

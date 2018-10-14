@@ -1,0 +1,92 @@
+---
+title: "Ressonância magnética"
+author: "Amanda Yumi"
+date: "10 de outubro de 2018"
+output: html_document
+weight: 70
+---
+
+# Imagens estruturais T1 e Voxel-based-morphometry (VBM)
+
+A Ressonância Magnética (RM) é um método de diagnóstico por imagem, estabelecido na prática clínica, utilizada em pesquisas científicas e diagnósticos clínicos. Dada a alta capacidade de diferenciar tecidos e coletar informações bioquímicas, o espectro de aplicações se estende a todas as partes do corpo humano e explora aspectos
+anatômicos e funcionais.
+A física da Ressonância Magnética Nuclear (RMN) aplicada à formação de imagens é complexa e abrangente, uma vez que tópicos como eletromagnetismo, supercondutividade e processamento de sinais têm de ser abordados em conjunto para o entendimento deste método. Esta revisão tem por objetivo explorar de forma
+introdutória e simplificada a física da imagem por ressonância magnética e demonstrar equipamentos, mecanismos e aplicações da RM, servindo como texto de apoio para o aprofundamento do assunto.
+
+## Frequência de Larmor:
+
+No caso do hidrogênio:
+
+$ \lambda = 42.58 mh z /tesla $
+
+Na RM clínica: $0.5 - 1.5 Tesla$
+(EXPLICAR MELHOR SOBRE OS MÉTODOS DE NEUROESTIMULAÇÃO, EQUIPAMENTOS 3T, 7T E 9T)
+
+(CARREGAR GIF ANIMADO DOS SPINS)
+
+(GRADIENTE DE CAMPO)
+
+
+Para ler os arquivos nift e analyze, precisamos utilizar a biblioteca "AnalyzeFMRI".
+
+```{r, echo = FALSE, message = FALSE}
+library(tidyverse)
+```
+
+```{r, cache=FALSE, message = FALSE, warning = FALSE}
+#Instalar biblioteca para ler arquivos nifti e analyze
+#install.packages("AnalyzeFMRI")
+#Carrega biblioteca
+require(AnalyzeFMRI)
+```
+
+```{r}
+#leitura da imagem no arquivo nifti
+volume = f.read.volume("ch2.nii")
+```
+
+```{r}
+# Verificar a dimensão dos dados
+dim(volume)
+```
+
+Fazer figuras desta imagem de ressonância, identificamos pelo eixo X, Y e Z e fixamos conforme a referência que queremos ( sagital, coronal, axial)
+
+```{r, results = 'hide'}
+# Imagem AXIAL na secção z= 90, deixando x e y livres:
+# as.data.frame exibe menos poluido.
+volume[,,90,1]
+```
+
+```{r}
+image(volume[,,90,1])
+```
+
+Alterando para uma escala de cinza:
+
+```{r}
+image(volume[,,90,1], col = gray((1:50)/50))
+```
+(é possível verificar o caldado, ventrículo, giro fusiforme)
+
+Para visualizar no ângulo sagital: 
+```{r}
+#Imagem SAGITAL na fatia x=100, deixo o y e z livres
+image(volume[100,,,1],col=gray((1:50)/50))
+```
+
+Para visualizar no coronal:
+
+```{r}
+#Imagem Coronal na fatia y=100
+image(volume[,100,,1], col = gray((1:50)/50))
+```
+
+Nota: Não é possível identificar facilmente se o lado é esquerdo ou direito. Depende se a notação da imagem coletada é radiológica ou neurológica.
+
+Olhando as coordenadas em voxel (o parâmetro pode ter o primeiro argumento como um intervalo, depende da análise).
+
+```{r}
+#Colocar zero nas coordenadas x=100,y=100,z=150 (voxels)
+volume[100,100,150,1]=0
+```

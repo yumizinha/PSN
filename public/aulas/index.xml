@@ -78,9 +78,16 @@ A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/aulas/6_eyetracker/</guid>
-      <description>(INSERIR INTRODUÇÃO SOBRE) EYE TRACKER. TECNOLOGIAS, FUNCIONAMENTO BIOLÓGICO.
-#leitura de dados dados=read.table(&amp;quot;dadosEYE.txt&amp;quot;,header=TRUE,sep=&amp;quot;;&amp;quot;) dim(dados) ## [1] 9099 30 Para ler as primeiras linhas (só pra saber a cara da tabela sem olhar tudo):
-head(dados) ## RecordingTime..ms. Time.of.Day..h.m.s.ms. Trial Stimulus ## 1 221104.5 21:41:01:349 Trial001 brian-1-recording.avi ## 2 221137.8 21:41:01:382 Trial001 brian-1-recording.avi ## 3 221170.9 21:41:01:415 Trial001 brian-1-recording.avi ## 4 221204.4 21:41:01:449 Trial001 brian-1-recording.avi ## 5 221237.5 21:41:01:482 Trial001 brian-1-recording.avi ## 6 221270.</description>
+      <description>A tecnologia de eye tracking (ET) permite o rastreamento ocular, o que possibilita sua aplicação em diversas áreas das ciências, como saúde, psicologia e até mesmo marketing. O aparelho realiza a gravação do comportamento ocular, ou seja, identificando a localização do olhar, a duração de tempo, a dilatação da pupila e o trajeto do olhar. A importância desta técnica se deve ao fato de que o olhar de um indivíduo está diretamente relacionado com a sua atenção, o que faz com que seja possível compreender, em parte, o processo cognitivo de um usuário.</description>
+    </item>
+    
+    <item>
+      <title>Ressonância magnética</title>
+      <link>/aulas/7_ressonanciamagnetica/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/7_ressonanciamagnetica/</guid>
+      <description>Imagens estruturais T1 e Voxel-based-morphometry (VBM) A Ressonância Magnética (RM) é um método de diagnóstico por imagem, estabelecido na prática clínica, utilizada em pesquisas científicas e diagnósticos clínicos. Dada a alta capacidade de diferenciar tecidos e coletar informações bioquímicas, o espectro de aplicações se estende a todas as partes do corpo humano e explora aspectos anatômicos e funcionais. A física da Ressonância Magnética Nuclear (RMN) aplicada à formação de imagens é complexa e abrangente, uma vez que tópicos como eletromagnetismo, supercondutividade e processamento de sinais têm de ser abordados em conjunto para o entendimento deste método.</description>
     </item>
     
   </channel>
