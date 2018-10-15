@@ -55,15 +55,57 @@ A neuroestimulação pode ser feita de duas formas:
 
 A estimulação magnética transcraniana tem sido útil no tratamento de pacientes com depressão, transtorno bipolar (alternância entre depressão e euforia) e alucinações auditivas (um dos sinais da esquizofrenia). Os sintomas tornam-se mais brandos ou desaparecem.
 
-O método não requer cirurgia. Exames de imagem determinam o ponto do cérebro que precisa ser estimulado. Com base nessa referência, o médico aplica a técnica no consultório. 
+O método não requer cirurgia. Exames de imagem determinam o ponto do cérebro que precisa ser estimulado. Com base nessa referência, o médico aplica a técnica no consultório.
+
+A Potência do aparelho é avaliada pela intensidade do campo magnético, ou seja, do seu magnetismo. Em clínicas o equipamento varia entre menos de 1, até 3 Tesla.
+
+* 1) Potência abaixo de 1 Tesla
+São equipamentos de campo aberto, usados para realizar exames de extremidades corporais, com baixa qualidade de imagens.
+
+* 2) Potência de 1 Tesla: Está presente nos aparelhos fabricados até 2002.
+Tem desenho de campo pouco eficiente, poucas funcionalidades e imagens de baixa qualidade. Utilizados no campo veterinário hoje em dia.
+
+* 3) Potência de 1,5 Tesla: São mais comuns nas clínicas de radiologia.
+É o suficiente para a maioria dos exames e realizado de rotinas nos exames médicos.
+
+* 4) Potência de 3 Tesla: Se encaixa no que chamávamos na residência de equipamento de pesquisa e que acaba sendo incorporado na rotina. O problema aqui são os dispositivos implantáveis antigos como marcapassos que não possuem proteção suficiente para o campo magnético e não há estudos sobre sua utilização em gestantes.
 
 
+Na FMUSP há um equipamento 7T:
+o Magnetom 7T MRI é um equipamento de ultra-alto campo que oferece maior nível de sensibilidade e detalhamento para medidas estruturais e funcionais do organismo humano com ressonância magnética, tecnologia de diagnóstico por imagens que possibilita identificar propriedades de uma substância do corpo humano de modo não invasivo. As bobinas do aparelho interagem com os tecidos, em seu interior, utilizando ondas eletromagnéticas. Em seguida, são construidas as imagens, decodificando o sinal recebido dos átomos de hidrogênio da água que compõe o corpo humano. Tesla (homenagem a Nikola Tesla, inventor que fez grandes contribuições para a utilização da eletricidade e do magnetismo) é uma unidade de medida do campo magnético. A precisão das imagens geradas por um equipamento 7 Tesla, traduzida na resolução e na capacidade de discernir alterações, é mais de 5,4 vezes superior à de equipamentos 3 Tesla e 21 vezes superior à de aparelhos 1,5 Tesla utilizados em hospitais. Um aumento de duas vezes no campo magnético quadruplica a precisão das imagens. 
 
-(EQUIPAMENTOS 3T, 7T E 9T)
 
 (CARREGAR GIF ANIMADO DOS SPINS)
 
 (GRADIENTE DE CAMPO)
+
+Vantagens da MRI:
+
+* Escaneamento de uma corte transversal cerebral em menos de 2 segundos, permitindo mapear a maior parte do cérebro em um ou dois minutos;
+
+* Resoluções espaciais muito mais precisas de 2 a 3mm, conseguindo coletar informações em voxels (união volume com pixel) de aproximadamente o o tamanho de um grão de arroz;
+
+* Não requer a utilização de contraste possibilitando um mapeamento mais extenso, e acaba com o receio de ingestão de materiais radioativos.
+
+Desvantagens do MRI:
+
+* Alguns estudiosos da área dizem que o aumento detectado no fluxo sanguíneo pode estar alimentando mais de uma operação, devido ao fato da ação neuronal levar milionésimos de segundos, enquanto o afluxo de sangue continua por dois a seis segundos;
+
+*  Um vez que cada voxel encerra milhares de neurônios, pode ser necessária a ativação de milhares ou mesmo milhões deles para acender uma região cerebral, é como se uma seção inteira de um estádio tivesse de gritar para ser ouvida;
+
+* Em alguns casos um pequeno grupo de neurônios puxando pouco sangue, ou um circuito fino de neurônios conectado a regiões mais amplas, podem executar funções tão cruciais quanto um grupo maior, mas tanto passarem desapercebidos quanto serem identificados como uma função de menor importância;
+
+* É possível que alguns neurônios funcionem melhor do que outros, e assim consumindo menos sangue, o que pode representar erroneamente a neurodinâmica real.
+
+# Leitura dos dados de MRI:
+
+Com esses equipamentos é possível extrair dados de MRI nas direções axial, coronal e sagital:
+
+* O plano horizontal, transverso ou axialatravessa o eixo menor do corpo, do dorso até o ventre , isto é, da posição posterior para a anterior. Divide a estrutura atravessada em porções superior e inferior.
+
+* Plano coronal ou plano frontal é um dos tipos de planos anatômicos, dividindo o corpo com cortes verticais e perpendiculares ao plano mediano. Assim é possível definir a parte ventral/anterior (frente) da parte dorsal/posterior (costas).
+
+* O plano sagital mediano (ou plano mediano) divide o corpo em duas metades iguais, direita e esquerda. 2. Plano Frontal: são todos os planos verticais com trajeto paralelo à sutura coronal do crânio (ou da “testa”). O plano coronal divide o corpo em duas metades diferentes, anterior e posterior.
 
 
 Para ler os arquivos nift e analyze, precisamos utilizar a biblioteca "AnalyzeFMRI".
@@ -89,7 +131,7 @@ volume = f.read.volume("ch2.nii")
 dim(volume)
 ```
 
-Fazer figuras desta imagem de ressonância, identificamos pelo eixo X, Y e Z e fixamos conforme a referência que queremos ( sagital, coronal, axial)
+Fazer figuras desta imagem de ressonância, identificamos pelo eixo X, Y e Z e fixamos conforme a referência que queremos (sagital, coronal, axial)
 
 ```{r, results = 'hide'}
 # Imagem AXIAL na secção z= 90, deixando x e y livres:

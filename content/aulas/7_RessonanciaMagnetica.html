@@ -46,9 +46,47 @@ weight: 70
 <p>A neuroestimulação pode ser feita de duas formas: * a) com um aparelho que libera ondas magnéticas (estimulação magnética transcraniana) e é colocado próximo da cabeça * b) com eletrodos implantados no cérebro (estimulação elétrica)</p>
 <p>A estimulação magnética transcraniana tem sido útil no tratamento de pacientes com depressão, transtorno bipolar (alternância entre depressão e euforia) e alucinações auditivas (um dos sinais da esquizofrenia). Os sintomas tornam-se mais brandos ou desaparecem.</p>
 <p>O método não requer cirurgia. Exames de imagem determinam o ponto do cérebro que precisa ser estimulado. Com base nessa referência, o médico aplica a técnica no consultório.</p>
-<p>(EQUIPAMENTOS 3T, 7T E 9T)</p>
+<p>A Potência do aparelho é avaliada pela intensidade do campo magnético, ou seja, do seu magnetismo. Em clínicas o equipamento varia entre menos de 1, até 3 Tesla.</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Potência abaixo de 1 Tesla São equipamentos de campo aberto, usados para realizar exames de extremidades corporais, com baixa qualidade de imagens.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Potência de 1 Tesla: Está presente nos aparelhos fabricados até 2002. Tem desenho de campo pouco eficiente, poucas funcionalidades e imagens de baixa qualidade. Utilizados no campo veterinário hoje em dia.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Potência de 1,5 Tesla: São mais comuns nas clínicas de radiologia. É o suficiente para a maioria dos exames e realizado de rotinas nos exames médicos.</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Potência de 3 Tesla: Se encaixa no que chamávamos na residência de equipamento de pesquisa e que acaba sendo incorporado na rotina. O problema aqui são os dispositivos implantáveis antigos como marcapassos que não possuem proteção suficiente para o campo magnético e não há estudos sobre sua utilização em gestantes.</li>
+</ol></li>
+</ul>
+<p>Na FMUSP há um equipamento 7T: o Magnetom 7T MRI é um equipamento de ultra-alto campo que oferece maior nível de sensibilidade e detalhamento para medidas estruturais e funcionais do organismo humano com ressonância magnética, tecnologia de diagnóstico por imagens que possibilita identificar propriedades de uma substância do corpo humano de modo não invasivo. As bobinas do aparelho interagem com os tecidos, em seu interior, utilizando ondas eletromagnéticas. Em seguida, são construidas as imagens, decodificando o sinal recebido dos átomos de hidrogênio da água que compõe o corpo humano. Tesla (homenagem a Nikola Tesla, inventor que fez grandes contribuições para a utilização da eletricidade e do magnetismo) é uma unidade de medida do campo magnético. A precisão das imagens geradas por um equipamento 7 Tesla, traduzida na resolução e na capacidade de discernir alterações, é mais de 5,4 vezes superior à de equipamentos 3 Tesla e 21 vezes superior à de aparelhos 1,5 Tesla utilizados em hospitais. Um aumento de duas vezes no campo magnético quadruplica a precisão das imagens.</p>
 <p>(CARREGAR GIF ANIMADO DOS SPINS)</p>
 <p>(GRADIENTE DE CAMPO)</p>
+<p>Vantagens da MRI:</p>
+<ul>
+<li><p>Escaneamento de uma corte transversal cerebral em menos de 2 segundos, permitindo mapear a maior parte do cérebro em um ou dois minutos;</p></li>
+<li><p>Resoluções espaciais muito mais precisas de 2 a 3mm, conseguindo coletar informações em voxels (união volume com pixel) de aproximadamente o o tamanho de um grão de arroz;</p></li>
+<li><p>Não requer a utilização de contraste possibilitando um mapeamento mais extenso, e acaba com o receio de ingestão de materiais radioativos.</p></li>
+</ul>
+<p>Desvantagens do MRI:</p>
+<ul>
+<li><p>Alguns estudiosos da área dizem que o aumento detectado no fluxo sanguíneo pode estar alimentando mais de uma operação, devido ao fato da ação neuronal levar milionésimos de segundos, enquanto o afluxo de sangue continua por dois a seis segundos;</p></li>
+<li><p>Um vez que cada voxel encerra milhares de neurônios, pode ser necessária a ativação de milhares ou mesmo milhões deles para acender uma região cerebral, é como se uma seção inteira de um estádio tivesse de gritar para ser ouvida;</p></li>
+<li><p>Em alguns casos um pequeno grupo de neurônios puxando pouco sangue, ou um circuito fino de neurônios conectado a regiões mais amplas, podem executar funções tão cruciais quanto um grupo maior, mas tanto passarem desapercebidos quanto serem identificados como uma função de menor importância;</p></li>
+<li><p>É possível que alguns neurônios funcionem melhor do que outros, e assim consumindo menos sangue, o que pode representar erroneamente a neurodinâmica real.</p></li>
+</ul>
+</div>
+</div>
+<div id="leitura-dos-dados-de-mri" class="section level1">
+<h1>Leitura dos dados de MRI:</h1>
+<p>Com esses equipamentos é possível extrair dados de MRI nas direções axial, coronal e sagital:</p>
+<ul>
+<li><p>O plano horizontal, transverso ou axialatravessa o eixo menor do corpo, do dorso até o ventre , isto é, da posição posterior para a anterior. Divide a estrutura atravessada em porções superior e inferior.</p></li>
+<li><p>Plano coronal ou plano frontal é um dos tipos de planos anatômicos, dividindo o corpo com cortes verticais e perpendiculares ao plano mediano. Assim é possível definir a parte ventral/anterior (frente) da parte dorsal/posterior (costas).</p></li>
+<li><p>O plano sagital mediano (ou plano mediano) divide o corpo em duas metades iguais, direita e esquerda. 2. Plano Frontal: são todos os planos verticais com trajeto paralelo à sutura coronal do crânio (ou da “testa”). O plano coronal divide o corpo em duas metades diferentes, anterior e posterior.</p></li>
+</ul>
 <p>Para ler os arquivos nift e analyze, precisamos utilizar a biblioteca “AnalyzeFMRI”.</p>
 <pre class="r"><code>#Instalar biblioteca para ler arquivos nifti e analyze
 #install.packages(&quot;AnalyzeFMRI&quot;)
@@ -59,7 +97,7 @@ volume = f.read.volume(&quot;ch2.nii&quot;)</code></pre>
 <pre class="r"><code># Verificar a dimensão dos dados
 dim(volume)</code></pre>
 <pre><code>## [1] 181 217 181   1</code></pre>
-<p>Fazer figuras desta imagem de ressonância, identificamos pelo eixo X, Y e Z e fixamos conforme a referência que queremos ( sagital, coronal, axial)</p>
+<p>Fazer figuras desta imagem de ressonância, identificamos pelo eixo X, Y e Z e fixamos conforme a referência que queremos (sagital, coronal, axial)</p>
 <pre class="r"><code># Imagem AXIAL na secção z= 90, deixando x e y livres:
 # as.data.frame exibe menos poluido.
 volume[,,90,1]</code></pre>
@@ -80,5 +118,4 @@ image(volume[,100,,1], col = gray((1:50)/50))</code></pre>
 <p>Olhando as coordenadas em voxel (o parâmetro pode ter o primeiro argumento como um intervalo, depende da análise).</p>
 <pre class="r"><code>#Colocar zero nas coordenadas x=100,y=100,z=150 (voxels)
 volume[100,100,150,1]=0</code></pre>
-</div>
 </div>
