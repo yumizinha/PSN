@@ -13,17 +13,17 @@
     <title>Eye Tracking :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1539540342" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1539540342" rel="stylesheet">
-    <link href="../../css/hybrid.css?1539540342" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1539540342" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1539540342" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1539540342" rel="stylesheet">
-    <link href="../../css/theme.css?1539540342" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1539540342" rel="stylesheet">
+    <link href="../../css/nucleus.css?1539578818" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1539578818" rel="stylesheet">
+    <link href="../../css/hybrid.css?1539578818" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1539578818" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1539578818" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1539578818" rel="stylesheet">
+    <link href="../../css/theme.css?1539578818" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1539578818" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1539540342"></script>
+    <script src="../../js/jquery-2.x.min.js?1539578818"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1539540342"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1539540342"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1539578818"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1539578818"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1539540342"></script>
+<script type="text/javascript" src="../../js/search.js?1539578818"></script>
 
     
   </div>
@@ -382,6 +382,8 @@
 
 <p>A tecnologia de eye tracking (ET) permite o rastreamento ocular, o que possibilita sua aplicação em diversas áreas das ciências, como saúde, psicologia e até mesmo marketing. O aparelho realiza a gravação do comportamento ocular, ou seja, identificando a localização do olhar, a duração de tempo, a dilatação da pupila e o trajeto do olhar. A importância desta técnica se deve ao fato de que o olhar de um indivíduo está diretamente relacionado com a sua atenção, o que faz com que seja possível compreender, em parte, o processo cognitivo de um usuário.</p>
 <p>A distância entre o reflexo que sai da pupila e o reflexo da luz observado na córnea é o que permite identificar a localização do olhar de uma pessoa, esse ponto onde a pessoa fixa o olhar é chamado de “fixação”. A fixação geralmente dura entre 100 e 500 ms (milissegundos). O trajeto que se produz entre duas fixações é chamado de sacada (saccade).</p>
+<p>A hipótese trabalhada nesse tópico é baseada na relação entre as substâncias noradrelina e norepinefrina que associadas ao núcleos cerúleos permitem realizar a seguinte associação: * Aumento da atividade cerebral <span class="math inline">\(\rightarrow\)</span> dilatação da pupila * Repouso o sistema parassimpático $a pupila se contrai.]</p>
+<p>Conforme ocorre a dilatação do diâmetro da pupila, podemos fazer inferências sobre a atividade cerebral dos indivíduos, como por exemplo determinando uma média dos sinais referentes ao diâmetro da pupila e comparar esses valores entre as condições de repouso e tarefa.</p>
 <pre class="r"><code>#leitura de dados
 dados=read.table(&quot;dadosEYE.txt&quot;,header=TRUE,sep=&quot;;&quot;)
 
@@ -460,7 +462,7 @@ dim(dados)</code></pre>
 ## 5                     -                  -                  -       -
 ## 6                     -                  -                  -       -</code></pre>
 <p>(assim é possível verificar se está tudo ok e se não tem problema algum com os arquivos)</p>
-<p>A função colnames ajuda a identificar o nome das colunas.</p>
+<p>A função “colnames”&quot; ajuda a identificar o nome das colunas.</p>
 <pre class="r"><code>#Leia os nomes das colunas 
 colnames(dados)</code></pre>
 <pre><code>##  [1] &quot;RecordingTime..ms.&quot;               &quot;Time.of.Day..h.m.s.ms.&quot;          
@@ -483,9 +485,19 @@ colnames(dados)</code></pre>
 dados[1:10,1]</code></pre>
 <pre><code>##  [1] 221104.5 221137.8 221170.9 221204.4 221237.5 221270.8 221304.0
 ##  [8] 221337.5 221370.7 221403.9</code></pre>
-<p>Identificando a diferença dos elementos com o elemento anterior:</p>
-<pre class="r"><code>#Identificamos a diferença entre um elemento menos o #anterior, para isso usamos o comando &quot;diff&quot; para ter 
+<p>Para conhecer a taxa de amostragem fazemos um elemento menos o anterior, para isso usamos o comando “diff” e tiramos a média:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Identificando a diferença dos elementos com o elemento anterior:</li>
+</ol></li>
+</ul>
+<pre class="r"><code>#Identificamos a diferença entre um elemento menos o anterior, para isso usamos o comando &quot;diff&quot;:
 diff(dados[,1])</code></pre>
+<ul>
+<li><ol start="2" style="list-style-type: decimal">
+<li>O cálculo da média proporciona a identificação do intervalo, e dessa forma é possível identificar a taxa de amostragem:</li>
+</ol></li>
+</ul>
 <pre class="r"><code>DIFF = mean(diff(dados$RecordingTime..ms.))
 
 #A taxa de amostragem em Hertz é dada por:
@@ -501,17 +513,20 @@ plot(dados$RecordingTime..ms.*1000,
 <p>Para essa análise, pretendemos identificar os picos de cima e os de baixo (muito sensíveis posso considerar como missing data).</p>
 <p>Identificando o diâmetro da pupila direita e os dados que quero ignorar:</p>
 <pre class="r"><code>#Sinal do diametro da pupila direita
-pupilD=dados$Pupil.Diameter.Right..mm.
+pupilD = dados$Pupil.Diameter.Right..mm.
 
 #Detectar outliers, piscadas e missing data
 IX=which(pupilD&lt;4 | pupilD&gt;6)
 pupilD[IX]=NA</code></pre>
-<p>Delineamento do experimento: * 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo) * Cada época de 30s se refere a HZ<em>30 caselas no vetor pupilD. </em> Devemos criar um vetor indicando a condição para cada casela do vetor pupilD:</p>
+<p>Delineamento do experimento: * 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo), fazendo a subtração de 13 a partir do 2000 (e decrescendo!) * Cada época de 30s se refere a HZ<em>30 caselas no vetor pupilD. </em> Devemos criar um vetor indicando a condição para cada casela do vetor pupilD: * O vetor CONDICAO armazenará os dois tipos de estímulos existentes, inicialmente marcado como 1 para todos os dados</p>
 <pre class="r"><code>CONDICAO = array(1, length(pupilD))</code></pre>
 <p>Durante os períodos de contagem de subtração mental (a cada 30s) há um repouso:</p>
-<pre class="r"><code>inicio = ceiling(HZ*30)
+<pre class="r"><code># identificando o inicio do intervalo, com base nos 30s de trial:
+inicio = ceiling(HZ*30)
+# calculando o teto, que é o final do trial, 30s depois:
 final = ceiling((HZ*30)+(HZ*30))</code></pre>
-<p>Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado é reproduzir as linhas acima num laço e identificar as condições e intervalos. A grosso modo o intervalo seria desta forma:</p>
+<p>Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado mesmo seria reproduzir as linhas acima num laço e identificar as condições e intervalos.</p>
+<p>Uma vez identificado os períodos do trial, atualizar o vetor CONDICAO para os parâmetros para 2 nos intervalos em que ocorre o estímulo:</p>
 <pre class="r"><code>#Colocar 2 nas caselas durante os periodos de subtracao mental
 CONDICAO[902:1803]=2
 CONDICAO[2706:3607]=2
@@ -525,19 +540,23 @@ boxplot(pupilD[which(CONDICAO==1)],pupilD[which(CONDICAO==2)])
 boxplot(pupilD~CONDICAO)</code></pre>
 <p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Além disso, queremos avaliar a transição repouso da tarefa para cada bloco em cada região.</p>
+<p>Olhando apenas uma condição:</p>
+<pre class="r"><code>plot(1:1803,pupilD[1:1803],type=&quot;l&quot;)</code></pre>
+<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Olhando todas as condições:</p>
 <pre class="r"><code>plot(1:1803,pupilD[1:1803],type=&quot;l&quot;)
 lines(1:1804,pupilD[1804:3607],col=2)
 lines(1:1804,pupilD[3608:5411],col=3)
 lines(1:1804,pupilD[5412:7215],col=4)
 lines(1:1804,pupilD[7216:9019],col=6)</code></pre>
-<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Para visualização dos dados, analisamos a curva média da pupila nesses períodos.</p>
-<pre class="r"><code>#calcular a curva media
-MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupilD[7216:9019])/5
-
-plot(60*(1:1804)/1804,MEDIA,type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;,ylab=&quot;Diametro(mm)&quot;)
-abline(v=30,lty=3)</code></pre>
 <p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>É possível ver uma tendência dos dados. Para uma visualização melhor dos dados, analisamos a curva média da pupila nesses períodos:</p>
+<pre class="r"><code>#calcular a curva media
+MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupilD[7216:9019])/5</code></pre>
+<p>No caso do plot, estamos multiplicando por 60 por se tratar de um ciclo de 30s de atividade e 30s de repouso:</p>
+<pre class="r"><code>plot(60*(1:1804)/1804,MEDIA,type=&quot;l&quot;,xlab=&quot;Tempo(s)&quot;,ylab=&quot;Diametro(mm)&quot;)
+abline(v=30,lty=3)</code></pre>
+<p><img src="../../aulas/6_EyeTracker_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>A dificuldade nestes exercícios é a identificação das caselas a serem trabalhadas.</p>
 
 
@@ -743,20 +762,20 @@ abline(v=30,lty=3)</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1539540342"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1539540342"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1539540342"></script>
-    <script src="../../js/jquery.sticky.js?1539540342"></script>
-    <script src="../../js/featherlight.min.js?1539540342"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1539540342"></script>
-    <script src="../../js/highlight.pack.js?1539540342"></script>
+    <script src="../../js/clipboard.min.js?1539578818"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1539578818"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1539578818"></script>
+    <script src="../../js/jquery.sticky.js?1539578818"></script>
+    <script src="../../js/featherlight.min.js?1539578818"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1539578818"></script>
+    <script src="../../js/highlight.pack.js?1539578818"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1539540342"></script>
-    <script src="../../js/learn.js?1539540342"></script>
-    <script src="../../js/hugo-learn.js?1539540342"></script>
+    <script src="../../js/modernizr.custom.71422.js?1539578818"></script>
+    <script src="../../js/learn.js?1539578818"></script>
+    <script src="../../js/hugo-learn.js?1539578818"></script>
 
-    <link href="../../mermaid/mermaid.css?1539540342" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1539540342"></script>
+    <link href="../../mermaid/mermaid.css?1539578818" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1539578818"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

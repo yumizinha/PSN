@@ -6,14 +6,16 @@ output: html_document
 weight: 60
 ---
 
-A tecnologia de eye tracking (ET) permite o rastreamento ocular, o que possibilita sua aplicação em diversas áreas das ciências, como saúde, psicologia e até mesmo marketing. O aparelho realiza a gravação do comportamento ocular, ou seja, identificando a localização do olhar, a duração
-de tempo, a dilatação da pupila e o trajeto do olhar. 
-A importância desta técnica se deve ao fato de que o olhar de um indivíduo está diretamente relacionado com a sua atenção, o que faz com que seja possível compreender, em parte, o processo
-cognitivo de um usuário. 
+A tecnologia de eye tracking (ET) permite o rastreamento ocular, o que possibilita sua aplicação em diversas áreas das ciências, como saúde, psicologia e até mesmo marketing. O aparelho realiza a gravação do comportamento ocular, ou seja, identificando a localização do olhar, a duração de tempo, a dilatação da pupila e o trajeto do olhar. 
+A importância desta técnica se deve ao fato de que o olhar de um indivíduo está diretamente relacionado com a sua atenção, o que faz com que seja possível compreender, em parte, o processo cognitivo de um usuário. 
 
-A distância entre o reflexo que sai da pupila e o reflexo da luz observado na córnea é o que permite identificar a localização do olhar de uma pessoa, esse ponto onde
-a pessoa fixa o olhar é chamado de “fixação”. A fixação geralmente dura entre 100 e 500 ms (milissegundos). O trajeto que se produz entre duas fixações é chamado de sacada (saccade).
+A distância entre o reflexo que sai da pupila e o reflexo da luz observado na córnea é o que permite identificar a localização do olhar de uma pessoa, esse ponto onde a pessoa fixa o olhar é chamado de “fixação”. A fixação geralmente dura entre 100 e 500 ms (milissegundos). O trajeto que se produz entre duas fixações é chamado de sacada (saccade).
 
+A hipótese trabalhada nesse tópico é baseada na relação entre as substâncias noradrelina e norepinefrina que associadas ao núcleos cerúleos permitem realizar a seguinte associação: 
+* Aumento da atividade cerebral $\rightarrow$ dilatação da pupila
+* Repouso o sistema parassimpático $\rightarrow a pupila se contrai.]
+
+Conforme ocorre a dilatação do diâmetro da pupila, podemos fazer inferências sobre a atividade cerebral dos indivíduos, como por exemplo determinando uma média dos sinais referentes ao diâmetro da pupila e comparar esses valores entre as condições de repouso e tarefa.
 
 
 ```{r}
@@ -32,7 +34,7 @@ head(dados)
 
 (assim é possível verificar se está tudo ok e se não tem problema algum com os arquivos)
 
-A função colnames ajuda a identificar o nome das colunas.
+A função "colnames"" ajuda a identificar o nome das colunas.
 
 ```{r}
 #Leia os nomes das colunas 
@@ -49,12 +51,16 @@ Entre um MILISEGUNDO e outro, temos um intervalo de sinais coletados.
 dados[1:10,1]
 ```
 
-Identificando a diferença dos elementos com o elemento anterior:
+Para conhecer a taxa de amostragem fazemos um elemento menos o anterior, para isso usamos o comando "diff" e tiramos a média:
+
+* 1) Identificando a diferença dos elementos com o elemento anterior:
 
 ```{r, results='hide'}
-#Identificamos a diferença entre um elemento menos o #anterior, para isso usamos o comando "diff" para ter 
+#Identificamos a diferença entre um elemento menos o anterior, para isso usamos o comando "diff":
 diff(dados[,1])
 ```
+
+* 2) O cálculo da média proporciona a identificação do intervalo, e dessa forma é possível identificar a taxa de amostragem:
 
 ```{r, results='hide'}
 DIFF = mean(diff(dados$RecordingTime..ms.))
@@ -63,7 +69,6 @@ DIFF = mean(diff(dados$RecordingTime..ms.))
 HZ=1000*1/DIFF
 
 ```
-
 
 No caso do cálculo da frequência, HZ, está multiplicado por 1000 pois a coleta está em milisegundos e a frequência tem que considerar segundos.
 
@@ -85,7 +90,7 @@ Identificando o diâmetro da pupila direita e os dados que quero ignorar:
 
 ```{r}
 #Sinal do diametro da pupila direita
-pupilD=dados$Pupil.Diameter.Right..mm.
+pupilD = dados$Pupil.Diameter.Right..mm.
 
 #Detectar outliers, piscadas e missing data
 IX=which(pupilD<4 | pupilD>6)
@@ -93,9 +98,10 @@ pupilD[IX]=NA
 ```
 
 Delineamento do experimento:
-* 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo)
+* 30 segundos em repouso seguidos de 30s de tarefa (repetindo ciclo), fazendo a subtração de 13 a partir do 2000 (e decrescendo!)
 * Cada época de 30s se refere a HZ*30 caselas no vetor pupilD.
 * Devemos criar um vetor indicando a condição para cada casela do vetor pupilD:
+* O vetor CONDICAO armazenará os dois tipos de estímulos existentes, inicialmente marcado como 1 para todos os dados 
 
 ```{r}
 CONDICAO = array(1, length(pupilD))
@@ -104,12 +110,15 @@ CONDICAO = array(1, length(pupilD))
 Durante os períodos de contagem de subtração mental (a cada 30s) há um repouso:
 
 ```{r}
+# identificando o inicio do intervalo, com base nos 30s de trial:
 inicio = ceiling(HZ*30)
+# calculando o teto, que é o final do trial, 30s depois:
 final = ceiling((HZ*30)+(HZ*30))
 ```
 
-Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado é reproduzir as linhas acima num laço e identificar as condições e intervalos.
-A grosso modo o intervalo seria desta forma:
+Calculando as condições (para aula fizemos de uma forma manual para ficar mais rápido). O recomendado mesmo seria reproduzir as linhas acima num laço e identificar as condições e intervalos.
+
+Uma vez identificado os períodos do trial, atualizar o vetor CONDICAO para os parâmetros para 2 nos intervalos em que ocorre o estímulo:
 
 ```{r}
 #Colocar 2 nas caselas durante os periodos de subtracao mental
@@ -132,6 +141,14 @@ boxplot(pupilD~CONDICAO)
 
 Além disso, queremos avaliar a transição repouso da tarefa para cada bloco em cada região.
 
+Olhando apenas uma condição:
+
+```{r}
+plot(1:1803,pupilD[1:1803],type="l")
+```
+
+Olhando todas as condições:
+
 ```{r}
 plot(1:1803,pupilD[1:1803],type="l")
 lines(1:1804,pupilD[1804:3607],col=2)
@@ -140,14 +157,21 @@ lines(1:1804,pupilD[5412:7215],col=4)
 lines(1:1804,pupilD[7216:9019],col=6)
 ```
 
-Para visualização dos dados, analisamos a curva média da pupila nesses períodos.
+
+É possível ver uma tendência dos dados. Para uma visualização melhor dos dados, analisamos a curva média da pupila nesses períodos:
 
 ```{r}
 #calcular a curva media
 MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupilD[7216:9019])/5
+```
 
+
+No caso do plot, estamos multiplicando por 60 por se tratar de um ciclo de 30s de atividade e 30s de repouso:
+
+```{r}
 plot(60*(1:1804)/1804,MEDIA,type="l",xlab="Tempo(s)",ylab="Diametro(mm)")
 abline(v=30,lty=3)
+
 ```
 
 A dificuldade nestes exercícios é a identificação das caselas a serem trabalhadas.
