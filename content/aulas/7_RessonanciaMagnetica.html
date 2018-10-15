@@ -10,7 +10,12 @@ weight: 70
 
 <div id="imagens-estruturais-t1-e-voxel-based-morphometry-vbm" class="section level1">
 <h1>Imagens estruturais T1 e Voxel-based-morphometry (VBM)</h1>
-<p>A Ressonância Magnética (RM) é um método de diagnóstico por imagem, estabelecido na prática clínica, utilizada em pesquisas científicas e diagnósticos clínicos. Dada a alta capacidade de diferenciar tecidos e coletar informações bioquímicas, o espectro de aplicações se estende a todas as partes do corpo humano e explora aspectos anatômicos e funcionais. A física da Ressonância Magnética Nuclear (RMN) aplicada à formação de imagens é complexa e abrangente, uma vez que tópicos como eletromagnetismo, supercondutividade e processamento de sinais têm de ser abordados em conjunto para o entendimento deste método. Esta revisão tem por objetivo explorar de forma introdutória e simplificada a física da imagem por ressonância magnética e demonstrar equipamentos, mecanismos e aplicações da RM, servindo como texto de apoio para o aprofundamento do assunto.</p>
+<p>A Ressonância Magnética (RM) é um método de diagnóstico por imagem, estabelecido na prática clínica, utilizada em pesquisas científicas e diagnósticos clínicos. Dada a alta capacidade de diferenciar tecidos e coletar informações bioquímicas, o espectro de aplicações se estende a todas as partes do corpo humano e explora aspectos anatômicos e funcionais. A física da Ressonância Magnética Nuclear (RMN) aplicada à formação de imagens é complexa e abrangente, uma vez que tópicos como eletromagnetismo, supercondutividade e processamento de sinais têm de ser abordados em conjunto para o entendimento deste método, usando fortes campos magnéticos e ondas de rádio para obtenção de imagens de múltiplas partes do corpo. Esta revisão tem por objetivo explorar de forma introdutória e simplificada a física da imagem por ressonância magnética e demonstrar equipamentos, mecanismos e aplicações da RM, servindo como texto de apoio para o aprofundamento do assunto.</p>
+<p>As imagens cerebrais de ressonância magnética podem ser separadas em duas grandes categorias: a estrutural, que lida com o estudo da estrutura do cérebro e o diagnóstico de doenças e lesões, e a funcional que é capaz de detectar variações no fluxo sanguíneo em resposta à atividade neural.</p>
+<p>Como não consegui explicar bem o fenômeno, segue a explicação das notas de aula da Cândida Barreto:</p>
+<p>Os núcleos atômicos contêm prótons e nêutrons com movimento intrínseco de rotação. Os Prótons contêm carga elétrica, podemos considerar que a carga elétrica do próton é distribuída e rotacional ao longo do eixo central. A Distribuição de carga em movimento de rotação produzem um campo magnético de modo que o arranjo é análogo a um imã, tal que o próton pode ser visto como um dipolo magnético.</p>
+<p>Em muitos núcleos os prótons e nêutrons estão emparelhados de tal forma que seus spins e momentos magnéticos se cancelam. Núcleo com número ímpar de prótons e nêutrons exibe spin e momento magnético. O átomo de hidrogênio possui um único próton e é o elemento mais abundante no corpo, tal que este gera o sinal de ressonância magnética nuclear mais forte entre os núcleos. Normalmente os momentos magnéticos nucleares têm direção aleatória. Sob ação de um forte campo magnético estático externo o próton vai se comportar como uma pequena bússola e a direção do seu momento magnético tende a se alinhar ao campo externo.</p>
+<p>A detecção do sinal do sinal de RMN é feita a partir da perturbação no vetor de magnetização de tal forma a torná-lo mensurável. É feito uma Irradiação dos prótons por um sinal de rádio frequência (RF) com fótons de energia igual à diferença entre os estados que provoca a transição de um certo número de prótons para o estado antiparalelo, de modo que, ao retirar o estimo de RF ocorre um relaxamento longitudinal de modo que <span class="math inline">\(M_0\)</span> volta ao estado paralelo. Já na componente transversal, o pulso de RF oscila com frequência igual à frequência dos prótons (Frequência de Larmor), de modo que os prótons começam a precessionar em fase, produzindo um sinal magnético coerente que pode ser medido.</p>
 <div id="frequencia-de-larmor" class="section level2">
 <h2>Frequência de Larmor:</h2>
 <p>Em 1897, o físico inglês Joseph Larmor (1857-1942) demostrou que o efeito de um campo magnético sobre partículas carregadas que descrevem órbitas circulares era o de superpor à frequência precessional em torno do campo externo, conhecida desde então como Frequência de Larmor.</p>
@@ -20,10 +25,28 @@ weight: 70
 <p>$ = 42.58 mh z /tesla $</p>
 <p>Na RM clínica: <span class="math inline">\(0.5 - 1.5 Tesla\)</span></p>
 <p>O método de neuroestimulação cerebral teve seus primeiros estudos nos anos 90. Novas pesquisas revelam que é eficaz e tem dado sinais de que será cada vez mais usado. Alguns hospitais e clínicas começam a oferecê-lo no Brasil.</p>
+<p>A diferença entre T1 e T2 está na intensidade de sinal baseada em tempos de relaxamento T1, o TR da sequência é encurtado. Uma sequência de TR curto e TE curto produz uma imagem ponderada em T1. Isso permite que estruturas com tempos de relaxamento T1 curtos sejam brilhantes (gordura, líquidos proteinogênicos) e estruturas com T1 longo sejam escuras (neoplasia, edema, inflamação, líquido puro). As imagens ponderadas em T2 já não são muito nítidas e são utilizadas para analises da ressonância magnética funcional(fMRI). Assim, de modo geral, a criação de uma imagem por RMN pode ser descrita pelos seguintes passos:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Aplicar campo magnético estático.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Selecionar corte aplicando campo magnético em gradiente.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Aplicar pulsos de RF.</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Receber sinal de RF.</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Converter o sinal em imagem.</li>
+</ol></li>
+</ul>
 <p>A neuroestimulação pode ser feita de duas formas: * a) com um aparelho que libera ondas magnéticas (estimulação magnética transcraniana) e é colocado próximo da cabeça * b) com eletrodos implantados no cérebro (estimulação elétrica)</p>
 <p>A estimulação magnética transcraniana tem sido útil no tratamento de pacientes com depressão, transtorno bipolar (alternância entre depressão e euforia) e alucinações auditivas (um dos sinais da esquizofrenia). Os sintomas tornam-se mais brandos ou desaparecem.</p>
 <p>O método não requer cirurgia. Exames de imagem determinam o ponto do cérebro que precisa ser estimulado. Com base nessa referência, o médico aplica a técnica no consultório.</p>
-<p>(EXPLICAR MELHOR SOBRE OS MÉTODOS DE NEUROESTIMULAÇÃO, EQUIPAMENTOS 3T, 7T E 9T)</p>
+<p>(EQUIPAMENTOS 3T, 7T E 9T)</p>
 <p>(CARREGAR GIF ANIMADO DOS SPINS)</p>
 <p>(GRADIENTE DE CAMPO)</p>
 <p>Para ler os arquivos nift e analyze, precisamos utilizar a biblioteca “AnalyzeFMRI”.</p>
