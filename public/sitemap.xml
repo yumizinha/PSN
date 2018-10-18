@@ -39,6 +39,10 @@
   </url>
   
   <url>
+    <loc>/aulas/8_fmri/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
   </url>

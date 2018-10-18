@@ -1,0 +1,45 @@
+---
+title: "fMRI"
+author: "Amanda Yumi"
+date: "10 de outubro de 2018"
+output: html_document
+weight: 80
+---
+
+
+
+<p>Leitura dos dados:</p>
+<pre class="r"><code>#Carrega a biblioteca
+require(AnalyzeFMRI)</code></pre>
+<pre><code>## Carregando pacotes exigidos: AnalyzeFMRI</code></pre>
+<pre><code>## Carregando pacotes exigidos: R.matlab</code></pre>
+<pre><code>## R.matlab v3.6.1 (2016-10-19) successfully loaded. See ?R.matlab for help.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;R.matlab&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     getOption, isOpen</code></pre>
+<pre><code>## Carregando pacotes exigidos: fastICA</code></pre>
+<pre><code>## Carregando pacotes exigidos: tcltk</code></pre>
+<pre><code>## Carregando pacotes exigidos: tkrplot</code></pre>
+<pre class="r"><code>#Leitura dos dados
+volumes=f.read.volume(&quot;Stroop.nii&quot;)
+
+#Checar as dimensoes da imagem
+dim(volumes)</code></pre>
+<pre><code>## [1]  45  54  45 180</code></pre>
+<pre class="r"><code>#Plotar uma imagem axial do primeiro volume
+image(volumes[,,25,1],col=gray((0:100)/100))</code></pre>
+<p><img src="/aulas/8_fMRI_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Verificar em todos os pontos do tempo:</p>
+<pre class="r"><code>#Plotar o sinal BOLD da imagem preprocessada 
+#no voxel=x=20,y=30,z=25
+ts.plot(volumes[20,30,25,])</code></pre>
+<p><img src="/aulas/8_fMRI_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Para marcar a posição do voxel:</p>
+<pre class="r"><code>volumes[20,30,25,]=0
+image(volumes[,,25,1], col=gray((0:100)/100))</code></pre>
+<p><img src="/aulas/8_fMRI_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>dim(volumes)</code></pre>
+<pre><code>## [1]  45  54  45 180</code></pre>
+<p>Próxima prova: não cobrará código. Conceito de voxel based morphometry (VBM) e de Ressonância Magnética Funcional (aula de hoje).</p>

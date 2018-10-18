@@ -214,3 +214,15 @@ boxplot(MEDIA[1:902],MEDIA[903:1804])
 ```
 
 
+```{r, results='hide', }
+mediarep = mean(pupilD[which(CONDICAO==1)])
+# Desvio padrão da condição repouso:
+desviorep = sd(pupilD[which(CONDICAO==1)])
+
+# Media da condição tarefa:
+media = mean(pupilD[which(CONDICAO==2)])
+# Desvio padrão da condição tarefa:
+desviopad = sd(pupilD[which(CONDICAO==2)])
+```
+
+

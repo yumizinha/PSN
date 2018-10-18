@@ -171,3 +171,6 @@ Olhando as coordenadas em voxel (o parâmetro pode ter o primeiro argumento como
 #Colocar zero nas coordenadas x=100,y=100,z=150 (voxels)
 volume[100,100,150,1]=0
 ```
+
+# Próxima aula Aston Jones e alterações do diâmetro pupilar.
+

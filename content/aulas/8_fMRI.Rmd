@@ -1,0 +1,44 @@
+---
+title: "fMRI"
+author: "Amanda Yumi"
+date: "10 de outubro de 2018"
+output: html_document
+weight: 80
+---
+
+Leitura dos dados:
+```{r}
+#Carrega a biblioteca
+require(AnalyzeFMRI)
+
+#Leitura dos dados
+volumes=f.read.volume("Stroop.nii")
+
+#Checar as dimensoes da imagem
+dim(volumes)
+
+
+#Plotar uma imagem axial do primeiro volume
+image(volumes[,,25,1],col=gray((0:100)/100))
+```
+
+Verificar em todos os pontos do tempo:
+
+```{r}
+#Plotar o sinal BOLD da imagem preprocessada 
+#no voxel=x=20,y=30,z=25
+ts.plot(volumes[20,30,25,])
+
+```
+
+Para marcar a posição do voxel:
+
+```{r}
+volumes[20,30,25,]=0
+image(volumes[,,25,1], col=gray((0:100)/100))
+dim(volumes)
+```
+
+Próxima prova: não cobrará código. Conceito de voxel based morphometry (VBM) e de Ressonância Magnética Funcional (aula de hoje).
+
+

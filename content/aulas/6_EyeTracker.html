@@ -186,3 +186,11 @@ MEDIA=(pupilD[1:1804]+pupilD[1804:3607]+pupilD[3608:5411]+pupilD[5412:7215]+pupi
 abline(v=30,lty=3)</code></pre>
 <p><img src="/aulas/6_EyeTracker_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>A dificuldade nestes exercícios é a identificação das caselas a serem trabalhadas.</p>
+<pre class="r"><code>mediarep = mean(pupilD[which(CONDICAO==1)])
+# Desvio padrão da condição repouso:
+desviorep = sd(pupilD[which(CONDICAO==1)])
+
+# Media da condição tarefa:
+media = mean(pupilD[which(CONDICAO==2)])
+# Desvio padrão da condição tarefa:
+desviopad = sd(pupilD[which(CONDICAO==2)])</code></pre>

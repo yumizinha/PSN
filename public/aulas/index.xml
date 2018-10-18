@@ -90,5 +90,15 @@ A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (
       <description>Imagens estruturais T1 e Voxel-based-morphometry (VBM) A Ressonância Magnética (RM) é um método de diagnóstico por imagem, estabelecido na prática clínica, utilizada em pesquisas científicas e diagnósticos clínicos. Dada a alta capacidade de diferenciar tecidos e coletar informações bioquímicas, o espectro de aplicações se estende a todas as partes do corpo humano e explora aspectos anatômicos e funcionais. A física da Ressonância Magnética Nuclear (RMN) aplicada à formação de imagens é complexa e abrangente, uma vez que tópicos como eletromagnetismo, supercondutividade e processamento de sinais têm de ser abordados em conjunto para o entendimento deste método, usando fortes campos magnéticos e ondas de rádio para obtenção de imagens de múltiplas partes do corpo.</description>
     </item>
     
+    <item>
+      <title>fMRI</title>
+      <link>/aulas/8_fmri/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/8_fmri/</guid>
+      <description>Leitura dos dados:
+#Carrega a biblioteca require(AnalyzeFMRI) ## Carregando pacotes exigidos: AnalyzeFMRI ## Carregando pacotes exigidos: R.matlab ## R.matlab v3.6.1 (2016-10-19) successfully loaded. See ?R.matlab for help. ## ## Attaching package: &amp;#39;R.matlab&amp;#39; ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## getOption, isOpen ## Carregando pacotes exigidos: fastICA ## Carregando pacotes exigidos: tcltk ## Carregando pacotes exigidos: tkrplot #Leitura dos dados volumes=f.read.volume(&amp;quot;Stroop.nii&amp;quot;) #Checar as dimensoes da imagem dim(volumes) ## [1] 45 54 45 180 #Plotar uma imagem axial do primeiro volume image(volumes[,,25,1],col=gray((0:100)/100)) Verificar em todos os pontos do tempo:</description>
+    </item>
+    
   </channel>
 </rss>
