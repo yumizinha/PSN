@@ -96,8 +96,7 @@ A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/aulas/8_fmri/</guid>
-      <description>Leitura dos dados:
-#Carrega a biblioteca require(AnalyzeFMRI) ## Carregando pacotes exigidos: AnalyzeFMRI ## Carregando pacotes exigidos: R.matlab ## R.matlab v3.6.1 (2016-10-19) successfully loaded. See ?R.matlab for help. ## ## Attaching package: &amp;#39;R.matlab&amp;#39; ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## getOption, isOpen ## Carregando pacotes exigidos: fastICA ## Carregando pacotes exigidos: tcltk ## Carregando pacotes exigidos: tkrplot #Leitura dos dados volumes=f.read.volume(&amp;quot;Stroop.nii&amp;quot;) #Checar as dimensoes da imagem dim(volumes) ## [1] 45 54 45 180 #Plotar uma imagem axial do primeiro volume image(volumes[,,25,1],col=gray((0:100)/100)) Verificar em todos os pontos do tempo:</description>
+      <description>A imagem por ressonância magnética funcional (fMRI, do inglês Functional Magnetic Ressonance Imaging), é uma técnica específica do uso da imagem por ressonância magnética (MRI, do inglês Magnetic Resonance Imaging) capaz de detectar variações no fluxo sanguíneo em resposta à atividade neural. A fMRI tem dominado o cenário do mapeamento cerebral em parte devido ao fato de não utilizar radiação ionizante ou contraste exógeno. Além disso, essa técnica possui boa resolução espacial, embora a resolução temporal seja baixa em relação a outras técnicas, como EEG e NIRS.</description>
     </item>
     
   </channel>

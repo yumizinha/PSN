@@ -75,10 +75,6 @@ Na FMUSP há um equipamento 7T:
 o Magnetom 7T MRI é um equipamento de ultra-alto campo que oferece maior nível de sensibilidade e detalhamento para medidas estruturais e funcionais do organismo humano com ressonância magnética, tecnologia de diagnóstico por imagens que possibilita identificar propriedades de uma substância do corpo humano de modo não invasivo. As bobinas do aparelho interagem com os tecidos, em seu interior, utilizando ondas eletromagnéticas. Em seguida, são construidas as imagens, decodificando o sinal recebido dos átomos de hidrogênio da água que compõe o corpo humano. Tesla (homenagem a Nikola Tesla, inventor que fez grandes contribuições para a utilização da eletricidade e do magnetismo) é uma unidade de medida do campo magnético. A precisão das imagens geradas por um equipamento 7 Tesla, traduzida na resolução e na capacidade de discernir alterações, é mais de 5,4 vezes superior à de equipamentos 3 Tesla e 21 vezes superior à de aparelhos 1,5 Tesla utilizados em hospitais. Um aumento de duas vezes no campo magnético quadruplica a precisão das imagens. 
 
 
-(CARREGAR GIF ANIMADO DOS SPINS)
-
-(GRADIENTE DE CAMPO)
-
 Vantagens da MRI:
 
 * Escaneamento de uma corte transversal cerebral em menos de 2 segundos, permitindo mapear a maior parte do cérebro em um ou dois minutos;
@@ -171,6 +167,4 @@ Olhando as coordenadas em voxel (o parâmetro pode ter o primeiro argumento como
 #Colocar zero nas coordenadas x=100,y=100,z=150 (voxels)
 volume[100,100,150,1]=0
 ```
-
-# Próxima aula Aston Jones e alterações do diâmetro pupilar.
 
