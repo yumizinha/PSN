@@ -13,17 +13,17 @@
     <title>fMRI :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1540181478" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1540181478" rel="stylesheet">
-    <link href="../../css/hybrid.css?1540181478" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1540181478" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1540181478" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1540181478" rel="stylesheet">
-    <link href="../../css/theme.css?1540181478" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1540181478" rel="stylesheet">
+    <link href="../../css/nucleus.css?1540209532" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1540209532" rel="stylesheet">
+    <link href="../../css/hybrid.css?1540209532" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1540209532" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1540209532" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1540209532" rel="stylesheet">
+    <link href="../../css/theme.css?1540209532" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1540209532" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1540181478"></script>
+    <script src="../../js/jquery-2.x.min.js?1540209532"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1540181478"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1540181478"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1540209532"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1540209532"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1540181478"></script>
+<script type="text/javascript" src="../../js/search.js?1540209532"></script>
 
     
   </div>
@@ -421,14 +421,19 @@
 <li><p>Voxel based morphometry VBM: Baseado nas três etapas e com análise de inferência bayesiana: Para cada voxel, estima a prob (%) de ser substância branca, cinzenta, liquor, etc…</p></li>
 </ul>
 <p>No geral, analisamos mais substância cinzenta no VBM.</p>
-<p>John Ash Burner indicou que não querem verificar a probabilidade mas sim a redução modulando a deformação e tendo uma estimativa de volume. Explicação do Jacobiano do modelo da imagem: Efeito da modulação de imagens segmentadas. O determinante Jacobiano representa as mudanças de volume devido à normalização espacial não linear. Essas alterações de volume são usadas para modular o resultado da segmentação.</p>
-<p>O VBM segmenta a imagem entre massa cinzenta, branca e fluído espinal, adequando as imagens para um template e suavizando-as. A análise estatística é baseada no General Linear Model (GLM). Apesar a base do VBM ser constante, o algotitmo se altera. O modelo básico constitui na normalização, segmentaçãoe suavização.</p>
+<p>John Ashburner indicou que não querem verificar a probabilidade mas sim a redução modulando a deformação e tendo uma estimativa de volume. A VBM é portanto uma medida de diferenças estruturais ou anatómicas entre um grupo de controle clínico e saudável. O VBM permite a análise da concentração de tecido numa base de voxel por voxel. A este respeito, a VBM difere de outras medidas de morfometria que use uma abordagem de região de interesse (ROI). Os dados de VBM são normalizados e mapeados para um modelo cerebral que reduz o impacto das diferenças individuais na anatomia do cérebro. Medidas VBM mostraram diferenças na concentração de substância cinzenta nos lobos temporal e frontal em pacientes com esquizofrenia e controles saudáveis.</p>
+<p>Na sua forma mais simples, a morfometria baseada em voxel (VBM) envolve uma comparação voxel-wise (não sei como traduzir) da concentração local de substância cinzenta entre dois grupos de indivíduos. O procedimento envolve a normalização espacial de imagens de alta resolução de todos os participantes do estudo no mesmo espaço estereotáxico. Segue-se a segmentação da massa cinzenta a partir das imagens espacialmente normalizadas e suavização dos segmentos de matéria cinzenta. Testes estatísticos paramétricos de voxel que comparam as imagens de substância cinzenta suavizadas dos dois grupos são realizados. Em seguida, são aplicadas as correções para comparações múltiplas feitas usando a teoria dos campos aleatórios de Gauss. Ashburner, descreve os passos envolvidos no VBM, enfatizando a segmentação da massa cinzenta a partir de imagens RM com artefato não uniformizado e fornecendo avaliações das premissas que sustentam o método, incluindo a precisão da segmentação e as suposições feitas sobre a distribuição estatística dos dados.</p>
+<p>A morfometria baseada em deformação e baseada em tensores em referência a métodos para estudar formas cerebrais baseadas em campos de deformação obtidos por registro não-linear de imagens cerebrais. Quando comparamos grupos, a morfometria baseada em deformação (DBM) usa campos de deformação para identificar diferenças nas posições relativas de estruturas dentro dos cérebros dos sujeitos, enquanto usamos o termo morfometria baseada em tensores para nos referirmos àqueles métodos que localizam diferenças na forma local de estruturas cerebrais.</p>
+<p>Explicação do Jacobiano do modelo da imagem: Efeito da modulação de imagens segmentadas. O determinante Jacobiano representa as mudanças de volume devido à normalização espacial não linear. Essas alterações de volume são usadas para modular o resultado da segmentação.</p>
+<p>O VBM segmenta a imagem entre massa cinzenta, branca e fluído espinal, adequando as imagens para um template e suavizando-as. A análise estatística é baseada no General Linear Model (GLM). O modelo básico constitui na normalização, segmentaçãoe suavização.</p>
 <p>Ex: GM-modulated (massa cinzenta modulada)…é o VBM com a modulação pelo jacobiano</p>
 <p>Com grupos de indivíduos, tem-se grupos de voxel em vários grupos para cada voxel para identificar a intensidade do GM-modulated em múltiplos indivíduos (normalmente fazem um teste T). Muitos estudos se apoiam no VBM, mas conforme avançam as pesquisas de computação, a modelagem do córtex vem como uma superfície cortical ao invés da massa cinzenta.</p>
+<p>No entanto, essa aplicação pode ser demorada e só pode fornecer medidas de áreas bastante amplas. Diferenças menores no volume podem ser negligenciadas uma vez que o VBM registra cada cérebro para um modelo, o que implica em se livrar da maioria das grandes diferenças na anatomia do cérebro entre as pessoas. Então as imagens cerebrais são suavizadas para que cada voxel represente a média de si mesmo e seus vizinhos. Finalmente, o volume da imagem é comparado entre os cérebros em cada voxel.</p>
+<p>É importante o cuidado na suavização pois o VBM pode ser sensível a vários artefatos, que incluem desalinhamento das estruturas cerebrais, classificação errônea dos tipos de tecido, diferenças nos padrões de dobra e na espessura cortical. Todos estes erros de classificação podem confundir a análise estatística e diminuir a sensibilidade de verdadeiros efeitos volumétricos ou aumentar a chance de falsos positivos. Para o córtex cerebral, foi demonstrado que as diferenças de volume identificadas com a VBM podem refletir principalmente diferenças na área de superfície do córtex, do que na espessura cortical.</p>
 </div>
 <div id="no-spm" class="section level1">
 <h1>No SPM:</h1>
-<p>O plugin SPM para o MATLAB executa diversas etapas no processamento de imagens de RM. Deformação não linear: cada região da imagem ele faz um mapeamento para o template.</p>
+<p>Entre os desenvolvimentos que despertam interesse estão os métodos de análise automática de imagens, que permitem a quantificação de anormalidades em exames radiológicos no nível do voxel (a unidade tridimensional básica das imagens cerebrais, de volumes na ordem de poucos milímetros cúbicos). O método de análise voxel-a-voxel mais conhecido é o Statistical Parametric Mapping (SPM). O plugin SPM para o MATLAB executa diversas etapas no processamento de imagens de RM. Deformação não linear: cada região da imagem ele faz um mapeamento para o template.</p>
 <p>No SPM aplica-se algoritmo para smooth a imagem, a convolução basicamente faz uma média ponderada dos vizinhos de cada conjunto de voxels.</p>
 </div>
 <div id="bases-fisicas-neurologicas-e-pre-processamento" class="section level1">
@@ -442,7 +447,7 @@
 <h1>Resolução fMRI e comparação:</h1>
 <p>No caso de fMRI, a coleta está em torno de 1-3s, em geral coleta-se a cada 2s. A tava de amostragem então é a cada 0,5hz, o que é muito mais lento que outras técnicas como EEG, NIRS etc. A resolução temporal é muito inferior ao EEG mas a resolução espacial é melhor que o EEG.</p>
 <p>Em ressonância, denominamos por TR o tempo de repetição (tempo entre as imagens da coleta).</p>
-<p>PET e SPECT possuem maior resolução temporal e espacial que fMRI:</p>
+<p>Os métodos mais acessíveis, como a tomografia computadorizada (TC), a ressonância magnética (RM) e a tomografia computadorizada por emissão de fóton único (single photon emission computed tomography - SPECT) são recursos importantes para o diagnóstico diferencial de demências; para o diagnóstico e manejo de doenças neurológicas que comumente cursam com sintomas psiquiátricos. No caso, SPECT e PET possuem maior resolução temporal e espacial que fMRI:</p>
 <p>Embora a ressonância magnética funcional (fMRI) tenha algumas vantagens sobre PET e SPECT, devido às suas características de melhor resolução espacial e, principalmente, temporal, não-invasiva (sem uso de radiação ionizante), que permite múltiplas seqüências/estudos do mesmo indivíduo na mesma sessão, os modelos para quantificação de informação e a capacidade de estudar uma gama muito maior de funções cerebrais, que incluem principalmente a neurotransmissão e os neurorreceptores, são específicos da tomografia de emissão (PET e SPECT)</p>
 </div>
 <div id="processo-de-acoplamento-hemodinamico-medida-indireta" class="section level1">
@@ -722,20 +727,20 @@ image(volumes[,,25,1], col=gray((0:100)/100))</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1540181478"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1540181478"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1540181478"></script>
-    <script src="../../js/jquery.sticky.js?1540181478"></script>
-    <script src="../../js/featherlight.min.js?1540181478"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1540181478"></script>
-    <script src="../../js/highlight.pack.js?1540181478"></script>
+    <script src="../../js/clipboard.min.js?1540209532"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1540209532"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1540209532"></script>
+    <script src="../../js/jquery.sticky.js?1540209532"></script>
+    <script src="../../js/featherlight.min.js?1540209532"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1540209532"></script>
+    <script src="../../js/highlight.pack.js?1540209532"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1540181478"></script>
-    <script src="../../js/learn.js?1540181478"></script>
-    <script src="../../js/hugo-learn.js?1540181478"></script>
+    <script src="../../js/modernizr.custom.71422.js?1540209532"></script>
+    <script src="../../js/learn.js?1540209532"></script>
+    <script src="../../js/hugo-learn.js?1540209532"></script>
 
-    <link href="../../mermaid/mermaid.css?1540181478" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1540181478"></script>
+    <link href="../../mermaid/mermaid.css?1540209532" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1540209532"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

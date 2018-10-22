@@ -43,19 +43,29 @@ Muitas vezes, quando trabalhamos com imagens distintas, temos cérebros com form
 
 No geral, analisamos mais substância cinzenta no VBM.
 
-John Ash Burner indicou que não querem verificar a probabilidade mas sim a redução modulando a deformação e tendo uma estimativa de volume. 
+John Ashburner indicou que não querem verificar a probabilidade mas sim a redução modulando a deformação e tendo uma estimativa de volume. A VBM é portanto uma medida de diferenças estruturais ou anatómicas entre um grupo de controle clínico e saudável. O VBM permite a análise da concentração de tecido numa base de voxel por voxel. A este respeito, a VBM difere de outras medidas de morfometria que use uma abordagem de região de interesse (ROI). Os dados de VBM são normalizados e mapeados para um modelo cerebral que reduz o impacto das diferenças individuais na anatomia do cérebro. Medidas VBM mostraram diferenças na concentração de substância cinzenta nos lobos temporal e frontal em pacientes com esquizofrenia e controles saudáveis.
+
+Na sua forma mais simples, a morfometria baseada em voxel (VBM) envolve uma comparação voxel-wise (não sei como traduzir) da concentração local de substância cinzenta entre dois grupos de indivíduos. O procedimento envolve a normalização espacial de imagens de alta resolução de todos os participantes do estudo no mesmo espaço estereotáxico. Segue-se a segmentação da massa cinzenta a partir das imagens espacialmente normalizadas e suavização dos segmentos de matéria cinzenta. Testes estatísticos paramétricos de voxel que comparam as imagens de substância cinzenta suavizadas dos dois grupos são realizados. Em seguida, são aplicadas as correções para comparações múltiplas feitas usando a teoria dos campos aleatórios de Gauss. Ashburner, descreve os passos envolvidos no VBM, enfatizando a segmentação da massa cinzenta a partir de imagens RM com artefato não uniformizado e fornecendo avaliações das premissas que sustentam o método, incluindo a precisão da segmentação e as suposições feitas sobre a distribuição estatística dos dados.
+
+A morfometria baseada em deformação e baseada em tensores em referência a métodos para estudar formas cerebrais baseadas em campos de deformação obtidos por registro não-linear de imagens cerebrais. Quando comparamos grupos, a morfometria baseada em deformação (DBM) usa campos de deformação para identificar diferenças nas posições relativas de estruturas dentro dos cérebros dos sujeitos, enquanto usamos o termo morfometria baseada em tensores para nos referirmos àqueles métodos que localizam diferenças na forma local de estruturas cerebrais.
+
 Explicação do Jacobiano do modelo da imagem: Efeito da modulação de imagens segmentadas. O determinante Jacobiano representa as mudanças de volume devido à normalização espacial não linear. Essas alterações de volume são usadas para modular o resultado da segmentação.
 
 O VBM segmenta a imagem entre massa cinzenta, branca e fluído espinal, adequando as imagens para um template e suavizando-as.
-A análise estatística é baseada no General Linear Model (GLM). Apesar a base do VBM ser constante, o algotitmo se altera. O modelo básico constitui na normalização, segmentaçãoe suavização.
+A análise estatística é baseada no General Linear Model (GLM). O modelo básico constitui na normalização, segmentaçãoe suavização.
 
 Ex: GM-modulated (massa cinzenta modulada)...é o VBM com a modulação pelo jacobiano
 
 Com grupos de indivíduos, tem-se grupos de voxel em vários grupos para cada voxel para identificar a intensidade do GM-modulated em múltiplos indivíduos (normalmente fazem um teste T).
 Muitos estudos se apoiam no VBM, mas conforme avançam as pesquisas de computação, a modelagem do córtex vem como uma superfície cortical ao invés da massa cinzenta.
 
+No entanto, essa aplicação pode ser demorada e só pode fornecer medidas de áreas bastante amplas. Diferenças menores no volume podem ser negligenciadas uma vez que o VBM registra cada cérebro para um modelo, o que implica em se livrar da maioria das grandes diferenças na anatomia do cérebro entre as pessoas. Então as imagens cerebrais são suavizadas para que cada voxel represente a média de si mesmo e seus vizinhos. Finalmente, o volume da imagem é comparado entre os cérebros em cada voxel.
+
+É importante o cuidado na suavização pois o VBM pode ser sensível a vários artefatos, que incluem desalinhamento das estruturas cerebrais, classificação errônea dos tipos de tecido, diferenças nos padrões de dobra e na espessura cortical. Todos estes erros de classificação podem confundir a análise estatística e diminuir a sensibilidade de verdadeiros efeitos volumétricos ou aumentar a chance de falsos positivos. Para o córtex cerebral, foi demonstrado que as diferenças de volume identificadas com a VBM podem refletir principalmente diferenças na área de superfície do córtex, do que na espessura cortical.
+
 # No SPM:
 
+Entre os desenvolvimentos que despertam interesse estão os métodos de análise automática de imagens, que permitem a quantificação de anormalidades em exames radiológicos no nível do voxel (a unidade tridimensional básica das imagens cerebrais, de volumes na ordem de poucos milímetros cúbicos). O método de análise voxel-a-voxel mais conhecido é o Statistical Parametric Mapping (SPM).
 O plugin SPM para o MATLAB executa diversas etapas no processamento de imagens de RM. Deformação não linear: cada região da imagem ele faz um mapeamento para o template.
 
 No SPM aplica-se algoritmo para smooth a imagem, a convolução basicamente faz uma média ponderada dos vizinhos de cada conjunto de voxels.
@@ -83,16 +93,11 @@ A resolução temporal é muito inferior ao EEG mas a resolução espacial é me
 
 Em ressonância, denominamos por TR o tempo de repetição (tempo entre as imagens da coleta).
 
-PET e SPECT possuem maior resolução temporal e espacial que fMRI:
+Os métodos mais acessíveis, como a tomografia computadorizada (TC), a ressonância magnética (RM) e a tomografia computadorizada por emissão de fóton único (single photon emission computed tomography - SPECT) são recursos importantes para o diagnóstico diferencial de demências; para o diagnóstico e manejo de doenças neurológicas que comumente cursam com sintomas psiquiátricos. No caso, SPECT e PET possuem maior resolução temporal e espacial que fMRI:
 
-Embora a ressonância magnética funcional (fMRI) tenha algumas
-vantagens sobre PET e SPECT, devido às suas características
-de melhor resolução espacial e, principalmente, temporal,
-não-invasiva (sem uso de radiação ionizante), que permite múltiplas seqüências/estudos do mesmo indivíduo na mesma sessão,
-os modelos para quantificação de informação e a capacidade de
-estudar uma gama muito maior de funções cerebrais, que incluem
-principalmente a neurotransmissão e os neurorreceptores,
-são específicos da tomografia de emissão (PET e SPECT)
+Embora a ressonância magnética funcional (fMRI) tenha algumas vantagens sobre PET e SPECT, devido às suas características de melhor resolução espacial e, principalmente, temporal,
+não-invasiva (sem uso de radiação ionizante), que permite múltiplas seqüências/estudos do mesmo indivíduo na mesma sessão, os modelos para quantificação de informação e a capacidade de
+estudar uma gama muito maior de funções cerebrais, que incluem principalmente a neurotransmissão e os neurorreceptores, são específicos da tomografia de emissão (PET e SPECT)
 
 
 
@@ -119,13 +124,9 @@ Para análise de conectividade funcional, utiliza-se passa-banda
 
 Outro filtro comum é o detrend: O sinal bold pode estar caindo com o tempo e para isso é aplicado o filtro: aplicando regressão linear menos o predito (linear), é possível ajustar também fazer um quadrático (parábola), já também foi aplicado cúbico na tentativa de limpar os ruídos. Geralmente também pode ser de baixa frequência.
 
-
 4) Spatial normalization: Colocar no template específico para todos os sujeitos. Trabalhar com grupos de indivíduos.
 
-
 5) Spatial smoothing: Corrigir alguns voxels que não foram bem encaixados e manter as propriedades estatísticas. “Borrar” 
-
-
 
 
 Leitura dos dados:
