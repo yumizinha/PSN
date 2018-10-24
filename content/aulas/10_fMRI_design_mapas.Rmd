@@ -3,7 +3,7 @@ title: "Experimentos em fMRI e Mapas de ativação"
 author: "Amanda Yumi"
 date: "24 de outubro de 2018"
 output: html_document
-weight: 90
+weight: 100
 ---
 
 COLOCAR TEXTO SOBRE DESENHO EXPERIMENTAL, BLOCK DESIGN
@@ -27,6 +27,36 @@ X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] && \text{(sendo C a condição
 $$
 
 Função de resposta hemodinâmica canônica:
+
+```{r}
+glover=function(HZ){
+	a1=6
+	a2=12
+	b1=0.9
+	b2=0.9
+	d1=5.4
+	d2=10.8
+	c=0.35
+	x=seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
+	glover1=((x/d1)^a1)*exp((-x+d1)/b1)
+	glover2=((x/d2)^a2)*exp((-x+d2)/b2)
+	G=glover1-c*glover2
+	return(G)
+}
+```
+
+Determinando HRF: Função de resposta hemodinâmica e exemplo de event related:
+
+```{r}
+HRF = glover0.5
+```
+
+Exemplo de event-related:
+
+```{r}
+CONDICAO = array(0, 90)
+
+```
 
 
 
