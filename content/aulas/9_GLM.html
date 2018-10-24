@@ -1,0 +1,126 @@
+---
+title: "GLM - Modelo Linear Geral"
+author: "Amanda Yumi"
+date: "22 de outubro de 2018"
+output: html_document
+weight: 90
+---
+
+
+
+<p>ADICIONAR TEXTO SOBRE GLM E EQUAÇÕES EXPLICANDO CONTEXTUALIZAÇÃO TEÓRICA</p>
+<p>ESTIMADOR DE MÍNIMOS QUADRADOS</p>
+<p>Simulando um modelo linear:</p>
+<pre class="r"><code># Neste caso, y não depende de x:
+X = rnorm(100)
+Erro = rnorm(100)
+Y = 2 + 0*X + Erro
+# VER DEPOIS
+# plot(X, Y)</code></pre>
+<p>Estimadores de MMQ para alfa e beta:</p>
+<pre class="r"><code># Cria o vetor Ytil (vertical) e a matriz Xmat (design matrix)
+N = 100 #arbitrario
+Ytil = matrix(Y, N, 1)
+
+# já atribuindo 
+Xmat = matrix(1, N, 2)
+Xmat[ ,2] = X
+
+# Faz os cálculos na multiplicação matricial
+betahat = solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
+
+# estimador é a fórmula que traz a estimativa. 
+Ypredito = betahat[1]+ betahat[2]*X
+# VER DEPOIS PQ O LINES NÃO COMPILA
+# lines(X, Ypredito, col=2)
+
+# Estimativa dos erros (resíduos)
+residuos = Y-Ypredito
+# plot(X, Y)
+# plot(X, residuos)</code></pre>
+<p>Modelo de regressão linear múltipla:</p>
+<p>Objetivo: Prever o valor de Y utilizando múltiplas variáveis. Fazendo um exemplo com 3:</p>
+<p><span class="math display">\[
+Y_i = \alpha + \beta_1 * X_i + beta_2*Wi + beta_3*Zi + erro_i
+\]</span></p>
+<p>Neste caso, quero achar os betas que melhor se ajustam ao que estou querendo modelar. Note que é uma função linear, quero saber quais são os pesos que me ajudam a ter uma melhor predição.</p>
+<p>Estimadores de Mínimos quadrados</p>
+<div id="modelo-de-regressao-linear-multipla" class="section level1">
+<h1>MODELO DE REGRESSÃO LINEAR MÚLTIPLA</h1>
+<p>COLOCAR TEORIA SOBRE ISSO</p>
+<pre class="r"><code>N=100
+#Simular um modelo linear
+X=rnorm(N)
+Z=rnorm(N)
+W=rnorm(N)
+Erro=rnorm(N)
+Y= 3 + 5*X + 0*W -2*Z + Erro
+
+#Estimadores de Minimos quadrados para alfa e beta1, beta2 e beta3
+#Cria o vetor Ytil (em pe) e a matriz Xmat (Design Matrix)
+Ytil=matrix(Y,N,1)
+Xmat=matrix(1,N,4)
+Xmat[,2]=X
+Xmat[,3]=W
+Xmat[,4]=Z
+
+#Faz os calculos
+betahat= solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
+
+#Estimativa dos erros (residuos)
+residuos=Y-Ypredito</code></pre>
+<p>No R, a seguinte notação é válida para implementação:</p>
+<pre class="r"><code>modelo = lm(Y~X+W+Z)</code></pre>
+<p>Se comparar os resultados deste com o que foi feito manualmente acima, pode verificar que é idêntico ao que foi calculado manualmente.</p>
+<pre class="r"><code>summary(modelo)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ X + W + Z)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.7293 -0.5661  0.0392  0.5932  2.3227 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  3.03904    0.09389  32.368   &lt;2e-16 ***
+## X            4.96102    0.10669  46.501   &lt;2e-16 ***
+## W           -0.05318    0.10399  -0.511     0.61    
+## Z           -1.92774    0.08544 -22.563   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9272 on 96 degrees of freedom
+## Multiple R-squared:  0.9656, Adjusted R-squared:  0.9646 
+## F-statistic: 899.1 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Olhando a tabela de resultados,</p>
+<p>Estimate = mesmos valores estimados antes Std Error: desvio padrão do estimador t valor: o valor de t (veremos posteriormente) Pr(&gt;|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero</p>
+<p>Olhando o resultado do W, você consegue verificar que o valor-p é muito maior, o que de fato, pela nossa construção é possível verificar.</p>
+<p>R2 ajustado corrige pelo número de variáveis que estão sendo utilizadas R não ajustado considera todas as variáveis que estão entrando</p>
+<div id="modelo-polinomial-de-ordem-3" class="section level2">
+<h2>Modelo polinomial de ordem 3</h2>
+<pre class="r"><code>X = rnorm(100)
+Erro = rnorm(100)</code></pre>
+<p>Seja o polinômio de ordem três: Y = 2 + 3X +0.5X^2 + 0.1*X^3 + Erro</p>
+<pre class="r"><code># plot(X, Y)
+Y=2 + 3*X + 1*X^2 + 0.1* X^3
+# plot(X, Y)
+modelo = lm(Y~X)
+# VER DEPOIS PQ NÃO COMPILOU O LINES
+#lines(X, modelo$fit, col = 2)</code></pre>
+<p>Aplicando a regressão lm prevendo Y usando X, W e Z:</p>
+<pre class="r"><code># termo quadrático
+W = X^2
+
+# termo cúbico:
+Z = X^3
+Ypredito = modelo$fit</code></pre>
+<p>Se colocar esse modelo para visualização, podemos ver a seguinte bagunça:</p>
+<pre class="r"><code># VER DEPOIS PORQUÊ NÃO COMPILOU ESSE GRÁFICO NO R Studio:
+# lines(X, Ypredito, col=2)</code></pre>
+<p>Isso acontece porque ele liga todos os pontos na ordem em que é gerado, o que não é adequado para esse novo modelo. Por isso utilizamos o points:</p>
+<pre class="r"><code># VER DEPOIS
+# points(X, Ypredito, col=2)</code></pre>
+<p>Na próxima aula, veremos mapas probabilísticos para estimar os mapas de ativação do bold. Também é válido para o NIRs.</p>
+</div>
+</div>

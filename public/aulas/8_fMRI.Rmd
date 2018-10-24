@@ -162,31 +162,4 @@ image(volumes[,,25,1], col=gray((0:100)/100))
 dim(volumes)
 ```
 
-Próxima prova: não cobrará código. Conceito de voxel based morphometry (VBM) e de Ressonância Magnética Funcional (aula de hoje).
-
-1) Qual a importância da técnica VBM para os estudos em neurociências?
-Qual sua utilidade? Dê exemplos.
-
-A morfometria baseada em voxel (VBM) envolve uma comparação voxel-wise (não sei como traduzir) da concentração local de substância cinzenta entre dois grupos de indivíduos. O procedimento envolve a normalização espacial de imagens de alta resolução de todos os participantes do estudo no mesmo espaço estereotáxico. Segue-se a segmentação da massa cinzenta a partir das imagens espacialmente normalizadas e suavização dos segmentos de matéria cinzenta. Testes estatísticos paramétricos de voxel que comparam as imagens de substância cinzenta suavizadas dos dois grupos são realizados. Em seguida, são aplicadas as correções para comparações múltiplas feitas usando a teoria dos campos aleatórios de Gauss. Ashburner, descreve os passos envolvidos no VBM, enfatizando a segmentação da massa cinzenta a partir de imagens RM com artefato não uniformizado e fornecendo avaliações das premissas que sustentam o método, incluindo a precisão da segmentação e as suposições feitas sobre a distribuição estatística dos dados.
-
-A morfometria baseada em deformação e baseada em tensores em referência a métodos para estudar formas cerebrais baseadas em campos de deformação obtidos por registro não-linear de imagens cerebrais. Quando comparamos grupos, a morfometria baseada em deformação (DBM) usa campos de deformação para identificar diferenças nas posições relativas de estruturas dentro dos cérebros dos sujeitos, enquanto usamos o termo morfometria baseada em tensores para nos referirmos àqueles métodos que localizam diferenças na forma local de estruturas cerebrais.
-
-
-
-
-
-2) Por que estudos de fMRI para investigar a ativação cerebral envolvendo grupos de pacientes que tomam medicação que afetam o sistema circulatório devem ser realizados com espectral cautela (em relação a interpretação dos resultados)? O que deve ser garantido?
-
-
-
-# Processo de acoplamento hemodinâmico (medida indireta):
-* Aumento da atividade neuronal local 
-* Dilatação das arteríolas
-* Aumento do fluxo sanguíneo
-* Diminuição da concentração de desoxihemoglobina
-* Aumento da sinal BOLD por conseguinte
-
-
-A fMRI é capaz de detectar variações no fluxo sanguíneo em resposta à atividade neural, com o  cenário do mapeamento cerebral. As mudanças cardiovasculares cerebrais estão relacionadas à atividade elétrica neuronal, devido ao aumento do consumo de oxigênio. O Oxigênio é carregado pela hemoglobina. A hemoglobina desoxigenada (deoxi-Hb) é paramagnética ao passo que a hemoglobina oxigenada (Hb) é diamagnética. Desse modo, a mudança na proporção de Hb/deoxi-Hb durante o aumento de fluxo sanguíneo oxigenado leva a um pequeno aumento do sinal de ressonância subjacente ao local onde ouve aumento da atividade de neurônios. Esse mecanismo é a base do contraste utilizado na maioria dos experimentos de fMRI, e é conhecido como contraste BOLD (do inglês, Blood Oxygenation Level Dependent). Maior fluxo sanguíneo significa maior disponibilidade de glicose e oxigênio, na forma de hemoglobina oxigenada, em parte devido à dilatação local dos vasos sanguíneos. O aumento do fluxo sanguíneo também acompanha o aumento da atividade elétrica de neurônios. Comumente o aumento do fluxo de oxigênio é maior que o oxigênio consumido na queima de glicose, o que causa a diminuição de dHb nesses vasos sanguíneos. Essas mudanças nas propriedades magnéticas do sangue, fazem com que as áreas ativas interfiram menos na magnetização transversa e no eventual decaimento de T2* induzido por deformação magnética espacial, levando a um leve aumento do sinal de MRI. Especificamente para o fMRI, a resposta hemodinâmica dura em torno de 10 segundos, aumentando multiplicadamente (sempre proporcional ao valor original), atingindo o ápice de 4 a 6 segundos, e então caindo da mesma maneira. Mudanças no fluxo sanguíneo ocorrem via mudanças no sistema vascular concomitantes a atividade neuronal ao longo do tempo. Por essas resposta serem contínuas e suaves, fazer uma amostragem com TRs mais rápidos não iria ajudar. Medicações que afetam o sistema circulatório alteram a estrutura normal de acoplamento hemodinâmico (Aumento da atividade neuronal local, dilatação de arteríolas, aumento de fluxo sanguíneo e diminuição da concentração de desoxihemoglobina, acarretando no aumento do sinal BOLD e enviesando o estudo).
-
 
