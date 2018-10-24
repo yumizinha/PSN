@@ -1,0 +1,33 @@
+---
+title: "Experimentos em fMRI e Mapas de ativação"
+author: "Amanda Yumi"
+date: "24 de outubro de 2018"
+output: html_document
+weight: 90
+---
+
+COLOCAR TEXTO SOBRE DESENHO EXPERIMENTAL, BLOCK DESIGN
+Maior erro dos novatos: acreditar que com um estímulo só e comparar repouso com o estímulo. É necessário ter uma amostra representativa para conseguir garantir os dados para comparação.
+
+Para análise, precisarei:
+
+1. Dados
+2. Especificar a HRF - hemodynamic response function
+3. Desenho experimental
+
+Analisar o sinal BOLD nos n estímulos.
+No desenho experimental, tenho as condições do meu experimento, convoluído pela HRF. Forma de unificar condições experimentais com a forma hemodinâmica.
+
+Convolução:
+
+$$
+\begin{align}
+X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] && \text{(sendo C a condição)}
+\end{align}
+$$
+
+Função de resposta hemodinâmica canônica:
+
+
+
+

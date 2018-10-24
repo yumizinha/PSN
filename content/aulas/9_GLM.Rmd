@@ -1,0 +1,169 @@
+---
+title: "GLM - Modelo Linear Geral"
+author: "Amanda Yumi"
+date: "22 de outubro de 2018"
+output: html_document
+weight: 90
+---
+
+ADICIONAR TEXTO SOBRE GLM E EQUAÇÕES EXPLICANDO CONTEXTUALIZAÇÃO TEÓRICA
+
+ESTIMADOR DE MÍNIMOS QUADRADOS
+
+Simulando um modelo linear:
+
+```{r}
+# Neste caso, y não depende de x:
+x = rnorm(100)
+Erro = rnorm(100)
+Y = 2 + 0*x + Erro
+plot(X, Y)
+```
+
+Estimadores de MMQ para alfa e beta:
+```{r}
+# Cria o vetor Ytil (vertical) e a matriz Xmat (design matrix)
+N = 100 #arbitrario
+Ytil = matrix(Y, N, 1)
+
+# já atribuindo 
+Xmat = matrix(1, N, 2)
+Xmat[ ,2] = x
+
+# Faz os cálculos na multiplicação matricial
+betahat = solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
+
+# estimador é a fórmula que traz a estimativa. 
+Ypredito = betahat[1]+ betahat[2]*X
+lines(X, Ypredito, col=2)
+
+# Estimativa dos erros (resíduos)
+residuos = Y-Ypredito
+plot(X,Y)
+plot(X, residuos)
+
+```
+
+
+Modelo de regressão linear múltipla:
+
+Objetivo: Prever o valor de Y utilizando múltiplas variáveis.
+Fazendo um exemplo com 3:
+
+
+```{r}
+Y_i = alfa + Beta_1*X_i + Beta_2*Wi + Beta_3Zi + erro_i
+
+```
+
+Neste caso, quero achar os betas que melhor se ajustam ao que estou querendo modelar.
+Note que é uma função linear, quero saber quais são os pesos que me ajudam a ter uma melhor predição.
+
+Estimadores de Mínimos quadrados
+
+# MODELO DE REGRESSÃO LINEAR MÚLTIPLA 
+COLOCAR TEORIA SOBRE ISSO
+
+```{r}
+N=100
+#Simular um modelo linear
+X=rnorm(N)
+Z=rnorm(N)
+W=rnorm(N)
+Erro=rnorm(N)
+Y= 3 + 5*X + 0*W -2*Z + Erro
+
+#Estimadores de Minimos quadrados para alfa e beta1, beta2 e beta3
+#Cria o vetor Ytil (em pe) e a matriz Xmat (Design Matrix)
+Ytil=matrix(Y,N,1)
+Xmat=matrix(1,N,4)
+Xmat[,2]=X
+Xmat[,3]=W
+Xmat[,4]=Z
+
+#Faz os calculos
+betahat= solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
+
+#Estimativa dos erros (residuos)
+residuos=Y-Ypredito
+
+```
+
+No R, a seguinte notação é válida para implementação:
+
+```{r}
+modelo = lm(Y~X+W+Z)
+```
+
+Se comparar os resultados deste com o que foi feito manualmente acima, pode verificar que é idêntico ao que foi calculado manualmente.
+
+```{r}
+summary(modelo)
+```
+
+Olhando a tabela de resultados, 
+
+Estimate = mesmos valores estimados antes
+Std Error: desvio padrão do estimador
+t valor: o valor de t (veremos posteriormente)
+Pr(>|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero
+
+Olhando o resultado do W, você consegue verificar que o valor-p é muito maior, o que de fato, pela nossa construção é possível verificar.
+
+
+R2 ajustado corrige pelo número de variáveis que estão sendo utilizadas
+R não ajustado considera todas as variáveis que estão entrando
+
+
+## Modelo polinomial de ordem 3
+
+```{r}
+X = rnorm(100)
+Erro = rnorm(100)
+```
+
+Seja o polinômio de ordem três:
+
+```{r}
+Y = 2 + 3X +0.5X^2 + 0.1*X^3 + Erro
+plot(X, Y)
+Y=2 + 3*X + 1*X^2 0.1* X^3
+plot(X, Y)
+modelo = lm(Y~X)
+lines(X, modelo$fit, col = 2)
+
+```
+
+Aplicando a regressão lm prevendo Y usando X, W e Z:
+
+```{r}
+# termo quadrático
+W = X^2
+
+# termo cúbico:
+Z = X^3
+Ypredito = modelo$fit
+```
+
+Se colocar esse modelo para visualização, podemos ver a seguinte bagunça:
+
+```{r}
+lines(X, Ypredito, col=2)
+```
+
+Isso acontece porque ele liga todos os pontos na ordem em que é gerado, o que não é adequado para esse novo modelo.
+Por isso utilizamos o points:
+
+```{r}
+points(X, Ypredito, col=2)
+
+```
+
+
+Na próxima aula, veremos mapas probabilísticos para estimar os mapas de ativação do bold.
+Também é válido para o NIRs.
+
+
+
+
+

@@ -162,6 +162,4 @@ image(volumes[,,25,1], col=gray((0:100)/100))
 dim(volumes)
 ```
 
-Próxima prova: não cobrará código. Conceito de voxel based morphometry (VBM) e de Ressonância Magnética Funcional (aula de hoje).
-
 
