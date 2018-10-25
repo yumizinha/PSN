@@ -26,7 +26,7 @@ X = rnorm(100)
 Erro = rnorm(100)
 Y = 2 + 0*X + Erro
 # VER DEPOIS
-# plot(X, Y)
+plot(X, Y)
 ```
 
 Estimadores de MMQ para alfa e beta:
@@ -61,7 +61,7 @@ Objetivo: Prever o valor de Y utilizando múltiplas variáveis.
 Fazendo um exemplo com 3:
 
 $$
-Y_i = \alpha + \beta_1 * X_i + beta_2*Wi + beta_3*Zi + erro_i
+Y_i = \alpha + \beta_1 * X_i + \beta_2*Wi + \beta_3*Zi + \epsilon_i
 $$
 
 Neste caso, quero achar os betas que melhor se ajustam ao que estou querendo modelar.
