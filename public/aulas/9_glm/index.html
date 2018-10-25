@@ -13,17 +13,17 @@
     <title>GLM - Modelo Linear Geral :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1540432287" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1540432287" rel="stylesheet">
-    <link href="../../css/hybrid.css?1540432287" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1540432287" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1540432287" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1540432287" rel="stylesheet">
-    <link href="../../css/theme.css?1540432287" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1540432287" rel="stylesheet">
+    <link href="../../css/nucleus.css?1540432858" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1540432858" rel="stylesheet">
+    <link href="../../css/hybrid.css?1540432858" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1540432858" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1540432858" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1540432858" rel="stylesheet">
+    <link href="../../css/theme.css?1540432858" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1540432858" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1540432287"></script>
+    <script src="../../js/jquery-2.x.min.js?1540432858"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1540432287"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1540432287"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1540432858"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1540432858"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1540432287"></script>
+<script type="text/javascript" src="../../js/search.js?1540432858"></script>
 
     
   </div>
@@ -444,7 +444,6 @@
 X = rnorm(100)
 Erro = rnorm(100)
 Y = 2 + 0*X + Erro
-# VER DEPOIS
 plot(X, Y)</code></pre>
 <p><img src="../../aulas/9_GLM_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Estimadores de MMQ para alfa e beta:</p>
@@ -466,8 +465,10 @@ Ypredito = betahat[1]+ betahat[2]*X
 
 # Estimativa dos erros (resíduos)
 residuos = Y-Ypredito
-# plot(X, Y)
-# plot(X, residuos)</code></pre>
+plot(X, Y)</code></pre>
+<p><img src="../../aulas/9_GLM_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>plot(X, residuos)</code></pre>
+<p><img src="../../aulas/9_GLM_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 <p>Modelo de regressão linear múltipla:</p>
 <p>Objetivo: Prever o valor de Y utilizando múltiplas variáveis. Fazendo um exemplo com 3:</p>
 <p><span class="math display">\[
@@ -509,20 +510,20 @@ residuos=Y-Ypredito</code></pre>
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -2.32378 -0.76979 -0.03075  0.57386  2.21759 
+## -2.43630 -0.59725  0.00152  0.63853  2.48437 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.92874    0.09889  29.617   &lt;2e-16 ***
-## X            4.87813    0.09821  49.669   &lt;2e-16 ***
-## W            0.02338    0.09634   0.243    0.809    
-## Z           -2.05854    0.09717 -21.185   &lt;2e-16 ***
+## (Intercept)  2.86707    0.10326  27.766   &lt;2e-16 ***
+## X            5.01255    0.09921  50.523   &lt;2e-16 ***
+## W           -0.10635    0.10681  -0.996    0.322    
+## Z           -1.97674    0.11941 -16.554   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9698 on 96 degrees of freedom
-## Multiple R-squared:  0.9699, Adjusted R-squared:  0.9689 
-## F-statistic:  1030 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 1.012 on 96 degrees of freedom
+## Multiple R-squared:  0.9715, Adjusted R-squared:  0.9706 
+## F-statistic:  1090 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Olhando a tabela de resultados,</p>
 <p>Estimate = mesmos valores estimados antes Std Error: desvio padrão do estimador t valor: o valor de t (veremos posteriormente) Pr(&gt;|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero</p>
 <p>Olhando o resultado do W, você consegue verificar que o valor-p é muito maior, o que de fato, pela nossa construção é possível verificar.</p>
@@ -532,10 +533,12 @@ residuos=Y-Ypredito</code></pre>
 <pre class="r"><code>X = rnorm(100)
 Erro = rnorm(100)</code></pre>
 <p>Seja o polinômio de ordem três: Y = 2 + 3X +0.5X^2 + 0.1*X^3 + Erro</p>
-<pre class="r"><code># plot(X, Y)
-Y=2 + 3*X + 1*X^2 + 0.1* X^3
-# plot(X, Y)
-modelo = lm(Y~X)
+<pre class="r"><code>plot(X, Y)</code></pre>
+<p><img src="../../aulas/9_GLM_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>Y=2 + 3*X + 1*X^2 + 0.1* X^3
+plot(X, Y)</code></pre>
+<p><img src="../../aulas/9_GLM_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<pre class="r"><code>modelo = lm(Y~X)
 # VER DEPOIS PQ NÃO COMPILOU O LINES
 #lines(X, modelo$fit, col = 2)</code></pre>
 <p>Aplicando a regressão lm prevendo Y usando X, W e Z:</p>
@@ -806,20 +809,20 @@ Ypredito = modelo$fit</code></pre>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1540432287"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1540432287"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1540432287"></script>
-    <script src="../../js/jquery.sticky.js?1540432287"></script>
-    <script src="../../js/featherlight.min.js?1540432287"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1540432287"></script>
-    <script src="../../js/highlight.pack.js?1540432287"></script>
+    <script src="../../js/clipboard.min.js?1540432858"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1540432858"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1540432858"></script>
+    <script src="../../js/jquery.sticky.js?1540432858"></script>
+    <script src="../../js/featherlight.min.js?1540432858"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1540432858"></script>
+    <script src="../../js/highlight.pack.js?1540432858"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1540432287"></script>
-    <script src="../../js/learn.js?1540432287"></script>
-    <script src="../../js/hugo-learn.js?1540432287"></script>
+    <script src="../../js/modernizr.custom.71422.js?1540432858"></script>
+    <script src="../../js/learn.js?1540432858"></script>
+    <script src="../../js/hugo-learn.js?1540432858"></script>
 
-    <link href="../../mermaid/mermaid.css?1540432287" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1540432287"></script>
+    <link href="../../mermaid/mermaid.css?1540432858" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1540432858"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -25,7 +25,6 @@ Simulando um modelo linear:
 X = rnorm(100)
 Erro = rnorm(100)
 Y = 2 + 0*X + Erro
-# VER DEPOIS
 plot(X, Y)
 ```
 
@@ -49,8 +48,8 @@ Ypredito = betahat[1]+ betahat[2]*X
 
 # Estimativa dos erros (resíduos)
 residuos = Y-Ypredito
-# plot(X, Y)
-# plot(X, residuos)
+plot(X, Y)
+plot(X, residuos)
 
 ```
 
@@ -133,9 +132,9 @@ Erro = rnorm(100)
 Seja o polinômio de ordem três:
 Y = 2 + 3X +0.5X^2 + 0.1*X^3 + Erro
 ```{r}
-# plot(X, Y)
+plot(X, Y)
 Y=2 + 3*X + 1*X^2 + 0.1* X^3
-# plot(X, Y)
+plot(X, Y)
 modelo = lm(Y~X)
 # VER DEPOIS PQ NÃO COMPILOU O LINES
 #lines(X, modelo$fit, col = 2)

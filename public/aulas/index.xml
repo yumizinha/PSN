@@ -108,7 +108,7 @@ A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (
       <description>ADICIONAR TEXTO SOBRE GLM E EQUAÇÕES EXPLICANDO CONTEXTUALIZAÇÃO TEÓRICA
 ESTIMADOR DE MÍNIMOS QUADRADOS
 Simulando um modelo linear:
-# Neste caso, y não depende de x: X = rnorm(100) Erro = rnorm(100) Y = 2 + 0*X + Erro # VER DEPOIS plot(X, Y) Estimadores de MMQ para alfa e beta:
+# Neste caso, y não depende de x: X = rnorm(100) Erro = rnorm(100) Y = 2 + 0*X + Erro plot(X, Y) Estimadores de MMQ para alfa e beta:
 # Cria o vetor Ytil (vertical) e a matriz Xmat (design matrix) N = 100 #arbitrario Ytil = matrix(Y, N, 1) # já atribuindo Xmat = matrix(1, N, 2) Xmat[ ,2] = X # Faz os cálculos na multiplicação matricial betahat = solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil # estimador é a fórmula que traz a estimativa.</description>
     </item>
     
