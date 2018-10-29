@@ -1,5 +1,5 @@
 ---
-title: "Experimentos em fMRI e Mapas de ativação"
+title: "Mapas de ativação e testes para fMRI"
 author: "Amanda Yumi"
 date: "24 de outubro de 2018"
 output: html_document
@@ -25,7 +25,7 @@ Para análise, seguiremos os seguintes passos:
 
 1. Definição do block design do experimento 
 2. Coleta de dados
-3. Pré-processamento do sinal
+3. Pré-processamento do sinal: Correção do motion correction (quando a pessoa se mexe durante a aquisição de dados. Nesse caso é feito o realinhamento, com corpo rígido: 3 parâmetros rotação, 3 parâmetros de translação e/ou combinações desses movimentos).
 4. Especificar a convolução da HRF - hemodynamic response function (veremos adiante)
 5. Aplicação do GLM no sinal BOLD para cada voxel x.y.z, usando como variável preditora os dados de convoluídos
 6. Aplicação de um teste estatístico para definir quais voxels são relevantes para construção dos mapas
@@ -90,7 +90,7 @@ Determinando HRF: Função de resposta hemodinâmica, considerando um tempo de r
 HRF = glover(0.5)
 ```
 
-Exemplo de event-related:
+Exemplo de event-related (similar ao potencial evocado, vários experimentos coletados coincidindo). No caso de estímulos muito consecutivos, a curva basal nem retorna ao original, o que dificulta na visualização:
 ```{r, cache = TRUE}
 CONDICAO = array(0, 90)
 CONDICAO[30] = 1
@@ -172,14 +172,14 @@ BOLD_{x,y,z}[t] = \alpha + \beta . X_t + \epsilon_t && \text{(sendo } X_t \text{
 $$
 
 neste caso, supondo:
-* $\epsilon_t$ com média zero e variância constante (homocedasticidade)
-* Erros $\epsilon_t$ são independentes
+$\epsilon_t$ com média zero e variância constante (homocedasticidade) e os erros $\epsilon_t$ são independentes
 
 Para comparação, faremos um teste de hipóteses.
 Analisando pelo t-valor, estatística t (verificar ativa ou não e se é estatisticamente diferente de zero ou não): Estatística T do beta correspondente a condição congruente é igual ao do modelo.
 
+Obs: O valor p não armazena sinal, ou seja, não conseguimos verificar existência de ativação ou de desativação.
 
-Fazendo os Mapas de estatisticas T
+Fazendo os Mapas de estatisticas T:
 
 
 ```{r, cache = TRUE}
@@ -203,17 +203,54 @@ for(xi in 1:45){
          modelo=lm(volume[xi,yi,zi,]~X+Z)
 
          #Estatistica T do beta correspondente a condicao congruente
-         mapaTcongruente[xi,yi,zi,1] = summary(modelo)$coef[2,3]
+         mapaTcongruente[xi,yi,zi,1] = summary(modelo)$coef[2,3] # Beta_1
 
          #Estatistica T do beta correspondente a condicao incongruente
-         mapaTincongruente[xi,yi,zi,1] = summary(modelo)$coef[3,3]
+         mapaTincongruente[xi,yi,zi,1] = summary(modelo)$coef[3,3] #Beta_2
        }#fecha if
 }}}#fecha for do xi,yi,zi
 
 ```
 
-A estatística T me diz se os valores de $\beta_1$ são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).
+Se quero testar se $beta_1$ > 0, ou seja ativação de congruente vs nêutro:
+$$
+\begin{align} 
+\begin{bmatrix}
+\\ 1 && 0 && 0
+\end{bmatrix}
+\end{align}
+$$
 
+Se quero testar se $beta_1$ < 0, ou seja deativação de congruente vs nêutro:
+$$
+\begin{align} 
+\begin{bmatrix}
+\\ -1 && 0 && 0
+\end{bmatrix}
+\end{align}
+$$
+
+Se quero testar se $beta_2$ < 0:
+$$
+\begin{align} 
+\begin{bmatrix}
+\\ 0 && -1 && 0
+\end{bmatrix}
+\end{align}
+$$
+
+E por fim, se quero testar a ativação Incongruente > Congruente, ou seja, $beta_2$ > $beta_1$, quero verificar se $-\beta_1 + \beta_2 > 0$, logo, na condição:
+
+$$
+\begin{align} 
+\begin{bmatrix}
+\\ -1 && +1 && 0
+\end{bmatrix}
+\end{align}
+$$
+
+
+A estatística T me diz se por exemplo os valores de $\beta_1$ são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).
 
 
 Agora, armazenando os mapas em arquivos no formato Analyze (um IMG e um HDR):
@@ -226,5 +263,10 @@ f.write.analyze(mapaTincongruente, "MapaIncongruente",
                 pixdim = c(4, 4, 4),
                 originator = c(23.5, 32.5, 19, 1, 1))
 ```
+
+
+
+
+
 
 

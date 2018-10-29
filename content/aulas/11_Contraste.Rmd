@@ -1,0 +1,71 @@
+---
+title: "Contraste"
+author: "Amanda Yumi"
+date: "29 de outubro de 2018"
+output: html_document
+---
+
+Observações: Movimentação de corpo rígido:
+
+$$
+\begin{align}
+BOLD_{t} = \alpha + \beta . X_t + (\gamma_1\mu_1 + ...+\gamma_6 \mu_6) + \epsilon_t && \text{(sendo } X_t \text{ a condição da convolução)}
+\end{align}
+$$
+
+Neste caso, $\gamma_1\mu_1 + ...+\gamma_6 \mu_6$ é a combinação do ajuste de corpos rígidos para ajuste de movimento. São 6 eixos (3 de rotação e 3 de translação). São utilizados pois muitas coletas de fMRI são realizadas com movimento (fala, movimento da mão ou com alguma tarefa que pode gerar movimentação). Alguns pesquisadores sugerem 12 movimentos, que seriam os 6 usuais utilizados e suas derivadas para correção.
+
+Em event-related, além da condição convoluída pela HRF, inclui também suas derivadas.
+
+## Para mapas de ativação de um indivíduo - 1st level
+
+Se quiser sofisticar a análise com mais acurácia, realizamos os ajustes:
+
+$$
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. X_t' + \epsilon_t && \text{(sendo } X_t' = X_t - X_{t-1} \text{)}
+\end{align}
+$$
+
+A adição de Kernels de Volterra:
+
+$$
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. V_t' + \epsilon_t && \text{(sendo } V_t \text{ os kernels de Volterra)}
+\end{align}
+$$
+E no caso dos testes estatísticos de ativação, trabalharia com o $\beta_1$
+
+
+3. Além disso, trabalha-se com a autocorrelação dos resíduos. Seja o modelo
+
+$$
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+$$
+
+neste caso, supondo:
+$\epsilon_t$ com média zero e variância constante (homocedasticidade) e os erros $\epsilon_t$ são independentes
+
+3.1  Pre-whitening: Aplicação de modelo autoregressivo 
+3.2  Estimação não-paramétrica e semi-paramétrica: Descobrir independência dos resíduos
+3.3  Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.
+
+
+## Contraste:
+
+As análises são feitas em dois tipos:
+
+* 1st level: Comparação entre ativação em condições no mesmo indivíduo
+* 2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos
+
+Seja no primeiro nível a implementação do GLM: 
+
+
+$$
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+$$
+

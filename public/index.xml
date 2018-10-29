@@ -109,12 +109,23 @@ A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (
     </item>
     
     <item>
-      <title>Experimentos em fMRI e Mapas de ativação</title>
+      <title>Mapas de ativação e testes para fMRI</title>
       <link>/aulas/10_fmri_design_mapas/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/aulas/10_fmri_design_mapas/</guid>
       <description>Para esse exercício, vamos utilizar dados de uma tarefa do tipo stroop. Essa tarefa consiste na medida do tempo de reação e na acurácia da leitura, em voz alta, de palavras em duas situações: 1. As palavras estão escritas na mesma cor que a cor expressa pelo significado semântico - denominamos por CONGRUENTES 2. As palavras estão numa cor que difere da cor expressa pelo significado semântico (exemplo: a palavra vermelho impressa com tinta azul) - denominamos por INCONGRUENTES</description>
+    </item>
+    
+    <item>
+      <title>Contraste</title>
+      <link>/aulas/11_contraste/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/11_contraste/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min.</description>
     </item>
     
   </channel>

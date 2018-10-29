@@ -1,5 +1,5 @@
 ---
-title: "Experimentos em fMRI e Mapas de ativação"
+title: "Mapas de ativação e testes para fMRI"
 author: "Amanda Yumi"
 date: "24 de outubro de 2018"
 output: html_document
@@ -15,7 +15,7 @@ weight: 100
 <ol style="list-style-type: decimal">
 <li>Definição do block design do experimento</li>
 <li>Coleta de dados</li>
-<li>Pré-processamento do sinal</li>
+<li>Pré-processamento do sinal: Correção do motion correction (quando a pessoa se mexe durante a aquisição de dados. Nesse caso é feito o realinhamento, com corpo rígido: 3 parâmetros rotação, 3 parâmetros de translação e/ou combinações desses movimentos).</li>
 <li>Especificar a convolução da HRF - hemodynamic response function (veremos adiante)</li>
 <li>Aplicação do GLM no sinal BOLD para cada voxel x.y.z, usando como variável preditora os dados de convoluídos</li>
 <li>Aplicação de um teste estatístico para definir quais voxels são relevantes para construção dos mapas</li>
@@ -62,7 +62,7 @@ X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] &amp;&amp; \text{(sendo C a co
 <p>Determinando HRF: Função de resposta hemodinâmica, considerando um tempo de repetição TR de 2s, ou seja 1/2:</p>
 <pre class="r"><code>#HRF- Funcao de resposta hemodinamica
 HRF = glover(0.5)</code></pre>
-<p>Exemplo de event-related:</p>
+<p>Exemplo de event-related (similar ao potencial evocado, vários experimentos coletados coincidindo). No caso de estímulos muito consecutivos, a curva basal nem retorna ao original, o que dificulta na visualização:</p>
 <pre class="r"><code>CONDICAO = array(0, 90)
 CONDICAO[30] = 1
 CONDICAO[60] = 1
@@ -123,9 +123,10 @@ Z=Z/max(Z)</code></pre>
 BOLD_{x,y,z}[t] = \alpha + \beta . X_t + \epsilon_t &amp;&amp; \text{(sendo } X_t \text{ a condição da convolução)}
 \end{align}
 \]</span></p>
-<p>neste caso, supondo: * <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) * Erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
+<p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
 <p>Para comparação, faremos um teste de hipóteses. Analisando pelo t-valor, estatística t (verificar ativa ou não e se é estatisticamente diferente de zero ou não): Estatística T do beta correspondente a condição congruente é igual ao do modelo.</p>
-<p>Fazendo os Mapas de estatisticas T</p>
+<p>Obs: O valor p não armazena sinal, ou seja, não conseguimos verificar existência de ativação ou de desativação.</p>
+<p>Fazendo os Mapas de estatisticas T:</p>
 <pre class="r"><code># Verificando a dimensão do volume para identificar como serão os mapas:
 dim(volume)</code></pre>
 <pre><code>## [1]  45  54  45 180</code></pre>
@@ -143,13 +144,42 @@ for(xi in 1:45){
          modelo=lm(volume[xi,yi,zi,]~X+Z)
 
          #Estatistica T do beta correspondente a condicao congruente
-         mapaTcongruente[xi,yi,zi,1] = summary(modelo)$coef[2,3]
+         mapaTcongruente[xi,yi,zi,1] = summary(modelo)$coef[2,3] # Beta_1
 
          #Estatistica T do beta correspondente a condicao incongruente
-         mapaTincongruente[xi,yi,zi,1] = summary(modelo)$coef[3,3]
+         mapaTincongruente[xi,yi,zi,1] = summary(modelo)$coef[3,3] #Beta_2
        }#fecha if
 }}}#fecha for do xi,yi,zi</code></pre>
-<p>A estatística T me diz se os valores de <span class="math inline">\(\beta_1\)</span> são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).</p>
+<p>Se quero testar se <span class="math inline">\(beta_1\)</span> &gt; 0, ou seja ativação de congruente vs nêutro: <span class="math display">\[
+\begin{align} 
+\begin{bmatrix}
+\\ 1 &amp;&amp; 0 &amp;&amp; 0
+\end{bmatrix}
+\end{align}
+\]</span></p>
+<p>Se quero testar se <span class="math inline">\(beta_1\)</span> &lt; 0, ou seja deativação de congruente vs nêutro: <span class="math display">\[
+\begin{align} 
+\begin{bmatrix}
+\\ -1 &amp;&amp; 0 &amp;&amp; 0
+\end{bmatrix}
+\end{align}
+\]</span></p>
+<p>Se quero testar se <span class="math inline">\(beta_2\)</span> &lt; 0: <span class="math display">\[
+\begin{align} 
+\begin{bmatrix}
+\\ 0 &amp;&amp; -1 &amp;&amp; 0
+\end{bmatrix}
+\end{align}
+\]</span></p>
+<p>E por fim, se quero testar a ativação Incongruente &gt; Congruente, ou seja, <span class="math inline">\(beta_2\)</span> &gt; <span class="math inline">\(beta_1\)</span>, quero verificar se <span class="math inline">\(-\beta_1 + \beta_2 &gt; 0\)</span>, logo, na condição:</p>
+<p><span class="math display">\[
+\begin{align} 
+\begin{bmatrix}
+\\ -1 &amp;&amp; +1 &amp;&amp; 0
+\end{bmatrix}
+\end{align}
+\]</span></p>
+<p>A estatística T me diz se por exemplo os valores de <span class="math inline">\(\beta_1\)</span> são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).</p>
 <p>Agora, armazenando os mapas em arquivos no formato Analyze (um IMG e um HDR):</p>
 <pre class="r"><code>f.write.analyze(mapaTcongruente, &quot;MapaCongruente&quot;, 
                 pixdim = c(4, 4, 4),
@@ -157,3 +187,36 @@ for(xi in 1:45){
 f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;, 
                 pixdim = c(4, 4, 4),
                 originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
+<p>Observações: Movimentação de corpo rígido:</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{t} = \alpha + \beta . X_t + (\gamma_1\mu_1 + ...+\gamma_6 \mu_6) + \epsilon_t &amp;&amp; \text{(sendo } X_t \text{ a condição da convolução)}
+\end{align}
+\]</span></p>
+<p>Neste caso, <span class="math inline">\(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\)</span> é a combinação do ajuste de corpos rígidos para ajuste de movimento. São 6 eixos (3 de rotação e 3 de translação). São utilizados pois muitas coletas de fMRI são realizadas com movimento (fala, movimento da mão ou com alguma tarefa que pode gerar movimentação). Alguns pesquisadores sugerem 12 movimentos, que seriam os 6 usuais utilizados e suas derivadas para correção.</p>
+<p>Em event-related, além da condição convoluída pela HRF, inclui também suas derivadas.</p>
+<div id="para-mapas-de-ativacao-de-um-individuo---1st-level" class="section level2">
+<h2>Para mapas de ativação de um indivíduo - 1st level</h2>
+<p>Se quiser sofisticar a análise com mais acurácia, realizamos os ajustes:</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. X_t&#39; + \epsilon_t &amp;&amp; \text{(sendo } X_t&#39; = X_t - X_{t-1} \text{)}
+\end{align}
+\]</span></p>
+<p>A adição de Kernels de Volterra:</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. V_t&#39; + \epsilon_t &amp;&amp; \text{(sendo } V_t \text{ os kernels de Volterra)}
+\end{align}
+\]</span> E no caso dos testes estatísticos de ativação, trabalharia com o <span class="math inline">\(\beta_1\)</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Além disso, trabalha-se com a autocorrelação dos resíduos. Seja o modelo</li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+\]</span></p>
+<p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
+<p>3.1 Pre-whitening: Aplicação de modelo autoregressivo 3.2 Estimação não-paramétrica e semi-paramétrica: Descobrir independência dos resíduos 3.3 Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.</p>
+</div>
