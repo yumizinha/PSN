@@ -6,8 +6,51 @@ output: html_document
 weight: 90
 ---
 
-ADICIONAR TEXTO SOBRE GLM E EQUAÇÕES EXPLICANDO CONTEXTUALIZAÇÃO TEÓRICA
+Na ressonância magnética funcional, a hemoglobina que carrega o oxigênio é chamada oxiemoglobina (oxyHb) e ao se desprender do oxigênio essa passa ser chamada desoxihemoglobina (deoxyHb). A oxyHb possui propriedade diamagnética, isto é fraca interação com outros campos magnéticos; tem momento magnético zero e nenhum elétron sem par.  Já a deoxyHb é paramagnética, isto é possui maior susceptibilidade magnética, com elétrons não pareados e momento magnético significativo. Assim, na presença de um campo magnético intenso, como da ressonancia, as moleculas de deoxyHb causam uma atenuação do campo magnético e consequentemente uma alteração no contraste da imagem. Como resultado deste comportamento, tem-se o chamado sinal BOLD (Blood Oxigenated level dependent) que é medido pela ressonância magnética funcional (fMRI) - Notas de aula da Cândida.
 
+O sinal BOLD medido na fMRI está relacionado com a variação da quantidade de deoxyHb na região de estudo. O aumento da atividade cerebral, aumenta o fluxo sanguíneo para aquela região como uma forma de suprir a demanda metabólica. As células que cuidam da estrutura cerebral são as Glias, os astrocitos (metabolismo) e os oligocitrocitos (estrutural). A presença dos oligocitrocitos causam um aumento do vasos sanguíneos, que causa o aumento do fluxo sanguíneo e consequentemente diminuição da deoxyHb e aumento da oxyHb causando um aumento no sinal BOLD, isso é chamado de acoplamento hemodinâmico. Graças ao acoplamento hemodinâmico podemos medir o sinal BOLD e associa-lo a atividade cerebral, possibilitando a realização de inferências sobre o comportamento do cérebro. 
+
+
+O método GLM – Modelo Linear Geral é um método estatístico utilizado para verificar como uma variável depende de outras variáveis de interesse. Neste modelo a variável dependente é escrita como uma combinação linear das variáveis independentes, onde os coeficientes dessa combinação representam. A regressão linear é utilizada em umas das análises feitas com dados de fMRI, que são os mapas de ativação. Esses mapas mostram as regiões ativadas, de indivíduos ou grupo de indivíduos, quando estão realizando alguma tarefa cognitiva.
+
+A regressão é dada por:
+$$
+\begin{align}
+y = \beta xi + \alpha + \epsilon_1
+\end{align}
+$$ 
+Estimador de mínimos quadrados pelo pela contrução das matrizes:
+
+$$
+\begin{align} Y = 
+\begin{bmatrix}
+\\ y_1
+\\ y_2
+\\ y_3
+\\ ...
+\\ y_n
+
+\end{bmatrix}
+\end{align}
+$$ 
+
+e:
+$$
+\begin{align} X = 
+\begin{bmatrix}
+\\ 1 && x_1
+\\ 1 && x_2
+\\ 1 && x_3
+\\ ...
+\\ 1 && x_n
+
+\end{bmatrix}
+
+\end{align}
+$$ 
+
+
+Para conseguir entender melhor como gerar esses mapas de ativação, abaixo segue uma melhor compreensão do modelo. Primeiro implementaremos manualmente e na sequência com o modelo já do próprio R:
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 # Gambi pra funcionar o ts.plot:
@@ -15,8 +58,6 @@ graphics.off()
 par("mar")
 par(mar=c(1,1,1,1))
 ```
-
-ESTIMADOR DE MÍNIMOS QUADRADOS
 
 Simulando um modelo linear:
 
@@ -53,7 +94,6 @@ plot(X, residuos)
 
 ```
 
-
 Modelo de regressão linear múltipla:
 
 Objetivo: Prever o valor de Y utilizando múltiplas variáveis.
@@ -66,10 +106,52 @@ $$
 Neste caso, quero achar os betas que melhor se ajustam ao que estou querendo modelar.
 Note que é uma função linear, quero saber quais são os pesos que me ajudam a ter uma melhor predição.
 
-Estimadores de Mínimos quadrados
+Estimadores de Mínimos quadrados:
 
-# MODELO DE REGRESSÃO LINEAR MÚLTIPLA 
-COLOCAR TEORIA SOBRE ISSO
+$$
+\begin{align} Y = 
+\begin{bmatrix}
+\\ y_1
+\\ y_2
+\\ y_3
+\\ ...
+\\ y_n
+
+\end{bmatrix}
+\end{align}
+$$ 
+Supondo um exemplo de regressão múltipla com 3 variáveis:
+
+$$
+\begin{align} X = 
+
+\begin{bmatrix} \alpha && \beta_1 && \beta_2 && \beta_3
+\\ 1 && x_1 && y_1 && z_1 
+\\ 1 && x_2 && y_2 && z_2
+\\ 1 && x_3 && y_3 && z_3
+\\ ... && ... && ... && ...
+\\ 1 && x_n && y_n && z_n
+
+\end{bmatrix}
+\end{align}
+$$ 
+
+Estimando $beta$:
+
+$$
+\begin{align} \hat{\beta} = (X´ X)^{-1} X´ Y = 
+ 
+\begin{bmatrix}
+\\ \alpha
+\\ \beta_1
+\\ \beta_2
+\\ \beta_3
+
+\end{bmatrix}
+\end{align}
+$$ 
+
+
 
 ```{r}
 N=100

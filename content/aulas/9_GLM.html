@@ -8,8 +8,40 @@ weight: 90
 
 
 
-<p>ADICIONAR TEXTO SOBRE GLM E EQUAÇÕES EXPLICANDO CONTEXTUALIZAÇÃO TEÓRICA</p>
-<p>ESTIMADOR DE MÍNIMOS QUADRADOS</p>
+<p>Na ressonância magnética funcional, a hemoglobina que carrega o oxigênio é chamada oxiemoglobina (oxyHb) e ao se desprender do oxigênio essa passa ser chamada desoxihemoglobina (deoxyHb). A oxyHb possui propriedade diamagnética, isto é fraca interação com outros campos magnéticos; tem momento magnético zero e nenhum elétron sem par. Já a deoxyHb é paramagnética, isto é possui maior susceptibilidade magnética, com elétrons não pareados e momento magnético significativo. Assim, na presença de um campo magnético intenso, como da ressonancia, as moleculas de deoxyHb causam uma atenuação do campo magnético e consequentemente uma alteração no contraste da imagem. Como resultado deste comportamento, tem-se o chamado sinal BOLD (Blood Oxigenated level dependent) que é medido pela ressonância magnética funcional (fMRI) - Notas de aula da Cândida.</p>
+<p>O sinal BOLD medido na fMRI está relacionado com a variação da quantidade de deoxyHb na região de estudo. O aumento da atividade cerebral, aumenta o fluxo sanguíneo para aquela região como uma forma de suprir a demanda metabólica. As células que cuidam da estrutura cerebral são as Glias, os astrocitos (metabolismo) e os oligocitrocitos (estrutural). A presença dos oligocitrocitos causam um aumento do vasos sanguíneos, que causa o aumento do fluxo sanguíneo e consequentemente diminuição da deoxyHb e aumento da oxyHb causando um aumento no sinal BOLD, isso é chamado de acoplamento hemodinâmico. Graças ao acoplamento hemodinâmico podemos medir o sinal BOLD e associa-lo a atividade cerebral, possibilitando a realização de inferências sobre o comportamento do cérebro.</p>
+<p>O método GLM – Modelo Linear Geral é um método estatístico utilizado para verificar como uma variável depende de outras variáveis de interesse. Neste modelo a variável dependente é escrita como uma combinação linear das variáveis independentes, onde os coeficientes dessa combinação representam. A regressão linear é utilizada em umas das análises feitas com dados de fMRI, que são os mapas de ativação. Esses mapas mostram as regiões ativadas, de indivíduos ou grupo de indivíduos, quando estão realizando alguma tarefa cognitiva.</p>
+<p>A regressão é dada por: <span class="math display">\[
+\begin{align}
+y = \beta xi + \alpha + \epsilon_1
+\end{align}
+\]</span> Estimador de mínimos quadrados pelo pela contrução das matrizes:</p>
+$$
+<span class="math display">\[\begin{align} Y = 
+\begin{bmatrix}
+\\ y_1
+\\ y_2
+\\ y_3
+\\ ...
+\\ y_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$</p>
+e: $$
+<span class="math display">\[\begin{align} X = 
+\begin{bmatrix}
+\\ 1 &amp;&amp; x_1
+\\ 1 &amp;&amp; x_2
+\\ 1 &amp;&amp; x_3
+\\ ...
+\\ 1 &amp;&amp; x_n
+
+\end{bmatrix}
+
+\end{align}\]</span>
+<p>$$</p>
+<p>Para conseguir entender melhor como gerar esses mapas de ativação, abaixo segue uma melhor compreensão do modelo. Primeiro implementaremos manualmente e na sequência com o modelo já do próprio R:</p>
 <p>Simulando um modelo linear:</p>
 <pre class="r"><code># Neste caso, y não depende de x:
 X = rnorm(100)
@@ -46,10 +78,45 @@ plot(X, Y)</code></pre>
 Y_i = \alpha + \beta_1 * X_i + \beta_2*Wi + \beta_3*Zi + \epsilon_i
 \]</span></p>
 <p>Neste caso, quero achar os betas que melhor se ajustam ao que estou querendo modelar. Note que é uma função linear, quero saber quais são os pesos que me ajudam a ter uma melhor predição.</p>
-<p>Estimadores de Mínimos quadrados</p>
-<div id="modelo-de-regressao-linear-multipla" class="section level1">
-<h1>MODELO DE REGRESSÃO LINEAR MÚLTIPLA</h1>
-<p>COLOCAR TEORIA SOBRE ISSO</p>
+<p>Estimadores de Mínimos quadrados:</p>
+$$
+<span class="math display">\[\begin{align} Y = 
+\begin{bmatrix}
+\\ y_1
+\\ y_2
+\\ y_3
+\\ ...
+\\ y_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$ Supondo um exemplo de regressão múltipla com 3 variáveis:</p>
+$$
+<span class="math display">\[\begin{align} X = 
+
+\begin{bmatrix} \alpha &amp;&amp; \beta_1 &amp;&amp; \beta_2 &amp;&amp; \beta_3
+\\ 1 &amp;&amp; x_1 &amp;&amp; y_1 &amp;&amp; z_1 
+\\ 1 &amp;&amp; x_2 &amp;&amp; y_2 &amp;&amp; z_2
+\\ 1 &amp;&amp; x_3 &amp;&amp; y_3 &amp;&amp; z_3
+\\ ... &amp;&amp; ... &amp;&amp; ... &amp;&amp; ...
+\\ 1 &amp;&amp; x_n &amp;&amp; y_n &amp;&amp; z_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$</p>
+<p>Estimando <span class="math inline">\(beta\)</span>:</p>
+$$
+<span class="math display">\[\begin{align} \hat{\beta} = (X´ X)^{-1} X´ Y = 
+ 
+\begin{bmatrix}
+\\ \alpha
+\\ \beta_1
+\\ \beta_2
+\\ \beta_3
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$</p>
 <pre class="r"><code>N=100
 #Simular um modelo linear
 X=rnorm(N)
@@ -81,20 +148,20 @@ residuos=Y-Ypredito</code></pre>
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -2.43630 -0.59725  0.00152  0.63853  2.48437 
+## -1.97398 -0.59207  0.05746  0.67221  2.77103 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.86707    0.10326  27.766   &lt;2e-16 ***
-## X            5.01255    0.09921  50.523   &lt;2e-16 ***
-## W           -0.10635    0.10681  -0.996    0.322    
-## Z           -1.97674    0.11941 -16.554   &lt;2e-16 ***
+## (Intercept)  2.98297    0.09722  30.681   &lt;2e-16 ***
+## X            4.88059    0.10226  47.729   &lt;2e-16 ***
+## W            0.08872    0.11639   0.762    0.448    
+## Z           -2.01665    0.09989 -20.190   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.012 on 96 degrees of freedom
-## Multiple R-squared:  0.9715, Adjusted R-squared:  0.9706 
-## F-statistic:  1090 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.9659 on 96 degrees of freedom
+## Multiple R-squared:  0.9723, Adjusted R-squared:  0.9715 
+## F-statistic:  1124 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Olhando a tabela de resultados,</p>
 <p>Estimate = mesmos valores estimados antes Std Error: desvio padrão do estimador t valor: o valor de t (veremos posteriormente) Pr(&gt;|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero</p>
 <p>Olhando o resultado do W, você consegue verificar que o valor-p é muito maior, o que de fato, pela nossa construção é possível verificar.</p>
@@ -126,5 +193,4 @@ Ypredito = modelo$fit</code></pre>
 <pre class="r"><code># VER DEPOIS
 # points(X, Ypredito, col=2)</code></pre>
 <p>Na próxima aula, veremos mapas probabilísticos para estimar os mapas de ativação do bold. Também é válido para o NIRs.</p>
-</div>
 </div>

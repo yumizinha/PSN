@@ -8,114 +8,22 @@ weight: 100
 
 
 
-<p>COLOCAR TEXTO SOBRE DESENHO EXPERIMENTAL, BLOCK DESIGN Maior erro dos novatos: acreditar que com um estímulo só e comparar repouso com o estímulo. É necessário ter uma amostra representativa para conseguir garantir os dados para comparação.</p>
-<p>Para análise, precisarei:</p>
+<p>Para esse exercício, vamos utilizar dados de uma tarefa do tipo stroop. Essa tarefa consiste na medida do tempo de reação e na acurácia da leitura, em voz alta, de palavras em duas situações: 1. As palavras estão escritas na mesma cor que a cor expressa pelo significado semântico - denominamos por CONGRUENTES 2. As palavras estão numa cor que difere da cor expressa pelo significado semântico (exemplo: a palavra vermelho impressa com tinta azul) - denominamos por INCONGRUENTES</p>
+<p>Estima-se que na segunda situação ocorre um atraso no processamento da cor da palavra, induzido pelo conflito no processamento da informação e por conseguinte, causando tempos de reação mais lentos e um aumento de erros.</p>
+<p>Quando se trata de experimentos, o maior erro dos novatos é acreditar que com um estímulo só é possível comparar repouso com o estímulo. É necessário ter uma amostra representativa para conseguir garantir os dados para comparação.</p>
+<p>Para análise, seguiremos os seguintes passos:</p>
 <ol style="list-style-type: decimal">
-<li>Dados</li>
-<li>Especificar a HRF - hemodynamic response function</li>
-<li>Desenho experimental</li>
+<li>Definição do block design do experimento</li>
+<li>Coleta de dados</li>
+<li>Pré-processamento do sinal</li>
+<li>Especificar a convolução da HRF - hemodynamic response function (veremos adiante)</li>
+<li>Aplicação do GLM no sinal BOLD para cada voxel x.y.z, usando como variável preditora os dados de convoluídos</li>
+<li>Aplicação de um teste estatístico para definir quais voxels são relevantes para construção dos mapas</li>
+<li>Visualização e armazenamento dos mapas</li>
 </ol>
-<p>Analisar o sinal BOLD nos n estímulos. No desenho experimental, tenho as condições do meu experimento, convoluído pela HRF. Forma de unificar condições experimentais com a forma hemodinâmica.</p>
-<p>Convolução:</p>
-<p><span class="math display">\[
-\begin{align}
-X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] &amp;&amp; \text{(sendo C a condição)}
-\end{align}
-\]</span></p>
-<p>Função de resposta hemodinâmica canônica:</p>
-<pre class="r"><code>glover=function(HZ){
-    a1=6
-    a2=12
-    b1=0.9
-    b2=0.9
-    d1=5.4
-    d2=10.8
-    c=0.35
-    x=seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
-    glover1=((x/d1)^a1)*exp((-x+d1)/b1)
-    glover2=((x/d2)^a2)*exp((-x+d2)/b2)
-    G=glover1-c*glover2
-    return(G)
-}</code></pre>
-<p>Determinando HRF: Função de resposta hemodinâmica e exemplo de event related:</p>
-<pre class="r"><code>HRF = glover(0.5)</code></pre>
-<p>Exemplo de event-related:</p>
-<pre class="r"><code>CONDICAO=array(0, 90)
-CONDICAO[30] = 1
-CONDICAO[60] = 1
-ts.plot(CONDICAO)</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code># Convolucao do vetor condicao pela HRF
-# ATENCAO: NAO LER o pacote signal, pois a função
-# que faz a convolução tem o mesmo nome da que faz a
-# filtragem em frequência
-X=filter(CONDICAO,HRF,sides=1,method=&quot;convolution&quot;)
-ts.plot(cbind(CONDICAO,X),col=c(1,2))</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
-<p>Exemplo de Desenho block-design:</p>
-<pre class="r"><code>CONDICAO=array(0, 90)
-CONDICAO[20:40] = 1
-CONDICAO[60:80] = 1
-X=filter(CONDICAO, HRF, sides=1, method=&quot;convolution&quot;)
-ts.plot(cbind(CONDICAO, X), col=c(1, 2))</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>No GLM, faremos uma regressão linear múltipla onde o Y é o sinal BOLD, usando a HRF convoluída. No fundo, quero saber se o sinal se comporta conforme a ativação do voxel (se o voxel é ativado por um determinado estímulo).</p>
-<p>Para regressão múltipla, faremos um ajuste de nível (<span class="math inline">\(\alpha\)</span>) e de escala (<span class="math inline">\(\beta\)</span>)</p>
-<p><span class="math display">\[
-\begin{align}
-BOLD_{x,y,z}[t] = \alpha + \beta . X_t + \epsilon_t &amp;&amp; \text{(sendo X_t a condição da convolução)}
-\end{align}
-\]</span></p>
-<p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) Erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
-<p>Para comparação, faremos um teste de hipóteses para verificar.</p>
-<pre class="r"><code>require(AnalyzeFMRI)
-
-#Leitura de dados de fMRI
-volume=f.read.volume(&quot;Stroop.nii&quot;)
-
-#Leitura das condicoes (desenho experimental)
-congruente=scan(&quot;congruent.txt&quot;)
-incongruente=scan(&quot;incongruent.txt&quot;)</code></pre>
-<pre class="r"><code>glover=function(HZ){
-    a1=6
-    a2=12
-    b1=0.9
-    b2=0.9
-    d1=5.4
-    d2=10.8
-    c=0.35
-    x=seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
-    glover1=((x/d1)^a1)*exp((-x+d1)/b1)
-    glover2=((x/d2)^a2)*exp((-x+d2)/b2)
-    G=glover1-c*glover2
-    return(G)
-}
-
-#HRF- Funcao de resposta hemodinamica
-HRF=glover(0.5)
-
-#Convolucao da condicao congruente pela HRF
-X=filter(congruente, HRF, sides=1, method=&quot;convolution&quot;)
-
-#Convolucao da condicao incongruente pela HRF
-Z=filter(incongruente, HRF, sides=1, method=&quot;convolution&quot;)
-
-ts.plot(cbind(congruente, incongruente), col=c(1,2))</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<pre class="r"><code>ts.plot(cbind(X, Z), col=c(1, 2))</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
-<p>Realizando o ajuste do modelo linear geral:</p>
-<pre class="r"><code># Verificando a dimensão do volume para identificar como serão os mapas:
-dim(volume)</code></pre>
-<pre><code>## [1]  45  54  45 180</code></pre>
-<p>Analisando pelo t-valor, estatística t (verificar ativa ou não e se é estatisticamente diferente de zero ou não).</p>
-<p>Estatística T do beta correspondente a condição congruente é igual ao do modelo.</p>
-<div id="verificando-a-tarefa-stroop-com-imagem-processada." class="section level2">
-<h2>Verificando a Tarefa Stroop com imagem processada.</h2>
-<p>Realizando a leitura dos dados e separando entre congruente e incongruente:</p>
+<p>A ideia aqui é investigar a ativação cerebral para cada uma das situações: CONGRUENTES e INCONGRUENTES. Então, primeiramente realizamos a leitura dos dados:</p>
 <pre class="r"><code># Imagem esta preprocessada
 # SPM (UCL) e FSL (Oxford)
-
 
 require(AnalyzeFMRI)
 
@@ -124,9 +32,20 @@ volume=f.read.volume(&quot;Stroop.nii&quot;)
 
 #Leitura das condicoes (desenho experimental)
 congruente=scan(&quot;congruent.txt&quot;)
-incongruente=scan(&quot;incongruent.txt&quot;)
-
-glover=function(HZ){
+incongruente=scan(&quot;incongruent.txt&quot;)</code></pre>
+<p>Obs: O comando scan é melhor (mais rápido) para ler vetor do que o read.table, mais usado para ler .txt</p>
+<p>A função resposta ao estimulo congruente (ativação durante o estimulo, CONG = 1; e não ativação, fora do estímulo CONG = 0), como se observa em:</p>
+<pre class="r"><code>ts.plot(congruente)</code></pre>
+<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Realizemos agora a convolução dos estímulos sobre a resposta hemodinâmica esperada do indivíduo. Ou seja, ao ser submetido ao estimulo, espera-se que ocorra uma ativação cerebral associada a essa resposta. Essa ativação chamada de função resposta hemodinâmica (HRF – hemodinamic response funciona).</p>
+<p>A equação abaixo mostra a convolução da função resposta pela HRF pela HRF do modelo de Garry Glover:</p>
+<p><span class="math display">\[
+\begin{align}
+X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] &amp;&amp; \text{(sendo C a condição)}
+\end{align}
+\]</span></p>
+<p>Em código, essa função dada pelo modelo de Garry Glover faz duas curvas gaussianas e a HRF é a combinação linear dessas duas gaussianas. Os parâmetros já seguem por default:</p>
+<pre class="r"><code>glover=function(HZ){
     a1=6
     a2=12
     b1=0.9
@@ -140,39 +59,97 @@ glover=function(HZ){
     G=glover1-c*glover2
     return(G)
 }</code></pre>
-<p>Calculando o HRF:</p>
+<p>Determinando HRF: Função de resposta hemodinâmica, considerando um tempo de repetição TR de 2s, ou seja 1/2:</p>
 <pre class="r"><code>#HRF- Funcao de resposta hemodinamica
-HRF=glover(0.5)
-
-#Convolucao da condicao congruente pela HRF
-X=filter(congruente,HRF,sides=1,method=&quot;convolution&quot;)
+HRF = glover(0.5)</code></pre>
+<p>Exemplo de event-related:</p>
+<pre class="r"><code>CONDICAO = array(0, 90)
+CONDICAO[30] = 1
+CONDICAO[60] = 1
+ts.plot(CONDICAO)</code></pre>
+<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code># Convolucao do vetor condicao pela HRF
+# ATENCAO: NAO LER o pacote signal, pois a função
+# que faz a convolução tem o mesmo nome da que faz a
+# filtragem em frequência
+X = filter(CONDICAO, HRF, sides=1, method=&quot;convolution&quot;)
+ts.plot(cbind(CONDICAO, X), col = c(1,2))</code></pre>
+<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p>Exemplo de Desenho block-design:</p>
+<pre class="r"><code>CONDICAO = array(0, 90)
+CONDICAO[20:40] = 1
+CONDICAO[60:80] = 1
+X = filter(CONDICAO, HRF, sides=1, method=&quot;convolution&quot;)
+ts.plot(cbind(CONDICAO, X), col=c(1, 2))</code></pre>
+<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Identificando a convolução das condições pela HRF:</p>
+<pre class="r"><code>#Convolucao da condicao congruente pela HRF
+X=filter(congruente, HRF, sides=1, method=&quot;convolution&quot;)
 
 #Convolucao da condicao incongruente pela HRF
-Z=filter(incongruente,HRF,sides=1,method=&quot;convolution&quot;)
+Z=filter(incongruente, HRF, sides=1, method=&quot;convolution&quot;)</code></pre>
+<p>Ao plotarmos a função que representa um modelo de ativação relacionado ao design do experimento, verificamos comportamentos semelhantes. Analisando as duas condições:</p>
+<pre class="r"><code>ts.plot(cbind(congruente, incongruente), col=c(1,2))</code></pre>
+<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>ts.plot(cbind(X, Z), col=c(1, 2))</code></pre>
+<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>A título de curiosidade, essa convolução utilizada na função filter é equivalente ao seguinte código (as saídas são equivalentes):</p>
+<pre class="r"><code>#Faça a convolução do INCONG pela HRF.
+Z = array(0,length(incongruente))
+for(ti in (length(HRF)+1):length(incongruente)){
+   for( i in 1:length(HRF)){
+    Z[ti]= Z[ti]+ incongruente[ti-i]*HRF[i]
+  }
+}
 
-ts.plot(cbind(congruente,incongruente),col=c(1,2))</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<pre class="r"><code>ts.plot(cbind(X,Z),col=c(1,2))</code></pre>
-<p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+#Convolução do CONG pela HRF
+X = array(0,length(congruente))
+for(ti in (length(HRF)+1):length(congruente)){
+   for( i in 1:length(HRF)){
+    X[ti]= X[ti]+ congruente[ti-i]*HRF[i]
+  }
+}
+
+#Normalizando (colocar o máximo em 1) os dados da condição para facilitar a interpretação. 
+
+X = X/max(X)
+Z=Z/max(Z)</code></pre>
+<p>Para garantir uma resposta hemodinâmica mais próxima do que se espera é feita uma convolução da resposta esperada relacionada ao desenho do experimento com a função resposta hemodinâmica do modelo de Garry Glover, dando origem a um sinal convoluído que representa como seria, idealmente, o comportamento do sinal BOLD para aquele modelo de experimento.</p>
+<p>Realizando o ajuste do modelo linear geral:</p>
+<p>No GLM, faremos uma regressão linear múltipla onde o Y é o sinal BOLD, usando a HRF convoluída. No fundo, quero saber se o sinal se comporta conforme a ativação do voxel (se o voxel é ativado por um determinado estímulo). Para cada voxel x, y e z vamos rodar o GLM (Regressao multipla) usando como variável preditora os dados dessa convolução.</p>
+<p>Para regressão múltipla, faremos um ajuste de nível (<span class="math inline">\(\alpha\)</span>) e de escala (<span class="math inline">\(\beta\)</span>)</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{x,y,z}[t] = \alpha + \beta . X_t + \epsilon_t &amp;&amp; \text{(sendo } X_t \text{ a condição da convolução)}
+\end{align}
+\]</span></p>
+<p>neste caso, supondo: * <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) * Erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
+<p>Para comparação, faremos um teste de hipóteses. Analisando pelo t-valor, estatística t (verificar ativa ou não e se é estatisticamente diferente de zero ou não): Estatística T do beta correspondente a condição congruente é igual ao do modelo.</p>
 <p>Fazendo os Mapas de estatisticas T</p>
-<pre class="r"><code>mapaTcongruente=array(0,c(45,54,45,1))
-mapaTincongruente=array(0,c(45,54,45,1))
+<pre class="r"><code># Verificando a dimensão do volume para identificar como serão os mapas:
+dim(volume)</code></pre>
+<pre><code>## [1]  45  54  45 180</code></pre>
+<p>Considerando no caso do GLM o <span class="math inline">\(\beta_1\)</span> o congruente e <span class="math inline">\(\beta_2\)</span> o incongruente:</p>
+<pre class="r"><code># Considera as dimensões da matriz volume e adiciona esse 1, para construção do mapa
+mapaTcongruente = array(0,c(45,54,45,1))
+mapaTincongruente = array(0,c(45,54,45,1))
 
 for(xi in 1:45){
   for(yi in 1:54){
     for(zi in 1:45){
-        #pega somente os voxels intracranianos
+        #pega somente os voxels intracranianos, ou seja, diferentes de zero:
        if(volume[xi,yi,zi,1]!=0){
-         #Ajuste do modelo linear geral
+         #Ajuste do modelo linear geral - GLM:
          modelo=lm(volume[xi,yi,zi,]~X+Z)
 
          #Estatistica T do beta correspondente a condicao congruente
-         mapaTcongruente[xi,yi,zi,1]=summary(modelo)$coef[2,3]
+         mapaTcongruente[xi,yi,zi,1] = summary(modelo)$coef[2,3]
 
          #Estatistica T do beta correspondente a condicao incongruente
-         mapaTincongruente[xi,yi,zi,1]=summary(modelo)$coef[3,3]
+         mapaTincongruente[xi,yi,zi,1] = summary(modelo)$coef[3,3]
        }#fecha if
 }}}#fecha for do xi,yi,zi</code></pre>
+<p>A estatística T me diz se os valores de <span class="math inline">\(\beta_1\)</span> são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).</p>
 <p>Agora, armazenando os mapas em arquivos no formato Analyze (um IMG e um HDR):</p>
 <pre class="r"><code>f.write.analyze(mapaTcongruente, &quot;MapaCongruente&quot;, 
                 pixdim = c(4, 4, 4),
@@ -180,5 +157,3 @@ for(xi in 1:45){
 f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;, 
                 pixdim = c(4, 4, 4),
                 originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
-<p>A estatística T me diz se os valores de <span class="math inline">\(\beta_1\)</span> são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).</p>
-</div>
