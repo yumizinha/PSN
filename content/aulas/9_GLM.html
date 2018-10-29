@@ -16,7 +16,6 @@ weight: 90
 y = \beta xi + \alpha + \epsilon_1
 \end{align}
 \]</span> Estimador de mínimos quadrados pelo pela contrução das matrizes:</p>
-$$
 <span class="math display">\[\begin{align} Y = 
 \begin{bmatrix}
 \\ y_1
@@ -27,8 +26,7 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$</p>
-e: $$
+<p>e:</p>
 <span class="math display">\[\begin{align} X = 
 \begin{bmatrix}
 \\ 1 &amp;&amp; x_1
@@ -40,7 +38,6 @@ e: $$
 \end{bmatrix}
 
 \end{align}\]</span>
-<p>$$</p>
 <p>Para conseguir entender melhor como gerar esses mapas de ativação, abaixo segue uma melhor compreensão do modelo. Primeiro implementaremos manualmente e na sequência com o modelo já do próprio R:</p>
 <p>Simulando um modelo linear:</p>
 <pre class="r"><code># Neste caso, y não depende de x:
@@ -79,7 +76,6 @@ Y_i = \alpha + \beta_1 * X_i + \beta_2*Wi + \beta_3*Zi + \epsilon_i
 \]</span></p>
 <p>Neste caso, quero achar os betas que melhor se ajustam ao que estou querendo modelar. Note que é uma função linear, quero saber quais são os pesos que me ajudam a ter uma melhor predição.</p>
 <p>Estimadores de Mínimos quadrados:</p>
-$$
 <span class="math display">\[\begin{align} Y = 
 \begin{bmatrix}
 \\ y_1
@@ -90,8 +86,7 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$ Supondo um exemplo de regressão múltipla com 3 variáveis:</p>
-$$
+<p>Supondo um exemplo de regressão múltipla com 3 variáveis:</p>
 <span class="math display">\[\begin{align} X = 
 
 \begin{bmatrix} \alpha &amp;&amp; \beta_1 &amp;&amp; \beta_2 &amp;&amp; \beta_3
@@ -103,9 +98,7 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$</p>
 <p>Estimando <span class="math inline">\(beta\)</span>:</p>
-$$
 <span class="math display">\[\begin{align} \hat{\beta} = (X´ X)^{-1} X´ Y = 
  
 \begin{bmatrix}
@@ -113,10 +106,8 @@ $$
 \\ \beta_1
 \\ \beta_2
 \\ \beta_3
-
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$</p>
 <pre class="r"><code>N=100
 #Simular um modelo linear
 X=rnorm(N)
@@ -138,9 +129,9 @@ betahat= solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
 
 #Estimativa dos erros (residuos)
 residuos=Y-Ypredito</code></pre>
-<p>No R, a seguinte notação é válida para implementação:</p>
+<p>No R, utlizamos a função lm para implementação do modelo. Neste caso, explicando Y em função das variáveis independentes X, W e Z:</p>
 <pre class="r"><code>modelo = lm(Y~X+W+Z)</code></pre>
-<p>Se comparar os resultados deste com o que foi feito manualmente acima, pode verificar que é idêntico ao que foi calculado manualmente.</p>
+<p>Se comparar os resultados deste com o que foi feito manualmente acima, pode verificar que é idêntico ao que foi calculado manualmente:</p>
 <pre class="r"><code>summary(modelo)</code></pre>
 <pre><code>## 
 ## Call:
@@ -148,24 +139,32 @@ residuos=Y-Ypredito</code></pre>
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.97398 -0.59207  0.05746  0.67221  2.77103 
+## -2.17988 -0.69426 -0.04394  0.71412  2.44574 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.98297    0.09722  30.681   &lt;2e-16 ***
-## X            4.88059    0.10226  47.729   &lt;2e-16 ***
-## W            0.08872    0.11639   0.762    0.448    
-## Z           -2.01665    0.09989 -20.190   &lt;2e-16 ***
+## (Intercept)  3.04327    0.10721  28.386  &lt; 2e-16 ***
+## X            5.19511    0.11034  47.084  &lt; 2e-16 ***
+## W           -0.28504    0.09985  -2.855  0.00528 ** 
+## Z           -2.05315    0.11281 -18.200  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9659 on 96 degrees of freedom
-## Multiple R-squared:  0.9723, Adjusted R-squared:  0.9715 
-## F-statistic:  1124 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 1.045 on 96 degrees of freedom
+## Multiple R-squared:  0.9663, Adjusted R-squared:  0.9652 
+## F-statistic: 916.3 on 3 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Olhando a tabela de resultados,</p>
-<p>Estimate = mesmos valores estimados antes Std Error: desvio padrão do estimador t valor: o valor de t (veremos posteriormente) Pr(&gt;|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero</p>
+<ul>
+<li>Estimate = mesmos valores estimados antes</li>
+<li>Std Error: desvio padrão do estimador</li>
+<li>t valor: o valor de t (veremos posteriormente)</li>
+<li>Pr(&gt;|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero</li>
+</ul>
 <p>Olhando o resultado do W, você consegue verificar que o valor-p é muito maior, o que de fato, pela nossa construção é possível verificar.</p>
-<p>R2 ajustado corrige pelo número de variáveis que estão sendo utilizadas R não ajustado considera todas as variáveis que estão entrando</p>
+<ul>
+<li>R2 ajustado corrige pelo número de variáveis que estão sendo utilizadas</li>
+<li>R não ajustado considera todas as variáveis que estão entrando</li>
+</ul>
 <div id="modelo-polinomial-de-ordem-3" class="section level2">
 <h2>Modelo polinomial de ordem 3</h2>
 <pre class="r"><code>X = rnorm(100)
@@ -178,7 +177,8 @@ plot(X, Y)</code></pre>
 <p><img src="/aulas/9_GLM_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 <pre class="r"><code>modelo = lm(Y~X)
 # VER DEPOIS PQ NÃO COMPILOU O LINES
-#lines(X, modelo$fit, col = 2)</code></pre>
+# lines(X, modelo$fit, col = 2)</code></pre>
+<p>Neste caso é possível verificar que um modelo linear não se adequa diretamente bem, pois trata-se de uma curva. Passamos então a construir com mais variáveis.</p>
 <p>Aplicando a regressão lm prevendo Y usando X, W e Z:</p>
 <pre class="r"><code># termo quadrático
 W = X^2
@@ -188,7 +188,7 @@ Z = X^3
 Ypredito = modelo$fit</code></pre>
 <p>Se colocar esse modelo para visualização, podemos ver a seguinte bagunça:</p>
 <pre class="r"><code># VER DEPOIS PORQUÊ NÃO COMPILOU ESSE GRÁFICO NO R Studio:
-# lines(X, Ypredito, col=2)</code></pre>
+#lines(X, Ypredito, col=2)</code></pre>
 <p>Isso acontece porque ele liga todos os pontos na ordem em que é gerado, o que não é adequado para esse novo modelo. Por isso utilizamos o points:</p>
 <pre class="r"><code># VER DEPOIS
 # points(X, Ypredito, col=2)</code></pre>

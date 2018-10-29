@@ -13,7 +13,6 @@ par("mar")
 par(mar=c(1,1,1,1))
 ```
 
-
 Para esse exercício, vamos utilizar dados de uma tarefa do tipo stroop. Essa tarefa consiste na medida do tempo de reação e na acurácia da leitura, em voz alta, de palavras em duas situações:
   1. As palavras estão escritas na mesma cor que a cor expressa pelo significado semântico - denominamos por CONGRUENTES
   2. As palavras estão numa cor que difere da cor expressa pelo significado semântico (exemplo: a palavra vermelho impressa com tinta azul) - denominamos por INCONGRUENTES

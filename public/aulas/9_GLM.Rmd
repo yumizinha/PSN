@@ -21,7 +21,7 @@ y = \beta xi + \alpha + \epsilon_1
 $$ 
 Estimador de mínimos quadrados pelo pela contrução das matrizes:
 
-$$
+
 \begin{align} Y = 
 \begin{bmatrix}
 \\ y_1
@@ -32,10 +32,10 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$ 
+
 
 e:
-$$
+
 \begin{align} X = 
 \begin{bmatrix}
 \\ 1 && x_1
@@ -47,7 +47,7 @@ $$
 \end{bmatrix}
 
 \end{align}
-$$ 
+
 
 
 Para conseguir entender melhor como gerar esses mapas de ativação, abaixo segue uma melhor compreensão do modelo. Primeiro implementaremos manualmente e na sequência com o modelo já do próprio R:
@@ -108,7 +108,7 @@ Note que é uma função linear, quero saber quais são os pesos que me ajudam a
 
 Estimadores de Mínimos quadrados:
 
-$$
+
 \begin{align} Y = 
 \begin{bmatrix}
 \\ y_1
@@ -119,10 +119,10 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$ 
+
 Supondo um exemplo de regressão múltipla com 3 variáveis:
 
-$$
+
 \begin{align} X = 
 
 \begin{bmatrix} \alpha && \beta_1 && \beta_2 && \beta_3
@@ -134,11 +134,11 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$ 
+
 
 Estimando $beta$:
 
-$$
+
 \begin{align} \hat{\beta} = (X´ X)^{-1} X´ Y = 
  
 \begin{bmatrix}
@@ -146,11 +146,8 @@ $$
 \\ \beta_1
 \\ \beta_2
 \\ \beta_3
-
 \end{bmatrix}
 \end{align}
-$$ 
-
 
 
 ```{r}
@@ -178,13 +175,13 @@ residuos=Y-Ypredito
 
 ```
 
-No R, a seguinte notação é válida para implementação:
+No R, utlizamos a função lm para implementação do modelo. Neste caso, explicando Y em função das variáveis independentes X, W e Z:
 
 ```{r}
 modelo = lm(Y~X+W+Z)
 ```
 
-Se comparar os resultados deste com o que foi feito manualmente acima, pode verificar que é idêntico ao que foi calculado manualmente.
+Se comparar os resultados deste com o que foi feito manualmente acima, pode verificar que é idêntico ao que foi calculado manualmente:
 
 ```{r}
 summary(modelo)
@@ -192,16 +189,16 @@ summary(modelo)
 
 Olhando a tabela de resultados, 
 
-Estimate = mesmos valores estimados antes
-Std Error: desvio padrão do estimador
-t valor: o valor de t (veremos posteriormente)
-Pr(>|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero
+* Estimate = mesmos valores estimados antes
+* Std Error: desvio padrão do estimador
+* t valor: o valor de t (veremos posteriormente)
+* Pr(>|t|): neste modelo se o p-valor for menor que 5%, temos evidências que este valor é estatisticamente diferente de zero
 
 Olhando o resultado do W, você consegue verificar que o valor-p é muito maior, o que de fato, pela nossa construção é possível verificar.
 
 
-R2 ajustado corrige pelo número de variáveis que estão sendo utilizadas
-R não ajustado considera todas as variáveis que estão entrando
+* R2 ajustado corrige pelo número de variáveis que estão sendo utilizadas
+* R não ajustado considera todas as variáveis que estão entrando
 
 
 ## Modelo polinomial de ordem 3
@@ -213,14 +210,18 @@ Erro = rnorm(100)
 
 Seja o polinômio de ordem três:
 Y = 2 + 3X +0.5X^2 + 0.1*X^3 + Erro
+
 ```{r}
 plot(X, Y)
 Y=2 + 3*X + 1*X^2 + 0.1* X^3
 plot(X, Y)
 modelo = lm(Y~X)
 # VER DEPOIS PQ NÃO COMPILOU O LINES
-#lines(X, modelo$fit, col = 2)
+# lines(X, modelo$fit, col = 2)
 ```
+
+Neste caso é possível verificar que um modelo linear não se adequa diretamente bem, pois trata-se de uma curva.
+Passamos então a construir com mais variáveis.
 
 Aplicando a regressão lm prevendo Y usando X, W e Z:
 
@@ -237,7 +238,7 @@ Se colocar esse modelo para visualização, podemos ver a seguinte bagunça:
 
 ```{r}
 # VER DEPOIS PORQUÊ NÃO COMPILOU ESSE GRÁFICO NO R Studio:
-# lines(X, Ypredito, col=2)
+#lines(X, Ypredito, col=2)
 ```
 
 Isso acontece porque ele liga todos os pontos na ordem em que é gerado, o que não é adequado para esse novo modelo.
