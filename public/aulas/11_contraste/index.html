@@ -13,17 +13,17 @@
     <title>Contraste :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1540818033" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1540818033" rel="stylesheet">
-    <link href="../../css/hybrid.css?1540818033" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1540818033" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1540818033" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1540818033" rel="stylesheet">
-    <link href="../../css/theme.css?1540818033" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1540818033" rel="stylesheet">
+    <link href="../../css/nucleus.css?1540823516" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1540823516" rel="stylesheet">
+    <link href="../../css/hybrid.css?1540823516" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1540823516" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1540823516" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1540823516" rel="stylesheet">
+    <link href="../../css/theme.css?1540823516" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1540823516" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1540818033"></script>
+    <script src="../../js/jquery-2.x.min.js?1540823516"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1540818033"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1540818033"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1540823516"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1540823516"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1540818033"></script>
+<script type="text/javascript" src="../../js/search.js?1540823516"></script>
 
     
   </div>
@@ -456,24 +456,52 @@
         
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>Observações: Movimentação de corpo rígido:</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{t} = \alpha + \beta . X_t + (\gamma_1\mu_1 + ...+\gamma_6 \mu_6) + \epsilon_t &amp;&amp; \text{(sendo } X_t \text{ a condição da convolução)}
+\end{align}
+\]</span></p>
+<p>Neste caso, <span class="math inline">\(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\)</span> é a combinação do ajuste de corpos rígidos para ajuste de movimento. São 6 eixos (3 de rotação e 3 de translação). São utilizados pois muitas coletas de fMRI são realizadas com movimento (fala, movimento da mão ou com alguma tarefa que pode gerar movimentação). Alguns pesquisadores sugerem 12 movimentos, que seriam os 6 usuais utilizados e suas derivadas para correção.</p>
+<p>Em event-related, além da condição convoluída pela HRF, inclui também suas derivadas.</p>
+<div id="para-mapas-de-ativacao-de-um-individuo---1st-level" class="section level2">
+<h2>Para mapas de ativação de um indivíduo - 1st level</h2>
+<p>Se quiser sofisticar a análise com mais acurácia, realizamos os ajustes:</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. X_t&#39; + \epsilon_t &amp;&amp; \text{(sendo } X_t&#39; = X_t - X_{t-1} \text{)}
+\end{align}
+\]</span></p>
+<p>A adição de Kernels de Volterra:</p>
+<p><span class="math display">\[
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. V_t&#39; + \epsilon_t &amp;&amp; \text{(sendo } V_t \text{ os kernels de Volterra)}
+\end{align}
+\]</span> E no caso dos testes estatísticos de ativação, trabalharia com o <span class="math inline">\(\beta_1\)</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Além disso, trabalha-se com a autocorrelação dos resíduos. Seja o modelo</li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+\]</span></p>
+<p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
+<p>3.1 Pre-whitening: Aplicação de modelo autoregressivo 3.2 Estimação não-paramétrica e semi-paramétrica: Descobrir independência dos resíduos 3.3 Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.</p>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="../../aulas/11_Contraste_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<div id="contraste" class="section level2">
+<h2>Contraste:</h2>
+<p>As análises são feitas em dois tipos:</p>
+<ul>
+<li>1st level: Comparação entre ativação em condições no mesmo indivíduo</li>
+<li>2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos</li>
+</ul>
+<p>Seja no primeiro nível a implementação do GLM:</p>
+<p><span class="math display">\[
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+\]</span></p>
 </div>
 
 
@@ -740,20 +768,20 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1540818033"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1540818033"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1540818033"></script>
-    <script src="../../js/jquery.sticky.js?1540818033"></script>
-    <script src="../../js/featherlight.min.js?1540818033"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1540818033"></script>
-    <script src="../../js/highlight.pack.js?1540818033"></script>
+    <script src="../../js/clipboard.min.js?1540823516"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1540823516"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1540823516"></script>
+    <script src="../../js/jquery.sticky.js?1540823516"></script>
+    <script src="../../js/featherlight.min.js?1540823516"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1540823516"></script>
+    <script src="../../js/highlight.pack.js?1540823516"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1540818033"></script>
-    <script src="../../js/learn.js?1540818033"></script>
-    <script src="../../js/hugo-learn.js?1540818033"></script>
+    <script src="../../js/modernizr.custom.71422.js?1540823516"></script>
+    <script src="../../js/learn.js?1540823516"></script>
+    <script src="../../js/hugo-learn.js?1540823516"></script>
 
-    <link href="../../mermaid/mermaid.css?1540818033" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1540818033"></script>
+    <link href="../../mermaid/mermaid.css?1540823516" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1540823516"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

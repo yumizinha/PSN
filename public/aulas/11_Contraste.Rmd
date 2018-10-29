@@ -5,26 +5,67 @@ date: "29 de outubro de 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+Observações: Movimentação de corpo rígido:
 
-## R Markdown
+$$
+\begin{align}
+BOLD_{t} = \alpha + \beta . X_t + (\gamma_1\mu_1 + ...+\gamma_6 \mu_6) + \epsilon_t && \text{(sendo } X_t \text{ a condição da convolução)}
+\end{align}
+$$
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Neste caso, $\gamma_1\mu_1 + ...+\gamma_6 \mu_6$ é a combinação do ajuste de corpos rígidos para ajuste de movimento. São 6 eixos (3 de rotação e 3 de translação). São utilizados pois muitas coletas de fMRI são realizadas com movimento (fala, movimento da mão ou com alguma tarefa que pode gerar movimentação). Alguns pesquisadores sugerem 12 movimentos, que seriam os 6 usuais utilizados e suas derivadas para correção.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Em event-related, além da condição convoluída pela HRF, inclui também suas derivadas.
 
-```{r cars}
-summary(cars)
-```
+## Para mapas de ativação de um indivíduo - 1st level
 
-## Including Plots
+Se quiser sofisticar a análise com mais acurácia, realizamos os ajustes:
 
-You can also embed plots, for example:
+$$
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. X_t' + \epsilon_t && \text{(sendo } X_t' = X_t - X_{t-1} \text{)}
+\end{align}
+$$
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+A adição de Kernels de Volterra:
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+$$
+\begin{align}
+BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. V_t' + \epsilon_t && \text{(sendo } V_t \text{ os kernels de Volterra)}
+\end{align}
+$$
+E no caso dos testes estatísticos de ativação, trabalharia com o $\beta_1$
+
+
+3. Além disso, trabalha-se com a autocorrelação dos resíduos. Seja o modelo
+
+$$
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+$$
+
+neste caso, supondo:
+$\epsilon_t$ com média zero e variância constante (homocedasticidade) e os erros $\epsilon_t$ são independentes
+
+3.1  Pre-whitening: Aplicação de modelo autoregressivo 
+3.2  Estimação não-paramétrica e semi-paramétrica: Descobrir independência dos resíduos
+3.3  Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.
+
+
+## Contraste:
+
+As análises são feitas em dois tipos:
+
+* 1st level: Comparação entre ativação em condições no mesmo indivíduo
+* 2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos
+
+Seja no primeiro nível a implementação do GLM: 
+
+
+$$
+\begin{align}
+Y_{t} = \alpha + \beta . X_t + \epsilon_t
+\end{align}
+$$
+

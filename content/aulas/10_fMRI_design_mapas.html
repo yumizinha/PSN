@@ -187,36 +187,3 @@ for(xi in 1:45){
 f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;, 
                 pixdim = c(4, 4, 4),
                 originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
-<p>Observações: Movimentação de corpo rígido:</p>
-<p><span class="math display">\[
-\begin{align}
-BOLD_{t} = \alpha + \beta . X_t + (\gamma_1\mu_1 + ...+\gamma_6 \mu_6) + \epsilon_t &amp;&amp; \text{(sendo } X_t \text{ a condição da convolução)}
-\end{align}
-\]</span></p>
-<p>Neste caso, <span class="math inline">\(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\)</span> é a combinação do ajuste de corpos rígidos para ajuste de movimento. São 6 eixos (3 de rotação e 3 de translação). São utilizados pois muitas coletas de fMRI são realizadas com movimento (fala, movimento da mão ou com alguma tarefa que pode gerar movimentação). Alguns pesquisadores sugerem 12 movimentos, que seriam os 6 usuais utilizados e suas derivadas para correção.</p>
-<p>Em event-related, além da condição convoluída pela HRF, inclui também suas derivadas.</p>
-<div id="para-mapas-de-ativacao-de-um-individuo---1st-level" class="section level2">
-<h2>Para mapas de ativação de um indivíduo - 1st level</h2>
-<p>Se quiser sofisticar a análise com mais acurácia, realizamos os ajustes:</p>
-<p><span class="math display">\[
-\begin{align}
-BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. X_t&#39; + \epsilon_t &amp;&amp; \text{(sendo } X_t&#39; = X_t - X_{t-1} \text{)}
-\end{align}
-\]</span></p>
-<p>A adição de Kernels de Volterra:</p>
-<p><span class="math display">\[
-\begin{align}
-BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. V_t&#39; + \epsilon_t &amp;&amp; \text{(sendo } V_t \text{ os kernels de Volterra)}
-\end{align}
-\]</span> E no caso dos testes estatísticos de ativação, trabalharia com o <span class="math inline">\(\beta_1\)</span></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Além disso, trabalha-se com a autocorrelação dos resíduos. Seja o modelo</li>
-</ol>
-<p><span class="math display">\[
-\begin{align}
-Y_{t} = \alpha + \beta . X_t + \epsilon_t
-\end{align}
-\]</span></p>
-<p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
-<p>3.1 Pre-whitening: Aplicação de modelo autoregressivo 3.2 Estimação não-paramétrica e semi-paramétrica: Descobrir independência dos resíduos 3.3 Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.</p>
-</div>

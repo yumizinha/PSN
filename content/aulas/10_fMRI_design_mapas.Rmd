@@ -252,7 +252,6 @@ $$
 
 A estatística T me diz se por exemplo os valores de $\beta_1$ são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).
 
-
 Agora, armazenando os mapas em arquivos no formato Analyze (um IMG e um HDR):
 
 ```{r, cache = TRUE}
