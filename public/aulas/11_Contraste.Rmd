@@ -1,5 +1,5 @@
 ---
-title: "Contraste"
+title: "Análise 1st e 2nd level"
 author: "Amanda Yumi"
 date: "29 de outubro de 2018"
 output: html_document
@@ -55,13 +55,18 @@ $\epsilon_t$ com média zero e variância constante (homocedasticidade) e os err
 
 ## Contraste:
 
-As análises são feitas em dois tipos:
+As etapas de:
+* coleta de dados
+* pré-processamento
+* 1st level
+* e/ou 2nd level
+
+Onde as análises são feitas em dois tipos:
 
 * 1st level: Comparação entre ativação em condições no mesmo indivíduo
 * 2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos
 
 Seja no primeiro nível a implementação do GLM: 
-
 
 $$
 \begin{align}
@@ -69,3 +74,274 @@ Y_{t} = \alpha + \beta . X_t + \epsilon_t
 \end{align}
 $$
 
+
+### Análise de grupo - 2nd level:
+
+As análises 2nd level se dividem em fixed effects (conclusões nos indivíduos que participaram do estudo) ou mixed effects/random para conclusões de onde os indivíduos foram amostrados. Em mixed effects, utiliza-se um grupo para amostrar um comportamento de uma população.
+
+Na análise de grupo, podemos aplicar diversos testes de hipóteses, como teste $\lambda^2$ (chi-quadrado), teste-T, correlação de Pearson. Com o GLM, é possível fazer parte destes testes. 
+
+$$
+\begin{align}
+Y_{i} = \alpha + \beta_1 . X_i + \beta_2.Z_i+... + \epsilon_t
+\end{align}
+$$
+supondo:
+$\epsilon_t$ com média zero e variância constante (homocedasticidade) e os erros $\epsilon_t$ são independentes
+
+Exemplo: Suponha que para um voxel X, Y, Z temos os $\beta$'s de uma condição experimental para N indivíduos. Como testar se na população de onde os N indivíduos foram amostrados se o $\beta > 0$?
+
+Para N-indivíduos, terei N cérebros para analisar. Para cada indivíduo tenho um $\beta_i$ atribuído a cada um:
+
+\begin{align}=
+\begin{bmatrix}
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}
+
+
+#### Teste para um grupo:
+Para testar se esse $\beta$, basta testar com teste-T se o $\alpha>0$ considerando o modelo de $ Y = \alpha + \epsilon_t$ ($\epsilon$ com média zero):
+
+
+$$
+\begin{align} Y = 
+\begin{bmatrix}
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}
+$$
+e 
+
+$$
+\begin{align} X = 
+\begin{bmatrix}
+\\ 1
+\\ 1
+\\ ...
+\\ 1
+
+\end{bmatrix}
+\end{align}
+$$
+
+Isso é equivalente a um teste T para uma amostra.
+
+#### 1) Comparando dois grupos:
+
+Por exemplo sejam as matrizes:
+
+$$
+\begin{align} X = 
+\begin{bmatrix} Controle
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}
+$$
+e pacientes:
+
+$$
+\begin{align} X = 
+\begin{bmatrix} Pacientes
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}
+$$
+
+O modelo de GLM utilizado é:
+
+$Y_i = \beta_1.C_i + \beta_2.P_i + \epsilon_t$
+note que não há intercepto $\alpha$  
+e:
+$Y_i$ é o coeficiente de ativação do indivíduo:  
+$i= {1, 2, ..., N_c, N_c, ..., (N_c+N_p)$  
+$C_i=1$ se o indivíduo $i$ é controle e zero caso contrário  $P_i=1$ se o indivíduo é paciente e zero caso contrário  
+
+
+$$ Y= 
+\left(\begin{array}{cc} 
+\beta_1^c \\
+\beta_2^c \\
+... \\
+\beta_N^p
+\end{array}\right),  X=
+\left(\begin{array} 1
+1 & 0\\ 
+1 & 0 \\
+1 & 0 \\
+... & ...\\
+0 & 1 \\
+0 & 1 \\
+0 & 1 \\
+\end{array}\right)
+$$ 
+
+Considerando a base a qual os 37 primeiros indivíduos são controles saudáveis e os demais são pacientes com Parkinson.
+
+Implementando no R:
+
+```{r}
+#Leitura de biblioteca
+require(AnalyzeFMRI)
+
+#Leitura dos dados
+betas=f.read.volume("grupo37C-P.nii")
+dim(betas)
+```
+
+
+```{r}
+# imagem axial do décimo individuo:
+#imagem axial (z=20) do decimo individuo na fatia 20
+image(betas[,,20,10])
+
+```
+
+Para um único voxel 20, 20, 20:
+
+```{r}
+Y = betas[20, 20, 20,]
+X = matrix(0, 92, 2)
+# Como 1: 37 são controle e do 38:92 são pacientes:
+
+# Variável dummy para controles
+X[1:37, 1]=1
+
+# Variável dummy para pacientes:
+X[38:92, 2]=1
+
+```
+
+ Ajustando o modelo - GLM:
+ 
+```{r}
+#Ajustar o GLM
+#o -1 na formula serve para tirar o intercepto
+modelo=lm(Y~-1+X[,1]+X[,2])
+summary(modelo)
+```
+ Se olhar o $\beta_1$ são as variáveis do grupo controle e $\beta_2$ do grupo de pacientes.
+ 
+ Analisando o teste de hipóteses e a ativação dos respectivos controles. Para ativação $beta_1 > 0$.
+ Olhando o resultado vemos que o p-valor é muito pequeno, portanto, os controles ativam nesse voxel. O mesmo vale para o grupo de pacientes. 
+ 
+Para entender se o controle ativa MAIS que o de pacientes:
+$\beta_1 > \beta_2$. No R esse teste não é tão simples de se verificar.
+
+
+#### Outro método: Grupos de referência
+
+$Y_i = \alpha + \beta_2.P_i + \epsilon_t$
+$P_i=1$ se o indivíduo é paciente e zero caso contrário  
+
+Para controles:
+$Y_i = \alpha + \epsilon_i$
+
+
+Para pacientes:
+$Y_i= \alpha+ \beta + \epsilon_i$
+$\beta$ é o incremento na média em relação aos controles.
+ 
+Neste caso:
+
+$$ Y= 
+\left(\begin{array}{cc} 
+\beta_1 \\
+\beta_2 \\
+... \\
+\beta_{(N_c+N_p)}
+\end{array}\right),  X=
+\left(\begin{array} 1
+1 & 0\\ 
+1 & 0 \\
+1 & 0 \\
+... & ...\\
+1 & 1 \\
+1 & 1 \\
+1 & 1 \\
+\end{array}\right)
+$$ 
+ 
+ Implementando para o mesmo voxel 20,20,20:
+
+```{r}
+### METODO GRUPO DE REFERENCIA
+#Neste caso sera o controle
+
+#Observacao: os 37 primeiros indiv
+#sao controles saudáveis e os demais
+#sao pacientes com Parkinson
+#GLM
+
+Y=betas[20,20,20,]
+X=matrix(0,92,2)
+#Intercepto
+X[,1]=1
+#Variavel dummy para Pacientes
+X[38:92,2]=1
+
+#Ajustar o GLM
+modelo=lm(Y~X[,2])
+summary(modelo)
+
+```
+ 
+Analisando especificamente para esse voxel, como $\beta<0$ é como se o grupo de pacientes possui uma ligeira ativação menor que o grupo de controle, Mas ao verificar o p-valor, pode-se verificar que não é significante.
+ 
+Para análise dos mapas, analisamos mais o t-valor.
+
+Fazendo a varredura para todos os voxeis intracranianos:
+
+
+```{r, cache = TRUE}
+#GLM em todos os voxels intracranianos
+MAPAT=array(0,c(45,54,45,1))
+
+for(xi in 1:45){
+  for(yi in 1:54){
+    for(zi in 1:45){ 
+     if(betas[xi, yi, zi, 1] != 0){
+      Y=betas[xi, yi, zi, ]
+      X=matrix(0, 92, 2)
+      #Intercepto
+      X[, 1] = 1
+      #Variavel dummy para Pacientes
+      X[38:92, 2] = 1
+
+      #Ajustar o GLM
+      modelo = lm(Y~X[, 2])
+      
+      #Estatistica T do paciente vs controle
+      MAPAT[xi, yi, zi, 1] = summary(modelo)$coef[2, 3]
+    }#fecha if
+}}}#fecha o for do xi,yi,zi
+
+#Salva os mapas em arquivos no formato Analyze (IMG/HDR)
+f.write.analyze(MAPAT,"MapaControlevsPaciente",
+                pixdim=c(4,4,4),
+                originator=c(23.5,32.5,19,1,1))
+```
+
+Entendimento dos modelos e comparação dos testes estatísticos.
+Próxima prova: melhor entendimento dos testes dos dois métodos.
+
+
+ 
+ 
+ 

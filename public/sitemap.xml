@@ -51,12 +51,12 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
+    <loc>/aulas/11_contraste/</loc>
   </url>
   
   <url>
-    <loc>/aulas/11_contraste/</loc>
+    <loc>/categories/</loc>
+    <priority>0</priority>
   </url>
   
   <url>

@@ -10,20 +10,20 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Contraste :: Documentation for Hugo Learn Theme</title>
+    <title>Análise 1st e 2nd level :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1540823516" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1540823516" rel="stylesheet">
-    <link href="../../css/hybrid.css?1540823516" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1540823516" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1540823516" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1540823516" rel="stylesheet">
-    <link href="../../css/theme.css?1540823516" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1540823516" rel="stylesheet">
+    <link href="../../css/nucleus.css?1540989958" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1540989958" rel="stylesheet">
+    <link href="../../css/hybrid.css?1540989958" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1540989958" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1540989958" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1540989958" rel="stylesheet">
+    <link href="../../css/theme.css?1540989958" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1540989958" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1540823516"></script>
+    <script src="../../js/jquery-2.x.min.js?1540989958"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1540823516"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1540823516"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1540989958"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1540989958"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1540823516"></script>
+<script type="text/javascript" src="../../js/search.js?1540989958"></script>
 
     
   </div>
@@ -324,9 +324,9 @@
  
   
     
-      <li data-nav-id="/aulas/11_contraste/" title="Contraste" class="dd-item active">
+      <li data-nav-id="/aulas/11_contraste/" title="Análise 1st e 2nd level" class="dd-item active">
         <a href="../../aulas/11_contraste/">
-        Contraste
+        Análise 1st e 2nd level
         <i class="fa fa-check read-icon"></i>
         </a>
     </li>
@@ -426,7 +426,7 @@
             
           
           
-            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Contraste
+            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Análise 1st e 2nd level
           
          
           
@@ -450,7 +450,7 @@
         
         <div id="body-inner">
           
-            <h1>Contraste</h1>
+            <h1>Análise 1st e 2nd level</h1>
           
 
         
@@ -491,7 +491,8 @@ Y_{t} = \alpha + \beta . X_t + \epsilon_t
 </div>
 <div id="contraste" class="section level2">
 <h2>Contraste:</h2>
-<p>As análises são feitas em dois tipos:</p>
+<p>As etapas de: * coleta de dados * pré-processamento * 1st level * e/ou 2nd level</p>
+<p>Onde as análises são feitas em dois tipos:</p>
 <ul>
 <li>1st level: Comparação entre ativação em condições no mesmo indivíduo</li>
 <li>2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos</li>
@@ -502,6 +503,252 @@ Y_{t} = \alpha + \beta . X_t + \epsilon_t
 Y_{t} = \alpha + \beta . X_t + \epsilon_t
 \end{align}
 \]</span></p>
+<div id="analise-de-grupo---2nd-level" class="section level3">
+<h3>Análise de grupo - 2nd level:</h3>
+<p>As análises 2nd level se dividem em fixed effects (conclusões nos indivíduos que participaram do estudo) ou mixed effects/random para conclusões de onde os indivíduos foram amostrados. Em mixed effects, utiliza-se um grupo para amostrar um comportamento de uma população.</p>
+<p>Na análise de grupo, podemos aplicar diversos testes de hipóteses, como teste <span class="math inline">\(\lambda^2\)</span> (chi-quadrado), teste-T, correlação de Pearson. Com o GLM, é possível fazer parte destes testes.</p>
+<p><span class="math display">\[
+\begin{align}
+Y_{i} = \alpha + \beta_1 . X_i + \beta_2.Z_i+... + \epsilon_t
+\end{align}
+\]</span> supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
+<p>Exemplo: Suponha que para um voxel X, Y, Z temos os <span class="math inline">\(\beta\)</span>’s de uma condição experimental para N indivíduos. Como testar se na população de onde os N indivíduos foram amostrados se o <span class="math inline">\(\beta &gt; 0\)</span>?</p>
+<p>Para N-indivíduos, terei N cérebros para analisar. Para cada indivíduo tenho um <span class="math inline">\(\beta_i\)</span> atribuído a cada um:</p>
+<span class="math display">\[\begin{align}=
+\begin{bmatrix}
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<div id="teste-para-um-grupo" class="section level4">
+<h4>Teste para um grupo:</h4>
+<p>Para testar se esse <span class="math inline">\(\beta\)</span>, basta testar com teste-T se o <span class="math inline">\(\alpha&gt;0\)</span> considerando o modelo de $ Y = + _t$ (<span class="math inline">\(\epsilon\)</span> com média zero):</p>
+$$
+<span class="math display">\[\begin{align} Y = 
+\begin{bmatrix}
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$ e</p>
+$$
+<span class="math display">\[\begin{align} X = 
+\begin{bmatrix}
+\\ 1
+\\ 1
+\\ ...
+\\ 1
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$</p>
+<p>Isso é equivalente a um teste T para uma amostra.</p>
+</div>
+<div id="comparando-dois-grupos" class="section level4">
+<h4>1) Comparando dois grupos:</h4>
+<p>Por exemplo sejam as matrizes:</p>
+$$
+<span class="math display">\[\begin{align} X = 
+\begin{bmatrix} Controle
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$ e pacientes:</p>
+$$
+<span class="math display">\[\begin{align} X = 
+\begin{bmatrix} Pacientes
+\\ \beta_1
+\\ \beta_2
+\\ ...
+\\ \beta_n
+
+\end{bmatrix}
+\end{align}\]</span>
+<p>$$</p>
+<p>O modelo de GLM utilizado é:</p>
+<p><span class="math inline">\(Y_i = \beta_1.C_i + \beta_2.P_i + \epsilon_t\)</span> note que não há intercepto <span class="math inline">\(\alpha\)</span><br />
+e: <span class="math inline">\(Y_i\)</span> é o coeficiente de ativação do indivíduo:<br />
+<span class="math inline">\(i= {1, 2, ..., N_c, N_c, ..., (N_c+N_p)\)</span><br />
+<span class="math inline">\(C_i=1\)</span> se o indivíduo <span class="math inline">\(i\)</span> é controle e zero caso contrário <span class="math inline">\(P_i=1\)</span> se o indivíduo é paciente e zero caso contrário</p>
+<p><span class="math display">\[ Y= 
+\left(\begin{array}{cc} 
+\beta_1^c \\
+\beta_2^c \\
+... \\
+\beta_N^p
+\end{array}\right),  X=
+\left(\begin{array} 1
+1 &amp; 0\\ 
+1 &amp; 0 \\
+1 &amp; 0 \\
+... &amp; ...\\
+0 &amp; 1 \\
+0 &amp; 1 \\
+0 &amp; 1 \\
+\end{array}\right)
+\]</span></p>
+<p>Considerando a base a qual os 37 primeiros indivíduos são controles saudáveis e os demais são pacientes com Parkinson.</p>
+<p>Implementando no R:</p>
+<pre class="r"><code>#Leitura de biblioteca
+require(AnalyzeFMRI)</code></pre>
+<pre><code>## Carregando pacotes exigidos: AnalyzeFMRI</code></pre>
+<pre><code>## Carregando pacotes exigidos: R.matlab</code></pre>
+<pre><code>## R.matlab v3.6.1 (2016-10-19) successfully loaded. See ?R.matlab for help.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;R.matlab&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     getOption, isOpen</code></pre>
+<pre><code>## Carregando pacotes exigidos: fastICA</code></pre>
+<pre><code>## Carregando pacotes exigidos: tcltk</code></pre>
+<pre><code>## Carregando pacotes exigidos: tkrplot</code></pre>
+<pre class="r"><code>#Leitura dos dados
+betas=f.read.volume(&quot;grupo37C-P.nii&quot;)
+dim(betas)</code></pre>
+<pre><code>## [1] 45 54 45 92</code></pre>
+<pre class="r"><code># imagem axial do décimo individuo:
+#imagem axial (z=20) do decimo individuo na fatia 20
+image(betas[,,20,10])</code></pre>
+<p><img src="../../aulas/11_Contraste_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Para um único voxel 20, 20, 20:</p>
+<pre class="r"><code>Y = betas[20, 20, 20,]
+X = matrix(0, 92, 2)
+# Como 1: 37 são controle e do 38:92 são pacientes:
+
+# Variável dummy para controles
+X[1:37, 1]=1
+
+# Variável dummy para pacientes:
+X[38:92, 2]=1</code></pre>
+<p>Ajustando o modelo - GLM:</p>
+<pre class="r"><code>#Ajustar o GLM
+#o -1 na formula serve para tirar o intercepto
+modelo=lm(Y~-1+X[,1]+X[,2])
+summary(modelo)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ -1 + X[, 1] + X[, 2])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.50669 -0.15868 -0.03905  0.09441  1.15112 
+## 
+## Coefficients:
+##        Estimate Std. Error t value Pr(&gt;|t|)    
+## X[, 1]  0.48435    0.04685   10.34   &lt;2e-16 ***
+## X[, 2]  0.44014    0.03843   11.45   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.285 on 90 degrees of freedom
+## Multiple R-squared:  0.7256, Adjusted R-squared:  0.7195 
+## F-statistic:   119 on 2 and 90 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Se olhar o <span class="math inline">\(\beta_1\)</span> são as variáveis do grupo controle e <span class="math inline">\(\beta_2\)</span> do grupo de pacientes.</p>
+<p>Analisando o teste de hipóteses e a ativação dos respectivos controles. Para ativação <span class="math inline">\(beta_1 &gt; 0\)</span>. Olhando o resultado vemos que o p-valor é muito pequeno, portanto, os controles ativam nesse voxel. O mesmo vale para o grupo de pacientes.</p>
+<p>Para entender se o controle ativa MAIS que o de pacientes: <span class="math inline">\(\beta_1 &gt; \beta_2\)</span>. No R esse teste não é tão simples de se verificar.</p>
+</div>
+<div id="outro-metodo-grupos-de-referencia" class="section level4">
+<h4>Outro método: Grupos de referência</h4>
+<p><span class="math inline">\(Y_i = \alpha + \beta_2.P_i + \epsilon_t\)</span> <span class="math inline">\(P_i=1\)</span> se o indivíduo é paciente e zero caso contrário</p>
+<p>Para controles: <span class="math inline">\(Y_i = \alpha + \epsilon_i\)</span></p>
+<p>Para pacientes: <span class="math inline">\(Y_i= \alpha+ \beta + \epsilon_i\)</span> <span class="math inline">\(\beta\)</span> é o incremento na média em relação aos controles.</p>
+<p>Neste caso:</p>
+<p><span class="math display">\[ Y= 
+\left(\begin{array}{cc} 
+\beta_1 \\
+\beta_2 \\
+... \\
+\beta_{(N_c+N_p)}
+\end{array}\right),  X=
+\left(\begin{array} 1
+1 &amp; 0\\ 
+1 &amp; 0 \\
+1 &amp; 0 \\
+... &amp; ...\\
+1 &amp; 1 \\
+1 &amp; 1 \\
+1 &amp; 1 \\
+\end{array}\right)
+\]</span></p>
+<p>Implementando para o mesmo voxel 20,20,20:</p>
+<pre class="r"><code>### METODO GRUPO DE REFERENCIA
+#Neste caso sera o controle
+
+#Observacao: os 37 primeiros indiv
+#sao controles saudáveis e os demais
+#sao pacientes com Parkinson
+#GLM
+
+Y=betas[20,20,20,]
+X=matrix(0,92,2)
+#Intercepto
+X[,1]=1
+#Variavel dummy para Pacientes
+X[38:92,2]=1
+
+#Ajustar o GLM
+modelo=lm(Y~X[,2])
+summary(modelo)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ X[, 2])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.50669 -0.15868 -0.03905  0.09441  1.15112 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.48435    0.04685   10.34   &lt;2e-16 ***
+## X[, 2]      -0.04421    0.06060   -0.73    0.468    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.285 on 90 degrees of freedom
+## Multiple R-squared:  0.00588,    Adjusted R-squared:  -0.005166 
+## F-statistic: 0.5323 on 1 and 90 DF,  p-value: 0.4675</code></pre>
+<p>Analisando especificamente para esse voxel, como <span class="math inline">\(\beta&lt;0\)</span> é como se o grupo de pacientes possui uma ligeira ativação menor que o grupo de controle, Mas ao verificar o p-valor, pode-se verificar que não é significante.</p>
+<p>Para análise dos mapas, analisamos mais o t-valor.</p>
+<p>Fazendo a varredura para todos os voxeis intracranianos:</p>
+<pre class="r"><code>#GLM em todos os voxels intracranianos
+MAPAT=array(0,c(45,54,45,1))
+
+for(xi in 1:45){
+  for(yi in 1:54){
+    for(zi in 1:45){ 
+     if(betas[xi, yi, zi, 1] != 0){
+      Y=betas[xi, yi, zi, ]
+      X=matrix(0, 92, 2)
+      #Intercepto
+      X[, 1] = 1
+      #Variavel dummy para Pacientes
+      X[38:92, 2] = 1
+
+      #Ajustar o GLM
+      modelo = lm(Y~X[, 2])
+      
+      #Estatistica T do paciente vs controle
+      MAPAT[xi, yi, zi, 1] = summary(modelo)$coef[2, 3]
+    }#fecha if
+}}}#fecha o for do xi,yi,zi
+
+#Salva os mapas em arquivos no formato Analyze (IMG/HDR)
+f.write.analyze(MAPAT,&quot;MapaControlevsPaciente&quot;,
+                pixdim=c(4,4,4),
+                originator=c(23.5,32.5,19,1,1))</code></pre>
+<p>Entendimento dos modelos e comparação dos testes estatísticos. Próxima prova: melhor entendimento dos testes dos dois métodos.</p>
+</div>
+</div>
 </div>
 
 
@@ -768,20 +1015,20 @@ Y_{t} = \alpha + \beta . X_t + \epsilon_t
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1540823516"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1540823516"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1540823516"></script>
-    <script src="../../js/jquery.sticky.js?1540823516"></script>
-    <script src="../../js/featherlight.min.js?1540823516"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1540823516"></script>
-    <script src="../../js/highlight.pack.js?1540823516"></script>
+    <script src="../../js/clipboard.min.js?1540989958"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1540989958"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1540989958"></script>
+    <script src="../../js/jquery.sticky.js?1540989958"></script>
+    <script src="../../js/featherlight.min.js?1540989958"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1540989958"></script>
+    <script src="../../js/highlight.pack.js?1540989958"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1540823516"></script>
-    <script src="../../js/learn.js?1540823516"></script>
-    <script src="../../js/hugo-learn.js?1540823516"></script>
+    <script src="../../js/modernizr.custom.71422.js?1540989958"></script>
+    <script src="../../js/learn.js?1540989958"></script>
+    <script src="../../js/hugo-learn.js?1540989958"></script>
 
-    <link href="../../mermaid/mermaid.css?1540823516" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1540823516"></script>
+    <link href="../../mermaid/mermaid.css?1540989958" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1540989958"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
