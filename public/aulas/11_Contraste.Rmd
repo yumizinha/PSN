@@ -309,7 +309,7 @@ Para análise dos mapas, analisamos mais o t-valor.
 Fazendo a varredura para todos os voxeis intracranianos:
 
 
-```{r, cache = TRUE}
+```{r}
 #GLM em todos os voxels intracranianos
 MAPAT=array(0,c(45,54,45,1))
 
