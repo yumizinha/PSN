@@ -53,7 +53,12 @@ $\epsilon_t$ com média zero e variância constante (homocedasticidade) e os err
 3.3  Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.
 
 
-## Contraste:
+## Análise de fMRI:
+
+Um conjunto de dados fMRI, pode ser visto como um conjunto de elementos cubóides (isto é, voxels) de dimensão variável, cada qual explicados por uma série temporal associada de tantos pontos de tempo quanto os volumes adquiridos por sessão.
+
+O objetivo de uma análise estatística (convencional) é determinar quais voxels têm um curso de tempo que se correlaciona com algum padrão conhecido de estimulação ou manipulação experimental. O primeiro passo na análise de dados de ressonância magnética funcional é aplicar uma série de transformações de “pré-processamento” com o objetivo de corrigir vários artefatos potenciais introduzidos na aquisição de dados. Cada transformação pode ser aplicada conforme necessário, dependendo do projeto experimental específico ou protocolo de aquisição. As etapas mais típicas incluem o ajuste de diferenças no tempo de aquisição de fatias de imagem individuais, correção do movimento do assunto, distorção dos dados de indivíduos individuais em um espaço comum (“normalização”) e suavização temporal e espacial (ver Jezzard et al., 2002). Após o pré-processamento, a análise de dados é geralmente realizada em duas etapas: uma análise de primeiro nível separada dos dados de cada indivíduo, seguida de uma análise de segundo nível na qual os resultados de vários assuntos são combinados.
+
 
 As etapas de:
 * coleta de dados
@@ -66,13 +71,22 @@ Onde as análises são feitas em dois tipos:
 * 1st level: Comparação entre ativação em condições no mesmo indivíduo
 * 2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos
 
+
+### Análise primeiro nível
+
+O objetivo da análise estatística de primeiro nível é determinar o quão grande é a contribuição de cada variável preditora $x_i$ para os valores observados de $y$ em um único indivíduo. Isto é, o tamanho de cada parâmetro de escala $\beta_i$ e se é significativamente diferente de zero.
+
 Seja no primeiro nível a implementação do GLM: 
 
 $$
 \begin{align}
-Y_{t} = \alpha + \beta . X_t + \epsilon_t
+Y_{t} = \beta . X_t + \epsilon_t
 \end{align}
 $$
+
+onde, $Y$ é um vector de coluna $n × 1$ representando a série temporal do sinal BOLD associada a um único voxel. X é a matriz design  $n × p$, com cada coluna representando uma variável de previsão diferente.
+
+A abordagem padrão para a análise de fMRI é ajustar o mesmo modelo de forma independente ao tempo de cada voxel. A covariância espacial entre voxels vizinhos é, portanto, tipicamente ignorada no estágio de ajuste do modelo. A presença de mais variáveis de resposta (isto é, voxels) do que observações (ou seja, volumes), juntamente com o objetivo de fazer afirmações topograficamente específicas sobre a atividade BOLD, tem tradicionalmente motivado essa abordagem “massiva-univariada”.
 
 
 ### Análise de grupo - 2nd level:
@@ -201,7 +215,7 @@ Implementando no R:
 require(AnalyzeFMRI)
 
 #Leitura dos dados
-betas=f.read.volume("grupo37C-P.nii")
+betas = f.read.volume("grupo37C-P.nii")
 dim(betas)
 ```
 
@@ -209,7 +223,7 @@ dim(betas)
 ```{r}
 # imagem axial do décimo individuo:
 #imagem axial (z=20) do decimo individuo na fatia 20
-image(betas[,,20,10])
+image(betas[,, 20, 10])
 
 ```
 
@@ -221,10 +235,10 @@ X = matrix(0, 92, 2)
 # Como 1: 37 são controle e do 38:92 são pacientes:
 
 # Variável dummy para controles
-X[1:37, 1]=1
+X[1:37, 1] = 1
 
 # Variável dummy para pacientes:
-X[38:92, 2]=1
+X[38:92, 2] = 1
 
 ```
 
@@ -233,7 +247,7 @@ X[38:92, 2]=1
 ```{r}
 #Ajustar o GLM
 #o -1 na formula serve para tirar o intercepto
-modelo=lm(Y~-1+X[,1]+X[,2])
+modelo = lm(Y~-1+X[, 1] + X[, 2])
 summary(modelo)
 ```
  Se olhar o $\beta_1$ são as variáveis do grupo controle e $\beta_2$ do grupo de pacientes.
@@ -289,15 +303,15 @@ $$
 #sao pacientes com Parkinson
 #GLM
 
-Y=betas[20,20,20,]
-X=matrix(0,92,2)
+Y = betas[20, 20, 20,]
+X = matrix(0, 92, 2)
 #Intercepto
-X[,1]=1
+X[, 1] = 1
 #Variavel dummy para Pacientes
-X[38:92,2]=1
+X[38:92, 2] = 1
 
 #Ajustar o GLM
-modelo=lm(Y~X[,2])
+modelo=lm(Y~X[, 2])
 summary(modelo)
 
 ```
@@ -333,9 +347,9 @@ for(xi in 1:45){
 }}}#fecha o for do xi,yi,zi
 
 #Salva os mapas em arquivos no formato Analyze (IMG/HDR)
-f.write.analyze(MAPAT,"MapaControlevsPaciente",
-                pixdim=c(4,4,4),
-                originator=c(23.5,32.5,19,1,1))
+f.write.analyze(MAPAT, "MapaControlevsPaciente",
+                pixdim = c(4, 4, 4),
+                originator = c(23.5, 32.5, 19, 1, 1))
 ```
 
 Entendimento dos modelos e comparação dos testes estatísticos.

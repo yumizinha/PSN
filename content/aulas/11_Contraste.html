@@ -40,20 +40,28 @@ Y_{t} = \alpha + \beta . X_t + \epsilon_t
 <p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
 <p>3.1 Pre-whitening: Aplicação de modelo autoregressivo 3.2 Estimação não-paramétrica e semi-paramétrica: Descobrir independência dos resíduos 3.3 Pre-coloring (AR) - Força os resíduos a ter a dependência desejada/conhecida que seja compatível com o modelo estatístico.</p>
 </div>
-<div id="contraste" class="section level2">
-<h2>Contraste:</h2>
+<div id="analise-de-fmri" class="section level2">
+<h2>Análise de fMRI:</h2>
+<p>Um conjunto de dados fMRI, pode ser visto como um conjunto de elementos cubóides (isto é, voxels) de dimensão variável, cada qual explicados por uma série temporal associada de tantos pontos de tempo quanto os volumes adquiridos por sessão.</p>
+<p>O objetivo de uma análise estatística (convencional) é determinar quais voxels têm um curso de tempo que se correlaciona com algum padrão conhecido de estimulação ou manipulação experimental. O primeiro passo na análise de dados de ressonância magnética funcional é aplicar uma série de transformações de “pré-processamento” com o objetivo de corrigir vários artefatos potenciais introduzidos na aquisição de dados. Cada transformação pode ser aplicada conforme necessário, dependendo do projeto experimental específico ou protocolo de aquisição. As etapas mais típicas incluem o ajuste de diferenças no tempo de aquisição de fatias de imagem individuais, correção do movimento do assunto, distorção dos dados de indivíduos individuais em um espaço comum (“normalização”) e suavização temporal e espacial (ver Jezzard et al., 2002). Após o pré-processamento, a análise de dados é geralmente realizada em duas etapas: uma análise de primeiro nível separada dos dados de cada indivíduo, seguida de uma análise de segundo nível na qual os resultados de vários assuntos são combinados.</p>
 <p>As etapas de: * coleta de dados * pré-processamento * 1st level * e/ou 2nd level</p>
 <p>Onde as análises são feitas em dois tipos:</p>
 <ul>
 <li>1st level: Comparação entre ativação em condições no mesmo indivíduo</li>
 <li>2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos</li>
 </ul>
+<div id="analise-primeiro-nivel" class="section level3">
+<h3>Análise primeiro nível</h3>
+<p>O objetivo da análise estatística de primeiro nível é determinar o quão grande é a contribuição de cada variável preditora <span class="math inline">\(x_i\)</span> para os valores observados de <span class="math inline">\(y\)</span> em um único indivíduo. Isto é, o tamanho de cada parâmetro de escala <span class="math inline">\(\beta_i\)</span> e se é significativamente diferente de zero.</p>
 <p>Seja no primeiro nível a implementação do GLM:</p>
 <p><span class="math display">\[
 \begin{align}
-Y_{t} = \alpha + \beta . X_t + \epsilon_t
+Y_{t} = \beta . X_t + \epsilon_t
 \end{align}
 \]</span></p>
+<p>onde, <span class="math inline">\(Y\)</span> é um vector de coluna <span class="math inline">\(n × 1\)</span> representando a série temporal do sinal BOLD associada a um único voxel. X é a matriz design <span class="math inline">\(n × p\)</span>, com cada coluna representando uma variável de previsão diferente.</p>
+<p>A abordagem padrão para a análise de fMRI é ajustar o mesmo modelo de forma independente ao tempo de cada voxel. A covariância espacial entre voxels vizinhos é, portanto, tipicamente ignorada no estágio de ajuste do modelo. A presença de mais variáveis de resposta (isto é, voxels) do que observações (ou seja, volumes), juntamente com o objetivo de fazer afirmações topograficamente específicas sobre a atividade BOLD, tem tradicionalmente motivado essa abordagem “massiva-univariada”.</p>
+</div>
 <div id="analise-de-grupo---2nd-level" class="section level3">
 <h3>Análise de grupo - 2nd level:</h3>
 <p>As análises 2nd level se dividem em fixed effects (conclusões nos indivíduos que participaram do estudo) ou mixed effects/random para conclusões de onde os indivíduos foram amostrados. Em mixed effects, utiliza-se um grupo para amostrar um comportamento de uma população.</p>
@@ -164,12 +172,12 @@ require(AnalyzeFMRI)</code></pre>
 <pre><code>## Carregando pacotes exigidos: tcltk</code></pre>
 <pre><code>## Carregando pacotes exigidos: tkrplot</code></pre>
 <pre class="r"><code>#Leitura dos dados
-betas=f.read.volume(&quot;grupo37C-P.nii&quot;)
+betas = f.read.volume(&quot;grupo37C-P.nii&quot;)
 dim(betas)</code></pre>
 <pre><code>## [1] 45 54 45 92</code></pre>
 <pre class="r"><code># imagem axial do décimo individuo:
 #imagem axial (z=20) do decimo individuo na fatia 20
-image(betas[,,20,10])</code></pre>
+image(betas[,, 20, 10])</code></pre>
 <p><img src="/aulas/11_Contraste_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Para um único voxel 20, 20, 20:</p>
 <pre class="r"><code>Y = betas[20, 20, 20,]
@@ -177,14 +185,14 @@ X = matrix(0, 92, 2)
 # Como 1: 37 são controle e do 38:92 são pacientes:
 
 # Variável dummy para controles
-X[1:37, 1]=1
+X[1:37, 1] = 1
 
 # Variável dummy para pacientes:
-X[38:92, 2]=1</code></pre>
+X[38:92, 2] = 1</code></pre>
 <p>Ajustando o modelo - GLM:</p>
 <pre class="r"><code>#Ajustar o GLM
 #o -1 na formula serve para tirar o intercepto
-modelo=lm(Y~-1+X[,1]+X[,2])
+modelo = lm(Y~-1+X[, 1] + X[, 2])
 summary(modelo)</code></pre>
 <pre><code>## 
 ## Call:
@@ -240,15 +248,15 @@ summary(modelo)</code></pre>
 #sao pacientes com Parkinson
 #GLM
 
-Y=betas[20,20,20,]
-X=matrix(0,92,2)
+Y = betas[20, 20, 20,]
+X = matrix(0, 92, 2)
 #Intercepto
-X[,1]=1
+X[, 1] = 1
 #Variavel dummy para Pacientes
-X[38:92,2]=1
+X[38:92, 2] = 1
 
 #Ajustar o GLM
-modelo=lm(Y~X[,2])
+modelo=lm(Y~X[, 2])
 summary(modelo)</code></pre>
 <pre><code>## 
 ## Call:
@@ -294,9 +302,9 @@ for(xi in 1:45){
 }}}#fecha o for do xi,yi,zi
 
 #Salva os mapas em arquivos no formato Analyze (IMG/HDR)
-f.write.analyze(MAPAT,&quot;MapaControlevsPaciente&quot;,
-                pixdim=c(4,4,4),
-                originator=c(23.5,32.5,19,1,1))</code></pre>
+f.write.analyze(MAPAT, &quot;MapaControlevsPaciente&quot;,
+                pixdim = c(4, 4, 4),
+                originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
 <p>Entendimento dos modelos e comparação dos testes estatísticos. Próxima prova: melhor entendimento dos testes dos dois métodos.</p>
 </div>
 </div>

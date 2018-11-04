@@ -84,8 +84,7 @@ betahat = solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
 
 # estimador é a fórmula que traz a estimativa. 
 Ypredito = betahat[1]+ betahat[2]*X
-# VER DEPOIS PQ O LINES NÃO COMPILA
-# lines(X, Ypredito, col=2)
+lines(X, Ypredito, col=2)
 
 # Estimativa dos erros (resíduos)
 residuos = Y-Ypredito
@@ -216,8 +215,7 @@ plot(X, Y)
 Y=2 + 3*X + 1*X^2 + 0.1* X^3
 plot(X, Y)
 modelo = lm(Y~X)
-# VER DEPOIS PQ NÃO COMPILOU O LINES
-# lines(X, modelo$fit, col = 2)
+lines(X, modelo$fit, col = 2)
 ```
 
 Neste caso é possível verificar que um modelo linear não se adequa diretamente bem, pois trata-se de uma curva.
@@ -237,16 +235,16 @@ Ypredito = modelo$fit
 Se colocar esse modelo para visualização, podemos ver a seguinte bagunça:
 
 ```{r}
-# VER DEPOIS PORQUÊ NÃO COMPILOU ESSE GRÁFICO NO R Studio:
-#lines(X, Ypredito, col=2)
+plot(X, Y)
+lines(X, Ypredito, col=2)
 ```
 
 Isso acontece porque ele liga todos os pontos na ordem em que é gerado, o que não é adequado para esse novo modelo.
 Por isso utilizamos o points:
 
 ```{r}
-# VER DEPOIS
-# points(X, Ypredito, col=2)
+plot(X, Y)
+points(X, Ypredito, col=2)
 
 ```
 

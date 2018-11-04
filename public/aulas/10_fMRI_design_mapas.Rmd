@@ -54,7 +54,9 @@ A função resposta ao estimulo congruente (ativação durante o estimulo, CONG 
 ts.plot(congruente)
 ```
 
-Realizemos agora a convolução dos estímulos sobre a resposta hemodinâmica esperada do indivíduo. Ou seja, ao ser submetido ao estimulo, espera-se que ocorra uma ativação cerebral associada a essa resposta. Essa ativação chamada de função resposta hemodinâmica (HRF – hemodinamic response funciona).
+O objetivo da análise é estimar se, e em que medida, cada preditor contribui para a variabilidade observada no curso do tempo do voxel. Considere, por exemplo, uma experiência na qual a resposta BOLD, $y$, é amostrada $n$ vezes (ou seja, volumes). A intensidade do sinal BOLD em cada observação ($y_i$) pode ser modelada como a soma de um número de variáveis preditoras conhecidas ($x_1,… x_p$), cada uma escalonada por um parâmetro ($\beta$):
+
+Realizemos agora a convolução dos estímulos sobre a resposta hemodinâmica esperada do indivíduo. Ou seja, ao ser submetido ao estimulo, espera-se que ocorra uma ativação cerebral associada a essa resposta. Essa ativação chamada de função resposta hemodinâmica (HRF – hemodinamic response functional).
 
 A equação abaixo mostra a convolução da função resposta pela HRF pela HRF do modelo de Garry Glover:
 
@@ -263,7 +265,8 @@ f.write.analyze(mapaTincongruente, "MapaIncongruente",
                 originator = c(23.5, 32.5, 19, 1, 1))
 ```
 
-
+Um artigo muito interessante que resume o uso de GLM nas análises de fMRI:
+https://doi.org/10.3389/fnhum.2011.00028
 
 
 
