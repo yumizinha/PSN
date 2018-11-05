@@ -84,6 +84,7 @@ betahat = solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%Ytil
 
 # estimador é a fórmula que traz a estimativa. 
 Ypredito = betahat[1]+ betahat[2]*X
+plot(X, Y)
 lines(X, Ypredito, col=2)
 
 # Estimativa dos erros (resíduos)

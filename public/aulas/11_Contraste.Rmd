@@ -3,6 +3,7 @@ title: "Análise 1st e 2nd level"
 author: "Amanda Yumi"
 date: "29 de outubro de 2018"
 output: html_document
+weight: 110
 ---
 
 Observações: Movimentação de corpo rígido:
@@ -36,7 +37,6 @@ BOLD_{t} = \alpha + \beta_1 . X_t + \beta_2. V_t' + \epsilon_t && \text{(sendo }
 $$
 E no caso dos testes estatísticos de ativação, trabalharia com o $\beta_1$
 
-
 3. Além disso, trabalha-se com a autocorrelação dos resíduos. Seja o modelo
 
 $$
@@ -69,7 +69,7 @@ As etapas de:
 Onde as análises são feitas em dois tipos:
 
 * 1st level: Comparação entre ativação em condições no mesmo indivíduo
-* 2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos
+* 2nd level: Comparação entre condições em um grupo OU comparação entre grupos de indivíduos
 
 
 ### Análise primeiro nível
@@ -122,7 +122,7 @@ Para N-indivíduos, terei N cérebros para analisar. Para cada indivíduo tenho 
 Para testar se esse $\beta$, basta testar com teste-T se o $\alpha>0$ considerando o modelo de $ Y = \alpha + \epsilon_t$ ($\epsilon$ com média zero):
 
 
-$$
+
 \begin{align} Y = 
 \begin{bmatrix}
 \\ \beta_1
@@ -132,10 +132,10 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$
+
 e 
 
-$$
+
 \begin{align} X = 
 \begin{bmatrix}
 \\ 1
@@ -145,7 +145,7 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$
+
 
 Isso é equivalente a um teste T para uma amostra.
 
@@ -153,7 +153,7 @@ Isso é equivalente a um teste T para uma amostra.
 
 Por exemplo sejam as matrizes:
 
-$$
+
 \begin{align} X = 
 \begin{bmatrix} Controle
 \\ \beta_1
@@ -163,10 +163,10 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$
+
 e pacientes:
 
-$$
+
 \begin{align} X = 
 \begin{bmatrix} Pacientes
 \\ \beta_1
@@ -176,7 +176,7 @@ $$
 
 \end{bmatrix}
 \end{align}
-$$
+
 
 O modelo de GLM utilizado é:
 
@@ -184,7 +184,7 @@ $Y_i = \beta_1.C_i + \beta_2.P_i + \epsilon_t$
 note que não há intercepto $\alpha$  
 e:
 $Y_i$ é o coeficiente de ativação do indivíduo:  
-$i= {1, 2, ..., N_c, N_c, ..., (N_c+N_p)$  
+$i=$ {1, 2, ..., $N_c$, $N_c$, ..., $(N_c+N_p)$  
 $C_i=1$ se o indivíduo $i$ é controle e zero caso contrário  $P_i=1$ se o indivíduo é paciente e zero caso contrário  
 
 
@@ -311,7 +311,7 @@ X[, 1] = 1
 X[38:92, 2] = 1
 
 #Ajustar o GLM
-modelo=lm(Y~X[, 2])
+modelo = lm(Y~X[, 2])
 summary(modelo)
 
 ```
@@ -320,19 +320,19 @@ Analisando especificamente para esse voxel, como $\beta<0$ é como se o grupo de
  
 Para análise dos mapas, analisamos mais o t-valor.
 
-Fazendo a varredura para todos os voxeis intracranianos:
+Fazendo a varredura para todos os voxeis intracranianos (análise de grupo de referência):
 
 
 ```{r}
 #GLM em todos os voxels intracranianos
-MAPAT=array(0,c(45,54,45,1))
+MAPAT = array(0, c(45, 54, 45, 1))
 
 for(xi in 1:45){
   for(yi in 1:54){
     for(zi in 1:45){ 
      if(betas[xi, yi, zi, 1] != 0){
-      Y=betas[xi, yi, zi, ]
-      X=matrix(0, 92, 2)
+      Y = betas[xi, yi, zi, ]
+      X = matrix(0, 92, 2)
       #Intercepto
       X[, 1] = 1
       #Variavel dummy para Pacientes

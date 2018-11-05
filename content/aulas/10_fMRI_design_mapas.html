@@ -37,7 +37,8 @@ incongruente=scan(&quot;incongruent.txt&quot;)</code></pre>
 <p>A função resposta ao estimulo congruente (ativação durante o estimulo, CONG = 1; e não ativação, fora do estímulo CONG = 0), como se observa em:</p>
 <pre class="r"><code>ts.plot(congruente)</code></pre>
 <p><img src="/aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Realizemos agora a convolução dos estímulos sobre a resposta hemodinâmica esperada do indivíduo. Ou seja, ao ser submetido ao estimulo, espera-se que ocorra uma ativação cerebral associada a essa resposta. Essa ativação chamada de função resposta hemodinâmica (HRF – hemodinamic response funciona).</p>
+<p>O objetivo da análise é estimar se, e em que medida, cada preditor contribui para a variabilidade observada no curso do tempo do voxel. Considere, por exemplo, uma experiência na qual a resposta BOLD, <span class="math inline">\(y\)</span>, é amostrada <span class="math inline">\(n\)</span> vezes (ou seja, volumes). A intensidade do sinal BOLD em cada observação (<span class="math inline">\(y_i\)</span>) pode ser modelada como a soma de um número de variáveis preditoras conhecidas (<span class="math inline">\(x_1,… x_p\)</span>), cada uma escalonada por um parâmetro (<span class="math inline">\(\beta\)</span>):</p>
+<p>Realizemos agora a convolução dos estímulos sobre a resposta hemodinâmica esperada do indivíduo. Ou seja, ao ser submetido ao estimulo, espera-se que ocorra uma ativação cerebral associada a essa resposta. Essa ativação chamada de função resposta hemodinâmica (HRF – hemodinamic response functional).</p>
 <p>A equação abaixo mostra a convolução da função resposta pela HRF pela HRF do modelo de Garry Glover:</p>
 <p><span class="math display">\[
 \begin{align}
@@ -187,3 +188,4 @@ for(xi in 1:45){
 f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;, 
                 pixdim = c(4, 4, 4),
                 originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
+<p>Um artigo muito interessante que resume o uso de GLM nas análises de fMRI: <a href="https://doi.org/10.3389/fnhum.2011.00028" class="uri">https://doi.org/10.3389/fnhum.2011.00028</a></p>

@@ -3,6 +3,7 @@ title: "Análise 1st e 2nd level"
 author: "Amanda Yumi"
 date: "29 de outubro de 2018"
 output: html_document
+weight: 110
 ---
 
 
@@ -48,7 +49,7 @@ Y_{t} = \alpha + \beta . X_t + \epsilon_t
 <p>Onde as análises são feitas em dois tipos:</p>
 <ul>
 <li>1st level: Comparação entre ativação em condições no mesmo indivíduo</li>
-<li>2nd level: Comparação entre condições em um grupo OU competação entre grupos de indivíduos</li>
+<li>2nd level: Comparação entre condições em um grupo OU comparação entre grupos de indivíduos</li>
 </ul>
 <div id="analise-primeiro-nivel" class="section level3">
 <h3>Análise primeiro nível</h3>
@@ -85,7 +86,6 @@ Y_{i} = \alpha + \beta_1 . X_i + \beta_2.Z_i+... + \epsilon_t
 <div id="teste-para-um-grupo" class="section level4">
 <h4>Teste para um grupo:</h4>
 <p>Para testar se esse <span class="math inline">\(\beta\)</span>, basta testar com teste-T se o <span class="math inline">\(\alpha&gt;0\)</span> considerando o modelo de $ Y = + _t$ (<span class="math inline">\(\epsilon\)</span> com média zero):</p>
-$$
 <span class="math display">\[\begin{align} Y = 
 \begin{bmatrix}
 \\ \beta_1
@@ -95,8 +95,7 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$ e</p>
-$$
+<p>e</p>
 <span class="math display">\[\begin{align} X = 
 \begin{bmatrix}
 \\ 1
@@ -106,13 +105,11 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$</p>
 <p>Isso é equivalente a um teste T para uma amostra.</p>
 </div>
 <div id="comparando-dois-grupos" class="section level4">
 <h4>1) Comparando dois grupos:</h4>
 <p>Por exemplo sejam as matrizes:</p>
-$$
 <span class="math display">\[\begin{align} X = 
 \begin{bmatrix} Controle
 \\ \beta_1
@@ -122,8 +119,7 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$ e pacientes:</p>
-$$
+<p>e pacientes:</p>
 <span class="math display">\[\begin{align} X = 
 \begin{bmatrix} Pacientes
 \\ \beta_1
@@ -133,11 +129,10 @@ $$
 
 \end{bmatrix}
 \end{align}\]</span>
-<p>$$</p>
 <p>O modelo de GLM utilizado é:</p>
 <p><span class="math inline">\(Y_i = \beta_1.C_i + \beta_2.P_i + \epsilon_t\)</span> note que não há intercepto <span class="math inline">\(\alpha\)</span><br />
 e: <span class="math inline">\(Y_i\)</span> é o coeficiente de ativação do indivíduo:<br />
-<span class="math inline">\(i= {1, 2, ..., N_c, N_c, ..., (N_c+N_p)\)</span><br />
+<span class="math inline">\(i=\)</span> {1, 2, …, <span class="math inline">\(N_c\)</span>, <span class="math inline">\(N_c\)</span>, …, <span class="math inline">\((N_c+N_p)\)</span><br />
 <span class="math inline">\(C_i=1\)</span> se o indivíduo <span class="math inline">\(i\)</span> é controle e zero caso contrário <span class="math inline">\(P_i=1\)</span> se o indivíduo é paciente e zero caso contrário</p>
 <p><span class="math display">\[ Y= 
 \left(\begin{array}{cc} 
@@ -256,7 +251,7 @@ X[, 1] = 1
 X[38:92, 2] = 1
 
 #Ajustar o GLM
-modelo=lm(Y~X[, 2])
+modelo = lm(Y~X[, 2])
 summary(modelo)</code></pre>
 <pre><code>## 
 ## Call:
@@ -278,16 +273,16 @@ summary(modelo)</code></pre>
 ## F-statistic: 0.5323 on 1 and 90 DF,  p-value: 0.4675</code></pre>
 <p>Analisando especificamente para esse voxel, como <span class="math inline">\(\beta&lt;0\)</span> é como se o grupo de pacientes possui uma ligeira ativação menor que o grupo de controle, Mas ao verificar o p-valor, pode-se verificar que não é significante.</p>
 <p>Para análise dos mapas, analisamos mais o t-valor.</p>
-<p>Fazendo a varredura para todos os voxeis intracranianos:</p>
+<p>Fazendo a varredura para todos os voxeis intracranianos (análise de grupo de referência):</p>
 <pre class="r"><code>#GLM em todos os voxels intracranianos
-MAPAT=array(0,c(45,54,45,1))
+MAPAT = array(0, c(45, 54, 45, 1))
 
 for(xi in 1:45){
   for(yi in 1:54){
     for(zi in 1:45){ 
      if(betas[xi, yi, zi, 1] != 0){
-      Y=betas[xi, yi, zi, ]
-      X=matrix(0, 92, 2)
+      Y = betas[xi, yi, zi, ]
+      X = matrix(0, 92, 2)
       #Intercepto
       X[, 1] = 1
       #Variavel dummy para Pacientes
