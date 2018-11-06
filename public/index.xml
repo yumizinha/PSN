@@ -128,5 +128,14 @@ A análise espectral decompõe o sinal de EEG em suas componentes fundamentais (
 Neste caso, \(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\) é a combinação do ajuste de corpos rígidos para ajuste de movimento. São 6 eixos (3 de rotação e 3 de translação). São utilizados pois muitas coletas de fMRI são realizadas com movimento (fala, movimento da mão ou com alguma tarefa que pode gerar movimentação).</description>
     </item>
     
+    <item>
+      <title>12_fNIRS</title>
+      <link>/aulas/12_fnirs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/12_fnirs/</guid>
+      <description>Espectroscopia do infravermelho próximo. A espectroscopia do infravermelho próximo em funcionamento - fNIRs é uma tecnologia de neuroimagem para mapear o córtex humano, que desde 1977, é empregada para o mapeamento do cérebro de humanos e em animais através de sua oxigenação (Jobsis, 1977). Os tecidos humanos são relativamente transparentes à luz na janela espectral NIR, que é absorvida por compostos pigmentados (cromóforos) ou dispersa em tecidos (Ferrari, 2012). A luz NIR é capaz de penetrar nos tecidos humanos, uma vez que o fator dominante no seu transporte de tecido é a dispersão.</description>
+    </item>
+    
   </channel>
 </rss>

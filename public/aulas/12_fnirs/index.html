@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../../images/favicon.png" type="image/x-icon" />
 <link rel="icon" href="../../images/favicon.png" type="image/x-icon" />
 
-    <title>Mapas de ativação e testes para fMRI :: Documentation for Hugo Learn Theme</title>
+    <title>12_fNIRS :: Documentation for Hugo Learn Theme</title>
     
     
     <link href="../../css/nucleus.css?1541464708" rel="stylesheet">
@@ -33,7 +33,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/aulas/10_fmri_design_mapas/">
+  <body class="" data-url="/aulas/12_fnirs/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -305,7 +305,7 @@
  
   
     
-      <li data-nav-id="/aulas/10_fmri_design_mapas/" title="Mapas de ativação e testes para fMRI" class="dd-item active">
+      <li data-nav-id="/aulas/10_fmri_design_mapas/" title="Mapas de ativação e testes para fMRI" class="dd-item ">
         <a href="../../aulas/10_fmri_design_mapas/">
         Mapas de ativação e testes para fMRI
         <i class="fa fa-check read-icon"></i>
@@ -343,7 +343,7 @@
  
   
     
-      <li data-nav-id="/aulas/12_fnirs/" title="12_fNIRS" class="dd-item ">
+      <li data-nav-id="/aulas/12_fnirs/" title="12_fNIRS" class="dd-item active">
         <a href="../../aulas/12_fnirs/">
         12_fNIRS
         <i class="fa fa-check read-icon"></i>
@@ -416,7 +416,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/10_fMRI_design_mapas.html" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/aulas/12_fNIRS.html" target="blank">
                       <i class="fa fa-code-fork"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -445,7 +445,7 @@
             
           
           
-            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > Mapas de ativação e testes para fMRI
+            <a href='../../'>Processamento de sinais neurais</a> > <a href='../../aulas/'>Conteúdo</a> > 12_fNIRS
           
          
           
@@ -469,50 +469,88 @@
         
         <div id="body-inner">
           
-            <h1>Mapas de ativação e testes para fMRI</h1>
+            <h1>12_fNIRS</h1>
           
 
         
 
 
-<p>Para esse exercício, vamos utilizar dados de uma tarefa do tipo stroop. Essa tarefa consiste na medida do tempo de reação e na acurácia da leitura, em voz alta, de palavras em duas situações: 1. As palavras estão escritas na mesma cor que a cor expressa pelo significado semântico - denominamos por CONGRUENTES 2. As palavras estão numa cor que difere da cor expressa pelo significado semântico (exemplo: a palavra vermelho impressa com tinta azul) - denominamos por INCONGRUENTES</p>
-<p>Estima-se que na segunda situação ocorre um atraso no processamento da cor da palavra, induzido pelo conflito no processamento da informação e por conseguinte, causando tempos de reação mais lentos e um aumento de erros.</p>
-<p>Quando se trata de experimentos, o maior erro dos novatos é acreditar que com um estímulo só é possível comparar repouso com o estímulo. É necessário ter uma amostra representativa para conseguir garantir os dados para comparação.</p>
-<p>Para análise, seguiremos os seguintes passos:</p>
-<ol style="list-style-type: decimal">
-<li>Definição do block design do experimento</li>
-<li>Coleta de dados</li>
-<li>Pré-processamento do sinal: Correção do motion correction (quando a pessoa se mexe durante a aquisição de dados. Nesse caso é feito o realinhamento, com corpo rígido: 3 parâmetros rotação, 3 parâmetros de translação e/ou combinações desses movimentos).</li>
-<li>Especificar a convolução da HRF - hemodynamic response function (veremos adiante)</li>
-<li>Aplicação do GLM no sinal BOLD para cada voxel x.y.z, usando como variável preditora os dados de convoluídos</li>
-<li>Aplicação de um teste estatístico para definir quais voxels são relevantes para construção dos mapas</li>
-<li>Visualização e armazenamento dos mapas</li>
-</ol>
-<p>A ideia aqui é investigar a ativação cerebral para cada uma das situações: CONGRUENTES e INCONGRUENTES. Então, primeiramente realizamos a leitura dos dados:</p>
-<pre class="r"><code># Imagem esta preprocessada
-# SPM (UCL) e FSL (Oxford)
+<div id="espectroscopia-do-infravermelho-proximo." class="section level1">
+<h1>Espectroscopia do infravermelho próximo.</h1>
+<p>A espectroscopia do infravermelho próximo em funcionamento - fNIRs é uma tecnologia de neuroimagem para mapear o córtex humano, que desde 1977, é empregada para o mapeamento do cérebro de humanos e em animais através de sua oxigenação (Jobsis, 1977). Os tecidos humanos são relativamente transparentes à luz na janela espectral NIR, que é absorvida por compostos pigmentados (cromóforos) ou dispersa em tecidos (Ferrari, 2012). A luz NIR é capaz de penetrar nos tecidos humanos, uma vez que o fator dominante no seu transporte de tecido é a dispersão. A imagem em infravermelho próximo ou a imagem óptica difusa são utilizadas para detectar mudanças simultâneas nas propriedades ópticas do córtex humano a partir de múltiplos locais de medição e exibe os resultados na forma de um mapa ou imagem em uma área específica.</p>
+<p>Atividade cerebral está associada a um número de eventos fisiológicos, alguns associados a mudanças nas propriedades ópticas do tecido cerebral e podem ser avaliadas por técnicas ópticas. As principais vantagens dos métodos ópticos incluem custo relativamente baixo, a especificidade bioquímica, a resolução temporal (na faixa de milissegundos), o potencial para medir simultaneamente os eventos intracelulares e intravasculares e a facilidade com que os dispositivos podem ser transportados (Ferrari, 2012).</p>
+<p>Segundo Delpy (10997), utiliza-se níveis seguros de luz laser (com comprimentos de onda entre 650 e 1000 nm) para inferir a variação do nível de oxigenação do tecido cerebral de forma não invasiva, que penetram no tecido biológico e atingem o córtex, permitindo analisar a oxi-hemoglobina (O2Hb), deoxi-hemoglobina (HHb) e hemoglobina total (tHb; tHb = O2Hb + HHb) do sangue cerebral. Muitos outros cromóforos ainda absorvem a luz mas apenas essas são de importância clínica e exibem absorção dependente da oxigenação. Através delas pode-se buscar um melhor entendimento do acoplamento neuro-vascular, das flutuações neurofisiológicas e da hemodinâmica cerebral.</p>
+<p>A técnica NIRs utiliza:</p>
+<ul>
+<li>Diodo laser e/ou fontes de luz de diodos emissores de luz que abrangem a janela óptica entre 650 e 1000 nm</li>
+<li>Fibra óptica flexível para transportar a luz NIR da fonte e detector tecidos</li>
+</ul>
+<p>Três tipos de NIRS diferentes são usadas, cada uma baseada em um tipo específico de iluminação:</p>
+<ul>
+<li><p>A modalidade CW ( ou ondas contínuas) que, com base na constante iluminação do tecido, mede a atenuação da luz através da cabeça. Essa modalidade mede apenas as alterações de oxigenação de O2Hb e HHb mas em relação às outras técnicas, oferece as vantagens de baixo custo e facilidade de transporte.</p></li>
+<li><p>O método de freqüência-domínio (FD) que, iluminando a cabeça com luz modulada por intensidade, mede a atenuação e o atraso de fase da luz emergente.</p></li>
+<li><p>A técnica do domínio do tempo (TD) que, iluminando a cabeça com pulsos de luz curtos, detecta a forma do pulso após a propagação através dos tecidos.</p></li>
+</ul>
+<p>As modalidades FD e TD oferecem a possibilidade de caracterizar as propriedades ópticas dos tecidos (absorção e coeficientes de espalhamento reduzidos), dos quais é possível recuperar as concentrações absolutas de O2Hb e HHb.</p>
+<p>As fibras ópticas são muito adequadas para qualquer posição e postura da cabeça. As medições de NIRS podem ser realizadas em ambientes naturais sem necessidade de restrição ou sedação e a profundidade adequada da penetração da luz NIR (quase a metade da distância do detector fonte) pode ser alcançada usando uma distância do detector em torno de 3cm. A seleção da distância ideal do detector de fonte depende da intensidade da luz NIR e do comprimento de onda, da idade do sujeito e a região da cabeça medida (Ferrari, 2012).</p>
+<p>À medida que a luz injetada se difunde em todas as direções dentro dos tecidos da cabeça (couro cabeludo, crânio e espaço subaracnóideo preenchido com líquido cefalorraquidiano) tanto antes como depois de passar pelo tecido cerebral, a sensibilidade de cada par de fontes-detectores exibe uma distribuição espacial da luz NIR através das diferentes camadas com formato similar ao de uma banana (duas extremidades estreitas e uma curva para dentro em direção ao centro).</p>
+<p>A atenuação relativamente alta da luz NIR no tecido é devida à hemoglobina principal do cromóforo (a proteína dos glóbulos vermelhos que faz o transporte de oxigênio) localizada em pequenos vasos (<span class="math inline">\(&lt;1 mm\)</span> de diâmetro) da microcirculação, como leitos capilares, arteriolares e venulares . NIRS é fracamente sensível aos vasos sanguíneos <span class="math inline">\(&gt; 1mm\)</span> porque absorvem completamente a luz.</p>
+<p>Conforme apresentado por (Mesquita, 2008), O tecido biológico é altamente espalhador de luz e possui coeficientes de absorção relativamente baixos na região do infravermelho próximo do espectro eletromagnético. Estas propriedades permitem a penetração da luz no tecido e sua conseqüente propagação por alguns milímetros, através dos coeficientes de absorção <span class="math inline">\(\mu_{a}\)</span>) e de espalhamento (<span class="math inline">\(\mu_s\)</span>) com valores típicos para estas grandezas no cérebro <span class="math inline">\(\mu_a = 1,4 cm^{-1}\)</span> e <span class="math inline">\(s = 350 cm^{-1}\)</span>. Com, <span class="math inline">\(\mu_a\)</span> variando significativamente com a concentração e o tipo de hemoglobina presente no tecido. É esta sensibilidade das propriedades ópticas da oxi-hemoglobina (O2Hb) e da deoxihemoglobina (HHb), aliada ao fato de ser baixo o coeficiente de absorção da água nessa região, que permite determinar os níveis de oxigenação do tecido com base no espalhamento de luz.</p>
+<p>Durante ativação cerebral (Mesquita2008), as variações nas concentrações de O2Hb e HHb resultam em variações na absorção da luz dentro do tecido. Para medidas hemodinâmicas funcionais típicas, assume-se que essas variações são pequenas, insuficientes para perturbar o caminho da luz através do tecido podendo ser generalizada através da Lei de Beer-Lambert:</p>
+<p>$ OD_i(t, ) = L_{i,j} () <em>{j=1}^{N</em>{vox}}_{a,j}(t, ) . $</p>
+<p>onde, <span class="math inline">\(OD\)</span> é a densidade óptica num detector <span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span> é a fonte, <span class="math inline">\(\lambda\)</span> é o comprimento da onda, <span class="math inline">\(\mu_a\)</span> é o coeficiente de absorção do tecido e <span class="math inline">\(L_{i,j}\)</span> é o livre caminho médio no tecido biológico entre a fonte e detector (na ordem de 28 <span class="math inline">\(\mu m\)</span>).</p>
+<p>No entanto, essa equação só é válida na ausência de espalhamento. Como o caminho médio da luz depende das propriedades de espalhamento do tecido, usa-se a lei de Beer-Lambert modificada, (MBLL, do inglês ) para contabilizar estes efeitos e levar em conta a propagação difusiva da luz, que inclui um fator de caminho diferencial adicional (<span class="math inline">\(l_{DPF}\)</span>), de forma que <span class="math inline">\(OD\)</span> passa a ser dada por:</p>
+<p>$ OD_i(t, ) = <em>{n}<em>n().c_n(t).L</em>{i,j} ().l</em>{DPF}() $</p>
+<p>onde a variação de concentração do n-ésimo cromóforo, <span class="math inline">\(\Delta C_n\)</span>, pode ser encontrada através de medidas de intensidade em função do tempo para n diferentes comprimentos de onda. No caso particular de <span class="math inline">\(n=2\)</span>, pode-se resolver o sistema e estimar as variações de O2Hb(t) e de HHb(t). Com isso, pode-se ver o coeficiente de extinção, distância entre emissor e detector, propriedades do tecido, etc.</p>
+<p>Os experimentos de NIRS, no entanto, medem apenas as variações relativas de oxigenação do tecido. Os valores absolutos não são disponíveis, principalmente levando-se em consideração as diferentes estruturas cerebrais pelas quais a luz atravessa. Outras limitações também são: (a) a interferência da espessura do crânio (medidas cerebrais) ou da espessura do tecido adiposo (medidas musculares); (b) a contribuição controversa desconhecida da mioglobina no sinal muscular NIRS; (c) o efeito do volume sanguíneo muda no comprimento do tecido e, consequentemente no volume de amostra observado; (d) a dificuldade de prever o quanto de uma mudança de sinal NIRS observada é devido ao fluxo sanguíneo cerebral vs. couro cabeludo, ou (e) mudanças simultâneas no fluxo e no volume. Ainda assim, dado o fato de que a fração do volume de sangue arterial é de aproximadamente 30% no cérebro humano, a técnica NIRS oferece a possibilidade de obter informações sobre alterações de oxigenação que ocorrem dentro do compartimento venoso, sendo uma técnica bastante eficaz para detectar zonas de ativação cerebral.</p>
+<p>Ao longo do tempo, o que se altera nos dados de fNIRS é a variação de oxyhemoglobina e deoxyhemoglobina.</p>
+<p>No caso da coleta, o canal é o caminho entre o emissor e o detector. A montagem é escolhida de forma a varrer as regiões cerebrais as quais se pretende estudar (aprox 3cm).</p>
+<div align="center">
+<p><iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen> </iframe></p>
+</div>
+<div align="center">
+<p><iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen> </iframe></p>
+</div>
+<div id="realizando-a-leitura-dos-dados-de-fnirs-no-r" class="section level3">
+<h3>Realizando a leitura dos dados de fNIRS no R:</h3>
+<pre class="r"><code># Os dados já foram preprocessados
+# - PCA para correcao de movimento
+# - retirar outliers
+# - filtro temporal: passa-banda (0.001-0.1Hz)
 
-require(AnalyzeFMRI)
+#Leitura de dados
+OXY=read.table(&quot;Oxy781HZ30sBlock.txt&quot;,header=F)
+DEOXY=read.table(&quot;Deoxy781HZ30sBlock.txt&quot;,header=F)</code></pre>
+<p>Analisando o tamanho do arquivo e a taxa de amostragem:</p>
+<pre class="r"><code># Taxa de amostragem do equipamento
+HZ = 7.81
 
-#Leitura de dados de fMRI
-volume=f.read.volume(&quot;Stroop.nii&quot;)
-
-#Leitura das condicoes (desenho experimental)
-congruente=scan(&quot;congruent.txt&quot;)
-incongruente=scan(&quot;incongruent.txt&quot;)</code></pre>
-<p>Obs: O comando scan é melhor (mais rápido) para ler vetor do que o read.table, mais usado para ler .txt</p>
-<p>A função resposta ao estimulo congruente (ativação durante o estimulo, CONG = 1; e não ativação, fora do estímulo CONG = 0), como se observa em:</p>
-<pre class="r"><code>ts.plot(congruente)</code></pre>
-<p><img src="../../aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>O objetivo da análise é estimar se, e em que medida, cada preditor contribui para a variabilidade observada no curso do tempo do voxel. Considere, por exemplo, uma experiência na qual a resposta BOLD, <span class="math inline">\(y\)</span>, é amostrada <span class="math inline">\(n\)</span> vezes (ou seja, volumes). A intensidade do sinal BOLD em cada observação (<span class="math inline">\(y_i\)</span>) pode ser modelada como a soma de um número de variáveis preditoras conhecidas (<span class="math inline">\(x_1,… x_p\)</span>), cada uma escalonada por um parâmetro (<span class="math inline">\(\beta\)</span>):</p>
-<p>Realizemos agora a convolução dos estímulos sobre a resposta hemodinâmica esperada do indivíduo. Ou seja, ao ser submetido ao estimulo, espera-se que ocorra uma ativação cerebral associada a essa resposta. Essa ativação chamada de função resposta hemodinâmica (HRF – hemodinamic response functional).</p>
-<p>A equação abaixo mostra a convolução da função resposta pela HRF pela HRF do modelo de Garry Glover:</p>
-<p><span class="math display">\[
-\begin{align}
-X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] &amp;&amp; \text{(sendo C a condição)}
-\end{align}
-\]</span></p>
-<p>Em código, essa função dada pelo modelo de Garry Glover faz duas curvas gaussianas e a HRF é a combinação linear dessas duas gaussianas. Os parâmetros já seguem por default:</p>
+dim(OXY)</code></pre>
+<pre><code>## [1] 2660   20</code></pre>
+<pre class="r"><code>dim(DEOXY)</code></pre>
+<pre><code>## [1] 2660   20</code></pre>
+<pre class="r"><code># Logo, temos de tempo de coleta:
+tempo = dim(OXY)/HZ
+tempo</code></pre>
+<pre><code>## [1] 340.588988   2.560819</code></pre>
+<pre class="r"><code>ts.plot(OXY[, 1])</code></pre>
+<p><img src="../../aulas/12_fNIRS_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>ts.plot(DEOXY[, 1])</code></pre>
+<p><img src="../../aulas/12_fNIRS_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre class="r"><code>#Tarefa block-design - 30s
+COND = 330</code></pre>
+<p>Considerando uma tarefa nas seguintes condições: R: 1: 234 T: 235:469 R: 470: 703 T: 704: 937 R: 938: 1172 T: 1173:1406 R: 1407:1640 T: 1641:1874 R: 1875:2109 T: 2110:2343 R: 2344:2577</p>
+<pre class="r"><code>#Tarefa block-design - 30s
+COND=array(0, 2577) #2577 para os primeiros 330s
+COND[235:469]=1
+COND[704:937]=1
+COND[1173:1406]=1
+COND[1641:1874]=1
+COND[2110:2343]=1
+ts.plot(COND)</code></pre>
+<p><img src="../../aulas/12_fNIRS_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Considerando a função glover para convolução pela HRF canônica, para verificar como a Oxyhemoglobina se comporta.</p>
+<p>Para prever o desenho experimental pela HRF, similar às aulas de ressonância:</p>
 <pre class="r"><code>glover=function(HZ){
     a1=6
     a2=12
@@ -526,136 +564,33 @@ X[t] = \sum_{l=0}^{k} HRF[k] \hspace{1mm}* C[t-k] &amp;&amp; \text{(sendo C a co
     glover2=((x/d2)^a2)*exp((-x+d2)/b2)
     G=glover1-c*glover2
     return(G)
+}
+
+#HRF canonica
+HRF=glover(HZ)
+
+#Convolucao da condicao da tarefa pela HRF
+X=filter(COND,HRF,method=&quot;convolution&quot;,side=1)
+ts.plot(X)</code></pre>
+<p><img src="../../aulas/12_fNIRS_files/figure-html/unnamed-chunk-4-1.png" width="672" /> Para o comportamento da deoxy, espero o comportamento inverso (deoxy está negativamente correlacionada com a oxy).</p>
+<p>Estamos modelando de forma similar: <span class="math display">\[ Y_t = \alpha + \beta.X_t + \epsilon_T\]</span></p>
+<pre class="r"><code># Vetor que contem as estatisticas t dos betas
+# do GLM para cada canal (nesse experimento são 20)
+mapaToxy = array(0, 20)
+mapaTdeoxy = array(0, 20)
+
+for(canal in 1:20){
+  #ajuste do GLM para oxy
+  modelo = lm(OXY[1:2577, canal]~X)
+  mapaToxy[canal] = summary(modelo)$coef[2, 3] #estat. t
+  
+  #ajuste do GLM para deoxy
+  modelo = lm(DEOXY[1:2577,canal]~X)
+  mapaTdeoxy[canal] = summary(modelo)$coef[2, 3] #estat. t
 }</code></pre>
-<p>Determinando HRF: Função de resposta hemodinâmica, considerando um tempo de repetição TR de 2s, ou seja 1/2:</p>
-<pre class="r"><code>#HRF- Funcao de resposta hemodinamica
-HRF = glover(0.5)</code></pre>
-<p>Exemplo de event-related (similar ao potencial evocado, vários experimentos coletados coincidindo). No caso de estímulos muito consecutivos, a curva basal nem retorna ao original, o que dificulta na visualização:</p>
-<pre class="r"><code>CONDICAO = array(0, 90)
-CONDICAO[30] = 1
-CONDICAO[60] = 1
-ts.plot(CONDICAO)</code></pre>
-<p><img src="../../aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<pre class="r"><code># Convolucao do vetor condicao pela HRF
-# ATENCAO: NAO LER o pacote signal, pois a função
-# que faz a convolução tem o mesmo nome da que faz a
-# filtragem em frequência
-X = filter(CONDICAO, HRF, sides=1, method=&quot;convolution&quot;)
-ts.plot(cbind(CONDICAO, X), col = c(1,2))</code></pre>
-<p><img src="../../aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<p>Exemplo de Desenho block-design:</p>
-<pre class="r"><code>CONDICAO = array(0, 90)
-CONDICAO[20:40] = 1
-CONDICAO[60:80] = 1
-X = filter(CONDICAO, HRF, sides=1, method=&quot;convolution&quot;)
-ts.plot(cbind(CONDICAO, X), col=c(1, 2))</code></pre>
-<p><img src="../../aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Identificando a convolução das condições pela HRF:</p>
-<pre class="r"><code>#Convolucao da condicao congruente pela HRF
-X=filter(congruente, HRF, sides=1, method=&quot;convolution&quot;)
-
-#Convolucao da condicao incongruente pela HRF
-Z=filter(incongruente, HRF, sides=1, method=&quot;convolution&quot;)</code></pre>
-<p>Ao plotarmos a função que representa um modelo de ativação relacionado ao design do experimento, verificamos comportamentos semelhantes. Analisando as duas condições:</p>
-<pre class="r"><code>ts.plot(cbind(congruente, incongruente), col=c(1,2))</code></pre>
-<p><img src="../../aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<pre class="r"><code>ts.plot(cbind(X, Z), col=c(1, 2))</code></pre>
-<p><img src="../../aulas/10_fMRI_design_mapas_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
-<p>A título de curiosidade, essa convolução utilizada na função filter é equivalente ao seguinte código (as saídas são equivalentes):</p>
-<pre class="r"><code>#Faça a convolução do INCONG pela HRF.
-Z = array(0,length(incongruente))
-for(ti in (length(HRF)+1):length(incongruente)){
-   for( i in 1:length(HRF)){
-    Z[ti]= Z[ti]+ incongruente[ti-i]*HRF[i]
-  }
-}
-
-#Convolução do CONG pela HRF
-X = array(0,length(congruente))
-for(ti in (length(HRF)+1):length(congruente)){
-   for( i in 1:length(HRF)){
-    X[ti]= X[ti]+ congruente[ti-i]*HRF[i]
-  }
-}
-
-#Normalizando (colocar o máximo em 1) os dados da condição para facilitar a interpretação. 
-
-X = X/max(X)
-Z=Z/max(Z)</code></pre>
-<p>Para garantir uma resposta hemodinâmica mais próxima do que se espera é feita uma convolução da resposta esperada relacionada ao desenho do experimento com a função resposta hemodinâmica do modelo de Garry Glover, dando origem a um sinal convoluído que representa como seria, idealmente, o comportamento do sinal BOLD para aquele modelo de experimento.</p>
-<p>Realizando o ajuste do modelo linear geral:</p>
-<p>No GLM, faremos uma regressão linear múltipla onde o Y é o sinal BOLD, usando a HRF convoluída. No fundo, quero saber se o sinal se comporta conforme a ativação do voxel (se o voxel é ativado por um determinado estímulo). Para cada voxel x, y e z vamos rodar o GLM (Regressao multipla) usando como variável preditora os dados dessa convolução.</p>
-<p>Para regressão múltipla, faremos um ajuste de nível (<span class="math inline">\(\alpha\)</span>) e de escala (<span class="math inline">\(\beta\)</span>)</p>
-<p><span class="math display">\[
-\begin{align}
-BOLD_{x,y,z}[t] = \alpha + \beta . X_t + \epsilon_t &amp;&amp; \text{(sendo } X_t \text{ a condição da convolução)}
-\end{align}
-\]</span></p>
-<p>neste caso, supondo: <span class="math inline">\(\epsilon_t\)</span> com média zero e variância constante (homocedasticidade) e os erros <span class="math inline">\(\epsilon_t\)</span> são independentes</p>
-<p>Para comparação, faremos um teste de hipóteses. Analisando pelo t-valor, estatística t (verificar ativa ou não e se é estatisticamente diferente de zero ou não): Estatística T do beta correspondente a condição congruente é igual ao do modelo.</p>
-<p>Obs: O valor p não armazena sinal, ou seja, não conseguimos verificar existência de ativação ou de desativação.</p>
-<p>Fazendo os Mapas de estatisticas T:</p>
-<pre class="r"><code># Verificando a dimensão do volume para identificar como serão os mapas:
-dim(volume)</code></pre>
-<pre><code>## [1]  45  54  45 180</code></pre>
-<p>Considerando no caso do GLM o <span class="math inline">\(\beta_1\)</span> o congruente e <span class="math inline">\(\beta_2\)</span> o incongruente:</p>
-<pre class="r"><code># Considera as dimensões da matriz volume e adiciona esse 1, para construção do mapa
-mapaTcongruente = array(0,c(45,54,45,1))
-mapaTincongruente = array(0,c(45,54,45,1))
-
-for(xi in 1:45){
-  for(yi in 1:54){
-    for(zi in 1:45){
-        #pega somente os voxels intracranianos, ou seja, diferentes de zero:
-       if(volume[xi,yi,zi,1]!=0){
-         #Ajuste do modelo linear geral - GLM:
-         modelo=lm(volume[xi,yi,zi,]~X+Z)
-
-         #Estatistica T do beta correspondente a condicao congruente
-         mapaTcongruente[xi,yi,zi,1] = summary(modelo)$coef[2,3] # Beta_1
-
-         #Estatistica T do beta correspondente a condicao incongruente
-         mapaTincongruente[xi,yi,zi,1] = summary(modelo)$coef[3,3] #Beta_2
-       }#fecha if
-}}}#fecha for do xi,yi,zi</code></pre>
-<p>Se quero testar se <span class="math inline">\(beta_1\)</span> &gt; 0, ou seja ativação de congruente vs nêutro: <span class="math display">\[
-\begin{align} 
-\begin{bmatrix}
-\\ 1 &amp;&amp; 0 &amp;&amp; 0
-\end{bmatrix}
-\end{align}
-\]</span></p>
-<p>Se quero testar se <span class="math inline">\(beta_1\)</span> &lt; 0, ou seja deativação de congruente vs nêutro: <span class="math display">\[
-\begin{align} 
-\begin{bmatrix}
-\\ -1 &amp;&amp; 0 &amp;&amp; 0
-\end{bmatrix}
-\end{align}
-\]</span></p>
-<p>Se quero testar se <span class="math inline">\(beta_2\)</span> &lt; 0: <span class="math display">\[
-\begin{align} 
-\begin{bmatrix}
-\\ 0 &amp;&amp; -1 &amp;&amp; 0
-\end{bmatrix}
-\end{align}
-\]</span></p>
-<p>E por fim, se quero testar a ativação Incongruente &gt; Congruente, ou seja, <span class="math inline">\(beta_2\)</span> &gt; <span class="math inline">\(beta_1\)</span>, quero verificar se <span class="math inline">\(-\beta_1 + \beta_2 &gt; 0\)</span>, logo, na condição:</p>
-<p><span class="math display">\[
-\begin{align} 
-\begin{bmatrix}
-\\ -1 &amp;&amp; +1 &amp;&amp; 0
-\end{bmatrix}
-\end{align}
-\]</span></p>
-<p>A estatística T me diz se por exemplo os valores de <span class="math inline">\(\beta_1\)</span> são maiores ou não que zero. Usamos um p de 0,1% para evitar os ruídos da suavização, que geram falsos positivos (t = 3.03).</p>
-<p>Agora, armazenando os mapas em arquivos no formato Analyze (um IMG e um HDR):</p>
-<pre class="r"><code>f.write.analyze(mapaTcongruente, &quot;MapaCongruente&quot;, 
-                pixdim = c(4, 4, 4),
-                originator = c(23.5, 32.5, 19, 1, 1))
-f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;, 
-                pixdim = c(4, 4, 4),
-                originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
-<p>Um artigo muito interessante que resume o uso de GLM nas análises de fMRI: <a href="https://doi.org/10.3389/fnhum.2011.00028" class="uri">https://doi.org/10.3389/fnhum.2011.00028</a></p>
+<p>Uma consideração do GLM é que os erros (resíduos) são independentes. Na prática, como a taxa de amostragem do NIRS é superior a do fMRI, o problema da autocorrelação dos resíduos é maior. Para mapas de ativação estatísticos, os procedimentos de pre-whitening, pre-colouring ou semi-paramétricos são necessários pois os valores de teste T do NIRS acabam com uma magnitude muito maior.</p>
+</div>
+</div>
 
 
 <footer class=" footline" >
@@ -871,26 +806,6 @@ f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;,
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
                 
                 
 
@@ -918,6 +833,23 @@ f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;,
             
         
                     
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -928,10 +860,10 @@ f.write.analyze(mapaTincongruente, &quot;MapaIncongruente&quot;,
 
 
         
-            <a class="nav nav-prev" href="../../aulas/9_glm/" title="GLM - Modelo Linear Geral"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="../../aulas/11_contraste/" title="Análise 1st e 2nd level"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="../../aulas/11_contraste/" title="Análise 1st e 2nd level" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="../../aulas/0_eletrofisiologia/" title="Introdução a eletrofisiologia" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 

@@ -149,7 +149,7 @@ e
 
 Isso é equivalente a um teste T para uma amostra.
 
-#### 1) Comparando dois grupos:
+#### PRIMEIRO método: Comparando dois grupos:
 
 Por exemplo sejam as matrizes:
 
@@ -351,11 +351,3 @@ f.write.analyze(MAPAT, "MapaControlevsPaciente",
                 pixdim = c(4, 4, 4),
                 originator = c(23.5, 32.5, 19, 1, 1))
 ```
-
-Entendimento dos modelos e comparação dos testes estatísticos.
-Próxima prova: melhor entendimento dos testes dos dois métodos.
-
-
- 
- 
- 
