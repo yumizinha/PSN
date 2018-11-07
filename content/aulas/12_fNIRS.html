@@ -122,7 +122,7 @@ for(canal in 1:20){
 </div>
 <div id="coleta-de-fnirs" class="section level3">
 <h3>Coleta de fNIRS</h3>
-<p>Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha).</p>
+<p>Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha). Além da empresa NIRx, tem a Artinis e a Hitashi.</p>
 <p>No software NIRx Star que se utiliza para fazer a calibração dos optodos e coleta do sinal.</p>
 <p>Na calibração pode-se corrigir o ajuste da touca com:</p>
 <ul>
@@ -147,9 +147,10 @@ for(canal in 1:20){
 <li>Aplicação do GLM: Em SPM Level, pode-se escolher qual onda trabalhar. Em “Specific basis” escolhemos a HRF canônica, com a leitura dos triggers. O pre-colouring e pre-whitening também é possível adicionar nas configurações.</li>
 </ul>
 <p>Nesse caso, o GLM para cada canal é:</p>
-<p>$ Y_t = + .X_t + _t$</p>
+<p><span class="math display">\[ Y_t = \alpha + \beta.X_t + \epsilon_t \]</span></p>
 <p>e na visualização é possível ver cada <span class="math inline">\(\beta\)</span> (azul é para deativação e vermelho para ativação). As regiões laterais são o córtex prefrontal dorsolateral (para funções executivas) e o medial (região da default mode).</p>
 <p>Para ver essas regiões são estatísticamente significantes, é necessário especificar o contraste (marcar com 1 e 0). É possível verificar por exemplo maior ativação no hemisfério oposto a mão que escreve.</p>
-<p>Além da empresa NIRx, tem a Artinis e a Hitashi.</p>
+<p>No experimento sugere-se que as tarefas sejam alternadas por conta do artefato de inclinação. No desenho experimental, alterna-se as tarefas para garantir que a variação da hemodinâmica seja realmente da tarefa cognitiva.</p>
+<p>Prova: Sobre NIRs.</p>
 </div>
 </div>

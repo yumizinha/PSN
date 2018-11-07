@@ -180,7 +180,8 @@ pois os valores de teste T do NIRS acabam com uma magnitude muito maior.
 
 ### Coleta de fNIRS
 
-Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha).
+Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha). Além da empresa NIRx, tem a Artinis e a Hitashi.
+
 
 No software NIRx Star que se utiliza para fazer a calibração dos optodos e coleta do sinal.
 
@@ -211,16 +212,17 @@ Após a coleta, o professor mostrou como processa no NIRSLab.
 
 Nesse caso, o GLM para cada canal é:
 
-$ Y_t = \alpha + \beta.X_t + \epsilon_t$
+$$ Y_t = \alpha + \beta.X_t + \epsilon_t $$
 
 e na visualização é possível ver cada $\beta$ (azul é para deativação e vermelho para ativação). 
 As regiões laterais são o córtex prefrontal dorsolateral (para funções executivas) e o medial (região da default mode). 
 
 Para ver essas regiões são estatísticamente significantes, é necessário especificar o contraste (marcar com 1 e 0). É possível verificar por exemplo maior ativação no hemisfério oposto a mão que escreve. 
 
-Além da empresa NIRx, tem a Artinis e a Hitashi.
+No experimento sugere-se que as tarefas sejam alternadas por conta do artefato de inclinação. No desenho experimental, alterna-se as tarefas para garantir que a variação da hemodinâmica seja realmente da tarefa cognitiva.
 
 
+Prova: Sobre NIRs.
 
 
 
