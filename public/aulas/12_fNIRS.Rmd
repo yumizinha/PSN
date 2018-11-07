@@ -59,11 +59,11 @@ Ao longo do tempo, o que se altera nos dados de fNIRS é a variação de oxyhemo
 
 No caso da coleta, o canal é o caminho entre o emissor e o detector. A montagem é escolhida de forma a varrer as regiões cerebrais as quais se pretende estudar (aprox 3cm).
 
-<iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen></iframe>
+http://www.youtube.com/watch?v=CJIZkZ2ol5A
 
 E também:
 
-<iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen></iframe>
+http://www.youtube.com/watch?v=3LMXiDzcANQ
 
 
 
@@ -196,7 +196,35 @@ Uma vantagem em relação ao EEG é que como se trata de luz infravermelho e nã
 
 Pode-se utilizar para atividades de neurofeedback.
 
-Na aula, foi mostrado com um voluntário um experimento de geração de números aleatórios.
+Na aula, foi mostrado com um voluntário um experimento de geração de números aleatórios, intercalando dois tipos de atividades:
+
+* Contagem de 0-9
+* Gerração de números aleatórios
+
+Após a coleta, o professor mostrou como processa no NIRSLab.
+
+* Carregar arquivo coletado
+* Correção de triggers (marcação do experimento)
+* Limpeza do sinal: Remoção de spikes e filtragem do sinal: escolha dos filtros. Na filtragem são filtrados comprimentos de onda e não a oxy e deoxy. A correção do movimento não é realizada no software
+* Cômputo de estados hemodinâmicos: Estabelecer parâmetros do coeficiente de absorção de Beer-Lambert e cômputo de estados hemodinâmicos.
+* Aplicação do GLM: Em SPM Level, pode-se escolher qual onda trabalhar. Em "Specific basis" escolhemos a HRF canônica, com a leitura dos triggers. O pre-colouring e pre-whitening também é possível adicionar nas configurações. 
+
+Nesse caso, o GLM para cada canal é:
+
+$ Y_t = \alpha + \beta.X_t + \epsilon_t$
+
+e na visualização é possível ver cada $\beta$ (azul é para deativação e vermelho para ativação). 
+As regiões laterais são o córtex prefrontal dorsolateral (para funções executivas) e o medial (região da default mode). 
+
+Para ver essas regiões são estatísticamente significantes, é necessário especificar o contraste (marcar com 1 e 0). É possível verificar por exemplo maior ativação no hemisfério oposto a mão que escreve. 
+
+Além da empresa NIRx, tem a Artinis e a Hitashi.
+
+
+
+
+
+
 
 
 

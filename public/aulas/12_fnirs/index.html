@@ -13,17 +13,17 @@
     <title>fNIRS :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1541586780" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1541586780" rel="stylesheet">
-    <link href="../../css/hybrid.css?1541586780" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1541586780" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1541586780" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1541586780" rel="stylesheet">
-    <link href="../../css/theme.css?1541586780" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1541586780" rel="stylesheet">
+    <link href="../../css/nucleus.css?1541588728" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1541588728" rel="stylesheet">
+    <link href="../../css/hybrid.css?1541588728" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1541588728" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1541588728" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1541588728" rel="stylesheet">
+    <link href="../../css/theme.css?1541588728" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1541588728" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1541586780"></script>
+    <script src="../../js/jquery-2.x.min.js?1541588728"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1541586780"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1541586780"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1541588728"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1541588728"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1541586780"></script>
+<script type="text/javascript" src="../../js/search.js?1541588728"></script>
 
     
   </div>
@@ -505,11 +505,9 @@
 <p>Os experimentos de NIRS, no entanto, medem apenas as variações relativas de oxigenação do tecido. Os valores absolutos não são disponíveis, principalmente levando-se em consideração as diferentes estruturas cerebrais pelas quais a luz atravessa. Outras limitações também são: (a) a interferência da espessura do crânio (medidas cerebrais) ou da espessura do tecido adiposo (medidas musculares); (b) a contribuição controversa desconhecida da mioglobina no sinal muscular NIRS; (c) o efeito do volume sanguíneo muda no comprimento do tecido e, consequentemente no volume de amostra observado; (d) a dificuldade de prever o quanto de uma mudança de sinal NIRS observada é devido ao fluxo sanguíneo cerebral vs. couro cabeludo, ou (e) mudanças simultâneas no fluxo e no volume. Ainda assim, dado o fato de que a fração do volume de sangue arterial é de aproximadamente 30% no cérebro humano, a técnica NIRS oferece a possibilidade de obter informações sobre alterações de oxigenação que ocorrem dentro do compartimento venoso, sendo uma técnica bastante eficaz para detectar zonas de ativação cerebral.</p>
 <p>Ao longo do tempo, o que se altera nos dados de fNIRS é a variação de oxyhemoglobina e deoxyhemoglobina.</p>
 <p>No caso da coleta, o canal é o caminho entre o emissor e o detector. A montagem é escolhida de forma a varrer as regiões cerebrais as quais se pretende estudar (aprox 3cm).</p>
-<iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen>
-</iframe>
+<p><a href="http://www.youtube.com/watch?v=CJIZkZ2ol5A" class="uri">http://www.youtube.com/watch?v=CJIZkZ2ol5A</a></p>
 <p>E também:</p>
-<iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen>
-</iframe>
+<p><a href="http://www.youtube.com/watch?v=3LMXiDzcANQ" class="uri">http://www.youtube.com/watch?v=3LMXiDzcANQ</a></p>
 <div id="realizando-a-leitura-dos-dados-de-fnirs-no-r" class="section level3">
 <h3>Realizando a leitura dos dados de fNIRS no R:</h3>
 <pre class="r"><code># Os dados já foram preprocessados
@@ -602,7 +600,24 @@ for(canal in 1:20){
 </ul>
 <p>Ao iniciar a gravação, pode-se ver os sinais: vermelho a oxihemoblogina (HbO) e azul a desoxihemoglobina (Hb). Na onda, é possível ver o artefato cardíaco no sinal (mais forte na oxy pois vem das arteríolas). A deoxy se encontra nas vênulas, que é mais fraco. Uma vantagem em relação ao EEG é que como se trata de luz infravermelho e não pulsos elétricos, não há problemas de artefatos ocasionados por movimentos ou fala.</p>
 <p>Pode-se utilizar para atividades de neurofeedback.</p>
-<p>Na aula, foi mostrado com um voluntário um experimento de geração de números aleatórios.</p>
+<p>Na aula, foi mostrado com um voluntário um experimento de geração de números aleatórios, intercalando dois tipos de atividades:</p>
+<ul>
+<li>Contagem de 0-9</li>
+<li>Gerração de números aleatórios</li>
+</ul>
+<p>Após a coleta, o professor mostrou como processa no NIRSLab.</p>
+<ul>
+<li>Carregar arquivo coletado</li>
+<li>Correção de triggers (marcação do experimento)</li>
+<li>Limpeza do sinal: Remoção de spikes e filtragem do sinal: escolha dos filtros. Na filtragem são filtrados comprimentos de onda e não a oxy e deoxy. A correção do movimento não é realizada no software</li>
+<li>Cômputo de estados hemodinâmicos: Estabelecer parâmetros do coeficiente de absorção de Beer-Lambert e cômputo de estados hemodinâmicos.</li>
+<li>Aplicação do GLM: Em SPM Level, pode-se escolher qual onda trabalhar. Em “Specific basis” escolhemos a HRF canônica, com a leitura dos triggers. O pre-colouring e pre-whitening também é possível adicionar nas configurações.</li>
+</ul>
+<p>Nesse caso, o GLM para cada canal é:</p>
+<p>$ Y_t = + .X_t + _t$</p>
+<p>e na visualização é possível ver cada <span class="math inline">\(\beta\)</span> (azul é para deativação e vermelho para ativação). As regiões laterais são o córtex prefrontal dorsolateral (para funções executivas) e o medial (região da default mode).</p>
+<p>Para ver essas regiões são estatísticamente significantes, é necessário especificar o contraste (marcar com 1 e 0). É possível verificar por exemplo maior ativação no hemisfério oposto a mão que escreve.</p>
+<p>Além da empresa NIRx, tem a Artinis e a Hitashi.</p>
 </div>
 </div>
 
@@ -886,20 +901,20 @@ for(canal in 1:20){
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1541586780"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1541586780"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1541586780"></script>
-    <script src="../../js/jquery.sticky.js?1541586780"></script>
-    <script src="../../js/featherlight.min.js?1541586780"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1541586780"></script>
-    <script src="../../js/highlight.pack.js?1541586780"></script>
+    <script src="../../js/clipboard.min.js?1541588728"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1541588728"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1541588728"></script>
+    <script src="../../js/jquery.sticky.js?1541588728"></script>
+    <script src="../../js/featherlight.min.js?1541588728"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1541588728"></script>
+    <script src="../../js/highlight.pack.js?1541588728"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1541586780"></script>
-    <script src="../../js/learn.js?1541586780"></script>
-    <script src="../../js/hugo-learn.js?1541586780"></script>
+    <script src="../../js/modernizr.custom.71422.js?1541588728"></script>
+    <script src="../../js/learn.js?1541588728"></script>
+    <script src="../../js/hugo-learn.js?1541588728"></script>
 
-    <link href="../../mermaid/mermaid.css?1541586780" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1541586780"></script>
+    <link href="../../mermaid/mermaid.css?1541588728" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1541588728"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
