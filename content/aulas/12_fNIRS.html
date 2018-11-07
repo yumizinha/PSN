@@ -38,12 +38,11 @@ weight: 120
 <p>Os experimentos de NIRS, no entanto, medem apenas as variações relativas de oxigenação do tecido. Os valores absolutos não são disponíveis, principalmente levando-se em consideração as diferentes estruturas cerebrais pelas quais a luz atravessa. Outras limitações também são: (a) a interferência da espessura do crânio (medidas cerebrais) ou da espessura do tecido adiposo (medidas musculares); (b) a contribuição controversa desconhecida da mioglobina no sinal muscular NIRS; (c) o efeito do volume sanguíneo muda no comprimento do tecido e, consequentemente no volume de amostra observado; (d) a dificuldade de prever o quanto de uma mudança de sinal NIRS observada é devido ao fluxo sanguíneo cerebral vs. couro cabeludo, ou (e) mudanças simultâneas no fluxo e no volume. Ainda assim, dado o fato de que a fração do volume de sangue arterial é de aproximadamente 30% no cérebro humano, a técnica NIRS oferece a possibilidade de obter informações sobre alterações de oxigenação que ocorrem dentro do compartimento venoso, sendo uma técnica bastante eficaz para detectar zonas de ativação cerebral.</p>
 <p>Ao longo do tempo, o que se altera nos dados de fNIRS é a variação de oxyhemoglobina e deoxyhemoglobina.</p>
 <p>No caso da coleta, o canal é o caminho entre o emissor e o detector. A montagem é escolhida de forma a varrer as regiões cerebrais as quais se pretende estudar (aprox 3cm).</p>
-<div align="center">
-<p><iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen> </iframe></p>
-</div>
-<div align="center">
-<p><iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen> </iframe></p>
-</div>
+<iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen>
+</iframe>
+<p>E também:</p>
+<iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen>
+</iframe>
 <div id="realizando-a-leitura-dos-dados-de-fnirs-no-r" class="section level3">
 <h3>Realizando a leitura dos dados de fNIRS no R:</h3>
 <pre class="r"><code># Os dados já foram preprocessados
@@ -122,5 +121,20 @@ for(canal in 1:20){
   mapaTdeoxy[canal] = summary(modelo)$coef[2, 3] #estat. t
 }</code></pre>
 <p>Uma consideração do GLM é que os erros (resíduos) são independentes. Na prática, como a taxa de amostragem do NIRS é superior a do fMRI, o problema da autocorrelação dos resíduos é maior. Para mapas de ativação estatísticos, os procedimentos de pre-whitening, pre-colouring ou semi-paramétricos são necessários pois os valores de teste T do NIRS acabam com uma magnitude muito maior.</p>
+</div>
+<div id="coleta-de-fnirs" class="section level3">
+<h3>Coleta de fNIRS</h3>
+<p>Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha).</p>
+<p>No software NIRx Star que se utiliza para fazer a calibração dos optodos e coleta do sinal.</p>
+<p>Na calibração pode-se corrigir o ajuste da touca com:</p>
+<ul>
+<li>Verde: Sinal excelente</li>
+<li>Amarelo: Sinal bom</li>
+<li>Vermelho: Sinal ruim</li>
+<li>Branco: Canal morto</li>
+</ul>
+<p>Ao iniciar a gravação, pode-se ver os sinais: vermelho a oxihemoblogina (HbO) e azul a desoxihemoglobina (Hb). Na onda, é possível ver o artefato cardíaco no sinal (mais forte na oxy pois vem das arteríolas). A deoxy se encontra nas vênulas, que é mais fraco. Uma vantagem em relação ao EEG é que como se trata de luz infravermelho e não pulsos elétricos, não há problemas de artefatos ocasionados por movimentos ou fala.</p>
+<p>Pode-se utilizar para atividades de neurofeedback.</p>
+<p>Na aula, foi mostrado com um voluntário um experimento de geração de números aleatórios.</p>
 </div>
 </div>

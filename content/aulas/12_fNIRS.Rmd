@@ -59,15 +59,12 @@ Ao longo do tempo, o que se altera nos dados de fNIRS é a variação de oxyhemo
 
 No caso da coleta, o canal é o caminho entre o emissor e o detector. A montagem é escolhida de forma a varrer as regiões cerebrais as quais se pretende estudar (aprox 3cm).
 
-<div align="center">
-   <iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen>
-   </iframe>
-</div>
+<iframe width="560" height="315" src="http://www.youtube.com/watch?v=CJIZkZ2ol5A" frameborder="0" allowfullscreen></iframe>
 
-<div align="center">
-   <iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen>
-   </iframe>
-</div>
+E também:
+
+<iframe width="560" height="315" src="http://www.youtube.com/watch?v=3LMXiDzcANQ" frameborder="0" allowfullscreen></iframe>
+
 
 
 ### Realizando a leitura dos dados de fNIRS no R:
@@ -179,6 +176,30 @@ for(canal in 1:20){
 
 Uma consideração do GLM é que os erros (resíduos) são independentes. Na prática, como a taxa de amostragem do NIRS é superior a do fMRI, o problema da autocorrelação dos resíduos é maior. Para mapas de ativação estatísticos, os procedimentos de pre-whitening, pre-colouring ou semi-paramétricos são necessários
 pois os valores de teste T do NIRS acabam com uma magnitude muito maior. 
+
+
+### Coleta de fNIRS
+
+Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha).
+
+No software NIRx Star que se utiliza para fazer a calibração dos optodos e coleta do sinal.
+
+Na calibração pode-se corrigir o ajuste da touca com:
+
+* Verde: Sinal excelente
+* Amarelo: Sinal bom
+* Vermelho: Sinal ruim
+* Branco: Canal morto
+
+Ao iniciar a gravação, pode-se ver os sinais: vermelho a oxihemoblogina (HbO) e azul a desoxihemoglobina (Hb). Na onda, é possível ver o artefato cardíaco no sinal (mais forte na oxy pois vem das arteríolas). A deoxy se encontra nas vênulas, que é mais fraco.
+Uma vantagem em relação ao EEG é que como se trata de luz infravermelho e não pulsos elétricos, não há problemas de artefatos ocasionados por movimentos ou fala. 
+
+Pode-se utilizar para atividades de neurofeedback.
+
+Na aula, foi mostrado com um voluntário um experimento de geração de números aleatórios.
+
+
+
 
 
 
