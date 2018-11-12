@@ -30,10 +30,13 @@ weight: 120
 <p>A atenuação relativamente alta da luz NIR no tecido é devida à hemoglobina principal do cromóforo (a proteína dos glóbulos vermelhos que faz o transporte de oxigênio) localizada em pequenos vasos (<span class="math inline">\(&lt;1 mm\)</span> de diâmetro) da microcirculação, como leitos capilares, arteriolares e venulares . NIRS é fracamente sensível aos vasos sanguíneos <span class="math inline">\(&gt; 1mm\)</span> porque absorvem completamente a luz.</p>
 <p>Conforme apresentado por (Mesquita, 2008), O tecido biológico é altamente espalhador de luz e possui coeficientes de absorção relativamente baixos na região do infravermelho próximo do espectro eletromagnético. Estas propriedades permitem a penetração da luz no tecido e sua conseqüente propagação por alguns milímetros, através dos coeficientes de absorção <span class="math inline">\(\mu_{a}\)</span>) e de espalhamento (<span class="math inline">\(\mu_s\)</span>) com valores típicos para estas grandezas no cérebro <span class="math inline">\(\mu_a = 1,4 cm^{-1}\)</span> e <span class="math inline">\(s = 350 cm^{-1}\)</span>. Com, <span class="math inline">\(\mu_a\)</span> variando significativamente com a concentração e o tipo de hemoglobina presente no tecido. É esta sensibilidade das propriedades ópticas da oxi-hemoglobina (O2Hb) e da deoxihemoglobina (HHb), aliada ao fato de ser baixo o coeficiente de absorção da água nessa região, que permite determinar os níveis de oxigenação do tecido com base no espalhamento de luz.</p>
 <p>Durante ativação cerebral (Mesquita2008), as variações nas concentrações de O2Hb e HHb resultam em variações na absorção da luz dentro do tecido. Para medidas hemodinâmicas funcionais típicas, assume-se que essas variações são pequenas, insuficientes para perturbar o caminho da luz através do tecido podendo ser generalizada através da Lei de Beer-Lambert:</p>
-<p>$ OD_i(t, ) = L_{i,j} () <em>{j=1}^{N</em>{vox}}_{a,j}(t, ) . $</p>
+<p><span class="math display">\[ \Delta OD_i(t, \lambda) = L_{i,j} (\lambda) \sum_{j=1}^{N_{vox}}\Delta\mu_{a,j}(t, \lambda) .
+\]</span></p>
 <p>onde, <span class="math inline">\(OD\)</span> é a densidade óptica num detector <span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span> é a fonte, <span class="math inline">\(\lambda\)</span> é o comprimento da onda, <span class="math inline">\(\mu_a\)</span> é o coeficiente de absorção do tecido e <span class="math inline">\(L_{i,j}\)</span> é o livre caminho médio no tecido biológico entre a fonte e detector (na ordem de 28 <span class="math inline">\(\mu m\)</span>).</p>
 <p>No entanto, essa equação só é válida na ausência de espalhamento. Como o caminho médio da luz depende das propriedades de espalhamento do tecido, usa-se a lei de Beer-Lambert modificada, (MBLL, do inglês ) para contabilizar estes efeitos e levar em conta a propagação difusiva da luz, que inclui um fator de caminho diferencial adicional (<span class="math inline">\(l_{DPF}\)</span>), de forma que <span class="math inline">\(OD\)</span> passa a ser dada por:</p>
-<p>$ OD_i(t, ) = <em>{n}<em>n().c_n(t).L</em>{i,j} ().l</em>{DPF}() $</p>
+<p><span class="math display">\[
+\Delta OD_i(t, \lambda) = \sum_{n}\mathcal{E}_n(\lambda).\Delta c_n(t).L_{i,j} (\lambda).l_{DPF}(\lambda)
+\]</span></p>
 <p>onde a variação de concentração do n-ésimo cromóforo, <span class="math inline">\(\Delta C_n\)</span>, pode ser encontrada através de medidas de intensidade em função do tempo para n diferentes comprimentos de onda. No caso particular de <span class="math inline">\(n=2\)</span>, pode-se resolver o sistema e estimar as variações de O2Hb(t) e de HHb(t). Com isso, pode-se ver o coeficiente de extinção, distância entre emissor e detector, propriedades do tecido, etc.</p>
 <p>Os experimentos de NIRS, no entanto, medem apenas as variações relativas de oxigenação do tecido. Os valores absolutos não são disponíveis, principalmente levando-se em consideração as diferentes estruturas cerebrais pelas quais a luz atravessa. Outras limitações também são: (a) a interferência da espessura do crânio (medidas cerebrais) ou da espessura do tecido adiposo (medidas musculares); (b) a contribuição controversa desconhecida da mioglobina no sinal muscular NIRS; (c) o efeito do volume sanguíneo muda no comprimento do tecido e, consequentemente no volume de amostra observado; (d) a dificuldade de prever o quanto de uma mudança de sinal NIRS observada é devido ao fluxo sanguíneo cerebral vs. couro cabeludo, ou (e) mudanças simultâneas no fluxo e no volume. Ainda assim, dado o fato de que a fração do volume de sangue arterial é de aproximadamente 30% no cérebro humano, a técnica NIRS oferece a possibilidade de obter informações sobre alterações de oxigenação que ocorrem dentro do compartimento venoso, sendo uma técnica bastante eficaz para detectar zonas de ativação cerebral.</p>
 <p>Ao longo do tempo, o que se altera nos dados de fNIRS é a variação de oxyhemoglobina e deoxyhemoglobina.</p>
@@ -49,8 +52,8 @@ weight: 120
 # - filtro temporal: passa-banda (0.001-0.1Hz)
 
 #Leitura de dados
-OXY=read.table(&quot;Oxy781HZ30sBlock.txt&quot;,header=F)
-DEOXY=read.table(&quot;Deoxy781HZ30sBlock.txt&quot;,header=F)</code></pre>
+OXY = read.table(&quot;Oxy781HZ30sBlock.txt&quot;, header=F)
+DEOXY = read.table(&quot;Deoxy781HZ30sBlock.txt&quot;, header=F)</code></pre>
 <p>Analisando o tamanho do arquivo e a taxa de amostragem:</p>
 <pre class="r"><code># Taxa de amostragem do equipamento
 HZ = 7.81
@@ -69,38 +72,38 @@ tempo</code></pre>
 <p><img src="/aulas/12_fNIRS_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre class="r"><code>#Tarefa block-design - 30s
 COND = 330</code></pre>
-<p>Considerando uma tarefa nas seguintes condições: R: 1: 234 T: 235:469 R: 470: 703 T: 704: 937 R: 938: 1172 T: 1173:1406 R: 1407:1640 T: 1641:1874 R: 1875:2109 T: 2110:2343 R: 2344:2577</p>
+<p>Considerando uma tarefa que intercala Repouso e tarefa de 30s, ou seja nas seguintes condições (convertendo para frames): R: 1:234 T: 235:469 R: 470:703 T: 704:937 R: 938:1172 T: 1173:1406 R: 1407:1640 T: 1641:1874 R: 1875:2109 T: 2110:2343 R: 2344:2577</p>
 <pre class="r"><code>#Tarefa block-design - 30s
-COND=array(0, 2577) #2577 para os primeiros 330s
-COND[235:469]=1
-COND[704:937]=1
-COND[1173:1406]=1
-COND[1641:1874]=1
-COND[2110:2343]=1
+COND = array(0, 2577) #2577 para os primeiros 330s
+COND[235:469] = 1
+COND[704:937] = 1
+COND[1173:1406] = 1
+COND[1641:1874] = 1
+COND[2110:2343] = 1
 ts.plot(COND)</code></pre>
 <p><img src="/aulas/12_fNIRS_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Considerando a função glover para convolução pela HRF canônica, para verificar como a Oxyhemoglobina se comporta.</p>
 <p>Para prever o desenho experimental pela HRF, similar às aulas de ressonância:</p>
-<pre class="r"><code>glover=function(HZ){
-    a1=6
-    a2=12
-    b1=0.9
-    b2=0.9
-    d1=5.4
-    d2=10.8
-    c=0.35
-    x=seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
-    glover1=((x/d1)^a1)*exp((-x+d1)/b1)
-    glover2=((x/d2)^a2)*exp((-x+d2)/b2)
-    G=glover1-c*glover2
+<pre class="r"><code>glover = function(HZ){
+    a1 = 6
+    a2 = 12
+    b1 = 0.9
+    b2 = 0.9
+    d1 = 5.4
+    d2 = 10.8
+    c = 0.35
+    x = seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
+    glover1 = ((x/d1)^a1)*exp((-x+d1)/b1)
+    glover2 = ((x/d2)^a2)*exp((-x+d2)/b2)
+    G = glover1-c*glover2
     return(G)
 }
 
 #HRF canonica
-HRF=glover(HZ)
+HRF = glover(HZ)
 
 #Convolucao da condicao da tarefa pela HRF
-X=filter(COND,HRF,method=&quot;convolution&quot;,side=1)
+X = filter(COND, HRF, method=&quot;convolution&quot;, side=1)
 ts.plot(X)</code></pre>
 <p><img src="/aulas/12_fNIRS_files/figure-html/unnamed-chunk-4-1.png" width="672" /> Para o comportamento da deoxy, espero o comportamento inverso (deoxy está negativamente correlacionada com a oxy).</p>
 <p>Estamos modelando de forma similar: <span class="math display">\[ Y_t = \alpha + \beta.X_t + \epsilon_T\]</span></p>
@@ -110,14 +113,63 @@ mapaToxy = array(0, 20)
 mapaTdeoxy = array(0, 20)
 
 for(canal in 1:20){
-  #ajuste do GLM para oxy
+  # ajuste do GLM para oxy
+  # o que antes eram todos os voxeis de fMRI, em NIRS são os 20 canais
+  # o modelo prevê a OXY de cada canal em funço da HRF convoluída da cond.
+  # dessa forma, ao ter cond =1 pra tarefa e 0 para repouso, o teste:
   modelo = lm(OXY[1:2577, canal]~X)
   mapaToxy[canal] = summary(modelo)$coef[2, 3] #estat. t
   
   #ajuste do GLM para deoxy
-  modelo = lm(DEOXY[1:2577,canal]~X)
+  modelo = lm(DEOXY[1:2577, canal]~X)
   mapaTdeoxy[canal] = summary(modelo)$coef[2, 3] #estat. t
 }</code></pre>
+<p>O mapa é o resultado do teste estatístico em todos os canais.</p>
+<pre class="r"><code>  modelo1 = lm(OXY[1:2577, 1]~X)
+  mapaToxy[canal] = summary(modelo1)$coef[2, 3]     #estat. t
+  summary(modelo1)  </code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = OXY[1:2577, 1] ~ X)
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.0008340 -0.0001565 -0.0000107  0.0001493  0.0009014 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -3.349e-05  6.535e-06  -5.124 3.24e-07 ***
+## X            3.263e-06  3.686e-07   8.851  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0002464 on 2341 degrees of freedom
+##   (234 observations deleted due to missingness)
+## Multiple R-squared:  0.03238,    Adjusted R-squared:  0.03197 
+## F-statistic: 78.34 on 1 and 2341 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>  #ajuste do GLM para deoxy
+  modelo2 = lm(DEOXY[1:2577, 1]~X)
+  mapaTdeoxy[canal] = summary(modelo2)$coef[2, 3]
+  summary(modelo2) #estat. t</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DEOXY[1:2577, 1] ~ X)
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -5.997e-04 -1.231e-04  6.810e-06  1.172e-04  4.925e-04 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 6.990e-06  4.636e-06   1.508   0.1317  
+## X           4.553e-07  2.615e-07   1.741   0.0818 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0001748 on 2341 degrees of freedom
+##   (234 observations deleted due to missingness)
+## Multiple R-squared:  0.001293,   Adjusted R-squared:  0.0008668 
+## F-statistic: 3.032 on 1 and 2341 DF,  p-value: 0.08178</code></pre>
 <p>Uma consideração do GLM é que os erros (resíduos) são independentes. Na prática, como a taxa de amostragem do NIRS é superior a do fMRI, o problema da autocorrelação dos resíduos é maior. Para mapas de ativação estatísticos, os procedimentos de pre-whitening, pre-colouring ou semi-paramétricos são necessários pois os valores de teste T do NIRS acabam com uma magnitude muito maior.</p>
 </div>
 <div id="coleta-de-fnirs" class="section level3">

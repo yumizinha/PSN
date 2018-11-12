@@ -40,16 +40,16 @@ Conforme apresentado por (Mesquita, 2008), O tecido biológico é altamente espa
 
 Durante ativação cerebral (Mesquita2008), as variações nas concentrações de O2Hb e HHb resultam em variações na absorção da luz dentro do tecido. Para medidas hemodinâmicas funcionais típicas, assume-se que essas variações são pequenas, insuficientes para perturbar o caminho da luz através do tecido podendo ser generalizada através da Lei de Beer-Lambert:
 
-$ \Delta OD_i(t, \lambda) = L_{i,j} (\lambda) \sum_{j=1}^{N_{vox}}\Delta\mu_{a,j}(t, \lambda) .
-$
+$$ \Delta OD_i(t, \lambda) = L_{i,j} (\lambda) \sum_{j=1}^{N_{vox}}\Delta\mu_{a,j}(t, \lambda) .
+$$
 
 onde, $OD$ é a densidade óptica num detector $i$, $j$ é a fonte, $\lambda$ é o comprimento da onda, $\mu_a$ é o coeficiente de absorção do tecido e $L_{i,j}$ é o livre caminho médio no tecido biológico entre a fonte e detector (na ordem de 28 $\mu m$).
 
 No entanto, essa equação só é válida na ausência de espalhamento. Como o caminho médio da luz depende das propriedades de espalhamento do tecido, usa-se a lei de Beer-Lambert modificada,  (MBLL, do inglês \textit{modified Beer-Lambert law}) para contabilizar estes efeitos e levar em conta a propagação difusiva da luz, que inclui um fator de caminho diferencial adicional ($l_{DPF}$), de forma que $OD$ passa a ser dada por:
 
-$
+$$
 \Delta OD_i(t, \lambda) = \sum_{n}\mathcal{E}_n(\lambda).\Delta c_n(t).L_{i,j} (\lambda).l_{DPF}(\lambda)
-$
+$$
 
 onde a variação de concentração do n-ésimo cromóforo, $\Delta C_n$, pode ser encontrada através de medidas de intensidade em função do tempo para n diferentes comprimentos de onda. No caso particular de $n=2$, pode-se resolver o sistema e estimar as variações de O2Hb(t) e de HHb(t). Com isso, pode-se ver o coeficiente de extinção, distância entre emissor e detector, propriedades do tecido, etc.
 
@@ -76,8 +76,8 @@ http://www.youtube.com/watch?v=3LMXiDzcANQ
 # - filtro temporal: passa-banda (0.001-0.1Hz)
 
 #Leitura de dados
-OXY=read.table("Oxy781HZ30sBlock.txt",header=F)
-DEOXY=read.table("Deoxy781HZ30sBlock.txt",header=F)
+OXY = read.table("Oxy781HZ30sBlock.txt", header=F)
+DEOXY = read.table("Deoxy781HZ30sBlock.txt", header=F)
 ```
 
 Analisando o tamanho do arquivo e a taxa de amostragem:
@@ -100,12 +100,12 @@ ts.plot(DEOXY[, 1])
 COND = 330
 ```
 
-Considerando uma tarefa nas seguintes condições:
-R: 1: 234
+Considerando uma tarefa que intercala Repouso e tarefa de 30s, ou seja nas seguintes condições (convertendo para frames):
+R: 1:234
 T: 235:469
-R: 470: 703
-T: 704: 937
-R: 938: 1172
+R: 470:703
+T: 704:937
+R: 938:1172
 T: 1173:1406
 R: 1407:1640
 T: 1641:1874
@@ -116,12 +116,12 @@ R: 2344:2577
 
 ```{r}
 #Tarefa block-design - 30s
-COND=array(0, 2577) #2577 para os primeiros 330s
-COND[235:469]=1
-COND[704:937]=1
-COND[1173:1406]=1
-COND[1641:1874]=1
-COND[2110:2343]=1
+COND = array(0, 2577) #2577 para os primeiros 330s
+COND[235:469] = 1
+COND[704:937] = 1
+COND[1173:1406] = 1
+COND[1641:1874] = 1
+COND[2110:2343] = 1
 ts.plot(COND)
 ```
 
@@ -130,26 +130,26 @@ Considerando a função glover para convolução pela HRF canônica, para verifi
 Para prever o desenho experimental pela HRF, similar às aulas de ressonância:
 
 ```{r}
-glover=function(HZ){
-	a1=6
-	a2=12
-	b1=0.9
-	b2=0.9
-	d1=5.4
-	d2=10.8
-	c=0.35
-	x=seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
-	glover1=((x/d1)^a1)*exp((-x+d1)/b1)
-	glover2=((x/d2)^a2)*exp((-x+d2)/b2)
-	G=glover1-c*glover2
+glover = function(HZ){
+	a1 = 6
+	a2 = 12
+	b1 = 0.9
+	b2 = 0.9
+	d1 = 5.4
+	d2 = 10.8
+	c = 0.35
+	x = seq(0, 30, 1/HZ) # HZ is the Sampling Rate (Heartz)
+	glover1 = ((x/d1)^a1)*exp((-x+d1)/b1)
+	glover2 = ((x/d2)^a2)*exp((-x+d2)/b2)
+	G = glover1-c*glover2
 	return(G)
 }
 
 #HRF canonica
-HRF=glover(HZ)
+HRF = glover(HZ)
 
 #Convolucao da condicao da tarefa pela HRF
-X=filter(COND,HRF,method="convolution",side=1)
+X = filter(COND, HRF, method="convolution", side=1)
 ts.plot(X)
 ```
 Para o comportamento da deoxy, espero o comportamento inverso (deoxy está negativamente correlacionada com a oxy).
@@ -164,24 +164,41 @@ mapaToxy = array(0, 20)
 mapaTdeoxy = array(0, 20)
 
 for(canal in 1:20){
-  #ajuste do GLM para oxy
+  # ajuste do GLM para oxy
+  # o que antes eram todos os voxeis de fMRI, em NIRS são os 20 canais
+  # o modelo prevê a OXY de cada canal em funço da HRF convoluída da cond.
+  # dessa forma, ao ter cond =1 pra tarefa e 0 para repouso, o teste:
   modelo = lm(OXY[1:2577, canal]~X)
   mapaToxy[canal] = summary(modelo)$coef[2, 3] #estat. t
   
   #ajuste do GLM para deoxy
-  modelo = lm(DEOXY[1:2577,canal]~X)
+  modelo = lm(DEOXY[1:2577, canal]~X)
   mapaTdeoxy[canal] = summary(modelo)$coef[2, 3] #estat. t
 }
+
 ```
 
-Uma consideração do GLM é que os erros (resíduos) são independentes. Na prática, como a taxa de amostragem do NIRS é superior a do fMRI, o problema da autocorrelação dos resíduos é maior. Para mapas de ativação estatísticos, os procedimentos de pre-whitening, pre-colouring ou semi-paramétricos são necessários
-pois os valores de teste T do NIRS acabam com uma magnitude muito maior. 
+O mapa é o resultado do teste estatístico em todos os canais.
+
+
+```{r}
+  modelo1 = lm(OXY[1:2577, 1]~X)
+  mapaToxy[canal] = summary(modelo1)$coef[2, 3]     #estat. t
+  summary(modelo1)  
+  #ajuste do GLM para deoxy
+  modelo2 = lm(DEOXY[1:2577, 1]~X)
+  mapaTdeoxy[canal] = summary(modelo2)$coef[2, 3]
+  summary(modelo2) #estat. t
+
+```
+
+
+Uma consideração do GLM é que os erros (resíduos) são independentes. Na prática, como a taxa de amostragem do NIRS é superior a do fMRI, o problema da autocorrelação dos resíduos é maior. Para mapas de ativação estatísticos, os procedimentos de pre-whitening, pre-colouring ou semi-paramétricos são necessários pois os valores de teste T do NIRS acabam com uma magnitude muito maior. 
 
 
 ### Coleta de fNIRS
 
 Na aula o professor mostrou o equipamento NIRSport da empresa NIRx (Alemanha). Além da empresa NIRx, tem a Artinis e a Hitashi.
-
 
 No software NIRx Star que se utiliza para fazer a calibração dos optodos e coleta do sinal.
 

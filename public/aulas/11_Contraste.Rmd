@@ -313,7 +313,6 @@ X[38:92, 2] = 1
 #Ajustar o GLM
 modelo = lm(Y~X[, 2])
 summary(modelo)
-
 ```
  
 Analisando especificamente para esse voxel, como $\beta<0$ é como se o grupo de pacientes possui uma ligeira ativação menor que o grupo de controle, Mas ao verificar o p-valor, pode-se verificar que não é significante.
