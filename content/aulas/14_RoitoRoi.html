@@ -62,7 +62,7 @@ f.write.analyze(atlas4mm,&quot;atlas4mm&quot;,
                 pixdim=c(4,4,4),
                 originator=c(23.5,32.5,19,1,1))</code></pre>
 <p>Pretendemos ver o sinal BOLD representativo na região/área:</p>
-<p>Identificando o número de regiões:</p>
+<p>Identificando o número de regiões (saber quantas ROIS teremos e então construirmos a nossa matriz de #conectividade)</p>
 <pre class="r"><code>#Extrair o sinal BOLD representativo de cada regiao de interesse ROI
 NOMESroi = names(table(atlas4mm))
 #de 2 em diante para eliminar AR
@@ -92,6 +92,7 @@ GS = rowMeans(BOLD)
 for(roi in 1:Nroi){
    BOLD2[, roi] = lm(BOLD[, roi]~GS)$res 
 }</code></pre>
+<p>Regress-out o GS (reduz a influência de componentes sistemáticas, i e, fisiológicas). Faz a regressão linear considerando o sinal BOLD de cada região como variável resposta e o GS como preditora e guarda os resíduos.</p>
 <p>O resultado de BOLD é uma matriz contendo as medias dos sinais de cada ROI ao #longo do tempo. Identificando a matriz de correlação de todos com todos. Usamos a função COR, criando uma matriz de conectividade:</p>
 <pre class="r"><code># Análise de conectividade funcional ROI-to-ROI
 COR = cor(BOLD2) #matriz de correlacao</code></pre>
@@ -123,7 +124,8 @@ diag(GP) = 0</code></pre>
 ## [5,] 0.2210473 0.01978718 0.1462443 0.04417543 0.00000000</code></pre>
 <p>Como métrica para comparar as redes, foi usado o grau da rede, que é o número médio de conexões existentes.</p>
 <p>O número máximo de conexões é determinado então a partir da soma dos elementos da linha da matriz de conexões e subtraindo o 1 das correlações da diagonal principal (dados de ROI com ele mesmo).</p>
-<p>Para ver medidas de centralidade (somar todas as conexões):</p>
+<p>Para ver medidas de centralidade (soma de todas as conexões):</p>
+<p>Métrica para comparar as redes - Foi usado aqui o grau da rede, que é o número médio de conexões.</p>
 <pre class="r"><code># Calculo do degree/grau de cada ROI
 degree = colSums(GP)
 # (poderia ser a media tb)
@@ -135,7 +137,7 @@ degree</code></pre>
 ## [22]  7.601596  7.204188  6.060172  9.643387  7.787061  5.282564  9.593935
 ## [29]  8.103715  8.474427 10.079470  6.307135  6.660861  7.623800  9.875775
 ## [36]  9.189755  8.593940  9.202202  8.412814  7.318565  6.579100</code></pre>
-<p>Podemos visualizar o mais importante, e normaliza-lo 0-1:</p>
+<p>Para criar um mapa de correlação vamos ranquear os degrees para termos uma ordem de organização. Podemos visualizar o mais importante, e normaliza-lo 0-1:</p>
 <pre class="r"><code>degreeNorm = rank(degree)/Nroi
 
 hist(GP)</code></pre>

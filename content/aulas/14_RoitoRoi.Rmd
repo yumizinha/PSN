@@ -73,7 +73,7 @@ f.write.analyze(atlas4mm,"atlas4mm",
 
 Pretendemos ver o sinal BOLD representativo na região/área:
 
-Identificando o número de regiões:
+Identificando o número de regiões (saber quantas ROIS teremos e então construirmos a nossa matriz de #conectividade)
 ```{r}
 #Extrair o sinal BOLD representativo de cada regiao de interesse ROI
 NOMESroi = names(table(atlas4mm))
@@ -114,6 +114,9 @@ for(roi in 1:Nroi){
    BOLD2[, roi] = lm(BOLD[, roi]~GS)$res 
 }
 ```
+
+Regress-out o GS (reduz a influência de componentes sistemáticas, i e, fisiológicas). Faz a regressão linear considerando o sinal BOLD de cada região como variável resposta e o GS como preditora e guarda os resíduos.
+
 
 O resultado de BOLD é uma matriz contendo as medias dos sinais de cada ROI ao #longo do tempo.
 Identificando a matriz de correlação de todos com todos. Usamos a função COR, criando uma matriz de conectividade:
@@ -162,7 +165,10 @@ Como métrica para comparar as redes, foi usado o grau da rede, que é o número
 
 O número máximo de conexões é determinado então a partir da soma dos elementos da linha da matriz de conexões e subtraindo o 1 das correlações da diagonal principal (dados de ROI com ele mesmo).
 
-Para ver medidas de centralidade (somar todas as conexões):
+Para ver medidas de centralidade (soma de todas as conexões):
+
+Métrica para comparar as redes -  Foi usado aqui o grau da rede, que é o número médio de conexões. 
+
 ```{r}
 # Calculo do degree/grau de cada ROI
 degree = colSums(GP)
@@ -171,7 +177,8 @@ degree = colSums(GP)
 degree
 ```
 
-Podemos visualizar o mais importante, e normaliza-lo 0-1:
+Para criar um mapa de correlação vamos ranquear os degrees para termos uma ordem de organização. Podemos visualizar o mais importante, e normaliza-lo 0-1:
+
 
 ```{r}
 degreeNorm = rank(degree)/Nroi
