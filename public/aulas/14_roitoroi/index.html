@@ -13,17 +13,17 @@
     <title>Conectividade - ROI to ROI :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1543193451" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1543193451" rel="stylesheet">
-    <link href="../../css/hybrid.css?1543193451" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1543193451" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1543193451" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1543193451" rel="stylesheet">
-    <link href="../../css/theme.css?1543193451" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1543193451" rel="stylesheet">
+    <link href="../../css/nucleus.css?1543202661" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1543202661" rel="stylesheet">
+    <link href="../../css/hybrid.css?1543202661" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1543202661" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1543202661" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1543202661" rel="stylesheet">
+    <link href="../../css/theme.css?1543202661" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1543202661" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1543193451"></script>
+    <script src="../../js/jquery-2.x.min.js?1543202661"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1543193451"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1543193451"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1543202661"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1543202661"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1543193451"></script>
+<script type="text/javascript" src="../../js/search.js?1543202661"></script>
 
     
   </div>
@@ -532,7 +532,17 @@
         
 
 
-<p>Nesta aula, aplicaremos os conceitos de conectividade funcional</p>
+<p>Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).</p>
+<p>Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):</p>
+<ol style="list-style-type: decimal">
+<li>Coleta dos dados de fMRI</li>
+<li>Pré-processamento do sinal</li>
+<li>Escolha das ROIS - Veremos a seguir</li>
+<li>Descartar alguns pontos iniciais dos sinais BOLD das ROIS, que por problemas de estabilização do sinal causam um artefato no início da medida que pode levar a correlações espúrias</li>
+<li>Extrair o sinal BOLD médio de cada ROI</li>
+<li>Criar uma matriz de correlação com dimensão igual a dimensão da matriz armazenando os resultados do sinal BOLD médio: Matriz quadrada em que cada elemento aponta a intensidade da correlação entre o sinal BOLD médio de cada região. Dessa forma, a diagonal principal é 1 (correlação dele com ele mesmo)</li>
+<li>Escolher uma métrica para quantificar a intensidade da associação entre cada região. Essa métrica pode ser a média, o máximo, o valor absoluto da correlação, ou qualquer outra que seja relevante para o estudo em questão.</li>
+</ol>
 <pre class="r"><code>#Carregar a biblioteca
 require(AnalyzeFMRI)</code></pre>
 <pre><code>## Carregando pacotes exigidos: AnalyzeFMRI</code></pre>
@@ -557,7 +567,7 @@ dim(fmri)</code></pre>
 <pre><code>## [1]  45  54  45 450</code></pre>
 <pre class="r"><code>dim(atlas)</code></pre>
 <pre><code>## [1] 181 217 181   1</code></pre>
-<p>Como as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm). Veja que o atlas possui quatro vezes mais dados que o fmri. Precisaremos fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.</p>
+<p>Veja que as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm): o atlas possui quatro vezes mais dados que o fmri. Então precisaremos antes de tudo, fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.</p>
 <p>Primeiro, identificando as dimensões:</p>
 <pre class="r"><code>XMAX = dim(fmri)[1]
 YMAX = dim(fmri)[2]
@@ -1027,20 +1037,20 @@ f.write.analyze(MAPA,&quot;MAPAROItoROI&quot;,
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1543193451"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1543193451"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1543193451"></script>
-    <script src="../../js/jquery.sticky.js?1543193451"></script>
-    <script src="../../js/featherlight.min.js?1543193451"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1543193451"></script>
-    <script src="../../js/highlight.pack.js?1543193451"></script>
+    <script src="../../js/clipboard.min.js?1543202661"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1543202661"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1543202661"></script>
+    <script src="../../js/jquery.sticky.js?1543202661"></script>
+    <script src="../../js/featherlight.min.js?1543202661"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1543202661"></script>
+    <script src="../../js/highlight.pack.js?1543202661"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1543193451"></script>
-    <script src="../../js/learn.js?1543193451"></script>
-    <script src="../../js/hugo-learn.js?1543193451"></script>
+    <script src="../../js/modernizr.custom.71422.js?1543202661"></script>
+    <script src="../../js/learn.js?1543202661"></script>
+    <script src="../../js/hugo-learn.js?1543202661"></script>
 
-    <link href="../../mermaid/mermaid.css?1543193451" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1543193451"></script>
+    <link href="../../mermaid/mermaid.css?1543202661" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1543202661"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

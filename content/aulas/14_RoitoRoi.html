@@ -7,7 +7,17 @@ output: html_document
 
 
 
-<p>Nesta aula, aplicaremos os conceitos de conectividade funcional</p>
+<p>Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).</p>
+<p>Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):</p>
+<ol style="list-style-type: decimal">
+<li>Coleta dos dados de fMRI</li>
+<li>Pré-processamento do sinal</li>
+<li>Escolha das ROIS - Veremos a seguir</li>
+<li>Descartar alguns pontos iniciais dos sinais BOLD das ROIS, que por problemas de estabilização do sinal causam um artefato no início da medida que pode levar a correlações espúrias</li>
+<li>Extrair o sinal BOLD médio de cada ROI</li>
+<li>Criar uma matriz de correlação com dimensão igual a dimensão da matriz armazenando os resultados do sinal BOLD médio: Matriz quadrada em que cada elemento aponta a intensidade da correlação entre o sinal BOLD médio de cada região. Dessa forma, a diagonal principal é 1 (correlação dele com ele mesmo)</li>
+<li>Escolher uma métrica para quantificar a intensidade da associação entre cada região. Essa métrica pode ser a média, o máximo, o valor absoluto da correlação, ou qualquer outra que seja relevante para o estudo em questão.</li>
+</ol>
 <pre class="r"><code>#Carregar a biblioteca
 require(AnalyzeFMRI)</code></pre>
 <pre><code>## Carregando pacotes exigidos: AnalyzeFMRI</code></pre>
@@ -32,7 +42,7 @@ dim(fmri)</code></pre>
 <pre><code>## [1]  45  54  45 450</code></pre>
 <pre class="r"><code>dim(atlas)</code></pre>
 <pre><code>## [1] 181 217 181   1</code></pre>
-<p>Como as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm). Veja que o atlas possui quatro vezes mais dados que o fmri. Precisaremos fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.</p>
+<p>Veja que as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm): o atlas possui quatro vezes mais dados que o fmri. Então precisaremos antes de tudo, fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.</p>
 <p>Primeiro, identificando as dimensões:</p>
 <pre class="r"><code>XMAX = dim(fmri)[1]
 YMAX = dim(fmri)[2]

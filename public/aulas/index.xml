@@ -143,7 +143,8 @@ Neste caso, \(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\) é a combinação do ajuste d
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/aulas/13_conectividade/</guid>
-      <description>Vimos anteriormente a ativação de cada voxel, o que demanda muito cálculo computacional, por isso os estudos de conectividade entre um conjunto de regiões de interesse (ROI) tem ganhado mais espaço nos estudos. Essa análise é realizada para conhecer quais regiões do cérebro estão sincronizadas nas mais diversas situações, desde estados de repouso quanto realizando tarefas cognitivas. É a partir dessa análise que geramos o chamado conectoma (do inglês connectome), isto é, uma rede de conexões entre as diferentes regiões cerebrais.</description>
+      <description>Vimos anteriormente os testes de ativação de cada voxel. Analisar o cérebro todo desta forma demanda muito cálculo computacional, por isso os estudos de conectividade entre um conjunto de regiões de interesse (ROI) têm ganhado mais espaço nas pesquisas.
+Essa análise é realizada para conhecer quais regiões do cérebro estão sincronizadas nas mais diversas situações, desde estados de repouso quanto realizando tarefas cognitivas. É a partir dessa análise que geramos o chamado conectoma (do inglês connectome), isto é, uma rede de conexões entre as diferentes regiões cerebrais.</description>
     </item>
     
     <item>
@@ -152,8 +153,8 @@ Neste caso, \(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\) é a combinação do ajuste d
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/aulas/14_roitoroi/</guid>
-      <description>Nesta aula, aplicaremos os conceitos de conectividade funcional
-#Carregar a biblioteca require(AnalyzeFMRI) ## Carregando pacotes exigidos: AnalyzeFMRI ## Carregando pacotes exigidos: R.matlab ## R.matlab v3.6.1 (2016-10-19) successfully loaded. See ?R.matlab for help. ## ## Attaching package: &amp;#39;R.matlab&amp;#39; ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## getOption, isOpen ## Carregando pacotes exigidos: fastICA ## Carregando pacotes exigidos: tcltk ## Carregando pacotes exigidos: tkrplot #Leitura do arquivo de Resting-state fMRI pre-processada fmri = f.</description>
+      <description>Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).
+Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):</description>
     </item>
     
     <item>
@@ -163,11 +164,7 @@ Neste caso, \(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\) é a combinação do ajuste d
       
       <guid>/aulas/15_fingerprint/</guid>
       <description>Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.
-A prova será de Seed to Voxel, análise ROI to ROI e Fingerprint.
-Os dados desse experimento contém dados chineses de Beijing, chamado Consortium for Reliability and Reproducibility (CoRR) (http://fcon_1000.projects.nitrc.org/indi/CoRR/html/)
-Para cada uma das 333 ROIs, é possível ver as subredes cerebrais.
-Realizando análise de todas as regiões corticais:
-#Leitura do ID dos sujeitos nomes = scan(&amp;quot;CARAS.</description>
+Os estudos de ressonância magnética funcional (fMRI) normalmente colapsam dados de muitos sujeitos, mas a organização funcional do cérebro varia entre cada um. Aqui estabelecemos que essa variabilidade individual é robusta e confiável, usando dados do CORR para identificar perfis de conectividade funcional e como atuam como uma “impressão digital” que pode identificar com precisão os indivíduos de um grande grupo.</description>
     </item>
     
   </channel>

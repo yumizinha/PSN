@@ -8,6 +8,7 @@ output: html_document
 
 
 <p>Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.</p>
+<p>Os estudos de ressonância magnética funcional (fMRI) normalmente colapsam dados de muitos sujeitos, mas a organização funcional do cérebro varia entre cada um. Aqui estabelecemos que essa variabilidade individual é robusta e confiável, usando dados do CORR para identificar perfis de conectividade funcional e como atuam como uma “impressão digital” que pode identificar com precisão os indivíduos de um grande grupo.</p>
 <p>A prova será de Seed to Voxel, análise ROI to ROI e Fingerprint.</p>
 <p>Os dados desse experimento contém dados chineses de Beijing, chamado Consortium for Reliability and Reproducibility (CoRR) (<a href="http://fcon_1000.projects.nitrc.org/indi/CoRR/html/" class="uri">http://fcon_1000.projects.nitrc.org/indi/CoRR/html/</a>)</p>
 <p>Para cada uma das 333 ROIs, é possível ver as subredes cerebrais.</p>
@@ -164,4 +165,6 @@ for(sujeito in 1:Nsujeitos){
 length(which(PREDICAO-1:61==0))/Nsujeitos</code></pre>
 <pre><code>## [1] 0.9344262</code></pre>
 <p>Olhando as regiões, temos que em adultos, as regiões de funções mais básicas/primárias (visual, auditivo e SMhand) não possuem alta acurácia. Já as regiões superiores, que integram redes, identificam melhor os indivúduos (no caso DMN, frontoparietal, dorsolateral).</p>
+<p>Analisando as redes superiores, é possível verificar que a identificação é bem-sucedida na verificação, indicando que o perfil de conectividade de um indivíduo é intrínseco e pode ser usado para diferenciá-lo, independentemente de como o cérebro está envolvido durante a geração de imagens.</p>
 <p>As redes mais complexas ainda estão em evolução nas crianças, por isso a taxa de acurácia na infância é menor, em torno de 40%. As regiões significantes continuam sendo DMN, Frontoparietal e Dorsolateral, mas com menor acurácia pois seguem em constante desenvolvimento.</p>
+<p>E de fato, pesquisas mostram que padrões característicos de conectividade distribuídos por todo o cérebro, mas a rede frontoparietal emergiu como a mais distinta. Perfis de conectividade preveem níveis de inteligência fluida: as mesmas redes que eram mais discriminadoras de indivíduos também mostram ser as mais indicativas do comportamento cognitivo. Os resultados indicam o potencial para fazer inferências sobre assuntos individuais com base na conectividade funcional fMRI.</p>

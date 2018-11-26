@@ -5,7 +5,19 @@ date: "14 de novembro de 2018"
 output: html_document
 ---
 
-Nesta aula, aplicaremos os conceitos de conectividade funcional 
+Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).
+
+Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):
+
+1. Coleta dos dados de fMRI
+2. Pré-processamento do sinal
+3.  Escolha das ROIS - Veremos a seguir
+4. Descartar alguns pontos iniciais dos sinais BOLD das ROIS, que por problemas de estabilização do sinal causam um artefato no início da medida que pode levar a correlações espúrias 
+5. Extrair o sinal BOLD médio de cada ROI
+6. Criar uma matriz de correlação com dimensão igual a dimensão da matriz armazenando os resultados do sinal BOLD médio: Matriz quadrada em que cada elemento aponta a intensidade da correlação entre o sinal BOLD médio de cada região. Dessa forma, a diagonal principal é 1 (correlação dele com ele mesmo)
+7. Escolher uma métrica para quantificar a intensidade da associação entre cada região. Essa métrica pode ser a média, o máximo, o valor absoluto da correlação, ou qualquer outra que seja relevante para o estudo em questão.
+
+
 
 ```{r}
 #Carregar a biblioteca
@@ -22,8 +34,8 @@ dim(fmri)
 dim(atlas)
 ```
 
-Como as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm). Veja que o atlas possui quatro vezes mais dados que o fmri.
-Precisaremos fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.
+Veja que as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm): o atlas possui quatro vezes mais dados que o fmri.
+Então precisaremos antes de tudo, fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.
 
 Primeiro, identificando as dimensões:
 

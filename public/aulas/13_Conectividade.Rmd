@@ -6,35 +6,25 @@ output: html_document
 weight: 130
 ---
 
-Vimos anteriormente a ativação de cada voxel, o que demanda muito cálculo computacional, por isso os estudos de conectividade entre um conjunto de regiões de interesse (ROI) tem ganhado mais espaço nos estudos.
+Vimos anteriormente os testes de ativação de cada voxel. Analisar o cérebro todo desta forma demanda muito cálculo computacional, por isso os estudos de conectividade entre um conjunto de regiões de interesse (ROI) têm ganhado mais espaço nas pesquisas.
+
 Essa análise é realizada para conhecer quais regiões do cérebro estão sincronizadas nas mais diversas situações, desde estados de repouso quanto realizando tarefas cognitivas.  É a partir dessa análise que geramos o chamado conectoma (do inglês connectome), isto é, uma rede de conexões entre as diferentes regiões cerebrais.
 
-Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):
 
-1. Coleta dos dados de fMRI
-2. Pré-processamento do sinal
-3.  Escolha das ROIS - Veremos a seguir
-4. Descartar alguns pontos iniciais dos sinais BOLD das ROIS, que por problemas de estabilização do sinal causam um artefato no início da medida que pode levar a correlações espúrias 
-5. Extrair o sinal BOLD médio de cada ROI
-6. Criar uma matriz de correlação com dimensão igual a dimensão da matriz armazenando os resultados do sinal BOLD médio: Matriz quadrada em que cada elemento aponta a intensidade da correlação entre o sinal BOLD médio de cada região. Dessa forma, a diagonal principal é 1 (correlação dele com ele mesmo)
-7. Escolher uma métrica para quantificar a intensidade da associação entre cada região. Essa métrica pode ser a média, o máximo, o valor absoluto da correlação, ou qualquer outra que seja relevante para o estudo em questão.
+# Conectividade estrutural
 
+Baseada na análise do movimento das moléculas de água no tecido cerebral in vivo, a tractografia é uma moderna técnica de ressonância magnética que mostra a posição, a anatomia e a integridade dos tratos da substância branca no encéfalo e na medula, conforme a direção de suas fibras.
 
-# Conectividade estrutural e funcional (funcional e efetiva).
+A Conectividade efetiva busca estudar as relações causais entre as atividades. Também é obtida por imagens funcionais. Utiliza-se Dynamic Causal Models (DCM), Causalidade de Granger entre outros métodos.
 
-Conectividade efetiva busca estudar as relações causais entre as atividades. Também é obtida por imagens funcionais. Utiliza-se Dynamic Causal Models (DCM), Causalidade de Granger entre outros métodos.
-
-# ESCREVER SOBRE Tractografia
 
 # Conectividade funcional
+
+Para análise de conectividade funcional, alguns métodos são aplicados para análise, conforme os objetivos do estudo:
 
 * Seed-to-voxel (mapas de conectividade): Dada uma região de interesse (seed), obter um mapa de correlações com essa seed. O output é um mapa de correlação com esse ponto.
 
 * ROI-to-ROI (grafos de conectoma) - ROI: Region of interest. O output é um grafo.
-
-Palavras soltas pra escrever depois: Correlação entre seed e voxel.
-
-O GSM - Global Signal Regression: Verificar o que é comum a todos e retirar o sinal global antes de calcular as correlações
 
 
 Uma das aplicações da matriz de correlação é através de grafos, com os ROIs constituindo os nós e as conexões entre cada nós as arestas, formando uma rede de conexões. 
@@ -44,6 +34,7 @@ Várias propriedades destas redes são utilizadas para análise das associaçõe
 Construindo computacionalmente a análise de conectividade entre ROIs.
 
 Para um determinado voxel escolhido de semente (seed) definiremos a região de interesse a partir dele:
+Escolhemos o Cingulo Posterior centralizado em x=23, y=19 ,z=27 (processamos um cubo de três voxeis centralizado neste):
 
 ```{r}
 #Carregar a biblioteca
@@ -72,14 +63,13 @@ ts.plot(SEED)
 
 Para corrigir os artefatos sistêmicos (que podem gerar correlação espúrias), apliquemos o GSR - Global Signal Regression nos sinais BOLDs das ROIs para então recalcular a matriz de conectividade.
 
-O Global Signal Regression é um método de correção para remoção de artefatos que consiste em ajustar um modelo de regressão linear, considerando o sinal BOLD de cada ROI como a variável resposta e o Global Signal (GS) como variável preditora. 
+O Global Signal Regression é um método de correção para remoção de artefatos que consiste em ajustar um modelo de regressão linear, considerando o sinal BOLD de cada ROI como a variável resposta e o Global Signal (GS) como variável preditora: ou seja, verifica o que é comum a todos e retira o sinal global antes de calcular as correlações
 
 É frequente realizar também (incluir como preditoras) os 6 parâmetros de movimentação da cabeça obtidos no pre-processamento. Além disso, também é comum em estudos com crianças e populações clínicas utilizar o método de scrubbing, que se baseia em descartar os scans colhidos durante grandes movimentações da cabeça. 
 
+Para calcular o GS (Global Signal), devemos normalizar o sinal BOLD das ROIS para media 0 e variância 1 (z-score), a fim de retirar a variabilidade de cada série temporal que poderia causar alguma correlação espúria.
 
-Para calcular o GS (Global Signal), devemos normalizar o sinal BOLD das ROIS para media 0 e variância 1 (z-score), a fim de retirar a variabilidade de cada serie temporal que poderia causar alguma correlação espúria. 
-
-Consideramos que essas componentes em comum estão contidas na média, por isso fazemos com que a média do sinal seja zero. Após o processo do GSR, teremos retirado, ou pelo menos minimizado, os efeitos dos artefatos sistêmicos nos sinais que poderiam causa correlações espúrias. 
+Consideramos que essas componentes em comum estão contidas na média, por isso fazemos com que a média do sinal seja zero. Após o processo do GSR, teremos retirado, ou pelo menos minimizado, os efeitos dos artefatos sistêmicos nos sinais que poderiam causa correlações espúrias:
 
 
 ```{r}
@@ -96,11 +86,12 @@ ts.plot(GSR)
 
 Uma vez aplicado o GSR para remoção de artefatos sistêmicos, utiliza-se o conceito de matriz de conectividade para verificar as similaridades entre as redes cerebrais de diferente indivíduos. 
 
-Podemos verificar essa semelhança entre as redes de diversas maneiras, podemos comparar as médias, máximos e/ou mínimo das correlações; ou podemos comparar as métricas de rede, como grau, coeficiente de centralidade, hubs, coeficiente de clusterização
-
+Podemos verificar essa semelhança entre as redes de diversas maneiras, podemos comparar as médias, máximos e/ou mínimo das correlações; ou podemos comparar as métricas de rede, como grau, coeficiente de centralidade, hubs, coeficiente de clusterização. 
 
 Para este exercício, Com 450hz numa taxa de 0.5hz, temos 900s.
 Armazenando o Mapa de Conectividade Funcional, com utilização do Coeficiente de correlação de Pearson:
+
+O mapa constitui no processamento de para cada voxel a comparação com a região de interesse (SEED), armazenando os resultados de sua correlação.
 
 ```{r}
 MAPA = array(0, c(XMAX, YMAX, ZMAX, 1))
@@ -121,7 +112,6 @@ f.write.analyze(MAPA,"MapaConectividade",
                 originator = c(23.5, 32.5, 19, 1, 1))
 
 ```
-
 
 Olhando no MRCRO é possível ver o seed altamente ativado (porque a correlação é 1 e seu entorno possui suavização espacial, que justifica a alta ativação com a região).
 
