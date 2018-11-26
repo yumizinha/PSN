@@ -1,0 +1,113 @@
+---
+title: "Conectividade - seed to voxel"
+author: "Amanda Yumi"
+date: "12 de novembro de 2018"
+output: html_document
+weight: 130
+---
+
+
+
+<p>Vimos anteriormente a ativação de cada voxel, o que demanda muito cálculo computacional, por isso os estudos de conectividade entre um conjunto de regiões de interesse (ROI) tem ganhado mais espaço nos estudos. Essa análise é realizada para conhecer quais regiões do cérebro estão sincronizadas nas mais diversas situações, desde estados de repouso quanto realizando tarefas cognitivas. É a partir dessa análise que geramos o chamado conectoma (do inglês connectome), isto é, uma rede de conexões entre as diferentes regiões cerebrais.</p>
+<p>Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):</p>
+<ol style="list-style-type: decimal">
+<li>Coleta dos dados de fMRI</li>
+<li>Pré-processamento do sinal</li>
+<li>Escolha das ROIS - Veremos a seguir</li>
+<li>Descartar alguns pontos iniciais dos sinais BOLD das ROIS, que por problemas de estabilização do sinal causam um artefato no início da medida que pode levar a correlações espúrias</li>
+<li>Extrair o sinal BOLD médio de cada ROI</li>
+<li>Criar uma matriz de correlação com dimensão igual a dimensão da matriz armazenando os resultados do sinal BOLD médio: Matriz quadrada em que cada elemento aponta a intensidade da correlação entre o sinal BOLD médio de cada região. Dessa forma, a diagonal principal é 1 (correlação dele com ele mesmo)</li>
+<li>Escolher uma métrica para quantificar a intensidade da associação entre cada região. Essa métrica pode ser a média, o máximo, o valor absoluto da correlação, ou qualquer outra que seja relevante para o estudo em questão.</li>
+</ol>
+<div id="conectividade-estrutural-e-funcional-funcional-e-efetiva." class="section level1">
+<h1>Conectividade estrutural e funcional (funcional e efetiva).</h1>
+<p>Conectividade efetiva busca estudar as relações causais entre as atividades. Também é obtida por imagens funcionais. Utiliza-se Dynamic Causal Models (DCM), Causalidade de Granger entre outros métodos.</p>
+</div>
+<div id="escrever-sobre-tractografia" class="section level1">
+<h1>ESCREVER SOBRE Tractografia</h1>
+</div>
+<div id="conectividade-funcional" class="section level1">
+<h1>Conectividade funcional</h1>
+<ul>
+<li><p>Seed-to-voxel (mapas de conectividade): Dada uma região de interesse (seed), obter um mapa de correlações com essa seed. O output é um mapa de correlação com esse ponto.</p></li>
+<li><p>ROI-to-ROI (grafos de conectoma) - ROI: Region of interest. O output é um grafo.</p></li>
+</ul>
+<p>Palavras soltas pra escrever depois: Correlação entre seed e voxel.</p>
+<p>O GSM - Global Signal Regression: Verificar o que é comum a todos e retirar o sinal global antes de calcular as correlações</p>
+<p>Uma das aplicações da matriz de correlação é através de grafos, com os ROIs constituindo os nós e as conexões entre cada nós as arestas, formando uma rede de conexões.</p>
+<p>Várias propriedades destas redes são utilizadas para análise das associações entre as ROIS, por exemplo temos o grau da rede, que corresponde ao número médio de conexões da mesma, ou medidas mais locais como os hubs que representam a ROI com maior número de conexões. Assim, a partir da construção da matriz de correlação das ROIs, podemos realizar um grande número de medidas capazes de fornecer informações as redes de conectividade do cérebro humano.</p>
+<p>Construindo computacionalmente a análise de conectividade entre ROIs.</p>
+<p>Para um determinado voxel escolhido de semente (seed) definiremos a região de interesse a partir dele:</p>
+<pre class="r"><code>#Carregar a biblioteca
+require(AnalyzeFMRI)</code></pre>
+<pre><code>## Carregando pacotes exigidos: AnalyzeFMRI</code></pre>
+<pre><code>## Carregando pacotes exigidos: R.matlab</code></pre>
+<pre><code>## R.matlab v3.6.1 (2016-10-19) successfully loaded. See ?R.matlab for help.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;R.matlab&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     getOption, isOpen</code></pre>
+<pre><code>## Carregando pacotes exigidos: fastICA</code></pre>
+<pre><code>## Carregando pacotes exigidos: tcltk</code></pre>
+<pre><code>## Carregando pacotes exigidos: tkrplot</code></pre>
+<pre class="r"><code>#Leitura do arquivo
+volume = f.read.volume(&quot;RESTING.img&quot;)
+dim(volume)</code></pre>
+<pre><code>## [1]  45  54  45 450</code></pre>
+<pre class="r"><code>#Dimensoes
+XMAX = dim(volume)[1]
+YMAX = dim(volume)[2]
+ZMAX = dim(volume)[3]
+TMAX = dim(volume)[4]
+
+#Selecionar regiao-de-interesse (ROI)
+#Cingulo Posterior centralizado em x=23, y=19 ,z=27
+#ROI será um cubo centralizado neste voxel
+SEED = array(0, TMAX)
+for(ti in 1:TMAX){
+  SEED[ti] = mean(volume[22:24, 18:20, 26:28, ti])
+}
+ts.plot(SEED)</code></pre>
+<p><img src="/aulas/13_Conectividade_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Para corrigir os artefatos sistêmicos (que podem gerar correlação espúrias), apliquemos o GSR - Global Signal Regression nos sinais BOLDs das ROIs para então recalcular a matriz de conectividade.</p>
+<p>O Global Signal Regression é um método de correção para remoção de artefatos que consiste em ajustar um modelo de regressão linear, considerando o sinal BOLD de cada ROI como a variável resposta e o Global Signal (GS) como variável preditora.</p>
+<p>É frequente realizar também (incluir como preditoras) os 6 parâmetros de movimentação da cabeça obtidos no pre-processamento. Além disso, também é comum em estudos com crianças e populações clínicas utilizar o método de scrubbing, que se baseia em descartar os scans colhidos durante grandes movimentações da cabeça.</p>
+<p>Para calcular o GS (Global Signal), devemos normalizar o sinal BOLD das ROIS para media 0 e variância 1 (z-score), a fim de retirar a variabilidade de cada serie temporal que poderia causar alguma correlação espúria.</p>
+<p>Consideramos que essas componentes em comum estão contidas na média, por isso fazemos com que a média do sinal seja zero. Após o processo do GSR, teremos retirado, ou pelo menos minimizado, os efeitos dos artefatos sistêmicos nos sinais que poderiam causa correlações espúrias.</p>
+<pre class="r"><code># Global signal - tirando a média de tudo e colocando no sinal global, deveria ser apenas nos vóxeis intracranianos
+
+#Global signal
+GSR = array(0,TMAX)
+for(ti in 1:TMAX){
+#na realidade deveria ser apenas dos voxels intracranianos
+  GSR[ti] = mean(volume[,,,ti])
+}
+ts.plot(GSR)</code></pre>
+<p><img src="/aulas/13_Conectividade_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Uma vez aplicado o GSR para remoção de artefatos sistêmicos, utiliza-se o conceito de matriz de conectividade para verificar as similaridades entre as redes cerebrais de diferente indivíduos.</p>
+<p>Podemos verificar essa semelhança entre as redes de diversas maneiras, podemos comparar as médias, máximos e/ou mínimo das correlações; ou podemos comparar as métricas de rede, como grau, coeficiente de centralidade, hubs, coeficiente de clusterização</p>
+<p>Para este exercício, Com 450hz numa taxa de 0.5hz, temos 900s. Armazenando o Mapa de Conectividade Funcional, com utilização do Coeficiente de correlação de Pearson:</p>
+<pre class="r"><code>MAPA = array(0, c(XMAX, YMAX, ZMAX, 1))
+
+for(xi in 1:XMAX){
+  for(yi in 1:YMAX){
+    for(zi in 1:ZMAX){
+       if(volume[xi, yi, zi, 1] != 0){ #mascara intracraniana
+         #Coef. de Correlacao de Pearson
+         MAPA[xi, yi, zi, 1] = cor(SEED, volume[xi, yi, zi,])
+       }#fecha o if
+}}}#fecha os for
+
+
+#Salva os mapas em arquivos no formato Analyze (IMG/HDR)
+f.write.analyze(MAPA,&quot;MapaConectividade&quot;,
+                pixdim = c(4, 4, 4),
+                originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
+<p>Olhando no MRCRO é possível ver o seed altamente ativado (porque a correlação é 1 e seu entorno possui suavização espacial, que justifica a alta ativação com a região).</p>
+<pre class="r"><code>#Transformacao de Fisher
+z = log((1+MAPA)/(1-MAPA))
+f.write.analyze(MAPA,&quot;MapaConectividadeZ&quot;,
+                pixdim = c(4, 4, 4),
+                originator = c(23.5, 32.5, 19, 1, 1))</code></pre>
+</div>

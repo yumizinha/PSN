@@ -59,12 +59,20 @@
   </url>
   
   <url>
-    <loc>/aulas/15_fingerprint/</loc>
+    <loc>/aulas/13_conectividade/</loc>
   </url>
   
   <url>
     <loc>/categories/</loc>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/aulas/14_roitoroi/</loc>
+  </url>
+  
+  <url>
+    <loc>/aulas/15_fingerprint/</loc>
   </url>
   
   <url>

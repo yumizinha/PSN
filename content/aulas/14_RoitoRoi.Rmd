@@ -1,0 +1,228 @@
+---
+title: "Conectividade - ROI to ROI"
+author: "Amanda Yumi"
+date: "14 de novembro de 2018"
+output: html_document
+---
+
+Nesta aula, aplicaremos os conceitos de conectividade funcional 
+
+```{r}
+#Carregar a biblioteca
+require(AnalyzeFMRI)
+
+#Leitura do arquivo de Resting-state fMRI pre-processada
+fmri = f.read.volume("RESTING.img")
+
+#Leitura do Atlas com as ROIs
+atlas = f.read.volume("xbrodmann.img")
+
+#Checar dimensoes das imagens
+dim(fmri)
+dim(atlas)
+```
+
+Como as dimensões são diferentes (o atlas possui voxels isotrópicos em 1mm e o dado de fmri em 4mm). Veja que o atlas possui quatro vezes mais dados que o fmri.
+Precisaremos fazer uma subamostragem da imagem grande para a menor, com razão 4 para 1 dos voxels do atlas.
+
+Primeiro, identificando as dimensões:
+
+```{r}
+XMAX = dim(fmri)[1]
+YMAX = dim(fmri)[2]
+ZMAX = dim(fmri)[3]
+TMAX = dim(fmri)[4]
+
+```
+
+Fazendo uma repetição do dado e o devido ajuste para centralizar na posição $(4x-2)$:
+
+```{r}
+atlas4mm = array(0, c(XMAX, YMAX, ZMAX, 1))
+for(xi in 1:XMAX){
+  for(yi in 1:YMAX){
+    for(zi in 1:ZMAX){
+       atlas4mm[xi, yi, zi, 1] = atlas[4*xi-2, 4*yi-2, 4*zi-2, 1]        
+}}}#fecha o for
+
+```
+
+Agora, pode-se ver que o atlas e o fmri possuem as mesmas dimensões.
+
+Salvando o atlas subamostrado:
+
+```{r}
+#Salva o atlas subamostrado espacialmente
+f.write.analyze(atlas4mm,"atlas4mm",
+                pixdim=c(4,4,4),
+                originator=c(23.5,32.5,19,1,1))
+```
+
+
+Pretendemos ver o sinal BOLD representativo na região/área:
+
+Identificando o número de regiões:
+```{r}
+#Extrair o sinal BOLD representativo de cada regiao de interesse ROI
+NOMESroi = names(table(atlas4mm))
+#de 2 em diante para eliminar AR
+NOMESroi = NOMESroi[2:length(NOMESroi)] 
+#Numeros de ROIs
+Nroi = length(NOMESroi)
+```
+
+Objetivo é ver a conectividade de cada ROI em cada nó no cérebro.
+Primeiro definimos uma matriz nula para armazenar o sinal de saída com número de linhas igual ao número de pontos no tempo, e número de colunas igual ao número de ROIS que quero analisar.
+
+Na sequência, calculamos o sinal BOLD medio de cada ROI para cada ponto no tempo (IX contém os voxeis da ROI).
+
+```{r}
+BOLD = matrix(0, TMAX, Nroi)
+for(roi in 1:Nroi){
+    #localiza os voxels com o label/nome respectivo da roi de interesse
+    IX = which(atlas4mm == NOMESroi[roi])
+    
+    #Extrai o sinal BOLD medio da ROI
+    for(ti in 1:TMAX){
+     BOLD[ti, roi] = mean(fmri[,,,ti][IX])
+    }
+
+}
+
+ts.plot(BOLD)
+```
+
+Para lidar com movimento, poderíamos fazer diversos tratamentos que não fizemos aqui faremos apenas a eliminação do sinal médio comum a todos que atrapalha, tirando o sinal médio de tudo (sinal global) e ficar com os resíduos usando GLM:
+
+```{r}
+# Global-signal-regression - GSR
+BOLD2 = BOLD
+GS = rowMeans(BOLD)
+for(roi in 1:Nroi){
+   BOLD2[, roi] = lm(BOLD[, roi]~GS)$res 
+}
+```
+
+O resultado de BOLD é uma matriz contendo as medias dos sinais de cada ROI ao #longo do tempo.
+Identificando a matriz de correlação de todos com todos. Usamos a função COR, criando uma matriz de conectividade:
+
+
+```{r}
+# Análise de conectividade funcional ROI-to-ROI
+COR = cor(BOLD2) #matriz de correlacao
+```
+
+Olhando um trecho, é possível ver as correlações,
+onde corr de um com ele mesmo resulta em 1:
+
+```{r}
+COR[1:5, 1:5]
+```
+
+Precisamos analisar a matriz de conectividade funcional.
+Para a Matriz de adjacência do grafo, primeiramente, devemos lidar com o sinal negativo (+/-) dos elementos desta matriz de correlações.
+
+A abordagem mais comum, é simplesmente tomar os valores em módulo (ignorar o sinal e pegar o valor absoluto).
+Ou ainda, também é frequente zerar esses valores negativos, deixando somente os positivos (existem outras formas de lidar com o sinal que também poderiam ser exploradas).
+
+
+GRAFO NÃO DIRECIONADO (IDA E VOLTA IGUAL) E GRAFO PONDERADO (COM PESOS NAS ARESTAS/ WEIGHTED GRAPH).
+
+Com a matriz de adjacência identificamos quem é mais hub e menos hub (importância no grafo):
+
+
+```{r}
+#Grafos ponderados - Matriz de adjacencia do grafo
+#Undirected weighted graph
+GP = abs(COR)
+
+#zera a diagonal principal:
+diag(GP) = 0
+```
+
+Visualizando:
+
+```{r}
+GP[1:5, 1:5]
+```
+
+Como métrica para comparar as redes, foi usado o grau da rede, que é o número médio de conexões existentes.
+
+O número máximo de conexões é determinado então a partir da soma dos elementos da linha da matriz de conexões e subtraindo o 1 das correlações da diagonal principal (dados de ROI com ele mesmo).
+
+Para ver medidas de centralidade (somar todas as conexões):
+```{r}
+# Calculo do degree/grau de cada ROI
+degree = colSums(GP)
+# (poderia ser a media tb)
+
+degree
+```
+
+Podemos visualizar o mais importante, e normaliza-lo 0-1:
+
+```{r}
+degreeNorm = rank(degree)/Nroi
+
+hist(GP)
+```
+
+Numa análise arbitrária, com muitas conexões, temos muitos ruídos.
+Tornando de forma binária a partir de um limiar facilita a leitura.
+
+Grafo não ponderado - Matriz de adjacência:
+Nas medidas de centralidade, temos soma das conexões. Como temos muitas regiões, essas somas ficam grandes, aumentando ruído. Por isso, transformamos o grafo em binário.
+
+```{r}
+#Grafo nao-ponderado - Binários - Matriz de adjacencia
+#Undirected unweighted graph
+LIMIAR = 0.2
+GNP = GP
+GNP[which(GP <= LIMIAR)] = 0
+GNP[which(GP > LIMIAR)] = 1
+```
+
+Determinando um limiar para essa ponderação:
+
+```{r}
+#Grafos Nao-ponderados (binarios)
+LIMIAR = 0.2
+GNP = GP
+GNP[which(GP <= LIMIAR)] = 0
+GNP[which(GP > LIMIAR)] = 1
+
+#Calculo do Degree em cada ROI
+degreeNP = colSums(GNP)
+
+#Normaliza para 0 e 1
+degreeNormNP = rank(degree)/Nroi
+
+plot(degree, degreeNP)
+cor(degree, degreeNP)
+```
+
+Definindo um mapa de centralidade de grau:
+
+```{r}
+#Construir um mapa de centralidade
+MAPA = array(0, c(XMAX, YMAX, ZMAX, 1))
+for(roi in 1:Nroi){
+  #Identificar os voxels com o label respectivo da ROI
+  IX = which(atlas4mm == NOMESroi[roi])
+  MAPA[,,,1][IX] = degreeNorm[roi]
+  
+}
+```
+
+
+Salvando o mapa de correlação para gerar uma imagem de visualização para verificar a intensidade da correlação:
+
+```{r}
+#Salva os mapas em arquivos no formato Analyze (IMG/HDR)
+f.write.analyze(MAPA,"MAPAROItoROI",
+                pixdim = c(4, 4, 4),
+                originator = c(23.5, 32.5, 19, 1, 1))
+
+```
+
+Com esse mapa, no MRICro podemos visualizar quem tem mais ou menos relevância, ou seja as regiões com correlações mais intensas.
