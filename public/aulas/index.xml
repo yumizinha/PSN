@@ -148,6 +148,24 @@ Essa análise é realizada para conhecer quais regiões do cérebro estão sincr
     </item>
     
     <item>
+      <title>Análise de Coerência</title>
+      <link>/aulas/16_analise_de_coerencia/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/16_analise_de_coerencia/</guid>
+      <description>Autocovariância: \(X_t\)
+\[ \lambda(h) = cov(X_t, X_t-h) \]
+Covariância cruzada:
+\[ \lambda(h)_{XY} = cov(X_t, X_t-h) \] Estimador -
+Estimador -
+\[ \hat{\lambda}(h)_{XY} = \]
+O espectro (ou densidade espectral) também pode ser obtido por meio da Transformada de Fourier da função de autocovariância.
+O espectro cruzado é a TDF da função da covariância cruzada.
+Calcularemos a coerência espectral usando os dados de eletrofisiologia:
+##################### Analise Espectral - Olhos Fechados #leitura dos sinais sinais=read.</description>
+    </item>
+    
+    <item>
       <title>Conectividade - ROI to ROI</title>
       <link>/aulas/14_roitoroi/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

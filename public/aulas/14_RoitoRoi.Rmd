@@ -245,3 +245,5 @@ f.write.analyze(MAPA,"MAPAROItoROI",
 ```
 
 Com esse mapa, no MRICro podemos visualizar quem tem mais ou menos relevância, ou seja as regiões com correlações mais intensas.
+
+
