@@ -1,0 +1,197 @@
+---
+title: "15_AnáliseFingerprintConnectoma"
+author: "Amanda Yumi"
+date: "21 de novembro de 2018"
+output: html_document
+---
+
+Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.
+
+A prova será de Seed to Voxel, análise ROI to ROI e Fingerprint.
+
+
+Os dados desse experimento contém dados chineses de Beijing, chamado Consortium for Reliability and Reproducibility (CoRR) (http://fcon_1000.projects.nitrc.org/indi/CoRR/html/)
+
+Para cada uma das 333 ROIs, é possível ver as subredes cerebrais.
+
+
+Realizando análise de todas as regiões corticais:
+
+```{r}
+#Leitura do ID dos sujeitos
+nomes = scan("CARAS.txt", what = "string")
+Nsujeitos = length(nomes) # numero de individuos
+
+```
+
+A matriz tem um pouco mais que as 333 regiões. Há regiões da default mode, região cinzenta que não estão no atlas e por isso preciso retirar.
+
+Realizando a leitura da matriz de conectividade funcional de cada indivíduo. São 61 indivíduos em duas leituras distintas com três meses de diferença:
+
+
+```{r}
+#Leitura dos arquivos com as matrizes de correlacao
+SCAN1 = array(0, c(Nsujeitos, 333, 333))
+SCAN2 = array(0, c(Nsujeitos, 333, 333))
+```
+
+Realizando a leitura dos sujeitos:
+
+```{r}
+for(sujeito in 1:Nsujeitos){
+
+# Leitura de dados do SCAN1
+# Concatena o prefixo e sufixo no ID do sujeito
+   STRINGNOME = paste("S1-GordonConnCOR-", nomes[sujeito],
+           ".txt", sep="")
+   a = read.table(STRINGNOME)
+   
+   # Extrai somente as linhas e colunas de interesse 
+   SCAN1[sujeito,,] = as.matrix(a[5:337, 5:337]) #pega somente as ROIS do atlas
+
+# Leitura de dados do SCAN2
+   STRINGNOME = paste("S2-GordonConnCOR-", nomes[sujeito],
+           ".txt", sep="")
+   a = read.table(STRINGNOME)
+   
+# Como tenho dados que não interessam a análise,
+# Extrai somente as linhas e colunas de interesse 
+   SCAN2[sujeito,,] = as.matrix(a[5:337, 5:337]) #pega somente as ROIS do atlas
+
+}#fecha for do sujeito
+```
+
+Para cada indivíduo em S1, quero comparar para identificar a similaridade entre os indivíduos. Existem diversas formas para estimar isso, todavia, na conectividade é usual calcular por correlação (nesse caso utilizaremos a correlação entre os vetores).
+
+Sendo a função "upper.tri" retorna se as caselas fazem parte ou não da triangular superior:
+
+
+```{r}
+# Criar matriz de similaridade entre individuos do Scan1 e Scan2: 
+SIMILARIDADE = matrix(0, Nsujeitos, Nsujeitos)
+
+# Analisando as dimensões:
+dim(SCAN1)
+
+dim(SCAN2)
+
+dim(SIMILARIDADE)
+```
+
+Interpretando o que queremos: Queremos que tenhamos a máxima correlação na diagonal principal entre os grupos, ou seja, que eu consiga identificar os mesmos sujeitos em scan2 e scan1.
+
+
+```{r}
+#Analise de Semelhanca entre conectomas funcionais
+#entre SCAN1 e SCAN2
+for(sujeito in 1:Nsujeitos){
+  #extrair vetor com os valores da matriz triangular superior 
+  #superior das matrizes de correlacao do SCAN1 e SCAN2
+  conn1 = SCAN1[sujeito,,][which(upper.tri(SCAN1[sujeito,,])==TRUE)]
+  
+  for(sujeito2 in 1:Nsujeitos){
+     conn2 = SCAN2[sujeito2,,][which(upper.tri(SCAN2[sujeito2,,])==TRUE)]
+
+     # metrica de similaridade
+     # Lembrando que 1 seria o maximo
+     SIMILARIDADE[sujeito, sujeito2] = cor(conn1, conn2) 
+
+  }#fecha for sujeito2  
+}#fecha for do sujeito
+```
+
+Identificando as correlações:
+```{r}
+SIMILARIDADE[1:5, 1:5]
+```
+A diagonal principal dessa matriz indica a correlação correspondente de acertar os mesmos sujeitos.
+
+Agora identificando os indivíduos através da máxima correlação:
+
+```{r}
+#Identificacao dos individuos pela maxima correlacao em cada linha
+PREDICAO = array(0, Nsujeitos)
+for(sujeito in 1:Nsujeitos){
+ PREDICAO[sujeito] = which(SIMILARIDADE[sujeito,] == max(SIMILARIDADE[sujeito,]))[1]
+}
+
+#Acuracia da predicao
+length(which(PREDICAO-1:61 == 0))/Nsujeitos
+
+```
+Como interpreto esse treco? Da contagem de 1:61 indivíduos, quero que a correlação no próximo scan seja compatível com 1:61 (ou seja, reconheça cada indivíduo).
+
+
+Analisando a default-mode network:
+
+```{r}
+###### ANALISE DA DEFAULT-MODE NETWORK
+
+#Leitura do ID dos sujeitos
+nomes=scan("CARAS.txt",what="string")
+Nsujeitos=length(nomes)
+
+#Leitura do arquivo com o label das subredes cerebrais
+SUBREDES=read.table("IDnet5-337.txt")[,2]
+table(SUBREDES)
+ROIS=which(SUBREDES=="Default")
+NROIS=length(ROIS)
+
+
+#Leitura da matriz de conectividade funcional de cada
+#individuo
+SCAN1=array(0,c(Nsujeitos,NROIS,NROIS))
+SCAN2=array(0,c(Nsujeitos,NROIS,NROIS))
+
+for(sujeito in 1:Nsujeitos){
+
+# Leitura de dados do SCAN1
+   STRINGNOME=paste("S1-GordonConnCOR-",nomes[sujeito],
+           ".txt",sep="")
+   a=read.table(STRINGNOME)
+   SCAN1[sujeito,,]=as.matrix(a[5:337,5:337])[ROIS,ROIS] #pega somente as ROIS do atlas
+
+# Leitura de dados do SCAN2
+   STRINGNOME=paste("S2-GordonConnCOR-",nomes[sujeito],
+           ".txt",sep="")
+   a=read.table(STRINGNOME)
+   SCAN2[sujeito,,]=as.matrix(a[5:337,5:337])[ROIS,ROIS] #pega somente as ROIS do atlas
+
+}#fecha for do sujeito
+
+
+#Analise de Fingerprint
+#Matriz de similaridade entre sujeitos no SCAN2 e 1
+SIMILARIDADE=matrix(0,Nsujeitos,Nsujeitos)
+
+for(sujeito in 1:Nsujeitos){
+   #Extrai valores da matriz triangular superior
+   conn1=SCAN1[sujeito,,][which(upper.tri(SCAN1[sujeito,,])==TRUE)]
+
+   for(sujeito2 in 1:Nsujeitos){
+      #Extrai valores da matriz triangular superior
+      conn2=SCAN2[sujeito2,,][which(upper.tri(SCAN2[sujeito2,,])==TRUE)]
+
+      SIMILARIDADE[sujeito,sujeito2]=cor(conn1,conn2)
+
+}}#fecha os for do sujeito
+
+#Identificacao dos individuos pela maxima correlacao
+PREDICAO=array(0,Nsujeitos)
+for(sujeito in 1:Nsujeitos){
+ PREDICAO[sujeito]=which(SIMILARIDADE[sujeito,]==max(SIMILARIDADE[sujeito,]))[1]
+}
+
+#Acuracia da predicao
+length(which(PREDICAO-1:61==0))/Nsujeitos
+```
+
+Olhando as regiões, temos que em adultos, as regiões de funções mais básicas/primárias (visual, auditivo e SMhand) não possuem alta acurácia.
+Já as regiões superiores, que integram redes, identificam melhor os indivúduos (no caso DMN, frontoparietal, dorsolateral).
+
+As redes mais complexas ainda estão em evolução nas crianças, por isso a taxa de acurácia na infância é menor, em torno de 40\%. As regiões significantes continuam sendo DMN, Frontoparietal e Dorsolateral, mas com menor acurácia pois seguem em constante desenvolvimento.
+
+
+
+
+

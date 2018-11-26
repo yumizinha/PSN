@@ -137,5 +137,19 @@ Neste caso, \(\gamma_1\mu_1 + ...+\gamma_6 \mu_6\) é a combinação do ajuste d
       <description>Espectroscopia do infravermelho próximo. A espectroscopia do infravermelho próximo em funcionamento - fNIRs é uma tecnologia de neuroimagem para mapear o córtex humano, que desde 1977, é empregada para o mapeamento do cérebro de humanos e em animais através de sua oxigenação (Jobsis, 1977). Os tecidos humanos são relativamente transparentes à luz na janela espectral NIR, que é absorvida por compostos pigmentados (cromóforos) ou dispersa em tecidos (Ferrari, 2012). A luz NIR é capaz de penetrar nos tecidos humanos, uma vez que o fator dominante no seu transporte de tecido é a dispersão.</description>
     </item>
     
+    <item>
+      <title>15_AnáliseFingerprintConnectoma</title>
+      <link>/aulas/15_fingerprint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/15_fingerprint/</guid>
+      <description>Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.
+A prova será de Seed to Voxel, análise ROI to ROI e Fingerprint.
+Os dados desse experimento contém dados chineses de Beijing, chamado Consortium for Reliability and Reproducibility (CoRR) (http://fcon_1000.projects.nitrc.org/indi/CoRR/html/)
+Para cada uma das 333 ROIs, é possível ver as subredes cerebrais.
+Realizando análise de todas as regiões corticais:
+#Leitura do ID dos sujeitos nomes = scan(&amp;quot;CARAS.</description>
+    </item>
+    
   </channel>
 </rss>
