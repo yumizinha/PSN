@@ -162,7 +162,7 @@ Estimador -
 O espectro (ou densidade espectral) também pode ser obtido por meio da Transformada de Fourier da função de autocovariância.
 O espectro cruzado é a TDF da função da covariância cruzada.
 Calcularemos a coerência espectral usando os dados de eletrofisiologia:
-##################### Analise Espectral - Olhos Fechados #leitura dos sinais sinais=read.</description>
+##################### Analise Espectral - Olhos Fechados #leitura dos sinais sinais = read.</description>
     </item>
     
     <item>

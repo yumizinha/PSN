@@ -13,17 +13,17 @@
     <title>Análise de Coerência :: Documentation for Hugo Learn Theme</title>
     
     
-    <link href="../../css/nucleus.css?1543262299" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css?1543262299" rel="stylesheet">
-    <link href="../../css/hybrid.css?1543262299" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1543262299" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1543262299" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1543262299" rel="stylesheet">
-    <link href="../../css/theme.css?1543262299" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1543262299" rel="stylesheet">
+    <link href="../../css/nucleus.css?1543440002" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css?1543440002" rel="stylesheet">
+    <link href="../../css/hybrid.css?1543440002" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1543440002" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1543440002" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1543440002" rel="stylesheet">
+    <link href="../../css/theme.css?1543440002" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1543440002" rel="stylesheet">
     
 
-    <script src="../../js/jquery-2.x.min.js?1543262299"></script>
+    <script src="../../js/jquery-2.x.min.js?1543440002"></script>
     
     <style type="text/css">
       :root #header + #content > #left > #rlblock_left{ 
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fa fa-close"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1543262299"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1543262299"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1543440002"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1543440002"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1543262299"></script>
+<script type="text/javascript" src="../../js/search.js?1543440002"></script>
 
     
   </div>
@@ -562,10 +562,10 @@
 <p>Calcularemos a coerência espectral usando os dados de eletrofisiologia:</p>
 <pre class="r"><code>##################### Analise Espectral - Olhos Fechados
 #leitura dos sinais
-sinais=read.table(&quot;OlhosFechados.txt&quot;,header=FALSE)
+sinais = read.table(&quot;OlhosFechados.txt&quot;, header = FALSE)
 
 #leitura do nome dos canais
-nomescanais=scan(&quot;NOMEScanais.txt&quot;,what=&quot;string&quot;)
+nomescanais = scan(&quot;NOMEScanais.txt&quot;,what = &quot;string&quot;)
 
 dim(sinais)</code></pre>
 <pre><code>## [1] 45315    32</code></pre>
@@ -575,19 +575,19 @@ dim(sinais)</code></pre>
 ## [21] &quot;CP6&quot;  &quot;TP10&quot; &quot;P7&quot;   &quot;P3&quot;   &quot;Pz&quot;   &quot;P4&quot;   &quot;P8&quot;   &quot;PO9&quot;  &quot;O1&quot;   &quot;Oz&quot;  
 ## [31] &quot;O2&quot;   &quot;PO10&quot;</code></pre>
 <pre class="r"><code>#Taxa de amostragem
-HZ=250
+HZ = 250
 
 #Tamanho da epoca (janela) em segundos
-TAMsegundos=5
+TAMsegundos = 5
 
 #Tamanho da epoca (janela) em caselas do vetor de sinais
-TAM=TAMsegundos*HZ
+TAM = TAMsegundos*HZ
 
 #Numero de epocas
-Nepocas=floor(nrow(sinais)/TAM)
+Nepocas = floor(nrow(sinais)/TAM)
 
 #Numero de canais
-Ncanais=ncol(sinais)
+Ncanais = ncol(sinais)
 
 # Por motivos didático, primeiramente vamos calcular
 # a coerencia entre dois canais sem dividir em epocas</code></pre>
@@ -596,52 +596,52 @@ Ncanais=ncol(sinais)
 <pre class="r"><code>coerencia = spectrum(sinais[, c(29,3)], spans = c(100, 100))</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre class="r"><code>#Grafico da coerencia
-plot((HZ/2)*(1:nrow(coerencia$coh))/nrow(coerencia$coh),coerencia$coh,
- type=&quot;l&quot;,xlab=&quot;Frequencia (Hz)&quot;,ylab=&quot;Coerencia&quot;)</code></pre>
+plot((HZ/2)*(1:nrow(coerencia$coh))/nrow(coerencia$coh), coerencia$coh,
+ type=&quot;l&quot;, xlab=&quot;Frequencia (Hz)&quot;, ylab=&quot;Coerencia&quot;)</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre class="r"><code>#Coerencia entre F7 e P7
-coerencia=spectrum(sinais[,c(3,23)],spans=c(100,100))</code></pre>
+coerencia = spectrum(sinais[, c(3, 23)], spans = c(100, 100))</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 <pre class="r"><code>#Grafico da coerencia
 plot((HZ/2)*(1:nrow(coerencia$coh))/nrow(coerencia$coh),coerencia$coh,
- type=&quot;l&quot;,xlab=&quot;Frequencia (Hz)&quot;,ylab=&quot;Coerencia&quot;)</code></pre>
+ type =&quot;l&quot;,xlab = &quot;Frequencia (Hz)&quot;, ylab = &quot;Coerencia&quot;)</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-4.png" width="672" /></p>
 <pre class="r"><code>#### Calculo da coerencia media entre epocas
 #1-Coerencia entre O1 e F7
 #2-Coerencia entre O1 e P7
 #3-Coerencia entre F7 e P7
 
-  y1=0
-  y2=0
-  y3=0
+  y1 = 0
+  y2 = 0
+  y3 = 0
   #Calcula a media entre épocas
   for(epoca in 1:Nepocas){
     #Descobrir caselas de inicio e fim de cada epoca
-    INICIO=TAM*(epoca-1)+1
-    FIM=epoca*TAM
-    y1=y1+spectrum(sinais[INICIO:FIM,c(29,3)],spans=c(15,15))$coh
-    y2=y2+spectrum(sinais[INICIO:FIM,c(29,23)],spans=c(15,15))$coh
-    y3=y3+spectrum(sinais[INICIO:FIM,c(23,3)],spans=c(15,15))$coh
+    INICIO = TAM*(epoca-1)+1
+    FIM = epoca*TAM
+    y1 = y1 +spectrum(sinais[INICIO:FIM, c(29, 3)], spans = c(15, 15))$coh
+    y2 = y2 +spectrum(sinais[INICIO:FIM, c(29, 23)], spans = c(15, 15))$coh
+    y3 = y3 +spectrum(sinais[INICIO:FIM, c(23, 3)], spans = c(15, 15))$coh
 
   }#for da epoca</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-5.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-6.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-7.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-8.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-9.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-10.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-11.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-12.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-13.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-14.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-15.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-16.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-17.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-18.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-19.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-20.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-21.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-22.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-23.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-24.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-25.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-26.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-27.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-28.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-29.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-30.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-31.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-32.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-33.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-34.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-35.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-36.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-37.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-38.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-39.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-40.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-41.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-42.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-43.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-44.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-45.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-46.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-47.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-48.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-49.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-50.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-51.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-52.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-53.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-54.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-55.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-56.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-57.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-58.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-59.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-60.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-61.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-62.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-63.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-64.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-65.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-66.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-67.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-68.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-69.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-70.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-71.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-72.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-73.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-74.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-75.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-76.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-77.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-78.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-79.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-80.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-81.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-82.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-83.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-84.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-85.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-86.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-87.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-88.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-89.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-90.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-91.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-92.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-93.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-94.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-95.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-96.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-97.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-98.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-99.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-100.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-101.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-102.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-103.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-104.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-105.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-106.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-107.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-108.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-109.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-110.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-111.png" width="672" /><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-112.png" width="672" /></p>
-<pre class="r"><code>   y1=y1/Nepocas
-   y2=y2/Nepocas
-   y3=y3/Nepocas
+<pre class="r"><code>   y1 = y1/Nepocas
+   y2 = y2/Nepocas
+   y3 = y3/Nepocas
 
 #Grafico da coerencia media
-plot((HZ/2)*(1:nrow(y1))/nrow(y1),y1,
- type=&quot;l&quot;,xlab=&quot;Frequencia (Hz)&quot;,ylab=&quot;Coerencia media&quot;)
-lines((HZ/2)*(1:nrow(y2))/nrow(y2),y2,col=2)
-lines((HZ/2)*(1:nrow(y3))/nrow(y3),y3,col=4)
-legend(&quot;topright&quot;,c(&quot;O1-F7&quot;,&quot;O1-P7&quot;,&quot;F7-P7&quot;),lty=c(1,1,1),col=c(1,2,4))</code></pre>
+plot((HZ/2)*(1:nrow(y1))/nrow(y1), y1,
+ type=&quot;l&quot;, xlab = &quot;Frequencia (Hz)&quot;, ylab = &quot;Coerencia media&quot;)
+lines((HZ/2)*(1:nrow(y2))/nrow(y2), y2, col = 2)
+lines((HZ/2)*(1:nrow(y3))/nrow(y3), y3, col = 4)
+legend(&quot;topright&quot;, c(&quot;O1-F7&quot;,&quot;O1-P7&quot;,&quot;F7-P7&quot;), lty = c(1, 1, 1), col = c(1, 2, 4))</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-113.png" width="672" /></p>
 <pre class="r"><code>#Grafico da coerencia media
-plot((HZ/2)*(1:nrow(y1))/nrow(y1),y1,
- type=&quot;l&quot;,xlab=&quot;Frequencia (Hz)&quot;,ylab=&quot;Coerencia media&quot;,ylim=c(0,1))
-lines((HZ/2)*(1:nrow(y2))/nrow(y2),y2,col=2)
-lines((HZ/2)*(1:nrow(y3))/nrow(y3),y3,col=4)
-legend(&quot;topright&quot;,c(&quot;O1-F7&quot;,&quot;O1-P7&quot;,&quot;F7-P7&quot;),lty=c(1,1,1),col=c(1,2,4))</code></pre>
+plot((HZ/2)*(1:nrow(y1))/nrow(y1), y1,
+ type = &quot;l&quot;, xlab = &quot;Frequencia (Hz)&quot;, ylab = &quot;Coerencia media&quot;, ylim = c(0, 1))
+lines((HZ/2)*(1:nrow(y2))/nrow(y2), y2, col = 2)
+lines((HZ/2)*(1:nrow(y3))/nrow(y3), y3, col = 4)
+legend(&quot;topright&quot;,c(&quot;O1-F7&quot;, &quot;O1-P7&quot;, &quot;F7-P7&quot;), lty = c(1, 1, 1), col = c(1, 2, 4))</code></pre>
 <p><img src="../../aulas/16_Analise_de_Coerencia_files/figure-html/unnamed-chunk-2-114.png" width="672" /></p>
 
 
@@ -991,20 +991,20 @@ legend(&quot;topright&quot;,c(&quot;O1-F7&quot;,&quot;O1-P7&quot;,&quot;F7-P7&qu
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1543262299"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1543262299"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1543262299"></script>
-    <script src="../../js/jquery.sticky.js?1543262299"></script>
-    <script src="../../js/featherlight.min.js?1543262299"></script>
-    <script src="../../js/html5shiv-printshiv.min.js?1543262299"></script>
-    <script src="../../js/highlight.pack.js?1543262299"></script>
+    <script src="../../js/clipboard.min.js?1543440002"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1543440002"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1543440002"></script>
+    <script src="../../js/jquery.sticky.js?1543440002"></script>
+    <script src="../../js/featherlight.min.js?1543440002"></script>
+    <script src="../../js/html5shiv-printshiv.min.js?1543440002"></script>
+    <script src="../../js/highlight.pack.js?1543440002"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom.71422.js?1543262299"></script>
-    <script src="../../js/learn.js?1543262299"></script>
-    <script src="../../js/hugo-learn.js?1543262299"></script>
+    <script src="../../js/modernizr.custom.71422.js?1543440002"></script>
+    <script src="../../js/learn.js?1543440002"></script>
+    <script src="../../js/hugo-learn.js?1543440002"></script>
 
-    <link href="../../mermaid/mermaid.css?1543262299" type="text/css" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1543262299"></script>
+    <link href="../../mermaid/mermaid.css?1543440002" type="text/css" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1543440002"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

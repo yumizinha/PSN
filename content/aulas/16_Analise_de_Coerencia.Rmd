@@ -29,28 +29,28 @@ Calcularemos a coerência espectral usando os dados de eletrofisiologia:
 ```{r}
 ##################### Analise Espectral - Olhos Fechados
 #leitura dos sinais
-sinais=read.table("OlhosFechados.txt",header=FALSE)
+sinais = read.table("OlhosFechados.txt", header = FALSE)
 
 #leitura do nome dos canais
-nomescanais=scan("NOMEScanais.txt",what="string")
+nomescanais = scan("NOMEScanais.txt",what = "string")
 
 dim(sinais)
 nomescanais 
 
 #Taxa de amostragem
-HZ=250
+HZ = 250
 
 #Tamanho da epoca (janela) em segundos
-TAMsegundos=5
+TAMsegundos = 5
 
 #Tamanho da epoca (janela) em caselas do vetor de sinais
-TAM=TAMsegundos*HZ
+TAM = TAMsegundos*HZ
 
 #Numero de epocas
-Nepocas=floor(nrow(sinais)/TAM)
+Nepocas = floor(nrow(sinais)/TAM)
 
 #Numero de canais
-Ncanais=ncol(sinais)
+Ncanais = ncol(sinais)
 
 # Por motivos didático, primeiramente vamos calcular
 # a coerencia entre dois canais sem dividir em epocas
@@ -67,51 +67,51 @@ Calculando a coerência entre O1 e F7 e vendo seu gráfico:
 coerencia = spectrum(sinais[, c(29,3)], spans = c(100, 100))
 
 #Grafico da coerencia
-plot((HZ/2)*(1:nrow(coerencia$coh))/nrow(coerencia$coh),coerencia$coh,
- type="l",xlab="Frequencia (Hz)",ylab="Coerencia")
+plot((HZ/2)*(1:nrow(coerencia$coh))/nrow(coerencia$coh), coerencia$coh,
+ type="l", xlab="Frequencia (Hz)", ylab="Coerencia")
 
 #Coerencia entre F7 e P7
-coerencia=spectrum(sinais[,c(3,23)],spans=c(100,100))
+coerencia = spectrum(sinais[, c(3, 23)], spans = c(100, 100))
 #Grafico da coerencia
 plot((HZ/2)*(1:nrow(coerencia$coh))/nrow(coerencia$coh),coerencia$coh,
- type="l",xlab="Frequencia (Hz)",ylab="Coerencia")
+ type ="l",xlab = "Frequencia (Hz)", ylab = "Coerencia")
 
 #### Calculo da coerencia media entre epocas
 #1-Coerencia entre O1 e F7
 #2-Coerencia entre O1 e P7
 #3-Coerencia entre F7 e P7
 
-  y1=0
-  y2=0
-  y3=0
+  y1 = 0
+  y2 = 0
+  y3 = 0
   #Calcula a media entre épocas
   for(epoca in 1:Nepocas){
     #Descobrir caselas de inicio e fim de cada epoca
-    INICIO=TAM*(epoca-1)+1
-    FIM=epoca*TAM
-    y1=y1+spectrum(sinais[INICIO:FIM,c(29,3)],spans=c(15,15))$coh
-    y2=y2+spectrum(sinais[INICIO:FIM,c(29,23)],spans=c(15,15))$coh
-    y3=y3+spectrum(sinais[INICIO:FIM,c(23,3)],spans=c(15,15))$coh
+    INICIO = TAM*(epoca-1)+1
+    FIM = epoca*TAM
+    y1 = y1 +spectrum(sinais[INICIO:FIM, c(29, 3)], spans = c(15, 15))$coh
+    y2 = y2 +spectrum(sinais[INICIO:FIM, c(29, 23)], spans = c(15, 15))$coh
+    y3 = y3 +spectrum(sinais[INICIO:FIM, c(23, 3)], spans = c(15, 15))$coh
 
   }#for da epoca
-   y1=y1/Nepocas
-   y2=y2/Nepocas
-   y3=y3/Nepocas
+   y1 = y1/Nepocas
+   y2 = y2/Nepocas
+   y3 = y3/Nepocas
 
 #Grafico da coerencia media
-plot((HZ/2)*(1:nrow(y1))/nrow(y1),y1,
- type="l",xlab="Frequencia (Hz)",ylab="Coerencia media")
-lines((HZ/2)*(1:nrow(y2))/nrow(y2),y2,col=2)
-lines((HZ/2)*(1:nrow(y3))/nrow(y3),y3,col=4)
-legend("topright",c("O1-F7","O1-P7","F7-P7"),lty=c(1,1,1),col=c(1,2,4))
+plot((HZ/2)*(1:nrow(y1))/nrow(y1), y1,
+ type="l", xlab = "Frequencia (Hz)", ylab = "Coerencia media")
+lines((HZ/2)*(1:nrow(y2))/nrow(y2), y2, col = 2)
+lines((HZ/2)*(1:nrow(y3))/nrow(y3), y3, col = 4)
+legend("topright", c("O1-F7","O1-P7","F7-P7"), lty = c(1, 1, 1), col = c(1, 2, 4))
 
 
 #Grafico da coerencia media
-plot((HZ/2)*(1:nrow(y1))/nrow(y1),y1,
- type="l",xlab="Frequencia (Hz)",ylab="Coerencia media",ylim=c(0,1))
-lines((HZ/2)*(1:nrow(y2))/nrow(y2),y2,col=2)
-lines((HZ/2)*(1:nrow(y3))/nrow(y3),y3,col=4)
-legend("topright",c("O1-F7","O1-P7","F7-P7"),lty=c(1,1,1),col=c(1,2,4))
+plot((HZ/2)*(1:nrow(y1))/nrow(y1), y1,
+ type = "l", xlab = "Frequencia (Hz)", ylab = "Coerencia media", ylim = c(0, 1))
+lines((HZ/2)*(1:nrow(y2))/nrow(y2), y2, col = 2)
+lines((HZ/2)*(1:nrow(y3))/nrow(y3), y3, col = 4)
+legend("topright",c("O1-F7", "O1-P7", "F7-P7"), lty = c(1, 1, 1), col = c(1, 2, 4))
 
 
 
