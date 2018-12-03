@@ -1,0 +1,11 @@
+---
+title: "Interface cérebro máquina"
+author: "Amanda Yumi"
+date: "28 de novembro de 2018"
+output: html_document
+weight: 180
+---
+
+
+
+

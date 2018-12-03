@@ -1,0 +1,78 @@
+---
+title: "Interface cérebro máquina"
+author: "Amanda Yumi"
+date: "28 de novembro de 2018"
+output: html_document
+weight: 180
+---
+
+Nessa aula faremos a coleta em tempo real de sinais de EEG.
+No exercício, identificaremos as ondas alfa.
+
+Por característica do equipamento, precisamos arrumar o nome do arquivo (armazenamento na forma 0001, 0017, 0101,...):
+
+```{r}
+# Arrumar o nome do arquivo:
+#loop dos arquivos segundo a segundo
+for(i in 1:1000){
+
+#Arrumar o nome do arquivo
+if( i<10){ID = paste("000", i, sep="")}
+else{
+   if(i<100){ID = paste("00", i, sep="")}
+   else{ID = paste("0", i, sep="")}
+}
+
+```
+
+
+
+
+
+
+
+
+```{r}
+# Leitura dos dados
+try(sinais = read.table(paste("test_", ID, ".txt", sep="")))
+
+# Por enquanto gerando os dados pra modelar antes:
+sinais=matrix(rnorm(200*20),200,20)
+
+
+# Taxa de amostragem
+HZ = 200
+
+# Extrair sinais de interesse
+SINAL = sinais[, 2] - sinais[, 1]
+
+# Para identificar o espectro do sinal, precisamos converter para frequência:
+
+AUXILIAR = spectrum(SINAL, plot = FALSE)
+espectro = AUXILIAR$spec
+frequencia = AUXILIAR$freq*HZ
+
+#identificar frequencias em alfa
+BANDA = which(frequencia > 8 & frequencia < 12)
+
+BANDA=8:12 #neste caso a casela coincide com a freq
+
+#calculo do espectro medio em alfa
+mean(espectro[BANDA])
+
+#calculo do espectro medio em alfa
+ALFA = mean(espectro[BANDA])
+
+#Display
+#while(1!=2){ para fazer a leitura contínua
+ barplot(runif(1), ylim = c(0, 1), col = 2)
+# Sys.sleep(1) - especificando que é por segundos
+#}
+```
+
+
+
+
+
+
+

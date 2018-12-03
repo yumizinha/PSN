@@ -194,5 +194,14 @@ Calcularemos a coerência espectral usando os dados de eletrofisiologia:
       <description>Inspirado no artigo na Nature: “Deep image reconstruction from human brain activity”“, que realizou a análise baseada na aprendizagem por máquina dos padrões de ressonância magnética funcional humana (fMRI) que permitiu a visualização do conteúdo perceptivo de imagens através de um novo método de reconstrução de imagem, no qual os valores de pixel de uma imagem são otimizados para tornar suas características DNN semelhantes àquelas decodificadas da atividade do cérebro humano em múltiplas camadas.</description>
     </item>
     
+    <item>
+      <title>Interface cérebro máquina</title>
+      <link>/aulas/18_bci/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/18_bci/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
