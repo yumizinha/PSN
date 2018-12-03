@@ -63,20 +63,24 @@
   </url>
   
   <url>
-    <loc>/aulas/16_analise_de_coerencia/</loc>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/aulas/14_roitoroi/</loc>
   </url>
   
   <url>
     <loc>/aulas/15_fingerprint/</loc>
+  </url>
+  
+  <url>
+    <loc>/aulas/16_analise_de_coerencia/</loc>
+  </url>
+  
+  <url>
+    <loc>/aulas/17_braindecoding/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
   </url>
   
   <url>

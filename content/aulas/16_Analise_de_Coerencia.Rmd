@@ -3,6 +3,8 @@ title: "Análise de Coerência"
 author: "Amanda Yumi"
 date: "26 de novembro de 2018"
 output: html_document
+weight: 160
+
 ---
 
 Autocovariância: $X_t$

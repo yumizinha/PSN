@@ -3,6 +3,8 @@ title: "Conectividade - ROI to ROI"
 author: "Amanda Yumi"
 date: "14 de novembro de 2018"
 output: html_document
+weight: 140
+
 ---
 
 Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).

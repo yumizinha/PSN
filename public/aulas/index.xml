@@ -148,6 +148,26 @@ Essa análise é realizada para conhecer quais regiões do cérebro estão sincr
     </item>
     
     <item>
+      <title>Conectividade - ROI to ROI</title>
+      <link>/aulas/14_roitoroi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/14_roitoroi/</guid>
+      <description>Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).
+Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):</description>
+    </item>
+    
+    <item>
+      <title>Fingerprint</title>
+      <link>/aulas/15_fingerprint/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/aulas/15_fingerprint/</guid>
+      <description>Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.
+Os estudos de ressonância magnética funcional (fMRI) normalmente colapsam dados de muitos sujeitos, mas a organização funcional do cérebro varia entre cada um. Aqui estabelecemos que essa variabilidade individual é robusta e confiável, usando dados do CORR para identificar perfis de conectividade funcional e como atuam como uma “impressão digital” que pode identificar com precisão os indivíduos de um grande grupo.</description>
+    </item>
+    
+    <item>
       <title>Análise de Coerência</title>
       <link>/aulas/16_analise_de_coerencia/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -166,23 +186,12 @@ Calcularemos a coerência espectral usando os dados de eletrofisiologia:
     </item>
     
     <item>
-      <title>Conectividade - ROI to ROI</title>
-      <link>/aulas/14_roitoroi/</link>
+      <title>Brain Decoding</title>
+      <link>/aulas/17_braindecoding/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/aulas/14_roitoroi/</guid>
-      <description>Nesta aula, aplicaremos os conceitos de conectividade funcional entre regiões de interesse (ROI to ROI).
-Para isso, tomaremos um conjunto de regiões (ROIS), que no caso podem ser mapas já existentes ou criadas de acordo com a necessidade do estudo. A partir das correlações dos sinais BOLD médio dessas regiões podemos inferir se as mesmas estão ao não correlacionadas. Para a realização deste tipo de análise devemos seguir os seguintes passos (NOTAS DE AULA DA CÂNDIDA BARRETO):</description>
-    </item>
-    
-    <item>
-      <title>Fingerprint</title>
-      <link>/aulas/15_fingerprint/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/aulas/15_fingerprint/</guid>
-      <description>Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.
-Os estudos de ressonância magnética funcional (fMRI) normalmente colapsam dados de muitos sujeitos, mas a organização funcional do cérebro varia entre cada um. Aqui estabelecemos que essa variabilidade individual é robusta e confiável, usando dados do CORR para identificar perfis de conectividade funcional e como atuam como uma “impressão digital” que pode identificar com precisão os indivíduos de um grande grupo.</description>
+      <guid>/aulas/17_braindecoding/</guid>
+      <description>Inspirado no artigo na Nature: “Deep image reconstruction from human brain activity”“, que realizou a análise baseada na aprendizagem por máquina dos padrões de ressonância magnética funcional humana (fMRI) que permitiu a visualização do conteúdo perceptivo de imagens através de um novo método de reconstrução de imagem, no qual os valores de pixel de uma imagem são otimizados para tornar suas características DNN semelhantes àquelas decodificadas da atividade do cérebro humano em múltiplas camadas.</description>
     </item>
     
   </channel>

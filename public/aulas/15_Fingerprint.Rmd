@@ -3,6 +3,8 @@ title: "Fingerprint"
 author: "Amanda Yumi"
 date: "21 de novembro de 2018"
 output: html_document
+weight: 150
+
 ---
 
 Fingerprint é a impressão digital das pessoas. Análise de Fingerprint e Connectoma se trata de explorar o porquê sermos únicos.
